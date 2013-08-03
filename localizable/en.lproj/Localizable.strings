@@ -1,0 +1,33 @@
+/* No comment provided by engineer. */
+"Bootstrapping failed. Please try another server." = "Bootstrapping failed. Please try another server.";
+
+/* No comment provided by engineer. */
+"Connected!" = "Connected!";
+
+/* No comment provided by engineer. */
+"Enter the address of a server to bootstrap against." = "Enter the address of a server to bootstrap against.";
+
+/* No comment provided by engineer. */
+"Offline" = "Offline";
+
+/* No comment provided by engineer. */
+"Online" = "Online";
+
+/* No comment provided by engineer. */
+"Please wait..." = "Please wait...";
+
+/* No comment provided by engineer. */
+"That doesn't look like a public key." = "That doesn't look like a public key.";
+
+/* No comment provided by engineer. */
+"That doesn't look right. Ports must be in the range 1-65535." = "That doesn't look right. Ports must be in the range 1-65535.";
+
+/* No comment provided by engineer. */
+"That's not an IP address. Did you enter it correctly?" = "That's not an IP address. Did you enter it correctly?";
+
+/* No comment provided by engineer. */
+"The server's public key:" = "The server's public key:";
+
+/* No comment provided by engineer. */
+"Your nickname cannot be blank." = "Your nickname cannot be blank.";
+
