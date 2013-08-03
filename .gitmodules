@@ -1,0 +1,3 @@
+[submodule "DeepEnd"]
+	path = DeepEnd
+	url = git://github.com/stal888/DeepEnd
