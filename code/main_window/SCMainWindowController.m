@@ -26,8 +26,6 @@
     self.userImage.layer.masksToBounds = YES;
     [[DESSelf self] addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
     [[DESSelf self] addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
-    [[DESToxNetworkConnection sharedConnection] addObserver:self forKeyPath:@"connectedNodeCount" options:NSKeyValueObservingOptionNew context:NULL];
-
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -36,17 +34,6 @@
             self.userStatus.stringValue = change[NSKeyValueChangeNewKey];
         } else if ([keyPath isEqualToString:@"displayName"]) {
             self.displayName.stringValue = change[NSKeyValueChangeNewKey];
-        }
-    } else if (object == [DESToxNetworkConnection sharedConnection]) {
-        NSInteger nc = [change[NSKeyValueChangeNewKey] integerValue];
-        ((SCShinyWindow*)self.window).indicator.connectedNodes = nc;
-        switch (nc) {
-            case 0:
-                self.statusLight.image = [NSImage imageNamed:@"status-light-offline"];
-                break;
-            default:
-                self.statusLight.image = [NSImage imageNamed:@"status-light-online"];
-                break;
         }
     }
 }
@@ -67,9 +54,62 @@
     }
 }
 
+- (IBAction)quickChangeStatus:(NSMenuItem *)sender {
+    switch (sender.tag) {
+        case 0:
+            [DESToxNetworkConnection sharedConnection].me.userStatus = @"Online";
+            break;
+        case 1:
+            [DESToxNetworkConnection sharedConnection].me.userStatus = @"Away";
+            break;
+        case 2:
+            [DESToxNetworkConnection sharedConnection].me.userStatus = @"Busy";
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)dealloc {
     [[DESSelf self] removeObserver:self forKeyPath:@"userStatus"];
     [[DESSelf self] removeObserver:self forKeyPath:@"displayName"];
+}
+
+#pragma mark - Sheets
+
+- (IBAction)presentCustomStatusSheet:(id)sender {
+    self.statusSheetField.stringValue = [DESToxNetworkConnection sharedConnection].me.userStatus;
+    [NSApp beginSheet:self.statusChangeSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (IBAction)presentNickChangeSheet:(id)sender {
+    self.nickSheetField.stringValue = [DESToxNetworkConnection sharedConnection].me.displayName;
+    [NSApp beginSheet:self.nickChangeSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (IBAction)confirmAndEndSheet:(NSButton *)sender {
+    [NSApp endSheet:self.window.attachedSheet returnCode:sender.tag];
+}
+
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    NSString *proposed = nil;
+    [sheet orderOut:self];
+    switch (returnCode) {
+        case 1: /* Nickname was changed. */
+            proposed = [self.nickSheetField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if (![[DESToxNetworkConnection sharedConnection].me.displayName isEqualToString:proposed]) {
+                [DESToxNetworkConnection sharedConnection].me.displayName = proposed;
+            }
+            break;
+        case 2:
+            proposed = [self.statusSheetField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if (![[DESToxNetworkConnection sharedConnection].me.userStatus isEqualToString:proposed]) {
+                [DESToxNetworkConnection sharedConnection].me.userStatus = proposed;
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - NSWindow delegate
