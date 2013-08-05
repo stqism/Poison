@@ -17,7 +17,7 @@ Since Poison is in early development, the UI might change in the near future. He
 ## Testing builds
 
 ... are not available yet. Check back later!  
-You can also build manually. Just run ``xcodebuild``.  
+You can also build manually (requires libsodium installed to /usr/local at the moment). Just run ``xcodebuild -workspace Poison.xcworkspace -scheme Poison``.  
 
 ## Coding guidelines
 - If you break compatibility with 10.6, I will break you.
