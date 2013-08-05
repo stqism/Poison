@@ -171,6 +171,7 @@
 					</object>
 					<object class="NSMenuItem" id="816841436">
 						<reference key="NSMenu" ref="649796088"/>
+						<bool key="NSIsDisabled">YES</bool>
 						<string key="NSTitle">Network</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -182,6 +183,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="768767752">
 									<reference key="NSMenu" ref="175861866"/>
+									<bool key="NSIsDisabled">YES</bool>
 									<string key="NSTitle">Copy Public Key</string>
 									<string key="NSKeyEquiv">c</string>
 									<int key="NSKeyEquivModMask">1572864</int>
@@ -191,9 +193,30 @@
 								</object>
 								<object class="NSMenuItem" id="695522785">
 									<reference key="NSMenu" ref="175861866"/>
+									<bool key="NSIsDisabled">YES</bool>
 									<string key="NSTitle">Add Friend...</string>
 									<string key="NSKeyEquiv">n</string>
 									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="944042737">
+									<reference key="NSMenu" ref="175861866"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<string key="NSTitle">Change Nickname...</string>
+									<string key="NSKeyEquiv">e</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="938163550">
+									<reference key="NSMenu" ref="175861866"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<string key="NSTitle">Change Status...</string>
+									<string key="NSKeyEquiv">e</string>
+									<int key="NSKeyEquivModMask">524288</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -963,6 +986,38 @@
 					</object>
 					<int key="connectionID">546</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showNicknameSet:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="944042737"/>
+					</object>
+					<int key="connectionID">549</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showStatusSet:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="938163550"/>
+					</object>
+					<int key="connectionID">550</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">copyPublicKey:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="768767752"/>
+					</object>
+					<int key="connectionID">551</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">networkMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="816841436"/>
+					</object>
+					<int key="connectionID">552</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1404,6 +1459,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="768767752"/>
 							<reference ref="695522785"/>
+							<reference ref="944042737"/>
+							<reference ref="938163550"/>
 						</array>
 						<reference key="parent" ref="816841436"/>
 					</object>
@@ -1458,6 +1515,16 @@
 						<int key="objectID">545</int>
 						<reference key="object" ref="305315945"/>
 						<reference key="parent" ref="835318025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">547</int>
+						<reference key="object" ref="944042737"/>
+						<reference key="parent" ref="175861866"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">548</int>
+						<reference key="object" ref="938163550"/>
+						<reference key="parent" ref="175861866"/>
 					</object>
 				</array>
 			</object>
@@ -1533,6 +1600,8 @@
 				<string key="542.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="543.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="545.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="547.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="548.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1542,22 +1611,46 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">546</int>
+			<int key="maxID">552</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">SCAppDelegate</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">showPreferencesWindow:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">showPreferencesWindow:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="copyPublicKey:">id</string>
+						<string key="showNicknameSet:">id</string>
+						<string key="showPreferencesWindow:">id</string>
+						<string key="showStatusSet:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="copyPublicKey:">
+							<string key="name">copyPublicKey:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showNicknameSet:">
+							<string key="name">showNicknameSet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showPreferencesWindow:">
 							<string key="name">showPreferencesWindow:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showStatusSet:">
+							<string key="name">showStatusSet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">networkMenu</string>
+						<string key="NS.object.0">NSMenuItem</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">networkMenu</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">networkMenu</string>
+							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

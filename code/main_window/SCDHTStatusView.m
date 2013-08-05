@@ -1,4 +1,5 @@
 #import "SCDHTStatusView.h"
+#define GOOD_CONNECTION_THRESHOLD 4
 
 @implementation SCDHTStatusView
 
@@ -11,6 +12,14 @@
 }
 
 - (void)setConnectedNodes:(NSInteger)connectedNodes {
+    if (connectedNodes == 0) {
+        self.toolTip = NSLocalizedString(@"Poison currently has no connectivity to the Tox network.", @"");
+    } else if (connectedNodes < GOOD_CONNECTION_THRESHOLD) {
+        self.toolTip = NSLocalizedString(@"Poison currently has limited connectivity to the Tox network. You may have trouble connecting to friends.", @"");
+    } else {
+        self.toolTip = NSLocalizedString(@"Poison's connection to the Tox network is healthy.", @"");
+    }
+    
     _connectedNodes = connectedNodes;
     [self setNeedsDisplay:YES];
     NSString *drawString = nil;
@@ -29,10 +38,12 @@
     [shadowPath fill];
     NSBezierPath *bodyPath = [NSBezierPath bezierPathWithRoundedRect:(NSRect){{0, 1}, {self.bounds.size.width, self.bounds.size.height - 1}} xRadius:2.0 yRadius:2.0];
     NSGradient *bodyGradient = nil;
-    switch (self.connectedNodes) {
-        case 0: bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:225.0 / 255.0 green:0.0 blue:25.0 / 255.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:159.0 / 255.0 green:0.0 blue:0.0 alpha:1.0]]; break;
-        case 1: bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:1.0 green:180.0 / 255.0 blue:0.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:209.0 / 255.0 green:148.0 / 255.0 blue:0.0 alpha:1.0]]; break;
-        default: bodyGradient = bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.0 green:177.0 / 255.0 blue:8.0 / 255.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:0.0 green:142.0 / 255.0 blue:40.0 / 255.0 alpha:1.0]]; break;
+    if (self.connectedNodes == 0) {
+        bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:225.0 / 255.0 green:0.0 blue:25.0 / 255.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:159.0 / 255.0 green:0.0 blue:0.0 alpha:1.0]];
+    } else if (self.connectedNodes < GOOD_CONNECTION_THRESHOLD) {
+        bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:1.0 green:180.0 / 255.0 blue:0.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:209.0 / 255.0 green:148.0 / 255.0 blue:0.0 alpha:1.0]];
+    } else {
+        bodyGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedRed:0.0 green:177.0 / 255.0 blue:8.0 / 255.0 alpha:1.0] endingColor:[NSColor colorWithCalibratedRed:0.0 green:142.0 / 255.0 blue:40.0 / 255.0 alpha:1.0]];
     }
     [bodyGradient drawInBezierPath:bodyPath angle:90.0];
     NSString *drawString = nil;

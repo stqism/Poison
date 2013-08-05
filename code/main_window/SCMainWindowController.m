@@ -2,6 +2,7 @@
 #import "SCShinyWindow.h"
 #import "SCDHTStatusView.h"
 #import "SCGradientView.h"
+#import "PXListView.h"
 #import <DeepEnd/DeepEnd.h>
 
 @implementation SCMainWindowController
@@ -24,8 +25,14 @@
     [self.userStatus.cell setTextColor:[NSColor controlColor]];
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
+    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
+        self.listView.scrollerKnobStyle = NSScrollerKnobStyleLight; /* Set in code to avoid IB warning. */
     [[DESSelf self] addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
     [[DESSelf self] addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
+    [[DESSelf self] addObserver:self forKeyPath:@"userStatusKind" options:NSKeyValueObservingOptionNew context:NULL];
+    [[DESToxNetworkConnection sharedConnection] addObserver:self forKeyPath:@"connectedNodeCount" options:NSKeyValueObservingOptionNew context:NULL];
+    ((SCShinyWindow*)self.window).indicator.connectedNodes = [[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue];
+
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -35,6 +42,8 @@
         } else if ([keyPath isEqualToString:@"displayName"]) {
             self.displayName.stringValue = change[NSKeyValueChangeNewKey];
         }
+    } else if (object == [DESToxNetworkConnection sharedConnection]) {
+        ((SCShinyWindow*)self.window).indicator.connectedNodes = [change[NSKeyValueChangeNewKey] integerValue];
     }
 }
 
@@ -73,6 +82,7 @@
 - (void)dealloc {
     [[DESSelf self] removeObserver:self forKeyPath:@"userStatus"];
     [[DESSelf self] removeObserver:self forKeyPath:@"displayName"];
+    [[DESSelf self] removeObserver:self forKeyPath:@"statusType"];
 }
 
 #pragma mark - Sheets

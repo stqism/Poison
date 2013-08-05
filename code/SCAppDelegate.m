@@ -5,6 +5,12 @@
 
 #import <DeepEnd/DeepEnd.h>
 
+@interface SCAppDelegate ()
+
+@property (strong) IBOutlet NSMenuItem *networkMenu;
+
+@end
+
 @implementation SCAppDelegate {
     NKSerializerType saveMode;
     NSString *currentNickname;
@@ -69,6 +75,10 @@
     if (self.loginWindow)
         [self.loginWindow.window close];
     [self showMainWindow];
+    self.networkMenu.enabled = YES;
+    for (NSMenuItem *item in self.networkMenu.submenu.itemArray) {
+        item.enabled = YES;
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -81,6 +91,25 @@
     if (!self.preferencesWindow)
         self.preferencesWindow = [[SCPreferencesWindowController alloc] initWithWindowNibName:@"Preferences"];
     [self.preferencesWindow showWindow:self];
+}
+
+- (IBAction)showNicknameSet:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentNickChangeSheet:self];
+    }
+}
+
+- (IBAction)showStatusSet:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentCustomStatusSheet:self];
+    }
+}
+
+- (IBAction)copyPublicKey:(id)sender {
+    [[NSPasteboard generalPasteboard] clearContents];
+    [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].publicKey]];
 }
 
 @end
