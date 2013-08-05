@@ -20,7 +20,7 @@
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-    initialLocation = CGPointZero;
+    //initialLocation = CGPointZero;
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {

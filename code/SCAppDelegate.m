@@ -37,8 +37,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
     [connection connect];
     [connection.me addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
-    [connection me].displayName = theUsername;
-    [connection me].userStatus = NSLocalizedString(@"Connecting...", @"");
+    connection.me.displayName = theUsername;
+    connection.me.userStatus = @"Online";
 }
 
 - (void)saveKeys {

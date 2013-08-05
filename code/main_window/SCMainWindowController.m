@@ -20,6 +20,8 @@
     self.sidebarHead.shadowColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
     self.sidebarHead.dragsWindow = YES;
     self.sidebarHead.needsDisplay = YES;
+    [self.displayName.cell setTextColor:[NSColor whiteColor]];
+    [self.userStatus.cell setTextColor:[NSColor controlColor]];
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
     [[DESSelf self] addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
@@ -46,6 +48,22 @@
                 self.statusLight.image = [NSImage imageNamed:@"status-light-online"];
                 break;
         }
+    }
+}
+
+- (IBAction)statusLabelAction:(NSTextField *)sender {
+    sender.editable = NO;
+    sender.backgroundColor = [NSColor clearColor];
+    if (sender == self.displayName)
+        sender.textColor = [NSColor whiteColor];
+    else
+        sender.textColor = [NSColor controlColor];
+    sender.drawsBackground = NO;
+    
+    if (![[DESToxNetworkConnection sharedConnection].me.displayName isEqualToString:self.displayName.stringValue]) {
+        [DESToxNetworkConnection sharedConnection].me.displayName = [self.displayName.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    } else if (![[DESToxNetworkConnection sharedConnection].me.userStatus isEqualToString:self.userStatus.stringValue]) {
+        [DESToxNetworkConnection sharedConnection].me.userStatus = [self.userStatus.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
 }
 

@@ -17,6 +17,8 @@
 		F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604617ADFC8C00C864C4 /* SCShinyWindow.m */; };
 		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
+		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
+		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
 		F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */; };
 		F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F58A9ADD17ACB85400923A25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F58A9ADB17ACB85400923A25 /* InfoPlist.strings */; };
@@ -49,7 +51,6 @@
 		F59A064317AC897800E9B15F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F59A064517AC897800E9B15F /* Localizable.strings */; };
 		F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
-		F5A9CC2217AEFDD0003423E0 /* SCHoldingSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */; };
 		F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2317AF1C31003423E0 /* user-icon-default.png */; };
 		F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */; };
 		F5A9CC3417AF2446003423E0 /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2917AF2446003423E0 /* PXListDocumentView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -152,6 +153,9 @@
 		F500604917AE06F700C864C4 /* SCDHTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDHTStatusView.m; sourceTree = "<group>"; };
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
+		F55E797E17AF4B9C0044092B /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
+		F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
+		F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
 		F58A9ACD17AC9ED500923A25 /* SCBigGreenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBigGreenButton.h; sourceTree = "<group>"; };
 		F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBigGreenButton.m; sourceTree = "<group>"; };
 		F58A9AD617ACB85400923A25 /* Kudryavka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kudryavka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,8 +197,6 @@
 		F59A065417AC8AC900E9B15F /* SCAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F59A065517AC8AC900E9B15F /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
 		F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DeepEnd.xcodeproj; path = DeepEnd/DeepEnd.xcodeproj; sourceTree = "<group>"; };
-		F5A9CC2017AEFDD0003423E0 /* SCHoldingSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHoldingSplitView.h; sourceTree = "<group>"; };
-		F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHoldingSplitView.m; sourceTree = "<group>"; };
 		F5A9CC2317AF1C31003423E0 /* user-icon-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default.png"; sourceTree = "<group>"; };
 		F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default@2x.png"; sourceTree = "<group>"; };
 		F5A9CC2817AF2446003423E0 /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListDocumentView.h; sourceTree = "<group>"; };
@@ -268,8 +270,6 @@
 		F500603517ADEF6100C864C4 /* main_window */ = {
 			isa = PBXGroup;
 			children = (
-				F5A9CC2017AEFDD0003423E0 /* SCHoldingSplitView.h */,
-				F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */,
 				F500604817AE06F600C864C4 /* SCDHTStatusView.h */,
 				F500604917AE06F700C864C4 /* SCDHTStatusView.m */,
 				F500604517ADFC8C00C864C4 /* SCShinyWindow.h */,
@@ -408,6 +408,7 @@
 		F59A061617AC873A00E9B15F /* interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				F55E797E17AF4B9C0044092B /* ChatView.xib */,
 				F500603E17ADFC1B00C864C4 /* MainWindow.xib */,
 				F500604117ADFC1E00C864C4 /* GeneralPane.xib */,
 				F500604417ADFC2400C864C4 /* Preferences.xib */,
@@ -487,6 +488,8 @@
 		F5C7BBFB17AC8D0D009BA3E4 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */,
+				F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */,
 				F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */,
 				F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */,
 				F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */,
@@ -675,6 +678,7 @@
 				F500603C17ADFC1B00C864C4 /* MainWindow.xib in Resources */,
 				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
 				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
+				F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,11 +728,11 @@
 				F500603917ADEF9200C864C4 /* SCMainWindowController.m in Sources */,
 				F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */,
 				F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */,
-				F5A9CC2217AEFDD0003423E0 /* SCHoldingSplitView.m in Sources */,
 				F5A9CC3417AF2446003423E0 /* PXListDocumentView.m in Sources */,
 				F5A9CC3517AF2446003423E0 /* PXListView+UserInteraction.m in Sources */,
 				F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */,
 				F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */,
+				F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
