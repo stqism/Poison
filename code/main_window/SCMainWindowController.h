@@ -1,13 +1,13 @@
-//
-//  SCMainWindowController.h
-//  Poison
-//
-//  Created by stal on 2013-08-03.
-//  Copyright (c) 2013 stal. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 
-@interface SCMainWindowController : NSWindowController
+@class SCGradientView;
+@interface SCMainWindowController : NSWindowController <NSWindowDelegate, NSSplitViewDelegate>
+
+@property (strong) IBOutlet NSSplitView *splitView;
+@property (strong) IBOutlet NSImageView *userImage;
+@property (strong) IBOutlet SCGradientView *sidebarHead;
+@property (strong) IBOutlet NSTextField *displayName;
+@property (strong) IBOutlet NSTextField *userStatus;
+@property (strong) IBOutlet NSImageView *statusLight;
 
 @end

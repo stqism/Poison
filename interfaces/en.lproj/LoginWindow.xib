@@ -254,7 +254,6 @@
 											<string key="NSFrame">{{94, 66}, {292, 110}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSImageCell" key="NSCell" id="28431462">
@@ -414,7 +413,6 @@
 											<string key="NSFrame">{{40, 31}, {434, 15}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="906576029">
@@ -761,6 +759,14 @@
 						<reference key="destination" ref="6675504"/>
 					</object>
 					<int key="connectionID">102</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">pageTwoBackgroundView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="401669417"/>
+					</object>
+					<int key="connectionID">103</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1193,7 +1199,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">102</int>
+			<int key="maxID">103</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1258,6 +1264,7 @@
 						<string key="nicknameField">NSTextField</string>
 						<string key="pageOne">NSView</string>
 						<string key="pageTwo">NSView</string>
+						<string key="pageTwoBackgroundView">SCShadowedView</string>
 						<string key="radioOptCustomFile">NSButton</string>
 						<string key="radioOptKeychain">NSButton</string>
 						<string key="radioOptNoSave">NSButton</string>
@@ -1293,6 +1300,10 @@
 						<object class="IBToOneOutletInfo" key="pageTwo">
 							<string key="name">pageTwo</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pageTwoBackgroundView">
+							<string key="name">pageTwoBackgroundView</string>
+							<string key="candidateClassName">SCShadowedView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="radioOptCustomFile">
 							<string key="name">radioOptCustomFile</string>

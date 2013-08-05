@@ -2,6 +2,7 @@
 #import "NKKeychainDataSerializer.h"
 #import "NKCryptedFileDataSerializer.h"
 #import "NKDummyDataSerializer.h"
+#import "NKKeyServerSerializer.h"
 
 @class NKKeychainDataSerializer, NKCryptedFileDataSerializer, NKDummyDataSerializer;
 
@@ -12,9 +13,11 @@
         case NKSerializerKeychain:
             return [[NKKeychainDataSerializer alloc] init];
         case NKSerializerCustomFile:
-            return [[NKCryptedFileDataSerializer alloc] init];
+            return [[NKDummyDataSerializer alloc] init];
         case NKSerializerNoop:
             return [[NKDummyDataSerializer alloc] init];
+        case NKSerializerKeyserver:
+            return [[NKKeyServerSerializer alloc] init];
         default:
             return nil;
     }
@@ -28,6 +31,11 @@
 - (NSDictionary *)loadKeysWithOptions:(NSDictionary *)aDict error:(NSError **)error {
     [NSException raise:@"NKAbstractClassException" format:@"You idiot."];
     return nil;
+}
+
+- (BOOL)hasDataForOptions:(NSDictionary *)aDict {
+    [NSException raise:@"NKAbstractClassException" format:@"You idiot."];
+    return NO;
 }
 
 @end

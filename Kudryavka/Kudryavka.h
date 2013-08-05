@@ -4,19 +4,16 @@
 #endif
 
 /*
- * Q: What is this?
- * A: This is a self-contained framework solely for serializing keys in different
- *    ways.
- * Q: Why?
- * A: To make it easier to re-use.
- * Q: Why doesn't this have a descriptive name?
- * A: Where's the fun in that?
+ * Kudryavka.framework - Storage and retrieval of Poison data.
+ * Technically BSD, but you have to link DeepEnd, which is GPLv3.
+ * Damn it.
  */
 
 typedef NS_ENUM(NSInteger, NKSerializerType) {
     NKSerializerKeychain,
     NKSerializerCustomFile,
     NKSerializerNoop,
+    NKSerializerKeyserver,
 };
 
 @interface NKDataSerializer : NSObject
@@ -26,5 +23,7 @@ typedef NS_ENUM(NSInteger, NKSerializerType) {
 - (BOOL)serializePrivateKey:(NSString *)thePrivateKey publicKey:(NSString *)thePublicKey options:(NSDictionary *)aDict error:(NSError **)error;
 
 - (NSDictionary *)loadKeysWithOptions:(NSDictionary *)aDict error:(NSError **)error;
+
+- (BOOL)hasDataForOptions:(NSDictionary *)aDict;
 
 @end

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F500602217AD8B6800C864C4 /* DeepEnd.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
+		F500602817ADA2AA00C864C4 /* SCPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F500602717ADA2AA00C864C4 /* SCPreferencesWindowController.m */; };
+		F500603017ADA77300C864C4 /* SCGeneralPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F500602F17ADA77300C864C4 /* SCGeneralPaneController.m */; };
+		F500603917ADEF9200C864C4 /* SCMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F500603817ADEF9200C864C4 /* SCMainWindowController.m */; };
+		F500603C17ADFC1B00C864C4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F500603E17ADFC1B00C864C4 /* MainWindow.xib */; };
+		F500603F17ADFC1E00C864C4 /* GeneralPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = F500604117ADFC1E00C864C4 /* GeneralPane.xib */; };
+		F500604217ADFC2400C864C4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = F500604417ADFC2400C864C4 /* Preferences.xib */; };
+		F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604617ADFC8C00C864C4 /* SCShinyWindow.m */; };
+		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
 		F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */; };
 		F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
@@ -40,11 +49,20 @@
 		F59A064317AC897800E9B15F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F59A064517AC897800E9B15F /* Localizable.strings */; };
 		F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
+		F5A9CC2217AEFDD0003423E0 /* SCHoldingSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */; };
+		F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2317AF1C31003423E0 /* user-icon-default.png */; };
+		F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */; };
+		F5A9CC3417AF2446003423E0 /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2917AF2446003423E0 /* PXListDocumentView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F5A9CC3517AF2446003423E0 /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2C17AF2446003423E0 /* PXListView+UserInteraction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2E17AF2446003423E0 /* PXListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC3117AF2446003423E0 /* PXListViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5C7BBF017AC8C0B009BA3E4 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F59A065517AC8AC900E9B15F /* SCAppDelegate.m */; };
 		F5C7BBF117AC8C0C009BA3E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F59A065217AC8AC900E9B15F /* main.m */; };
 		F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */; };
-		F5C7BBF717AC8CA4009BA3E4 /* SCLoginWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* SCLoginWindowController.xib */; };
+		F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */; };
 		F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */; };
+		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
+		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
 		F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
 		F5FF959E17AD7A3700BB2F13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FF959D17AD7A3700BB2F13 /* main.m */; };
 		F5FF95A817AD7A8000BB2F13 /* Kudryavka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58A9AD617ACB85400923A25 /* Kudryavka.framework */; };
@@ -102,6 +120,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F500602217AD8B6800C864C4 /* DeepEnd.framework in CopyFiles */,
 				F58A9AFB17ACC98900923A25 /* Kudryavka.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +137,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F500602617ADA2AA00C864C4 /* SCPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPreferencesWindowController.h; sourceTree = "<group>"; };
+		F500602717ADA2AA00C864C4 /* SCPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPreferencesWindowController.m; sourceTree = "<group>"; };
+		F500602E17ADA77300C864C4 /* SCGeneralPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGeneralPaneController.h; sourceTree = "<group>"; };
+		F500602F17ADA77300C864C4 /* SCGeneralPaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGeneralPaneController.m; sourceTree = "<group>"; };
+		F500603717ADEF9200C864C4 /* SCMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMainWindowController.h; sourceTree = "<group>"; };
+		F500603817ADEF9200C864C4 /* SCMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMainWindowController.m; sourceTree = "<group>"; };
+		F500603D17ADFC1B00C864C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		F500604017ADFC1E00C864C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GeneralPane.xib; sourceTree = "<group>"; };
+		F500604317ADFC2400C864C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Preferences.xib; sourceTree = "<group>"; };
+		F500604517ADFC8C00C864C4 /* SCShinyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShinyWindow.h; sourceTree = "<group>"; };
+		F500604617ADFC8C00C864C4 /* SCShinyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShinyWindow.m; sourceTree = "<group>"; };
+		F500604817AE06F600C864C4 /* SCDHTStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDHTStatusView.h; sourceTree = "<group>"; };
+		F500604917AE06F700C864C4 /* SCDHTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDHTStatusView.m; sourceTree = "<group>"; };
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
 		F58A9ACD17AC9ED500923A25 /* SCBigGreenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBigGreenButton.h; sourceTree = "<group>"; };
@@ -161,15 +193,32 @@
 		F59A065417AC8AC900E9B15F /* SCAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F59A065517AC8AC900E9B15F /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
 		F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DeepEnd.xcodeproj; path = DeepEnd/DeepEnd.xcodeproj; sourceTree = "<group>"; };
+		F5A9CC2017AEFDD0003423E0 /* SCHoldingSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHoldingSplitView.h; sourceTree = "<group>"; };
+		F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHoldingSplitView.m; sourceTree = "<group>"; };
+		F5A9CC2317AF1C31003423E0 /* user-icon-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default.png"; sourceTree = "<group>"; };
+		F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default@2x.png"; sourceTree = "<group>"; };
+		F5A9CC2817AF2446003423E0 /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListDocumentView.h; sourceTree = "<group>"; };
+		F5A9CC2917AF2446003423E0 /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListDocumentView.m; sourceTree = "<group>"; };
+		F5A9CC2A17AF2446003423E0 /* PXListView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListView+Private.h"; sourceTree = "<group>"; };
+		F5A9CC2B17AF2446003423E0 /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListView+UserInteraction.h"; sourceTree = "<group>"; };
+		F5A9CC2C17AF2446003423E0 /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXListView+UserInteraction.m"; sourceTree = "<group>"; };
+		F5A9CC2D17AF2446003423E0 /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListView.h; sourceTree = "<group>"; };
+		F5A9CC2E17AF2446003423E0 /* PXListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListView.m; sourceTree = "<group>"; };
+		F5A9CC2F17AF2446003423E0 /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListViewCell+Private.h"; sourceTree = "<group>"; };
+		F5A9CC3017AF2446003423E0 /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewCell.h; sourceTree = "<group>"; };
+		F5A9CC3117AF2446003423E0 /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
+		F5A9CC3217AF2446003423E0 /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
+		F5A9CC3317AF2446003423E0 /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDropHighlight.h; sourceTree = "<group>"; };
 		F5C7BBF217AC8C7C009BA3E4 /* SCLoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoginWindowController.h; sourceTree = "<group>"; };
 		F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoginWindowController.m; sourceTree = "<group>"; };
-		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SCLoginWindowController.xib; sourceTree = "<group>"; };
+		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginWindow.xib; sourceTree = "<group>"; };
 		F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGradientView.h; sourceTree = "<group>"; };
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
+		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
+		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
 		F5FF959917AD7A3700BB2F13 /* TestKudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestKudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5FF959A17AD7A3700BB2F13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F5FF959D17AD7A3700BB2F13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F5FF95A017AD7A3700BB2F13 /* TestKudryavka-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestKudryavka-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,12 +254,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F500602417ADA28F00C864C4 /* preferences */ = {
+			isa = PBXGroup;
+			children = (
+				F500602617ADA2AA00C864C4 /* SCPreferencesWindowController.h */,
+				F500602717ADA2AA00C864C4 /* SCPreferencesWindowController.m */,
+				F500602E17ADA77300C864C4 /* SCGeneralPaneController.h */,
+				F500602F17ADA77300C864C4 /* SCGeneralPaneController.m */,
+			);
+			path = preferences;
+			sourceTree = "<group>";
+		};
+		F500603517ADEF6100C864C4 /* main_window */ = {
+			isa = PBXGroup;
+			children = (
+				F5A9CC2017AEFDD0003423E0 /* SCHoldingSplitView.h */,
+				F5A9CC2117AEFDD0003423E0 /* SCHoldingSplitView.m */,
+				F500604817AE06F600C864C4 /* SCDHTStatusView.h */,
+				F500604917AE06F700C864C4 /* SCDHTStatusView.m */,
+				F500604517ADFC8C00C864C4 /* SCShinyWindow.h */,
+				F500604617ADFC8C00C864C4 /* SCShinyWindow.m */,
+				F500603717ADEF9200C864C4 /* SCMainWindowController.h */,
+				F500603817ADEF9200C864C4 /* SCMainWindowController.m */,
+			);
+			path = main_window;
+			sourceTree = "<group>";
+		};
 		F58A9AD817ACB85400923A25 /* Kudryavka */ = {
 			isa = PBXGroup;
 			children = (
 				F5FF959C17AD7A3700BB2F13 /* TestKudryavka */,
 				F58A9ADF17ACB85400923A25 /* Kudryavka.h */,
 				F58A9AE017ACB85400923A25 /* Kudryavka.m */,
+				F5FE73B217AEC97C001EF4A3 /* keyserver */,
 				F58A9AEE17ACBDD000923A25 /* dummy */,
 				F58A9AED17ACBDC300923A25 /* crypted_file */,
 				F58A9AEC17ACBDA700923A25 /* keychain */,
@@ -265,6 +341,7 @@
 				F59A061917AC873A00E9B15F /* localizable */,
 				F59A062117AC877C00E9B15F /* Poison-Info.plist */,
 				F59A062217AC877C00E9B15F /* Poison.entitlements */,
+				F5A9CC2717AF2446003423E0 /* PXListView */,
 				F58A9AD817ACB85400923A25 /* Kudryavka */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
@@ -316,7 +393,9 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F500602417ADA28F00C864C4 /* preferences */,
 				F5C7BBFB17AC8D0D009BA3E4 /* common */,
+				F500603517ADEF6100C864C4 /* main_window */,
 				F5C7BBFA17AC8CEC009BA3E4 /* login_window */,
 				F59A065317AC8AC900E9B15F /* Poison-Prefix.pch */,
 				F59A065417AC8AC900E9B15F /* SCAppDelegate.h */,
@@ -329,8 +408,11 @@
 		F59A061617AC873A00E9B15F /* interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				F500603E17ADFC1B00C864C4 /* MainWindow.xib */,
+				F500604117ADFC1E00C864C4 /* GeneralPane.xib */,
+				F500604417ADFC2400C864C4 /* Preferences.xib */,
 				F59A061717AC873A00E9B15F /* MainMenu.xib */,
-				F5C7BBF917AC8CA4009BA3E4 /* SCLoginWindowController.xib */,
+				F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -356,6 +438,8 @@
 				F59A062E17AC88DA00E9B15F /* status-light-offline.png */,
 				F59A062F17AC88DA00E9B15F /* status-light-online.png */,
 				F59A063017AC88DA00E9B15F /* tox_logo.png */,
+				F5A9CC2317AF1C31003423E0 /* user-icon-default.png */,
+				F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */,
 			);
 			path = ui_images;
 			sourceTree = "<group>";
@@ -367,6 +451,26 @@
 				F5A7E91417AD83B300B6ADA7 /* libDeepEnd-iOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F5A9CC2717AF2446003423E0 /* PXListView */ = {
+			isa = PBXGroup;
+			children = (
+				F5A9CC2817AF2446003423E0 /* PXListDocumentView.h */,
+				F5A9CC2917AF2446003423E0 /* PXListDocumentView.m */,
+				F5A9CC2A17AF2446003423E0 /* PXListView+Private.h */,
+				F5A9CC2B17AF2446003423E0 /* PXListView+UserInteraction.h */,
+				F5A9CC2C17AF2446003423E0 /* PXListView+UserInteraction.m */,
+				F5A9CC2D17AF2446003423E0 /* PXListView.h */,
+				F5A9CC2E17AF2446003423E0 /* PXListView.m */,
+				F5A9CC2F17AF2446003423E0 /* PXListViewCell+Private.h */,
+				F5A9CC3017AF2446003423E0 /* PXListViewCell.h */,
+				F5A9CC3117AF2446003423E0 /* PXListViewCell.m */,
+				F5A9CC3217AF2446003423E0 /* PXListViewDelegate.h */,
+				F5A9CC3317AF2446003423E0 /* PXListViewDropHighlight.h */,
+			);
+			name = PXListView;
+			path = PXListView/Classes;
 			sourceTree = "<group>";
 		};
 		F5C7BBFA17AC8CEC009BA3E4 /* login_window */ = {
@@ -391,22 +495,22 @@
 			path = common;
 			sourceTree = "<group>";
 		};
+		F5FE73B217AEC97C001EF4A3 /* keyserver */ = {
+			isa = PBXGroup;
+			children = (
+				F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */,
+				F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */,
+			);
+			path = keyserver;
+			sourceTree = "<group>";
+		};
 		F5FF959C17AD7A3700BB2F13 /* TestKudryavka */ = {
 			isa = PBXGroup;
 			children = (
 				F5FF959D17AD7A3700BB2F13 /* main.m */,
-				F5FF959F17AD7A3700BB2F13 /* Supporting Files */,
 			);
 			name = TestKudryavka;
-			path = ../TestKudryavka;
-			sourceTree = "<group>";
-		};
-		F5FF959F17AD7A3700BB2F13 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F5FF95A017AD7A3700BB2F13 /* TestKudryavka-Prefix.pch */,
-			);
-			name = "Supporting Files";
+			path = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,6 +524,7 @@
 				F58A9AEA17ACBDA400923A25 /* NKKeychainDataSerializer.h in Headers */,
 				F58A9AF117ACBDF800923A25 /* NKDummyDataSerializer.h in Headers */,
 				F58A9AF517ACBEAD00923A25 /* NKCryptedFileDataSerializer.h in Headers */,
+				F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +554,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F59A05FD17AC808900E9B15F /* Build configuration list for PBXNativeTarget "Poison" */;
 			buildPhases = (
+				F5FE73B017AEBA76001EF4A3 /* ShellScript */,
 				F59A05DC17AC808900E9B15F /* Sources */,
 				F59A05DD17AC808900E9B15F /* Frameworks */,
 				F58A9AFA17ACC97800923A25 /* CopyFiles */,
@@ -563,11 +669,32 @@
 				F59A063917AC88DA00E9B15F /* tox_logo.png in Resources */,
 				F59A063B17AC88FA00E9B15F /* shiina.iconset in Resources */,
 				F59A064317AC897800E9B15F /* Localizable.strings in Resources */,
-				F5C7BBF717AC8CA4009BA3E4 /* SCLoginWindowController.xib in Resources */,
+				F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */,
+				F500604217ADFC2400C864C4 /* Preferences.xib in Resources */,
+				F500603F17ADFC1E00C864C4 /* GeneralPane.xib in Resources */,
+				F500603C17ADFC1B00C864C4 /* MainWindow.xib in Resources */,
+				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
+				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F5FE73B017AEBA76001EF4A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$(($bN + 1))\nbN=$(printf \"%X\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F58A9AD117ACB85400923A25 /* Sources */ = {
@@ -578,6 +705,7 @@
 				F58A9AEB17ACBDA400923A25 /* NKKeychainDataSerializer.m in Sources */,
 				F58A9AF217ACBDF800923A25 /* NKDummyDataSerializer.m in Sources */,
 				F58A9AF617ACBEAD00923A25 /* NKCryptedFileDataSerializer.m in Sources */,
+				F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +719,16 @@
 				F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */,
 				F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */,
 				F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */,
+				F500602817ADA2AA00C864C4 /* SCPreferencesWindowController.m in Sources */,
+				F500603017ADA77300C864C4 /* SCGeneralPaneController.m in Sources */,
+				F500603917ADEF9200C864C4 /* SCMainWindowController.m in Sources */,
+				F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */,
+				F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */,
+				F5A9CC2217AEFDD0003423E0 /* SCHoldingSplitView.m in Sources */,
+				F5A9CC3417AF2446003423E0 /* PXListDocumentView.m in Sources */,
+				F5A9CC3517AF2446003423E0 /* PXListView+UserInteraction.m in Sources */,
+				F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */,
+				F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +766,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F500603E17ADFC1B00C864C4 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F500603D17ADFC1B00C864C4 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		F500604117ADFC1E00C864C4 /* GeneralPane.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F500604017ADFC1E00C864C4 /* en */,
+			);
+			name = GeneralPane.xib;
+			sourceTree = "<group>";
+		};
+		F500604417ADFC2400C864C4 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F500604317ADFC2400C864C4 /* en */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
 		F58A9ADB17ACB85400923A25 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -660,12 +822,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		F5C7BBF917AC8CA4009BA3E4 /* SCLoginWindowController.xib */ = {
+		F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F5C7BBF817AC8CA4009BA3E4 /* en */,
 			);
-			name = SCLoginWindowController.xib;
+			name = LoginWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -681,6 +843,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kudryavka/Kudryavka-Prefix.pch";
 				INFOPLIST_FILE = "Kudryavka/Kudryavka-Info.plist";
+				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -696,6 +860,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kudryavka/Kudryavka-Prefix.pch";
 				INFOPLIST_FILE = "Kudryavka/Kudryavka-Info.plist";
+				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -768,6 +934,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Poison-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -782,6 +949,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Poison-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -791,8 +959,8 @@
 		F5FF95A417AD7A3700BB2F13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestKudryavka/TestKudryavka-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -800,8 +968,8 @@
 		F5FF95A517AD7A3700BB2F13 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TestKudryavka/TestKudryavka-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

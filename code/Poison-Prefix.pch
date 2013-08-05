@@ -4,4 +4,5 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #define OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_6)
 #endif

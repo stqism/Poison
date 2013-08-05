@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import <Kudryavka/Kudryavka.h>
 
 @class SCLoginWindowController, SCMainWindowController,
        SCPreferencesWindowController, SCAboutWindowController;
@@ -10,5 +11,7 @@
 @property (strong) SCPreferencesWindowController *preferencesWindow;
 @property (strong) SCAboutWindowController *aboutWindow;
 @property (strong) NSArray *standaloneWindows;
+
+- (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
 
 @end

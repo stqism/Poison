@@ -3,10 +3,6 @@
 
 #import "SCPreferencesWindowController.h"
 
-@interface SCPreferencesWindowController ()
-
-@end
-
 @implementation SCPreferencesWindowController {
     NSViewController *currentPane;
     NSString *previousSelectedItemIdentifier;
@@ -19,7 +15,7 @@
         toolbarItem.action = @selector(didChangeSettingsPane:);
     }
     previousSelectedItemIdentifier = @"";
-    [self.toolbar setSelectedItemIdentifier:@"General"];
+    self.toolbar.selectedItemIdentifier = @"GeneralPane";
     [self didChangeSettingsPane:self.toolbar.items[0]];
 }
 
@@ -45,15 +41,8 @@
         [self.window.contentView setHidden:YES];
         [self.window setFrame:(NSRect){{self.window.frame.origin.x, self.window.frame.origin.y - (currentPane.view.frame.size.height + chromeHeight - self.window.frame.size.height)}, {currentPane.view.frame.size.width, currentPane.view.frame.size.height + chromeHeight}} display:YES animate:YES];
         [self.window setContentView:currentPane.view];
+        [self.window.contentView setHidden:NO];
     }
-}
-
-- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar {
-    NSMutableArray *selectable = [[NSMutableArray alloc] initWithCapacity:[toolbar.items count]];
-    for (NSToolbarItem *toolbarItem in toolbar.items) {
-        [selectable addObject:toolbarItem.itemIdentifier];
-    }
-    return (NSArray*)selectable;
 }
 
 @end

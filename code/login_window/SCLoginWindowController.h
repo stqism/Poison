@@ -9,6 +9,7 @@
 @property (strong) IBOutlet NSTextField *nicknameField;
 @property (strong) IBOutlet SCBigGreenButton *submitButton;
 @property (strong) IBOutlet NSTextField *versionLabel;
+@property (strong) IBOutlet SCShadowedView *pageTwoBackgroundView;
 
 @property (strong) IBOutlet NSView *pageOne;
 @property (strong) IBOutlet NSView *pageTwo;

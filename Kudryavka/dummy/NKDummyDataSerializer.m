@@ -7,8 +7,13 @@
 }
 
 - (NSDictionary *)loadKeysWithOptions:(NSDictionary *)aDict error:(NSError **)error {
-    *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": @"Key was not saved", @"silence": @YES}];
+    if (error)
+        *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": @"Key was not saved", @"silence": @YES}];
     return nil;
+}
+
+- (BOOL)hasDataForOptions:(NSDictionary *)aDict {
+    return NO;
 }
 
 @end

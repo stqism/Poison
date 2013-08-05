@@ -4,27 +4,24 @@
 
 @implementation NKKeychainDataSerializer
 
+/*
+ * TODO:
+ * - Figure out why this doesn't work under OS X 10.6.
+ */
+
 - (BOOL)serializePrivateKey:(NSString *)thePrivateKey publicKey:(NSString *)thePublicKey options:(NSDictionary *)aDict error:(NSError **)error {
-    uint8_t *buffer = NULL;
-    OSStatus ret = errSecSuccess;
-    
     if (aDict[@"overwrite"]) {
         [self clearStoredKeysForUsername:aDict[@"username"]];
     }
     
-    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:4];
-    
-    item[(id)kSecClass] = (__bridge id)(kSecClassGenericPassword);
-    item[(id)kSecAttrAccount] = aDict[@"username"];
-    
-    buffer = malloc(DESPrivateKeySize);
+    uint8_t *buffer = malloc(DESPrivateKeySize + DESPublicKeySize);
     DESConvertPrivateKeyToData(thePrivateKey, buffer);
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.privateKeyStore";
-    item[(id)kSecValueData] = [NSData dataWithBytes:buffer length:DESPrivateKeySize];
+    DESConvertPublicKeyToData(thePublicKey, buffer + DESPrivateKeySize);
+    NSString *theService = @"ca.kirara.kudryavka.unifiedKeyStore";
+    OSStatus ret = SecKeychainAddGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[aDict[@"username"] lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [aDict[@"username"] UTF8String], (UInt32)(DESPrivateKeySize + DESPublicKeySize), buffer, NULL);
     free(buffer);
-    ret = SecItemAdd((__bridge CFDictionaryRef)(item), NULL);
-    
     if (ret != errSecSuccess) {
+        NSLog(@"Kudryavka (serialize): ret is %i", ret);
         [self clearStoredKeysForUsername:aDict[@"username"]];
         if (error) {
             CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
@@ -33,73 +30,71 @@
         }
         return NO;
     }
-    
-    buffer = malloc(DESPublicKeySize);
-    DESConvertPublicKeyToData(thePublicKey, buffer);
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.publicKeyStore";
-    item[(id)kSecValueData] = [NSData dataWithBytes:buffer length:DESPublicKeySize];
-    free(buffer);
-    ret = SecItemAdd((__bridge CFDictionaryRef)(item), NULL);
-    
-    if (ret != errSecSuccess) {
-        [self clearStoredKeysForUsername:aDict[@"username"]];
-        if (error) {
-            CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
-            *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": (__bridge NSString*)reason}];
-            CFRelease(reason);
-        }
-        return NO;
-    }
-    
-    *error = nil;
+    if (error)
+        *error = nil;
     return YES;
 }
 
 - (NSDictionary *)loadKeysWithOptions:(NSDictionary *)aDict error:(NSError **)error {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:2];
-    OSStatus ret = errSecSuccess;
-    CFDataRef rs = NULL;
-    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:4];
-    item[(id)kSecClass] = (__bridge id)(kSecClassGenericPassword);
-    item[(id)kSecAttrAccount] = aDict[@"username"];
-    item[(id)kSecReturnData] = (__bridge id)(kCFBooleanTrue);
     
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.privateKeyStore";
-    SecItemCopyMatching((__bridge CFDictionaryRef)(item), (CFTypeRef*)&rs);
+    UInt32 length = 0;
+    uint8_t *buffer;
+    NSString *theService = @"ca.kirara.kudryavka.unifiedKeyStore";
+    OSStatus ret = SecKeychainFindGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[aDict[@"username"] lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [aDict[@"username"] UTF8String], &length, (void**)&buffer, NULL);
     if (ret != errSecSuccess) {
+        NSLog(@"Kudryavka (load): ret is %i", ret);
+        [self clearStoredKeysForUsername:aDict[@"username"]];
         if (error) {
             CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
             *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": (__bridge NSString*)reason}];
             CFRelease(reason);
         }
-        return NO;
+        return nil;
     }
-    result[@"privateKey"] = DESConvertPrivateKeyToString([(__bridge NSData*)rs bytes]);
     
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.publicKeyStore";
-    SecItemCopyMatching((__bridge CFDictionaryRef)(item), (CFTypeRef*)&rs);
-    if (ret != errSecSuccess) {
+    if (length != (DESPrivateKeySize + DESPublicKeySize)) {
+        SecKeychainItemFreeContent(NULL, buffer);
+        [self clearStoredKeysForUsername:aDict[@"username"]];
         if (error) {
-            CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
-            *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": (__bridge NSString*)reason}];
-            CFRelease(reason);
+            *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": @"The keychain data is corrupt."}];
         }
-        return NO;
+        return nil;
     }
-    result[@"publicKey"] = DESConvertPublicKeyToString([(__bridge NSData*)rs bytes]);
+    printf("%s\n", buffer);
+    uint8_t *temp_pub = malloc(DESPublicKeySize);
+    memcpy(temp_pub, buffer + DESPrivateKeySize, DESPublicKeySize);
+    uint8_t *temp_priv = malloc(DESPrivateKeySize);
+    memcpy(temp_priv, buffer, DESPrivateKeySize);
+    SecKeychainItemFreeContent(NULL, buffer);
+    if (!DESValidateKeyPair(temp_priv, temp_pub)) {
+        free(temp_pub);
+        free(temp_priv);
+        [self clearStoredKeysForUsername:aDict[@"username"]];
+        if (error) {
+            *error = [NSError errorWithDomain:@"ca.kirara.Kudryavka" code:9001 userInfo:@{@"cause": @"The keys stored do not match."}];
+        }
+        return nil;
+    }
     
+    result[@"privateKey"] = DESConvertPrivateKeyToString(temp_priv);
+    result[@"publicKey"] = DESConvertPublicKeyToString(temp_pub);
+    free(temp_pub);
+    free(temp_priv);
     if (error)
         *error = nil;
     return (NSDictionary*)result;
+}
+
+- (BOOL)hasDataForOptions:(NSDictionary *)aDict {
+    return [self loadKeysWithOptions:aDict error:nil] ? YES : NO;
 }
 
 - (void)clearStoredKeysForUsername:(NSString *)theUsername {
     NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:4];
     item[(id)kSecClass] = (__bridge id)(kSecClassGenericPassword);
     item[(id)kSecAttrAccount] = theUsername;
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.privateKeyStore";
-    SecItemDelete((__bridge CFDictionaryRef)(item));
-    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.publicKeyStore";
+    item[(id)kSecAttrService] = @"ca.kirara.kudryavka.unifiedKeyStore";
     SecItemDelete((__bridge CFDictionaryRef)(item));
 }
 
