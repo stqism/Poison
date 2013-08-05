@@ -8,6 +8,14 @@ before_script:
   - ./configure && make check -j3
   - sudo make install
   - cd ..
+  - git submodule init
+  - git submodule update
+  - cd DeepEnd
+  - git submodule init
+  - git submodule update
+  - cd ..
+
+script: xcodebuild -workspace Poison.xcworkspace -scheme Poison
 
 notifications:
   email:

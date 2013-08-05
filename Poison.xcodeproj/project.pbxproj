@@ -335,6 +335,7 @@
 		F59A05D717AC808900E9B15F = {
 			isa = PBXGroup;
 			children = (
+				F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */,
 				F59A061417AC873A00E9B15F /* art */,
 				F59A061517AC873A00E9B15F /* code */,
 				F59A061617AC873A00E9B15F /* interfaces */,
@@ -345,7 +346,6 @@
 				F58A9AD817ACB85400923A25 /* Kudryavka */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
-				F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
