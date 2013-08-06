@@ -19,6 +19,7 @@
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
+		F569EBE017B065B4009491DC /* Requests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F569EBDF17B065B4009491DC /* Requests.xib */; };
 		F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */; };
 		F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F58A9ADD17ACB85400923A25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F58A9ADB17ACB85400923A25 /* InfoPlist.strings */; };
@@ -156,6 +157,7 @@
 		F55E797E17AF4B9C0044092B /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
 		F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
 		F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
+		F569EBDF17B065B4009491DC /* Requests.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Requests.xib; sourceTree = "<group>"; };
 		F58A9ACD17AC9ED500923A25 /* SCBigGreenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBigGreenButton.h; sourceTree = "<group>"; };
 		F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBigGreenButton.m; sourceTree = "<group>"; };
 		F58A9AD617ACB85400923A25 /* Kudryavka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kudryavka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,6 +413,7 @@
 				F55E797E17AF4B9C0044092B /* ChatView.xib */,
 				F500603E17ADFC1B00C864C4 /* MainWindow.xib */,
 				F500604117ADFC1E00C864C4 /* GeneralPane.xib */,
+				F569EBDF17B065B4009491DC /* Requests.xib */,
 				F500604417ADFC2400C864C4 /* Preferences.xib */,
 				F59A061717AC873A00E9B15F /* MainMenu.xib */,
 				F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */,
@@ -679,6 +682,7 @@
 				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
 				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
 				F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */,
+				F569EBE017B065B4009491DC /* Requests.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +902,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -925,6 +930,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
