@@ -34,7 +34,7 @@
     NSArray *objects = nil;
     
     id cell = nil;
-    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
+    if (OS_VERSION_IS_BETTER_THAN_LION) {
         [cellNib instantiateWithOwner:nil topLevelObjects:&objects];
     } else {
         [cellNib instantiateNibWithOwner:nil topLevelObjects:&objects];
