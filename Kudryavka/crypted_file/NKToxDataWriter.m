@@ -35,7 +35,7 @@
         *bufPtr = localBlock;
         /* Base block begin */
         /* The second magic number. */
-        uint8_t magic2[4] = {0x6B, 0x75, 0x64, 0x6F};
+        uint8_t magic2[4] = {0x61, 0x76, 0x6B, 0x61};
         memcpy(localBlock, magic2, 4);
         offset = 4;
         DESConvertPublicKeyToData(source.me.publicKey, localBlock + offset);
