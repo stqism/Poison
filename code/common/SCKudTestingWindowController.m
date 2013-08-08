@@ -13,7 +13,8 @@
     NSTimeInterval end = [[NSDate date] timeIntervalSinceDate:start];
     self.timeField.stringValue = [NSString stringWithFormat:@"%f", end];
     self.lengthField.stringValue = [NSString stringWithFormat:@"%zu", buflen];
-    [[NSData dataWithBytes:buf length:buflen] writeToFile:@"/Volumes/stal/data" atomically:YES];
+    [[NSData dataWithBytes:buf length:buflen] writeToFile:[NSString stringWithFormat:@"%@/data", NSHomeDirectory()] atomically:YES];
+    free(buf);
 }
 
 @end
