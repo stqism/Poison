@@ -216,7 +216,7 @@
 									<object class="NSTextFieldCell" key="NSCell" id="1019786512">
 										<int key="NSCellFlags">67108864</int>
 										<int key="NSCellFlags2">272629760</int>
-										<string key="NSContents">Warning: You should only accept friend requests from peple you trust.</string>
+										<string key="NSContents">Warning: You should only accept friend requests from people you trust.</string>
 										<reference key="NSSupport" ref="371410545"/>
 										<string key="NSCellIdentifier">_NS:1535</string>
 										<reference key="NSControlView" ref="13602759"/>
