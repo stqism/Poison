@@ -16,10 +16,13 @@
 		F500604217ADFC2400C864C4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = F500604417ADFC2400C864C4 /* Preferences.xib */; };
 		F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604617ADFC8C00C864C4 /* SCShinyWindow.m */; };
 		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
+		F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */; };
+		F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51E65C817B0A48200BF09D4 /* RequestsCell.xib */; };
+		F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
-		F569EBE017B065B4009491DC /* Requests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F569EBDF17B065B4009491DC /* Requests.xib */; };
+		F57C3A3C17B160A000325A24 /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */; };
 		F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F58A9ADD17ACB85400923A25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F58A9ADB17ACB85400923A25 /* InfoPlist.strings */; };
@@ -48,8 +51,16 @@
 		F59A063717AC88DA00E9B15F /* status-light-offline.png in Resources */ = {isa = PBXBuildFile; fileRef = F59A062E17AC88DA00E9B15F /* status-light-offline.png */; };
 		F59A063817AC88DA00E9B15F /* status-light-online.png in Resources */ = {isa = PBXBuildFile; fileRef = F59A062F17AC88DA00E9B15F /* status-light-online.png */; };
 		F59A063917AC88DA00E9B15F /* tox_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F59A063017AC88DA00E9B15F /* tox_logo.png */; };
-		F59A063B17AC88FA00E9B15F /* shiina.iconset in Resources */ = {isa = PBXBuildFile; fileRef = F59A063A17AC88FA00E9B15F /* shiina.iconset */; };
 		F59A064317AC897800E9B15F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F59A064517AC897800E9B15F /* Localizable.strings */; };
+		F5A3A84B17B2AAB60068AFA0 /* NKToxDataWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5A3A84C17B2AAB60068AFA0 /* NKToxDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */; };
+		F5A3A85017B2F2300068AFA0 /* SCKudTestingWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A3A84E17B2F2300068AFA0 /* SCKudTestingWindowController.h */; };
+		F5A3A85117B2F2300068AFA0 /* SCKudTestingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84F17B2F2300068AFA0 /* SCKudTestingWindowController.m */; };
+		F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */; };
+		F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85817B342C20068AFA0 /* Requests.xib */; };
+		F5A3A85A17B34E580068AFA0 /* BootstrapSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */; };
+		F5A3A86217B350960068AFA0 /* SCAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A86117B350960068AFA0 /* SCAboutWindowController.m */; };
+		F5A3A86317B351030068AFA0 /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A86517B351030068AFA0 /* AboutWindow.xib */; };
 		F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2317AF1C31003423E0 /* user-icon-default.png */; };
@@ -58,6 +69,9 @@
 		F5A9CC3517AF2446003423E0 /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2C17AF2446003423E0 /* PXListView+UserInteraction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2E17AF2446003423E0 /* PXListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC3117AF2446003423E0 /* PXListViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F5B9113517B1E2D200E29017 /* SCFriendListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */; };
+		F5B9113817B203A500E29017 /* SCFriendListItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B9113717B203A500E29017 /* SCFriendListItemCell.m */; };
+		F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5B9113917B203CF00E29017 /* FriendCell.xib */; };
 		F5C7BBF017AC8C0B009BA3E4 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F59A065517AC8AC900E9B15F /* SCAppDelegate.m */; };
 		F5C7BBF117AC8C0C009BA3E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F59A065217AC8AC900E9B15F /* main.m */; };
 		F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */; };
@@ -152,12 +166,17 @@
 		F500604617ADFC8C00C864C4 /* SCShinyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShinyWindow.m; sourceTree = "<group>"; };
 		F500604817AE06F600C864C4 /* SCDHTStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDHTStatusView.h; sourceTree = "<group>"; };
 		F500604917AE06F700C864C4 /* SCDHTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDHTStatusView.m; sourceTree = "<group>"; };
+		F51E65C517B0A11600BF09D4 /* SCFriendRequestsSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendRequestsSheetController.h; sourceTree = "<group>"; };
+		F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendRequestsSheetController.m; sourceTree = "<group>"; };
+		F51E65C817B0A48200BF09D4 /* RequestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsCell.xib; sourceTree = "<group>"; };
+		F51E65CA17B0B04E00BF09D4 /* SCRequestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRequestCell.h; sourceTree = "<group>"; };
+		F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRequestCell.m; sourceTree = "<group>"; };
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
 		F55E797E17AF4B9C0044092B /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
 		F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
 		F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
-		F569EBDF17B065B4009491DC /* Requests.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Requests.xib; sourceTree = "<group>"; };
+		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
 		F58A9ACD17AC9ED500923A25 /* SCBigGreenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBigGreenButton.h; sourceTree = "<group>"; };
 		F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBigGreenButton.m; sourceTree = "<group>"; };
 		F58A9AD617ACB85400923A25 /* Kudryavka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kudryavka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,12 +211,21 @@
 		F59A062E17AC88DA00E9B15F /* status-light-offline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-light-offline.png"; sourceTree = "<group>"; };
 		F59A062F17AC88DA00E9B15F /* status-light-online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-light-online.png"; sourceTree = "<group>"; };
 		F59A063017AC88DA00E9B15F /* tox_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tox_logo.png; sourceTree = "<group>"; };
-		F59A063A17AC88FA00E9B15F /* shiina.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = shiina.iconset; sourceTree = "<group>"; };
 		F59A064417AC897800E9B15F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F59A065217AC8AC900E9B15F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F59A065317AC8AC900E9B15F /* Poison-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Poison-Prefix.pch"; sourceTree = "<group>"; };
 		F59A065417AC8AC900E9B15F /* SCAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F59A065517AC8AC900E9B15F /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
+		F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKToxDataWriter.h; sourceTree = "<group>"; };
+		F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKToxDataWriter.m; sourceTree = "<group>"; };
+		F5A3A84E17B2F2300068AFA0 /* SCKudTestingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKudTestingWindowController.h; sourceTree = "<group>"; };
+		F5A3A84F17B2F2300068AFA0 /* SCKudTestingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKudTestingWindowController.m; sourceTree = "<group>"; };
+		F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KudoTesting.xib; sourceTree = "<group>"; };
+		F5A3A85717B342C20068AFA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Requests.xib; sourceTree = "<group>"; };
+		F5A3A85B17B34E580068AFA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BootstrapSheet.xib; sourceTree = "<group>"; };
+		F5A3A86017B350960068AFA0 /* SCAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAboutWindowController.h; sourceTree = "<group>"; };
+		F5A3A86117B350960068AFA0 /* SCAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAboutWindowController.m; sourceTree = "<group>"; };
+		F5A3A86417B351030068AFA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AboutWindow.xib; sourceTree = "<group>"; };
 		F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DeepEnd.xcodeproj; path = DeepEnd/DeepEnd.xcodeproj; sourceTree = "<group>"; };
 		F5A9CC2317AF1C31003423E0 /* user-icon-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default.png"; sourceTree = "<group>"; };
 		F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default@2x.png"; sourceTree = "<group>"; };
@@ -213,6 +241,11 @@
 		F5A9CC3117AF2446003423E0 /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
 		F5A9CC3217AF2446003423E0 /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
 		F5A9CC3317AF2446003423E0 /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		F5B9113317B1E2D200E29017 /* SCFriendListHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendListHeaderCell.h; sourceTree = "<group>"; };
+		F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendListHeaderCell.m; sourceTree = "<group>"; };
+		F5B9113617B203A500E29017 /* SCFriendListItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendListItemCell.h; sourceTree = "<group>"; };
+		F5B9113717B203A500E29017 /* SCFriendListItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendListItemCell.m; sourceTree = "<group>"; };
+		F5B9113917B203CF00E29017 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		F5C7BBF217AC8C7C009BA3E4 /* SCLoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLoginWindowController.h; sourceTree = "<group>"; };
 		F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLoginWindowController.m; sourceTree = "<group>"; };
 		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginWindow.xib; sourceTree = "<group>"; };
@@ -282,6 +315,17 @@
 			path = main_window;
 			sourceTree = "<group>";
 		};
+		F51E65C417B0A0CB00BF09D4 /* friend_requests */ = {
+			isa = PBXGroup;
+			children = (
+				F51E65C517B0A11600BF09D4 /* SCFriendRequestsSheetController.h */,
+				F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */,
+				F51E65CA17B0B04E00BF09D4 /* SCRequestCell.h */,
+				F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */,
+			);
+			path = friend_requests;
+			sourceTree = "<group>";
+		};
 		F58A9AD817ACB85400923A25 /* Kudryavka */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +363,8 @@
 		F58A9AED17ACBDC300923A25 /* crypted_file */ = {
 			isa = PBXGroup;
 			children = (
+				F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */,
+				F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */,
 				F58A9AF317ACBEAD00923A25 /* NKCryptedFileDataSerializer.h */,
 				F58A9AF417ACBEAD00923A25 /* NKCryptedFileDataSerializer.m */,
 			);
@@ -386,7 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				F59A062517AC887300E9B15F /* Poison.iconset */,
-				F59A063A17AC88FA00E9B15F /* shiina.iconset */,
+				F57C3A3B17B160A000325A24 /* shiina.icns */,
 				F59A062717AC88DA00E9B15F /* ui_images */,
 			);
 			path = art;
@@ -395,7 +441,10 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F5A3A85F17B350810068AFA0 /* about_window */,
+				F5B9113217B1E26400E29017 /* contact_list */,
 				F500602417ADA28F00C864C4 /* preferences */,
+				F51E65C417B0A0CB00BF09D4 /* friend_requests */,
 				F5C7BBFB17AC8D0D009BA3E4 /* common */,
 				F500603517ADEF6100C864C4 /* main_window */,
 				F5C7BBFA17AC8CEC009BA3E4 /* login_window */,
@@ -410,10 +459,15 @@
 		F59A061617AC873A00E9B15F /* interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				F5A3A86517B351030068AFA0 /* AboutWindow.xib */,
+				F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */,
+				F5B9113917B203CF00E29017 /* FriendCell.xib */,
 				F55E797E17AF4B9C0044092B /* ChatView.xib */,
 				F500603E17ADFC1B00C864C4 /* MainWindow.xib */,
+				F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */,
 				F500604117ADFC1E00C864C4 /* GeneralPane.xib */,
-				F569EBDF17B065B4009491DC /* Requests.xib */,
+				F5A3A85817B342C20068AFA0 /* Requests.xib */,
+				F51E65C817B0A48200BF09D4 /* RequestsCell.xib */,
 				F500604417ADFC2400C864C4 /* Preferences.xib */,
 				F59A061717AC873A00E9B15F /* MainMenu.xib */,
 				F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */,
@@ -448,6 +502,15 @@
 			path = ui_images;
 			sourceTree = "<group>";
 		};
+		F5A3A85F17B350810068AFA0 /* about_window */ = {
+			isa = PBXGroup;
+			children = (
+				F5A3A86017B350960068AFA0 /* SCAboutWindowController.h */,
+				F5A3A86117B350960068AFA0 /* SCAboutWindowController.m */,
+			);
+			path = about_window;
+			sourceTree = "<group>";
+		};
 		F5A7E90D17AD83B300B6ADA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +540,17 @@
 			path = PXListView/Classes;
 			sourceTree = "<group>";
 		};
+		F5B9113217B1E26400E29017 /* contact_list */ = {
+			isa = PBXGroup;
+			children = (
+				F5B9113317B1E2D200E29017 /* SCFriendListHeaderCell.h */,
+				F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */,
+				F5B9113617B203A500E29017 /* SCFriendListItemCell.h */,
+				F5B9113717B203A500E29017 /* SCFriendListItemCell.m */,
+			);
+			path = contact_list;
+			sourceTree = "<group>";
+		};
 		F5C7BBFA17AC8CEC009BA3E4 /* login_window */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +565,8 @@
 		F5C7BBFB17AC8D0D009BA3E4 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F5A3A84E17B2F2300068AFA0 /* SCKudTestingWindowController.h */,
+				F5A3A84F17B2F2300068AFA0 /* SCKudTestingWindowController.m */,
 				F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */,
 				F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */,
 				F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */,
@@ -527,10 +603,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58A9AFD17ACCA7200923A25 /* Kudryavka.h in Headers */,
+				F5A3A84B17B2AAB60068AFA0 /* NKToxDataWriter.h in Headers */,
 				F58A9AEA17ACBDA400923A25 /* NKKeychainDataSerializer.h in Headers */,
 				F58A9AF117ACBDF800923A25 /* NKDummyDataSerializer.h in Headers */,
 				F58A9AF517ACBEAD00923A25 /* NKCryptedFileDataSerializer.h in Headers */,
 				F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */,
+				F5A3A85017B2F2300068AFA0 /* SCKudTestingWindowController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,7 +751,6 @@
 				F59A063717AC88DA00E9B15F /* status-light-offline.png in Resources */,
 				F59A063817AC88DA00E9B15F /* status-light-online.png in Resources */,
 				F59A063917AC88DA00E9B15F /* tox_logo.png in Resources */,
-				F59A063B17AC88FA00E9B15F /* shiina.iconset in Resources */,
 				F59A064317AC897800E9B15F /* Localizable.strings in Resources */,
 				F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */,
 				F500604217ADFC2400C864C4 /* Preferences.xib in Resources */,
@@ -682,7 +759,13 @@
 				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
 				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
 				F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */,
-				F569EBE017B065B4009491DC /* Requests.xib in Resources */,
+				F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */,
+				F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */,
+				F57C3A3C17B160A000325A24 /* shiina.icns in Resources */,
+				F5A3A85A17B34E580068AFA0 /* BootstrapSheet.xib in Resources */,
+				F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */,
+				F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */,
+				F5A3A86317B351030068AFA0 /* AboutWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +797,8 @@
 				F58A9AF217ACBDF800923A25 /* NKDummyDataSerializer.m in Sources */,
 				F58A9AF617ACBEAD00923A25 /* NKCryptedFileDataSerializer.m in Sources */,
 				F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */,
+				F5A3A84C17B2AAB60068AFA0 /* NKToxDataWriter.m in Sources */,
+				F5A3A85117B2F2300068AFA0 /* SCKudTestingWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +822,11 @@
 				F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */,
 				F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */,
 				F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */,
+				F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */,
+				F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */,
+				F5B9113517B1E2D200E29017 /* SCFriendListHeaderCell.m in Sources */,
+				F5B9113817B203A500E29017 /* SCFriendListItemCell.m in Sources */,
+				F5A3A86217B350960068AFA0 /* SCAboutWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +920,30 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		F5A3A85817B342C20068AFA0 /* Requests.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A3A85717B342C20068AFA0 /* en */,
+			);
+			name = Requests.xib;
+			sourceTree = "<group>";
+		};
+		F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A3A85B17B34E580068AFA0 /* en */,
+			);
+			name = BootstrapSheet.xib;
+			sourceTree = "<group>";
+		};
+		F5A3A86517B351030068AFA0 /* AboutWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A3A86417B351030068AFA0 /* en */,
+			);
+			name = AboutWindow.xib;
+			sourceTree = "<group>";
+		};
 		F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -853,6 +967,7 @@
 				INFOPLIST_FILE = "Kudryavka/Kudryavka-Info.plist";
 				INSTALL_PATH = "@rpath";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "-DKUD_DEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -870,6 +985,7 @@
 				INFOPLIST_FILE = "Kudryavka/Kudryavka-Info.plist";
 				INSTALL_PATH = "@rpath";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "-DKUD_DEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -889,21 +1005,16 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -924,14 +1035,13 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -943,6 +1053,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Poison-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;

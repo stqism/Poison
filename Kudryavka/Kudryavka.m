@@ -9,6 +9,7 @@
 @implementation NKDataSerializer
 
 + (NKDataSerializer *)serializerUsingMethod:(NKSerializerType)method {
+    NKDebug(@"start");
     switch (method) {
         case NKSerializerKeychain:
             return [[NKKeychainDataSerializer alloc] init];
@@ -21,6 +22,14 @@
         default:
             return nil;
     }
+}
+
++ (BOOL)isDebugBuild {
+    #ifdef KUD_DEBUG
+    return YES;
+    #else
+    return NO;
+    #endif
 }
 
 - (BOOL)serializePrivateKey:(NSString *)thePrivateKey publicKey:(NSString *)thePublicKey options:(NSDictionary *)aDict error:(NSError **)error {

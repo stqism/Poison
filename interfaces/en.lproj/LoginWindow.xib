@@ -1134,7 +1134,7 @@
 				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBWindowTemplateEditedContentRect">{{357, 418}, {480, 270}}</string>
-				<integer value="1" key="1.NSWindowTemplate.visibleAtLaunch"/>
+				<boolean value="NO" key="1.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="100.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="101.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1222,40 +1222,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SCLoginWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="continueWithKeySaveOption:">id</string>
-						<string key="returnPressed:">id</string>
-						<string key="selectCustomFile:">id</string>
-						<string key="selectKeychain:">id</string>
-						<string key="selectNoSave:">id</string>
-						<string key="submitNickname:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="continueWithKeySaveOption:">
-							<string key="name">continueWithKeySaveOption:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="returnPressed:">
-							<string key="name">returnPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectCustomFile:">
-							<string key="name">selectCustomFile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectKeychain:">
-							<string key="name">selectKeychain:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectNoSave:">
-							<string key="name">selectNoSave:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="submitNickname:">
-							<string key="name">submitNickname:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="backgroundView">SCGradientView</string>
 						<string key="finishSetup">SCBigGreenButton</string>

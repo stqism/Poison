@@ -21,7 +21,7 @@
     OSStatus ret = SecKeychainAddGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[aDict[@"username"] lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [aDict[@"username"] UTF8String], (UInt32)(DESPrivateKeySize + DESPublicKeySize), buffer, NULL);
     free(buffer);
     if (ret != errSecSuccess) {
-        NSLog(@"Kudryavka (serialize): ret is %i", ret);
+        NKDebug(@"Kudryavka (serialize): ret is %i", ret);
         [self clearStoredKeysForUsername:aDict[@"username"]];
         if (error) {
             CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
@@ -43,7 +43,7 @@
     NSString *theService = @"ca.kirara.kudryavka.unifiedKeyStore";
     OSStatus ret = SecKeychainFindGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[aDict[@"username"] lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [aDict[@"username"] UTF8String], &length, (void**)&buffer, NULL);
     if (ret != errSecSuccess) {
-        NSLog(@"Kudryavka (load): ret is %i", ret);
+        NKDebug(@"Kudryavka (load): ret is %i", ret);
         [self clearStoredKeysForUsername:aDict[@"username"]];
         if (error) {
             CFStringRef reason = SecCopyErrorMessageString(ret, NULL);
@@ -61,7 +61,6 @@
         }
         return nil;
     }
-    printf("%s\n", buffer);
     uint8_t *temp_pub = malloc(DESPublicKeySize);
     memcpy(temp_pub, buffer + DESPrivateKeySize, DESPublicKeySize);
     uint8_t *temp_priv = malloc(DESPrivateKeySize);

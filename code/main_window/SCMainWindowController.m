@@ -3,18 +3,24 @@
 #import "SCDHTStatusView.h"
 #import "SCGradientView.h"
 #import "PXListView.h"
+#import "PXListViewCell+Private.h"
+#import "SCFriendRequestsSheetController.h"
+#import "SCFriendListHeaderCell.h"
+#import "SCFriendListItemCell.h"
 #import <DeepEnd/DeepEnd.h>
 
-@implementation SCMainWindowController
+@implementation SCMainWindowController {
+    NSArray *_friendList;
+}
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
+    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         /* To eliminate IB warning, set fullscreen capability in code. */
         self.window.collectionBehavior = NSWindowCollectionBehaviorFullScreenPrimary;
-    }
     self.window.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restrainSplitter:) name:NSWindowDidResizeNotification object:self.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESFriendArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
     [(SCShinyWindow*)self.window repositionDHT];
     self.sidebarHead.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.sidebarHead.bottomColor = [NSColor colorWithCalibratedWhite:0.09 alpha:1.0];
@@ -25,6 +31,8 @@
     [self.userStatus.cell setTextColor:[NSColor controlColor]];
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
+    self.listView.delegate = self;
+    [self reloadList:nil];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         self.listView.scrollerKnobStyle = NSScrollerKnobStyleLight; /* Set in code to avoid IB warning. */
     [[DESSelf self] addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
@@ -67,11 +75,20 @@
     else
         sender.textColor = [NSColor controlColor];
     sender.drawsBackground = NO;
-    
-    if (![[DESToxNetworkConnection sharedConnection].me.displayName isEqualToString:self.displayName.stringValue]) {
-        [DESToxNetworkConnection sharedConnection].me.displayName = [self.displayName.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    } else if (![[DESToxNetworkConnection sharedConnection].me.userStatus isEqualToString:self.userStatus.stringValue]) {
-        [DESToxNetworkConnection sharedConnection].me.userStatus = [self.userStatus.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    DESSelf *me = [DESToxNetworkConnection sharedConnection].me;
+    NSString *proposedChange = [sender.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (sender == self.displayName) {
+        if ([me.displayName isEqualToString:proposedChange] || [proposedChange isEqualToString:@""]) {
+            sender.stringValue = me.displayName;
+            return;
+        }
+        me.displayName = proposedChange;
+    } else if (sender == self.userStatus) {
+        if ([me.userStatus isEqualToString:proposedChange] || [proposedChange isEqualToString:@""]) {
+            sender.stringValue = me.userStatus;
+            return;
+        }
+        me.userStatus = proposedChange;
     }
 }
 
@@ -120,8 +137,18 @@
     [NSApp beginSheet:self.nickChangeSheet modalForWindow:self.window modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 }
 
+- (IBAction)presentFriendRequestsSheet:(id)sender {
+    if (!self.requestSheet)
+        self.requestSheet = [[SCFriendRequestsSheetController alloc] initWithWindowNibName:@"Requests"];
+    [NSApp beginSheet:self.requestSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closeRequestsSheet:returnCode:contextInfo:) contextInfo:NULL];
+}
+
 - (IBAction)confirmAndEndSheet:(NSButton *)sender {
     [NSApp endSheet:self.window.attachedSheet returnCode:sender.tag];
+}
+
+- (void)closeRequestsSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
 }
 
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
@@ -138,7 +165,7 @@
         case 2: {
             proposed = [self.statusSheetField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if ([proposed isEqualToString:@""]) return;
-            DESStatusType kind = DESStatusTypeRetain;
+            DESStatusType kind = DESStatusTypeOnline;
             switch([self.statusSheetPopUp.selectedItem tag]) {
                 case 1:
                     kind = DESStatusTypeOnline; break;
@@ -196,6 +223,60 @@
 
 - (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex {
     return YES;
+}
+
+#pragma mark - PXListView delegate
+
+- (DESFriend *)friendInRow:(NSUInteger)row {
+    if (row == 0 || row == -1)
+        return nil;
+    return _friendList[row - 1];
+}
+
+- (void)selectFriend:(DESFriend *)aFriend {
+    if (!aFriend)
+        return;
+    NSUInteger row = [_friendList indexOfObject:aFriend];
+    self.listView.selectedRow = row - 1;
+}
+
+- (void)reloadList:(NSNotification *)notification {
+    @synchronized(self) {
+        DESFriend *selectedFriend = [self friendInRow:self.listView.selectedRow];
+        _friendList = [[DESToxNetworkConnection sharedConnection].friendManager.friends copy];
+        [self.listView reloadData];
+        [self selectFriend:selectedFriend];
+    }
+}
+
+- (NSUInteger)numberOfRowsInListView:(PXListView *)aListView {
+    return [_friendList count] + 1;
+}
+
+- (CGFloat)listView:(PXListView *)aListView heightOfRow:(NSUInteger)row {
+    if (row == 0)
+        return 17;
+    else
+        return 42;
+}
+
+- (PXListViewCell *)listView:(PXListView *)aListView cellForRow:(NSUInteger)row {
+    if (row == 0) {
+        SCFriendListHeaderCell *cell = nil;
+        if (!(cell = (SCFriendListHeaderCell*)[aListView dequeueCellWithReusableIdentifier:@"SectHeader"])) {
+            cell = [[SCFriendListHeaderCell alloc] initWithFrame:NSMakeRect(0, 0, 100, 17)];
+            cell.reusableIdentifier = @"SectHeader";
+        }
+        cell.stringValue = NSLocalizedString(@"Friends", @"");
+        return cell;
+    } else {
+        SCFriendListItemCell *cell = nil;
+        if (!(cell = (SCFriendListItemCell*)[aListView dequeueCellWithReusableIdentifier:@"FriendCell"])) {
+            cell = [SCFriendListItemCell cellLoadedFromNibNamed:@"FriendCell" bundle:[NSBundle mainBundle] reusableIdentifier:@"FriendCell"];
+        }
+        [cell bindToFriend:[self friendInRow:row]];
+        return cell;
+    }
 }
 
 @end

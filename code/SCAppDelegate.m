@@ -1,7 +1,9 @@
 #import "SCAppDelegate.h"
+#import "SCAboutWindowController.h"
 #import "SCPreferencesWindowController.h"
 #import "SCLoginWindowController.h"
 #import "SCMainWindowController.h"
+#import "SCKudTestingWindowController.h"
 
 #import <DeepEnd/DeepEnd.h>
 
@@ -87,10 +89,22 @@
 
 #pragma mark - Menus
 
+- (IBAction)showAboutWindow:(id)sender {
+    if (!self.aboutWindow)
+        self.aboutWindow = [[SCAboutWindowController alloc] initWithWindowNibName:@"AboutWindow"];
+    [self.aboutWindow showWindow:self];
+}
+
 - (IBAction)showPreferencesWindow:(id)sender {
     if (!self.preferencesWindow)
         self.preferencesWindow = [[SCPreferencesWindowController alloc] initWithWindowNibName:@"Preferences"];
     [self.preferencesWindow showWindow:self];
+}
+
+- (IBAction)showKudoTests:(id)sender {
+    if (!self.kTestingWindow)
+        self.kTestingWindow = [[SCKudTestingWindowController alloc] initWithWindowNibName:@"KudoTesting"];
+    [self.kTestingWindow showWindow:self];
 }
 
 - (IBAction)showNicknameSet:(id)sender {
@@ -110,6 +124,13 @@
 - (IBAction)copyPublicKey:(id)sender {
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].publicKey]];
+}
+
+- (IBAction)showRequestsWindow:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentFriendRequestsSheet:self];
+    }
 }
 
 @end

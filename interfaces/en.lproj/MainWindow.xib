@@ -92,7 +92,7 @@
 													<reference key="NSDocView" ref="599856075"/>
 													<object class="NSColor" key="NSBGColor">
 														<int key="NSColorSpace">3</int>
-														<bytes key="NSWhite">MC4xNQA</bytes>
+														<bytes key="NSWhite">MC4yAA</bytes>
 													</object>
 													<int key="NScvFlags">4</int>
 												</object>
@@ -150,7 +150,7 @@
 														<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
 														<string>NeXT TIFF v4.0 pasteboard type</string>
 													</set>
-													<string key="NSFrame">{{47, 5}, {16, 16}}</string>
+													<string key="NSFrame">{{47, 7}, {16, 16}}</string>
 													<reference key="NSSuperview" ref="761190873"/>
 													<reference key="NSNextKeyView" ref="844796760"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -174,14 +174,14 @@
 												<object class="NSTextField" id="844796760">
 													<reference key="NSNextResponder" ref="761190873"/>
 													<int key="NSvFlags">290</int>
-													<string key="NSFrame">{{63, 7}, {132, 14}}</string>
+													<string key="NSFrame">{{63, 8}, {132, 14}}</string>
 													<reference key="NSSuperview" ref="761190873"/>
 													<reference key="NSNextKeyView" ref="470041028"/>
 													<string key="NSReuseIdentifierKey">_NS:1535</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSTextFieldCell" key="NSCell" id="59653601">
-														<int key="NSCellFlags">68157504</int>
-														<int key="NSCellFlags2">272630784</int>
+														<int key="NSCellFlags">67108928</int>
+														<int key="NSCellFlags2">272631808</int>
 														<string key="NSContents">Label</string>
 														<object class="NSFont" key="NSSupport">
 															<string key="NSName">LucidaGrande</string>
@@ -206,14 +206,14 @@
 												<object class="NSTextField" id="593762285">
 													<reference key="NSNextResponder" ref="761190873"/>
 													<int key="NSvFlags">266</int>
-													<string key="NSFrame">{{48, 22}, {147, 17}}</string>
+													<string key="NSFrame">{{48, 23}, {147, 17}}</string>
 													<reference key="NSSuperview" ref="761190873"/>
 													<reference key="NSNextKeyView" ref="235295447"/>
 													<string key="NSReuseIdentifierKey">_NS:1535</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSTextFieldCell" key="NSCell" id="266046841">
-														<int key="NSCellFlags">68157504</int>
-														<int key="NSCellFlags2">272630784</int>
+														<int key="NSCellFlags">67108928</int>
+														<int key="NSCellFlags2">272631808</int>
 														<string key="NSContents">Label</string>
 														<object class="NSFont" key="NSSupport" id="474104079">
 															<string key="NSName">LucidaGrande</string>
@@ -244,7 +244,6 @@
 													</set>
 													<string key="NSFrame">{{11, 7}, {32, 32}}</string>
 													<reference key="NSSuperview" ref="761190873"/>
-													<reference key="NSNextKeyView"/>
 													<bool key="NSViewIsLayerTreeHost">YES</bool>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
@@ -382,7 +381,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="632015907">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="932938295">
@@ -494,7 +493,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{356, 93}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="932938295"/>
 					<string key="NSReuseIdentifierKey">_NS:21</string>
 				</object>
@@ -891,6 +889,14 @@
 					</object>
 					<int key="connectionID">82</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menu</string>
+						<reference key="source" ref="235295447"/>
+						<reference key="destination" ref="788920920"/>
+					</object>
+					<int key="connectionID">158</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1276,7 +1282,7 @@
 				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBWindowTemplateEditedContentRect">{{357, 418}, {480, 270}}</string>
-				<integer value="1" key="1.NSWindowTemplate.visibleAtLaunch"/>
+				<boolean value="NO" key="1.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="116.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="116.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="117.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1365,7 +1371,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">157</int>
+			<int key="maxID">158</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -1382,7 +1388,7 @@
 			<string key="status-light-away">{11, 11}</string>
 			<string key="status-light-offline">{11, 11}</string>
 			<string key="status-light-online">{11, 11}</string>
-			<string key="user-icon-default">{16, 16}</string>
+			<string key="user-icon-default">{32, 32}</string>
 		</dictionary>
 	</data>
 </archive>

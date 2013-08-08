@@ -1,7 +1,8 @@
 #import <Cocoa/Cocoa.h>
+#import "PXListViewDelegate.h"
 
-@class SCGradientView, PXListView;
-@interface SCMainWindowController : NSWindowController <NSWindowDelegate, NSSplitViewDelegate>
+@class SCGradientView, PXListView, SCFriendRequestsSheetController;
+@interface SCMainWindowController : NSWindowController <NSWindowDelegate, NSSplitViewDelegate, PXListViewDelegate>
 
 @property (strong) IBOutlet NSSplitView *splitView;
 @property (strong) IBOutlet NSImageView *userImage;
@@ -17,8 +18,10 @@
 @property (strong) IBOutlet NSTextField *nickSheetField;
 @property (strong) IBOutlet NSTextField *statusSheetField;
 @property (strong) IBOutlet NSPopUpButton *statusSheetPopUp;
+@property (strong) SCFriendRequestsSheetController *requestSheet;
 
 - (IBAction)presentCustomStatusSheet:(id)sender;
 - (IBAction)presentNickChangeSheet:(id)sender;
+- (IBAction)presentFriendRequestsSheet:(id)sender;
 
 @end
