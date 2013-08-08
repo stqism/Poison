@@ -77,6 +77,27 @@
 		F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */; };
 		F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */; };
 		F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */; };
+		F5DD1B8C17B40C77000AF9C6 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
+		F5DD1B8D17B40C77000AF9C6 /* crypto_aesctr.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */; };
+		F5DD1B8E17B40C77000AF9C6 /* crypto_scrypt-nosse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7817B40C76000AF9C6 /* crypto_scrypt-nosse.c */; };
+		F5DD1B8F17B40C77000AF9C6 /* crypto_scrypt-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7917B40C76000AF9C6 /* crypto_scrypt-ref.c */; };
+		F5DD1B9017B40C77000AF9C6 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
+		F5DD1B9117B40C77000AF9C6 /* crypto_scrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7B17B40C77000AF9C6 /* crypto_scrypt.h */; };
+		F5DD1B9217B40C77000AF9C6 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
+		F5DD1B9317B40C77000AF9C6 /* sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7D17B40C77000AF9C6 /* sha256.h */; };
+		F5DD1B9417B40C77000AF9C6 /* scryptenc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8017B40C77000AF9C6 /* scryptenc.c */; };
+		F5DD1B9517B40C77000AF9C6 /* scryptenc.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8117B40C77000AF9C6 /* scryptenc.h */; };
+		F5DD1B9617B40C77000AF9C6 /* scryptenc_cpuperf.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */; };
+		F5DD1B9717B40C77000AF9C6 /* scryptenc_cpuperf.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8317B40C77000AF9C6 /* scryptenc_cpuperf.h */; };
+		F5DD1B9817B40C77000AF9C6 /* memlimit.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8517B40C77000AF9C6 /* memlimit.c */; };
+		F5DD1B9917B40C77000AF9C6 /* memlimit.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8617B40C77000AF9C6 /* memlimit.h */; };
+		F5DD1B9A17B40C77000AF9C6 /* readpass.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8717B40C77000AF9C6 /* readpass.c */; };
+		F5DD1B9B17B40C77000AF9C6 /* readpass.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8817B40C77000AF9C6 /* readpass.h */; };
+		F5DD1B9C17B40C77000AF9C6 /* sysendian.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8917B40C77000AF9C6 /* sysendian.h */; };
+		F5DD1B9D17B40C77000AF9C6 /* warn.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8A17B40C77000AF9C6 /* warn.c */; };
+		F5DD1B9E17B40C77000AF9C6 /* warn.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8B17B40C77000AF9C6 /* warn.h */; };
+		F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */; };
+		F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
 		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
 		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
 		F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
@@ -119,6 +140,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F5E5824517AC095E00D9409B;
 			remoteInfo = DeepEnd;
+		};
+		F5DD1B9F17B413FC000AF9C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5DD1B6E17B40C27000AF9C6;
+			remoteInfo = scrypt;
 		};
 		F5FF95A617AD7A7D00BB2F13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -251,6 +279,27 @@
 		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginWindow.xib; sourceTree = "<group>"; };
 		F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGradientView.h; sourceTree = "<group>"; };
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
+		F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libscrypt.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypto_aesctr.c; sourceTree = "<group>"; };
+		F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto_aesctr.h; sourceTree = "<group>"; };
+		F5DD1B7817B40C76000AF9C6 /* crypto_scrypt-nosse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-nosse.c"; sourceTree = "<group>"; };
+		F5DD1B7917B40C76000AF9C6 /* crypto_scrypt-ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-ref.c"; sourceTree = "<group>"; };
+		F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-sse.c"; sourceTree = "<group>"; };
+		F5DD1B7B17B40C77000AF9C6 /* crypto_scrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto_scrypt.h; sourceTree = "<group>"; };
+		F5DD1B7C17B40C77000AF9C6 /* sha256.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha256.c; sourceTree = "<group>"; };
+		F5DD1B7D17B40C77000AF9C6 /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		F5DD1B8017B40C77000AF9C6 /* scryptenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scryptenc.c; sourceTree = "<group>"; };
+		F5DD1B8117B40C77000AF9C6 /* scryptenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scryptenc.h; sourceTree = "<group>"; };
+		F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scryptenc_cpuperf.c; sourceTree = "<group>"; };
+		F5DD1B8317B40C77000AF9C6 /* scryptenc_cpuperf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scryptenc_cpuperf.h; sourceTree = "<group>"; };
+		F5DD1B8517B40C77000AF9C6 /* memlimit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memlimit.c; sourceTree = "<group>"; };
+		F5DD1B8617B40C77000AF9C6 /* memlimit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memlimit.h; sourceTree = "<group>"; };
+		F5DD1B8717B40C77000AF9C6 /* readpass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = readpass.c; sourceTree = "<group>"; };
+		F5DD1B8817B40C77000AF9C6 /* readpass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readpass.h; sourceTree = "<group>"; };
+		F5DD1B8917B40C77000AF9C6 /* sysendian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sysendian.h; sourceTree = "<group>"; };
+		F5DD1B8A17B40C77000AF9C6 /* warn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = warn.c; sourceTree = "<group>"; };
+		F5DD1B8B17B40C77000AF9C6 /* warn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = warn.h; sourceTree = "<group>"; };
+		F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
 		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
 		F5FF959917AD7A3700BB2F13 /* TestKudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestKudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +312,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */,
+				F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */,
 				F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */,
 				F58A9AF817ACC94E00923A25 /* Security.framework in Frameworks */,
 				F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */,
@@ -276,6 +327,13 @@
 				F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */,
 				F58A9AE717ACB9EE00923A25 /* Kudryavka.framework in Frameworks */,
 				F59A05E417AC808900E9B15F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5DD1B6C17B40C27000AF9C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +450,7 @@
 				F59A062217AC877C00E9B15F /* Poison.entitlements */,
 				F5A9CC2717AF2446003423E0 /* PXListView */,
 				F58A9AD817ACB85400923A25 /* Kudryavka */,
+				F5DD1B7417B40C48000AF9C6 /* scrypt */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);
@@ -403,6 +462,7 @@
 				F59A05E017AC808900E9B15F /* Poison.app */,
 				F58A9AD617ACB85400923A25 /* Kudryavka.framework */,
 				F5FF959917AD7A3700BB2F13 /* TestKudryavka */,
+				F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -410,6 +470,7 @@
 		F59A05E217AC808900E9B15F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */,
 				F58A9AF717ACC94E00923A25 /* Security.framework */,
 				F59A05E317AC808900E9B15F /* Cocoa.framework */,
 				F5FF959A17AD7A3700BB2F13 /* Foundation.framework */,
@@ -577,6 +638,56 @@
 			path = common;
 			sourceTree = "<group>";
 		};
+		F5DD1B7417B40C48000AF9C6 /* scrypt */ = {
+			isa = PBXGroup;
+			children = (
+				F5DD1B7517B40C76000AF9C6 /* crypto */,
+				F5DD1B7F17B40C77000AF9C6 /* scryptenc */,
+				F5DD1B8417B40C77000AF9C6 /* util */,
+			);
+			path = scrypt;
+			sourceTree = "<group>";
+		};
+		F5DD1B7517B40C76000AF9C6 /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */,
+				F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */,
+				F5DD1B7817B40C76000AF9C6 /* crypto_scrypt-nosse.c */,
+				F5DD1B7917B40C76000AF9C6 /* crypto_scrypt-ref.c */,
+				F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */,
+				F5DD1B7B17B40C77000AF9C6 /* crypto_scrypt.h */,
+				F5DD1B7C17B40C77000AF9C6 /* sha256.c */,
+				F5DD1B7D17B40C77000AF9C6 /* sha256.h */,
+			);
+			path = crypto;
+			sourceTree = "<group>";
+		};
+		F5DD1B7F17B40C77000AF9C6 /* scryptenc */ = {
+			isa = PBXGroup;
+			children = (
+				F5DD1B8017B40C77000AF9C6 /* scryptenc.c */,
+				F5DD1B8117B40C77000AF9C6 /* scryptenc.h */,
+				F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */,
+				F5DD1B8317B40C77000AF9C6 /* scryptenc_cpuperf.h */,
+			);
+			path = scryptenc;
+			sourceTree = "<group>";
+		};
+		F5DD1B8417B40C77000AF9C6 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				F5DD1B8517B40C77000AF9C6 /* memlimit.c */,
+				F5DD1B8617B40C77000AF9C6 /* memlimit.h */,
+				F5DD1B8717B40C77000AF9C6 /* readpass.c */,
+				F5DD1B8817B40C77000AF9C6 /* readpass.h */,
+				F5DD1B8917B40C77000AF9C6 /* sysendian.h */,
+				F5DD1B8A17B40C77000AF9C6 /* warn.c */,
+				F5DD1B8B17B40C77000AF9C6 /* warn.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		F5FE73B217AEC97C001EF4A3 /* keyserver */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +723,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5DD1B6D17B40C27000AF9C6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5DD1B8D17B40C77000AF9C6 /* crypto_aesctr.h in Headers */,
+				F5DD1B9117B40C77000AF9C6 /* crypto_scrypt.h in Headers */,
+				F5DD1B9317B40C77000AF9C6 /* sha256.h in Headers */,
+				F5DD1B9517B40C77000AF9C6 /* scryptenc.h in Headers */,
+				F5DD1B9717B40C77000AF9C6 /* scryptenc_cpuperf.h in Headers */,
+				F5DD1B9917B40C77000AF9C6 /* memlimit.h in Headers */,
+				F5DD1B9B17B40C77000AF9C6 /* readpass.h in Headers */,
+				F5DD1B9C17B40C77000AF9C6 /* sysendian.h in Headers */,
+				F5DD1B9E17B40C77000AF9C6 /* warn.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -627,6 +754,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F5DD1BA017B413FC000AF9C6 /* PBXTargetDependency */,
 				F5A7E91717AD83C500B6ADA7 /* PBXTargetDependency */,
 			);
 			name = Kudryavka;
@@ -654,6 +782,23 @@
 			productName = Poison;
 			productReference = F59A05E017AC808900E9B15F /* Poison.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F5DD1B6E17B40C27000AF9C6 /* scrypt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5DD1B7317B40C28000AF9C6 /* Build configuration list for PBXNativeTarget "scrypt" */;
+			buildPhases = (
+				F5DD1B6B17B40C27000AF9C6 /* Sources */,
+				F5DD1B6C17B40C27000AF9C6 /* Frameworks */,
+				F5DD1B6D17B40C27000AF9C6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = scrypt;
+			productName = scrypt;
+			productReference = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		F5FF959817AD7A3700BB2F13 /* TestKudryavka */ = {
 			isa = PBXNativeTarget;
@@ -704,6 +849,7 @@
 				F59A05DF17AC808900E9B15F /* Poison */,
 				F58A9AD517ACB85400923A25 /* Kudryavka */,
 				F5FF959817AD7A3700BB2F13 /* TestKudryavka */,
+				F5DD1B6E17B40C27000AF9C6 /* scrypt */,
 			);
 		};
 /* End PBXProject section */
@@ -830,6 +976,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5DD1B6B17B40C27000AF9C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5DD1B8C17B40C77000AF9C6 /* crypto_aesctr.c in Sources */,
+				F5DD1B8E17B40C77000AF9C6 /* crypto_scrypt-nosse.c in Sources */,
+				F5DD1B8F17B40C77000AF9C6 /* crypto_scrypt-ref.c in Sources */,
+				F5DD1B9017B40C77000AF9C6 /* crypto_scrypt-sse.c in Sources */,
+				F5DD1B9217B40C77000AF9C6 /* sha256.c in Sources */,
+				F5DD1B9417B40C77000AF9C6 /* scryptenc.c in Sources */,
+				F5DD1B9617B40C77000AF9C6 /* scryptenc_cpuperf.c in Sources */,
+				F5DD1B9817B40C77000AF9C6 /* memlimit.c in Sources */,
+				F5DD1B9A17B40C77000AF9C6 /* readpass.c in Sources */,
+				F5DD1B9D17B40C77000AF9C6 /* warn.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5FF959517AD7A3700BB2F13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -855,6 +1018,11 @@
 			isa = PBXTargetDependency;
 			name = DeepEnd;
 			targetProxy = F5A7E91817AD83CA00B6ADA7 /* PBXContainerItemProxy */;
+		};
+		F5DD1BA017B413FC000AF9C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5DD1B6E17B40C27000AF9C6 /* scrypt */;
+			targetProxy = F5DD1B9F17B413FC000AF9C6 /* PBXContainerItemProxy */;
 		};
 		F5FF95A717AD7A7D00BB2F13 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -985,7 +1153,7 @@
 				INFOPLIST_FILE = "Kudryavka/Kudryavka-Info.plist";
 				INSTALL_PATH = "@rpath";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_CFLAGS = "-DKUD_DEBUG";
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1077,6 +1245,32 @@
 			};
 			name = Release;
 		};
+		F5DD1B7017B40C28000AF9C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "-Wno-deprecated";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F5DD1B7117B40C28000AF9C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "-Wno-deprecated";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F5FF95A417AD7A3700BB2F13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1121,6 +1315,15 @@
 			buildConfigurations = (
 				F59A05FE17AC808900E9B15F /* Debug */,
 				F59A05FF17AC808900E9B15F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5DD1B7317B40C28000AF9C6 /* Build configuration list for PBXNativeTarget "scrypt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5DD1B7017B40C28000AF9C6 /* Debug */,
+				F5DD1B7117B40C28000AF9C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

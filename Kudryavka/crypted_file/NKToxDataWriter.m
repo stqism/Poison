@@ -1,4 +1,6 @@
+#import "Kudryavka.h"
 #import "NKToxDataWriter.h"
+#import "scryptenc.h"
 
 @implementation NKToxDataWriter {
     DESToxNetworkConnection *source;
@@ -10,6 +12,45 @@
         source = aConnection;
     }
     return self;
+}
+
+- (BOOL)encodeDataIntoEncryptedBuffer:(uint8_t **)bufPtr withPassword:(NSString *)aPass outputLength:(size_t *)bufLen {
+    uint8_t *clearText = NULL;
+    size_t srcSize = 0;
+    BOOL success = [self encodeDataIntoBuffer:&clearText outputLength:&srcSize];
+    if (!success)
+        return NO;
+    size_t passLen = [aPass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    uint8_t *encrypted = calloc(12 + srcSize + 128, 1);
+    /* Prepare the header. */
+    uint8_t magic1[4] = {0x6B, 0x75, 0x64, 0x6F};
+    memcpy(encrypted, magic1, 4);
+    uint64_t eblocksize = srcSize + 128;
+    [self writeInt64:eblocksize toBuffer:encrypted + 4];
+    /* End header */
+    uint8_t *password = calloc(passLen, 1);
+    memcpy(password, [aPass UTF8String], passLen);
+    int fail = scryptenc_buf(clearText, srcSize, encrypted + 12, password, passLen, 0, 0.5, 2.0);
+    memset(password, 0, passLen);
+    free(password);
+    memset(clearText, 0, srcSize); /* quick, erase it before it's picked up by the NSA pooper-scooper! */
+    free(clearText);
+    if (!fail) {
+        if (bufPtr) {
+            *bufPtr = encrypted;
+        } else {
+            memset(encrypted, 0, 12 + srcSize + 128);
+            free(encrypted);
+        }
+        if (bufLen)
+            *bufLen = 12 + srcSize + 128;
+        return YES;
+    } else {
+        memset(encrypted, 0, 12 + srcSize + 128);
+        free(encrypted);
+        NKDebug(@"scrypt failed with result: %d", fail);
+        return NO;
+    }
 }
 
 - (BOOL)encodeDataIntoBuffer:(uint8_t **)bufPtr outputLength:(size_t *)bufLen {
