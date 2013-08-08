@@ -26,7 +26,7 @@
     NSNib *theNib = [[NSNib alloc] initWithNibNamed:nibToLoad bundle:[NSBundle mainBundle]];
     NSArray *objects = nil;
     BOOL success = NO;
-    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
+    if (OS_VERSION_IS_BETTER_THAN_LION) {
         success = [theNib instantiateWithOwner:self topLevelObjects:&objects];
     } else {
         success = [theNib instantiateNibWithOwner:self topLevelObjects:&objects];
