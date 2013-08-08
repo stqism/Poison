@@ -98,6 +98,7 @@
 		F5DD1B9E17B40C77000AF9C6 /* warn.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8B17B40C77000AF9C6 /* warn.h */; };
 		F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */; };
 		F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
+		F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */; };
 		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
 		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
 		F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
@@ -300,6 +301,7 @@
 		F5DD1B8A17B40C77000AF9C6 /* warn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = warn.c; sourceTree = "<group>"; };
 		F5DD1B8B17B40C77000AF9C6 /* warn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = warn.h; sourceTree = "<group>"; };
 		F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		F5DD1BE717B44D4F000AF9C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/AddFriend.xib; sourceTree = "<group>"; };
 		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
 		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
 		F5FF959917AD7A3700BB2F13 /* TestKudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestKudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -521,6 +523,7 @@
 			isa = PBXGroup;
 			children = (
 				F5A3A86517B351030068AFA0 /* AboutWindow.xib */,
+				F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */,
 				F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */,
 				F5B9113917B203CF00E29017 /* FriendCell.xib */,
 				F55E797E17AF4B9C0044092B /* ChatView.xib */,
@@ -912,6 +915,7 @@
 				F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */,
 				F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */,
 				F5A3A86317B351030068AFA0 /* AboutWindow.xib in Resources */,
+				F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1118,6 +1122,14 @@
 				F5C7BBF817AC8CA4009BA3E4 /* en */,
 			);
 			name = LoginWindow.xib;
+			sourceTree = "<group>";
+		};
+		F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5DD1BE717B44D4F000AF9C6 /* en */,
+			);
+			name = AddFriend.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
