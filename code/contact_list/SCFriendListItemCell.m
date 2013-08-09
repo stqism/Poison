@@ -3,11 +3,22 @@
 
 @implementation SCFriendListItemCell {
     DESFriend *referencedFriend;
+    CGFloat originalOriginX;
 }
 
 - (void)awakeFromNib {
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
+    originalOriginX = self.userStatus.frame.origin.x;
+}
+
+- (NSString *)defaultStringForStatusType:(DESStatusType)kind {
+    switch (kind) {
+        case DESStatusTypeOnline: return NSLocalizedString(@"Online", @"");
+        case DESStatusTypeAway: return NSLocalizedString(@"Away", @"");
+        case DESStatusTypeBusy: return NSLocalizedString(@"Busy", @"");
+        default: return NSLocalizedString(@"Invalid", @"");
+    }
 }
 
 - (void)bindToFriend:(DESFriend *)aFriend {
@@ -16,17 +27,61 @@
     [aFriend addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
-    self.displayName.stringValue = aFriend.displayName;
-    self.userStatus.stringValue = aFriend.userStatus;
+    if ([aFriend.displayName isEqualToString:@""]) {
+        self.displayName.stringValue = referencedFriend.publicKey;
+        self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
+    } else {
+        self.displayName.stringValue = aFriend.displayName;
+        self.displayName.textColor = [NSColor whiteColor];
+    }
+    if ([aFriend.userStatus isEqualToString:@""]) {
+        self.userStatus.stringValue = [self defaultStringForStatusType:aFriend.statusType];
+    } else {
+        self.userStatus.stringValue = aFriend.userStatus;
+    }
+    switch (referencedFriend.statusType) {
+        case DESStatusTypeAway:
+            self.statusLight.image = [NSImage imageNamed:@"status-light-away"];
+            break;
+        case DESStatusTypeBusy:
+            self.statusLight.image = [NSImage imageNamed:@"status-light-offline"];
+            break;
+        default:
+            self.statusLight.image = [NSImage imageNamed:@"status-light-online"];
+            break;
+    }
+    if (referencedFriend.status != DESFriendStatusOnline) {
+        self.statusLight.hidden = YES;
+        [self.userStatus setFrameOrigin:(NSPoint){self.statusLight.frame.origin.x, self.userStatus.frame.origin.y}];
+        switch (referencedFriend.status) {
+            case DESFriendStatusConfirmed: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+            case DESFriendStatusRequestSent: self.userStatus.stringValue = NSLocalizedString(@"Request sent...", @"");
+            case DESFriendStatusOffline: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+            default: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+        }
+    } else {
+        self.statusLight.hidden = NO;
+        [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == referencedFriend) {
         if ([keyPath isEqualToString:@"userStatus"]) {
-            self.userStatus.stringValue = change[NSKeyValueChangeNewKey];
+            if ([change[NSKeyValueChangeNewKey] isEqualToString:@""]) {
+                self.userStatus.stringValue = [self defaultStringForStatusType:referencedFriend.statusType];
+            } else {
+                self.userStatus.stringValue = change[NSKeyValueChangeNewKey];
+            }
         } else if ([keyPath isEqualToString:@"displayName"]) {
-            self.displayName.stringValue = change[NSKeyValueChangeNewKey];
-        } else if ([keyPath isEqualToString:@"statusType"]) {
+            if ([change[NSKeyValueChangeNewKey] isEqualToString:@""]) {
+                self.displayName.stringValue = referencedFriend.publicKey;
+                self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
+            } else {
+                self.displayName.stringValue = change[NSKeyValueChangeNewKey];
+                self.displayName.textColor = [NSColor whiteColor];
+            }
+        } else if ([keyPath isEqualToString:@"statusType"] || [keyPath isEqualToString:@"status"]) {
             switch (referencedFriend.statusType) {
                 case DESStatusTypeAway:
                     self.statusLight.image = [NSImage imageNamed:@"status-light-away"];
@@ -38,11 +93,18 @@
                     self.statusLight.image = [NSImage imageNamed:@"status-light-online"];
                     break;
             }
-        } else if ([keyPath isEqualToString:@"status"]) {
             if (referencedFriend.status != DESFriendStatusOnline) {
                 self.statusLight.hidden = YES;
+                [self.userStatus setFrameOrigin:(NSPoint){self.statusLight.frame.origin.x, self.userStatus.frame.origin.y}];
+                switch (referencedFriend.status) {
+                    case DESFriendStatusConfirmed: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+                    case DESFriendStatusRequestSent: self.userStatus.stringValue = NSLocalizedString(@"Request sent...", @"");
+                    case DESFriendStatusOffline: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+                    default: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
+                }
             } else {
                 self.statusLight.hidden = NO;
+                [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
             }
         }
     }

@@ -7,10 +7,12 @@
 #import "SCFriendRequestsSheetController.h"
 #import "SCFriendListHeaderCell.h"
 #import "SCFriendListItemCell.h"
+#import "SCAddFriendSheetController.h"
 #import <DeepEnd/DeepEnd.h>
 
 @implementation SCMainWindowController {
     NSArray *_friendList;
+    SCAddFriendSheetController *_addFriendSheet;
 }
 
 - (void)windowDidLoad {
@@ -115,6 +117,18 @@
 }
 
 #pragma mark - Sheets
+
+- (IBAction)presentAddFriendSheet:(id)sender {
+    if (!_addFriendSheet)
+        _addFriendSheet = [[SCAddFriendSheetController alloc] initWithWindowNibName:@"AddFriend"];
+    [_addFriendSheet loadWindow];
+    [_addFriendSheet fillFields];
+    [NSApp beginSheet:_addFriendSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(addFriendSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (void)addFriendSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
+}
 
 - (IBAction)presentCustomStatusSheet:(id)sender {
     self.statusSheetField.stringValue = [DESToxNetworkConnection sharedConnection].me.userStatus;

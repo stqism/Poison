@@ -99,6 +99,7 @@
 		F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */; };
 		F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
 		F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */; };
+		F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */; };
 		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
 		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
 		F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
@@ -301,7 +302,9 @@
 		F5DD1B8A17B40C77000AF9C6 /* warn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = warn.c; sourceTree = "<group>"; };
 		F5DD1B8B17B40C77000AF9C6 /* warn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = warn.h; sourceTree = "<group>"; };
 		F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
-		F5DD1BE717B44D4F000AF9C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/AddFriend.xib; sourceTree = "<group>"; };
+		F5DD1BE717B44D4F000AF9C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddFriend.xib; sourceTree = "<group>"; };
+		F5DD1BEA17B45283000AF9C6 /* SCAddFriendSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAddFriendSheetController.h; sourceTree = "<group>"; };
+		F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAddFriendSheetController.m; sourceTree = "<group>"; };
 		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
 		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
 		F5FF959917AD7A3700BB2F13 /* TestKudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestKudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -504,6 +507,7 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F5DD1BE917B45262000AF9C6 /* add_friend */,
 				F5A3A85F17B350810068AFA0 /* about_window */,
 				F5B9113217B1E26400E29017 /* contact_list */,
 				F500602417ADA28F00C864C4 /* preferences */,
@@ -689,6 +693,15 @@
 				F5DD1B8B17B40C77000AF9C6 /* warn.h */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		F5DD1BE917B45262000AF9C6 /* add_friend */ = {
+			isa = PBXGroup;
+			children = (
+				F5DD1BEA17B45283000AF9C6 /* SCAddFriendSheetController.h */,
+				F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */,
+			);
+			path = add_friend;
 			sourceTree = "<group>";
 		};
 		F5FE73B217AEC97C001EF4A3 /* keyserver */ = {
@@ -977,6 +990,7 @@
 				F5B9113517B1E2D200E29017 /* SCFriendListHeaderCell.m in Sources */,
 				F5B9113817B203A500E29017 /* SCFriendListItemCell.m in Sources */,
 				F5A3A86217B350960068AFA0 /* SCAboutWindowController.m in Sources */,
+				F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

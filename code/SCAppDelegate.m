@@ -126,6 +126,13 @@
     [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].publicKey]];
 }
 
+- (IBAction)showAddFriend:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentAddFriendSheet:self];
+    }
+}
+
 - (IBAction)showRequestsWindow:(id)sender {
     if (self.mainWindow) {
         [self.mainWindow.window makeKeyAndOrderFront:self];
