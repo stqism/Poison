@@ -22,6 +22,19 @@ You can also build manually (requires libsodium installed to /usr/local at the m
 ## Coding guidelines
 - If you break compatibility with 10.6, I will break you.
 
+## Translation guidelines
+- For menus: if the option will take you to another part of the UI (say, pop up a sheet), always suffix it with "...".
+- You can leave this out if ellipses aren't a [commonly-used] thing in your language.
+- An ellipse is three dots. Not four, not ten, three.
+
+## Automatic bootstrap
+Starting with 1.1.3, Poison has the ability to automatically download a list of bootstrap servers to connect to.  
+Don't worry, Poison will always ask you before downloading random nodelists off the Internet.  
+If you want to use the list in your application, it is available [here](http://kirara.ca/poison/Nodefile). Each entry is on its own line, and the entry format is  
+``[IP] [port] [public key] [comment ...]``  
+* The IP may be a hostname, so you should try to resolve it before using it.  
+* Since the comment is at the end, it is allowed to have spaces.  
+
 ## Licensing
 
 All assets used in Poison, with the exception of icons, PXListView, and scrypt, are licensed under GPLv3.  
