@@ -13,7 +13,9 @@ before_script:
   - git submodule update
   - cd ..
 
-script: xcodebuild -workspace Poison.xcworkspace -scheme Poison
+script:
+  - xcodebuild -workspace Poison.xcworkspace -scheme Poison
+  - xcodebuild -workspace Poison.xcworkspace -scheme Silica
 
 notifications:
   email:
