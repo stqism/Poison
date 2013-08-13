@@ -2,7 +2,7 @@
 #import <Kudryavka/Kudryavka.h>
 
 @class SCLoginWindowController, SCMainWindowController,
-       SCPreferencesWindowController, SCAboutWindowController, SCKudTestingWindowController;
+       SCPreferencesWindowController, SCAboutWindowController, SCKudTestingWindowController, DESChatContext;
 @interface SCAppDelegate : NSObject <NSApplicationDelegate>
 
 /* Windows */
@@ -13,6 +13,8 @@
 @property (strong) SCKudTestingWindowController *kTestingWindow;
 @property (strong) NSArray *standaloneWindows;
 
+@property (unsafe_unretained) IBOutlet NSMenuItem *kudoTestingMenuItem;
 - (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
+- (void)newWindowWithDESContext:(DESChatContext *)aContext;
 
 @end

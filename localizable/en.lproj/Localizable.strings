@@ -1,32 +1,92 @@
 /* No comment provided by engineer. */
-"Bootstrapping failed. Please try another server." = "Bootstrapping failed. Please try another server.";
+"Advanced" = "Advanced";
 
 /* No comment provided by engineer. */
-"Connected!" = "Connected!";
+"Away" = "Away";
 
 /* No comment provided by engineer. */
-"Enter the address of a server to bootstrap against." = "Enter the address of a server to bootstrap against.";
+"Busy" = "Busy";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"Disconnected" = "Disconnected";
+
+/* No comment provided by engineer. */
+"Failed to automatically bootstrap" = "Failed to automatically bootstrap";
+
+/* No comment provided by engineer. */
+"Failed to bootstrap" = "Failed to bootstrap";
+
+/* No comment provided by engineer. */
+"Failed to load keys: %@ Sorry about that." = "Failed to load keys: %@ Sorry about that.";
+
+/* No comment provided by engineer. */
+"Failed to save key: %@ Sorry about that." = "Failed to save key: %@ Sorry about that.";
+
+/* No comment provided by engineer. */
+"Fetching server list..." = "Fetching server list...";
+
+/* No comment provided by engineer. */
+"Friends" = "Friends";
+
+/* No comment provided by engineer. */
+"Invalid" = "Invalid";
+
+/* No comment provided by engineer. */
+"Load error" = "Load error";
+
+/* No comment provided by engineer. */
+"Looking at server %i/%i" = "Looking at server %1$i/%2$i";
 
 /* No comment provided by engineer. */
 "Offline" = "Offline";
 
 /* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
 "Online" = "Online";
 
 /* No comment provided by engineer. */
-"Please wait..." = "Please wait...";
+"Please select one of the options before continuing." = "Please select one of the options before continuing.";
 
 /* No comment provided by engineer. */
-"That doesn't look like a public key." = "That doesn't look like a public key.";
+"Poison currently has limited connectivity to the Tox network. You may have trouble connecting to friends." = "Poison currently has limited connectivity to the Tox network. You may have trouble connecting to friends.";
 
 /* No comment provided by engineer. */
-"That doesn't look right. Ports must be in the range 1-65535." = "That doesn't look right. Ports must be in the range 1-65535.";
+"Poison currently has no connectivity to the Tox network." = "Poison currently has no connectivity to the Tox network.";
 
 /* No comment provided by engineer. */
-"That's not an IP address. Did you enter it correctly?" = "That's not an IP address. Did you enter it correctly?";
+"Poison has run out of usable servers to connect to. If you know a server, click \"Advanced\" to connect manually. Sorry about that." = "Poison has run out of usable servers to connect to. If you know a server, click \"Advanced\" to connect manually. Sorry about that.";
 
 /* No comment provided by engineer. */
-"The server's public key:" = "The server's public key:";
+"Poison's connection to the Tox network is healthy." = "Poison's connection to the Tox network is healthy.";
+
+/* No comment provided by engineer. */
+"Request sent..." = "Request sent...";
+
+/* No comment provided by engineer. */
+"Save error" = "Save error";
+
+/* No comment provided by engineer. */
+"Server: %@:%hu [%@]" = "Server: %1$@:%2$hu [%3$@]";
+
+/* No comment provided by engineer. */
+"The DNS name '%@' could not be resolved." = "The DNS name '%@' could not be resolved.";
+
+/* No comment provided by engineer. */
+"Try again" = "Try again";
+
+/* No comment provided by engineer. */
+"Welcome back. Please login with your nickname." = "Welcome back. Please login with your nickname.";
+
+/* No comment provided by engineer. */
+"Welcome to Poison. Enter a nickname to get started." = "Welcome to Poison. Enter a nickname to get started.";
+
+/* No comment provided by engineer. */
+"Whoops!" = "Whoops!";
 
 /* No comment provided by engineer. */
 "Your nickname cannot be blank." = "Your nickname cannot be blank.";

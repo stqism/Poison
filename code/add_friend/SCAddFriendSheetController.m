@@ -5,6 +5,7 @@
 
 - (void)fillFields {
     self.keyField.stringValue = @"";
+    self.sendButton.enabled = NO;
     /* If there is a key on the pasteboard, put it into
      * the key field automatically. */
     NSArray *objects = [[NSPasteboard generalPasteboard] readObjectsForClasses:@[[NSString class]] options:nil];
@@ -12,10 +13,11 @@
         NSString *theStr = [rawStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if (![theStr isKindOfClass:[NSString class]])
             continue;
-        if ([theStr isEqualToString:[DESToxNetworkConnection sharedConnection].me.publicKey] || [theStr isEqualToString:[DESToxNetworkConnection sharedConnection].me.privateKey])
+        if ([theStr isEqualToString:[DESToxNetworkConnection sharedConnection].me.friendAddress])
             continue;
-        if (DESPublicKeyIsValid(theStr)) {
+        if (DESFriendAddressIsValid(theStr)) {
             self.keyField.stringValue = theStr;
+            self.sendButton.enabled = YES;
             break;
         }
     }
@@ -31,12 +33,18 @@
 }
 
 - (IBAction)submitAction:(id)sender {
-    [[DESToxNetworkConnection sharedConnection].friendManager addFriendWithPublicKey:self.keyField.stringValue message:self.sendsMessageCheck.state == NSOnState ? self.messageField.stringValue : @""];
-    [NSApp endSheet:self.window];
+    if (!DESFriendAddressIsValid(self.keyField.stringValue))
+        return;
+    dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
+        [[DESToxNetworkConnection sharedConnection].friendManager addFriendWithAddress:self.keyField.stringValue message:self.sendsMessageCheck.state == NSOnState ? self.messageField.stringValue : @""];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSApp endSheet:self.window];
+        });
+    });
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification{
-    if (DESPublicKeyIsValid(self.keyField.stringValue)) {
+    if (DESFriendAddressIsValid(self.keyField.stringValue)) {
         self.sendButton.enabled = YES;
         self.keyField.textColor = [NSColor blackColor];
     } else {

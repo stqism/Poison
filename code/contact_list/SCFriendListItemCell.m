@@ -1,4 +1,5 @@
 #import "SCFriendListItemCell.h"
+#import "SCAppDelegate.h"
 #import <DeepEnd/DeepEnd.h>
 
 @implementation SCFriendListItemCell {
@@ -21,24 +22,34 @@
     }
 }
 
+- (void)changeDisplayName:(NSString *)aName {
+    if ([aName isEqualToString:@""]) {
+        self.displayName.stringValue = referencedFriend ? referencedFriend.publicKey : @"";
+        self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
+    } else {
+        self.displayName.stringValue = aName;
+        self.displayName.textColor = [NSColor whiteColor];
+    }
+    self.displayName.toolTip = self.displayName.stringValue;
+}
+
+- (void)changeUserStatus:(NSString *)aStatus {
+    if ([aStatus isEqualToString:@""]) {
+        self.userStatus.stringValue = referencedFriend ? [self defaultStringForStatusType:referencedFriend.statusType] : @"";
+    } else {
+        self.userStatus.stringValue = aStatus;
+    }
+    self.userStatus.toolTip = aStatus;
+}
+
 - (void)bindToFriend:(DESFriend *)aFriend {
     referencedFriend = aFriend;
     [aFriend addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
-    if ([aFriend.displayName isEqualToString:@""]) {
-        self.displayName.stringValue = referencedFriend.publicKey;
-        self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
-    } else {
-        self.displayName.stringValue = aFriend.displayName;
-        self.displayName.textColor = [NSColor whiteColor];
-    }
-    if ([aFriend.userStatus isEqualToString:@""]) {
-        self.userStatus.stringValue = [self defaultStringForStatusType:aFriend.statusType];
-    } else {
-        self.userStatus.stringValue = aFriend.userStatus;
-    }
+    [self changeDisplayName:aFriend.displayName];
+    [self changeUserStatus:aFriend.userStatus];
     switch (referencedFriend.statusType) {
         case DESStatusTypeAway:
             self.statusLight.image = [NSImage imageNamed:@"status-light-away"];
@@ -68,19 +79,9 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == referencedFriend) {
         if ([keyPath isEqualToString:@"userStatus"]) {
-            if ([change[NSKeyValueChangeNewKey] isEqualToString:@""]) {
-                self.userStatus.stringValue = [self defaultStringForStatusType:referencedFriend.statusType];
-            } else {
-                self.userStatus.stringValue = change[NSKeyValueChangeNewKey];
-            }
+            [self changeUserStatus:change[NSKeyValueChangeNewKey]];
         } else if ([keyPath isEqualToString:@"displayName"]) {
-            if ([change[NSKeyValueChangeNewKey] isEqualToString:@""]) {
-                self.displayName.stringValue = referencedFriend.publicKey;
-                self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
-            } else {
-                self.displayName.stringValue = change[NSKeyValueChangeNewKey];
-                self.displayName.textColor = [NSColor whiteColor];
-            }
+            [self changeDisplayName:change[NSKeyValueChangeNewKey]];
         } else if ([keyPath isEqualToString:@"statusType"] || [keyPath isEqualToString:@"status"]) {
             switch (referencedFriend.statusType) {
                 case DESStatusTypeAway:
@@ -108,6 +109,15 @@
             }
         }
     }
+}
+
+- (IBAction)copyPublicKey:(id)sender {
+    [[NSPasteboard generalPasteboard] clearContents];
+    [[NSPasteboard generalPasteboard] writeObjects:@[referencedFriend.publicKey]];
+}
+
+- (IBAction)forkNewWindow:(id)sender {
+    [(SCAppDelegate*)[NSApp delegate] newWindowWithDESContext:[[DESToxNetworkConnection sharedConnection].friendManager chatContextForFriend:referencedFriend]];
 }
 
 - (void)prepareForReuse {

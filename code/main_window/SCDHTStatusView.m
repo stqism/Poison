@@ -1,5 +1,4 @@
 #import "SCDHTStatusView.h"
-#define GOOD_CONNECTION_THRESHOLD 4
 
 @implementation SCDHTStatusView
 
@@ -30,6 +29,17 @@
     NSFont *theFont = [NSFont boldSystemFontOfSize:self.frame.size.height - 4];
     CGSize theSize = [drawString sizeWithAttributes:@{NSFontAttributeName: theFont}];
     [self setFrameSize:(NSSize){theSize.width + 10, self.frame.size.height}];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+    if (self.target && self.action) {
+        if ([self.target respondsToSelector:self.action])
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            /* We know this code is safe, so ignore the warning. */
+            [self.target performSelector:self.action withObject:self];
+            #pragma clang diagnostic pop
+    }
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

@@ -2,6 +2,7 @@
 
 @implementation SCGradientView {
     CGPoint initialLocation;
+    BOOL willDrag;
 }
 
 - (void)awakeFromNib {
@@ -15,16 +16,22 @@
 
 #pragma mark - Dragging
 
+- (void)mouseEntered:(NSEvent *)theEvent {
+    willDrag = NO;
+}
+
 - (void)mouseDown:(NSEvent *)theEvent {
     initialLocation = [theEvent locationInWindow];
+    willDrag = YES;
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-    //initialLocation = CGPointZero;
+    initialLocation = CGPointZero;
+    willDrag = NO;
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-    if (!self.dragsWindow) {
+    if (!self.dragsWindow || !willDrag) {
         return;
     } else {
         NSRect screenVisibleFrame = [[NSScreen mainScreen] visibleFrame];

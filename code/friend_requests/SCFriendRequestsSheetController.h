@@ -13,4 +13,7 @@
 
 @property (strong) IBOutlet NSButton *acceptButton;
 @property (strong) IBOutlet NSButton *rejectButton;
+
+- (void)fillFields;
+
 @end

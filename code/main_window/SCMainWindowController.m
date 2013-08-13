@@ -8,11 +8,28 @@
 #import "SCFriendListHeaderCell.h"
 #import "SCFriendListItemCell.h"
 #import "SCAddFriendSheetController.h"
+#import "SCChatViewController.h"
+#import "SCBootstrapSheetController.h"
 #import <DeepEnd/DeepEnd.h>
+#import <WebKit/WebKit.h>
+
+@interface SCThinSplitView : NSSplitView
+
+@end
+
+@implementation SCThinSplitView
+
+- (NSColor *)dividerColor {
+    return [NSColor controlDarkShadowColor];
+}
+
+@end
 
 @implementation SCMainWindowController {
     NSArray *_friendList;
     SCAddFriendSheetController *_addFriendSheet;
+    SCChatViewController *chatView;
+    SCBootstrapSheetController *_bootstrapSheet;
 }
 
 - (void)windowDidLoad {
@@ -29,6 +46,11 @@
     self.sidebarHead.shadowColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
     self.sidebarHead.dragsWindow = YES;
     self.sidebarHead.needsDisplay = YES;
+    self.toolbar.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
+    self.toolbar.bottomColor = [NSColor colorWithCalibratedWhite:0.15 alpha:1.0];
+    self.toolbar.shadowColor = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
+    self.toolbar.dragsWindow = YES;
+    self.toolbar.needsDisplay = YES;
     [self.displayName.cell setTextColor:[NSColor whiteColor]];
     [self.userStatus.cell setTextColor:[NSColor controlColor]];
     self.userImage.layer.cornerRadius = 2.0;
@@ -42,7 +64,20 @@
     [[DESSelf self] addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     [[DESToxNetworkConnection sharedConnection] addObserver:self forKeyPath:@"connectedNodeCount" options:NSKeyValueObservingOptionNew context:NULL];
     ((SCShinyWindow*)self.window).indicator.connectedNodes = [[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue];
-
+    if (!chatView)
+        chatView = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
+    [self.splitView replaceSubview:self.splitView.subviews[1] with:chatView.view];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    ((SCShinyWindow*)self.window).indicator.target = self;
+    ((SCShinyWindow*)self.window).indicator.action = @selector(presentBootstrappingSheet:);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
+            return;
+        } else {
+            [self presentBootstrappingSheet:self];
+        }
+    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -114,6 +149,7 @@
     [[DESSelf self] removeObserver:self forKeyPath:@"userStatus"];
     [[DESSelf self] removeObserver:self forKeyPath:@"displayName"];
     [[DESSelf self] removeObserver:self forKeyPath:@"statusType"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Sheets
@@ -127,6 +163,16 @@
 }
 
 - (void)addFriendSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
+}
+
+- (IBAction)presentBootstrappingSheet:(id)sender {
+    if (!_bootstrapSheet)
+        _bootstrapSheet = [[SCBootstrapSheetController alloc] initWithWindowNibName:@"BootstrapSheet"];
+    [NSApp beginSheet:_bootstrapSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(bootstrapSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (void)bootstrapSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
 }
 
@@ -155,6 +201,7 @@
     if (!self.requestSheet)
         self.requestSheet = [[SCFriendRequestsSheetController alloc] initWithWindowNibName:@"Requests"];
     [NSApp beginSheet:self.requestSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closeRequestsSheet:returnCode:contextInfo:) contextInfo:NULL];
+    [self.requestSheet fillFields];
 }
 
 - (IBAction)confirmAndEndSheet:(NSButton *)sender {
@@ -261,6 +308,10 @@
         [self.listView reloadData];
         [self selectFriend:selectedFriend];
     }
+}
+
+- (void)listViewSelectionDidChange:(NSNotification *)aNotification {
+    chatView.context = [self friendInRow:self.listView.selectedRow].chatContext;
 }
 
 - (NSUInteger)numberOfRowsInListView:(PXListView *)aListView {

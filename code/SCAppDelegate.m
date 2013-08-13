@@ -6,6 +6,7 @@
 #import "SCKudTestingWindowController.h"
 
 #import <DeepEnd/DeepEnd.h>
+#import <Kudryavka/Kudryavka.h>
 
 @interface SCAppDelegate ()
 
@@ -19,6 +20,8 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    if (![NKDataSerializer isDebugBuild])
+        [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
     self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
     [self.loginWindow showWindow:self];
 }
@@ -83,6 +86,10 @@
     }
 }
 
+- (void)newWindowWithDESContext:(DESChatContext *)aContext {
+    
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     currentNickname = change[NSKeyValueChangeNewKey];
 }
@@ -123,7 +130,7 @@
 
 - (IBAction)copyPublicKey:(id)sender {
     [[NSPasteboard generalPasteboard] clearContents];
-    [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].publicKey]];
+    [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].friendAddress]];
 }
 
 - (IBAction)showAddFriend:(id)sender {
@@ -137,6 +144,13 @@
     if (self.mainWindow) {
         [self.mainWindow.window makeKeyAndOrderFront:self];
         [self.mainWindow presentFriendRequestsSheet:self];
+    }
+}
+
+- (IBAction)showBootstrapWindow:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentBootstrappingSheet:self];
     }
 }
 
