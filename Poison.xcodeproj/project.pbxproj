@@ -1486,7 +1486,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "${PRODUCT_NAME}.entitlements";
-				CODE_SIGN_IDENTITY = "Poison Code Signing";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -1504,7 +1503,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "${PRODUCT_NAME}.entitlements";
-				CODE_SIGN_IDENTITY = "Poison Code Signing";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
