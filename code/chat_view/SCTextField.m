@@ -27,23 +27,11 @@
 
 @end
 
-@implementation SCTextField {
-    CGColorRef shadowColor;
-}
+@implementation SCTextField
 
 - (void)awakeFromNib {
-    NSColor *sColor = [NSColor whiteColor];
-    NSInteger numberOfComponents = [sColor numberOfComponents];
-    CGFloat components[numberOfComponents];
-    CGColorSpaceRef colorSpace = [[sColor colorSpace] CGColorSpace];
-    [sColor getComponents:(CGFloat *)&components];
-    shadowColor = CGColorCreate(colorSpace, components);
     self.bezeled = YES;
     self.drawsBackground = NO;
-    self.wantsLayer = YES;
-    self.superview.layer.masksToBounds = NO;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowColor = shadowColor;
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
         self.layer.shadowOffset = (CGSize){0, 0.7};
         self.layer.shadowOpacity = 0.46;
@@ -51,6 +39,7 @@
         self.layer.shadowOffset = (CGSize){0, -1};
         self.layer.shadowOpacity = 0.2;
     }
+    NSLog(@"%@", self.subviews);
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow {
@@ -73,11 +62,6 @@
     [[NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0] fill];
     [[NSColor whiteColor] set];
     [[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, self.bounds.size.width - 2, self.bounds.size.height - 2) xRadius:3.42 yRadius:3.42] fill];
-}
-
-- (void)dealloc {
-    if (shadowColor)
-        CGColorRelease(shadowColor);
 }
 
 @end

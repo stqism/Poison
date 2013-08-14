@@ -30,6 +30,7 @@
     [self layoutViews:nil];
     SCThemeManager *manager = [SCThemeManager sharedManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme:) name:SCTranscriptThemeDidChangeNotification object:manager];
+    self.transcriptView.drawsBackground = NO;
     [self reloadTheme:nil];
 }
 
@@ -58,11 +59,12 @@
     [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
     CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;
     self.transcriptView.frame = (NSRect){{0, transcriptYOffset}, {self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.size.height + transcriptYOffset)}};
+    self.view.needsDisplay = YES;
 }
 
 - (void)reloadTheme:(NSNotification *)notification {
     SCThemeManager *manager = [SCThemeManager sharedManager];
-    self.transcriptView.layer.backgroundColor = [manager backgroundColorOfCurrentTheme].CGColor;
+    ((SCChatView*)self.view).topColor = [manager backgroundColorOfCurrentTheme];
     NSURLRequest *request = [NSURLRequest requestWithURL:[manager baseTemplateURLOfCurrentTheme]];
     [self.transcriptView.mainFrame loadRequest:request];
 }

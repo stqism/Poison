@@ -30,6 +30,8 @@
 		F5556B8617B5947500E636FE /* SCChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5556B8517B5947500E636FE /* SCChatView.m */; };
 		F5556B8A17B5B7D500E636FE /* SCBorderedGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5556B8917B5B7D500E636FE /* SCBorderedGradientView.m */; };
 		F5556B8F17B5C18800E636FE /* SCBootstrapSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5556B8E17B5C18800E636FE /* SCBootstrapSheetController.m */; };
+		F55DCCBF17BAF75200641071 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5556B7E17B57F9B00E636FE /* WebKit.framework */; };
+		F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
 		F57C3A3C17B160A000325A24 /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
@@ -427,6 +429,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */,
+				F55DCCBF17BAF75200641071 /* WebKit.framework in Frameworks */,
 				F5DE01E017B9A704002D69E6 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1494,7 +1498,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1510,7 +1513,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

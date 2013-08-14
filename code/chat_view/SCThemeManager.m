@@ -80,7 +80,7 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
         }
     }
     const char *chars = [hex UTF8String];
-    char output[3];
+    uint8_t output[3];
     int i = 0, j = 0;
     char byteChars[3] = {'\0','\0','\0'};
     unsigned long wholeByte = 0;
@@ -90,7 +90,7 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
         wholeByte = strtoul(byteChars, NULL, 16);
         output[j++] = wholeByte;
     }
-    return [NSColor colorWithCalibratedRed:(CGFloat)output[0] / 255.0 green:(CGFloat)output[1] / 255.0 blue:(CGFloat)output[2] / 255.0 alpha:1.0];
+    return [NSColor colorWithCalibratedRed:((CGFloat)output[0]) / 255.0 green:((CGFloat)output[1]) / 255.0 blue:((CGFloat)output[2]) / 255.0 alpha:1.0];
 }
 
 - (NSColor *)backgroundColorOfCurrentTheme {
@@ -110,7 +110,7 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
             return bgc;
         }
     }
-    return nil;
+    return [NSColor whiteColor];
 }
 
 - (NSURL *)baseTemplateURLOfCurrentTheme {
