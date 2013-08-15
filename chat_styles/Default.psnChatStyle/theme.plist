@@ -5,14 +5,14 @@
 	<key>aiThemeAuthor</key>
 	<string>stal</string>
 	<key>aiThemeBackgroundColor</key>
-	<string>FBFBFB</string>
+	<string>E6E6E6</string>
+	<key>aiThemeBaseTemplateName</key>
+	<string>themebase.html</string>
 	<key>aiThemeDescription</key>
 	<string>The default chat style used by Poison.</string>
 	<key>aiThemeHumanReadableName</key>
 	<string>Default</string>
 	<key>aiThemeShortVersionString</key>
-	<string>1.0</string>
-	<key>aiThemeBaseTemplateName</key>
-	<string>themebase.html</string>
+	<string>1.1.3</string>
 </dict>
 </plist>

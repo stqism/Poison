@@ -34,3 +34,6 @@ div.sender {
     color:#000;
     float:left;
 }
+div.ours > div.sender {
+    color:#0074cf;
+}

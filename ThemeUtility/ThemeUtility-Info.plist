@@ -32,5 +32,27 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ca.kirara.poison.chatStyleD</string>
+			<key>UTTypeIconFile</key>
+			<string>shiina</string>
+			<key>UTTypeIdentifier</key>
+			<string>ca.kirara.poison.chatStyleD</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psnChatStyle</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

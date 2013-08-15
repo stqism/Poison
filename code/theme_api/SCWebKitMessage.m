@@ -1,6 +1,14 @@
 #import "SCWebKitMessage.h"
 
+static NSDateFormatter *sharedFormatter = nil;
+
 @implementation SCWebKitMessage
+
++ (void)initialize {
+    sharedFormatter = [[NSDateFormatter alloc] init];
+    sharedFormatter.timeStyle = NSDateFormatterLongStyle;
+    sharedFormatter.dateStyle = NSDateFormatterNoStyle;
+}
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector {
     return NO;
@@ -35,8 +43,8 @@
     return self.wrappedMessage.friendStatus;
 }
 
-- (NSDate *)dateReceived {
-    return self.wrappedMessage.dateReceived;
+- (NSString *)dateString {
+    return [sharedFormatter stringFromDate:self.wrappedMessage.dateReceived];
 }
 
 - (NSInteger)messageID {

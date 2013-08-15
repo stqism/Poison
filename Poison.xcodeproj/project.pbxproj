@@ -34,7 +34,13 @@
 		F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
+		F5758EC617BC4C7300CBCE64 /* SCWebKitFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */; };
+		F5758EC717BC4C7500CBCE64 /* SCWebKitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */; };
+		F5758EC917BC4C9000CBCE64 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
+		F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
+		F5758ECD17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
 		F57C3A3C17B160A000325A24 /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
+		F58586BE17BC5B3400E0B432 /* SLBackingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F58586BD17BC5B3400E0B432 /* SLBackingView.m */; };
 		F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */; };
 		F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F58A9ADD17ACB85400923A25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F58A9ADB17ACB85400923A25 /* InfoPlist.strings */; };
@@ -123,7 +129,6 @@
 		F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */; };
 		F5DE01CE17B954DD002D69E6 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01CD17B954DD002D69E6 /* MessageCell.xib */; };
 		F5DE01D217B9567D002D69E6 /* SCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE01D117B9567D002D69E6 /* SCMessageCell.m */; };
-		F5DE01D517B99DAE002D69E6 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE01D417B99DAE002D69E6 /* SCThemeManager.m */; };
 		F5DE01DA17B9A43D002D69E6 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
 		F5DE01E017B9A704002D69E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F5DE01E617B9A704002D69E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01E417B9A704002D69E6 /* InfoPlist.strings */; };
@@ -191,6 +196,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F5758EC817BC4C8600CBCE64 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Themes;
+			dstSubfolderSpec = 7;
+			files = (
+				F5758EC917BC4C9000CBCE64 /* Default.psnChatStyle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F58A9AFA17ACC97800923A25 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,7 +277,11 @@
 		F55E797E17AF4B9C0044092B /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
 		F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
 		F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
+		F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCThemeManager.h; sourceTree = "<group>"; };
+		F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
 		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
+		F58586BC17BC5B3400E0B432 /* SLBackingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLBackingView.h; sourceTree = "<group>"; };
+		F58586BD17BC5B3400E0B432 /* SLBackingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLBackingView.m; sourceTree = "<group>"; };
 		F58A9ACD17AC9ED500923A25 /* SCBigGreenButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBigGreenButton.h; sourceTree = "<group>"; };
 		F58A9ACE17AC9ED500923A25 /* SCBigGreenButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBigGreenButton.m; sourceTree = "<group>"; };
 		F58A9AD617ACB85400923A25 /* Kudryavka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kudryavka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,8 +393,6 @@
 		F5DE01CD17B954DD002D69E6 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		F5DE01D017B9567D002D69E6 /* SCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMessageCell.h; sourceTree = "<group>"; };
 		F5DE01D117B9567D002D69E6 /* SCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMessageCell.m; sourceTree = "<group>"; };
-		F5DE01D317B99DAE002D69E6 /* SCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCThemeManager.h; sourceTree = "<group>"; };
-		F5DE01D417B99DAE002D69E6 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
 		F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnChatStyle; sourceTree = "<group>"; };
 		F5DE01DF17B9A704002D69E6 /* Silica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Silica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5DE01E317B9A704002D69E6 /* ThemeUtility-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ThemeUtility-Info.plist"; sourceTree = "<group>"; };
@@ -485,6 +502,8 @@
 		F52BDECE17B9D66B007CF88B /* theme_api */ = {
 			isa = PBXGroup;
 			children = (
+				F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */,
+				F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */,
 				F52BDECF17B9D7E1007CF88B /* SCWebKitFriend.h */,
 				F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */,
 				F52BDED217B9DFDA007CF88B /* SCWebKitMessage.h */,
@@ -496,8 +515,6 @@
 		F5556B8017B58F9A00E636FE /* chat_view */ = {
 			isa = PBXGroup;
 			children = (
-				F5DE01D317B99DAE002D69E6 /* SCThemeManager.h */,
-				F5DE01D417B99DAE002D69E6 /* SCThemeManager.m */,
 				F5DE01D017B9567D002D69E6 /* SCMessageCell.h */,
 				F5DE01D117B9567D002D69E6 /* SCMessageCell.m */,
 				F5C67D8817B8764200FE4D14 /* SCTextField.h */,
@@ -868,6 +885,8 @@
 				F5DE01ED17B9A704002D69E6 /* SLAppDelegate.h */,
 				F5DE01EE17B9A704002D69E6 /* SLAppDelegate.m */,
 				F5DE01F017B9A705002D69E6 /* MainMenu.xib */,
+				F58586BC17BC5B3400E0B432 /* SLBackingView.h */,
+				F58586BD17BC5B3400E0B432 /* SLBackingView.m */,
 				F5DE01E217B9A704002D69E6 /* Supporting Files */,
 			);
 			path = ThemeUtility;
@@ -1004,6 +1023,7 @@
 				F5DE01DB17B9A704002D69E6 /* Sources */,
 				F5DE01DC17B9A704002D69E6 /* Frameworks */,
 				F5DE01DD17B9A704002D69E6 /* Resources */,
+				F5758EC817BC4C8600CBCE64 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1201,9 +1221,9 @@
 				F5556B8F17B5C18800E636FE /* SCBootstrapSheetController.m in Sources */,
 				F5C67D8A17B8764200FE4D14 /* SCTextField.m in Sources */,
 				F5DE01D217B9567D002D69E6 /* SCMessageCell.m in Sources */,
-				F5DE01D517B99DAE002D69E6 /* SCThemeManager.m in Sources */,
 				F52BDED117B9D7E1007CF88B /* SCWebKitFriend.m in Sources */,
 				F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */,
+				F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,8 +1248,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5758EC717BC4C7500CBCE64 /* SCWebKitMessage.m in Sources */,
 				F5DE01E817B9A704002D69E6 /* main.m in Sources */,
 				F5DE01EF17B9A704002D69E6 /* SLAppDelegate.m in Sources */,
+				F5758EC617BC4C7300CBCE64 /* SCWebKitFriend.m in Sources */,
+				F5758ECD17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
+				F58586BE17BC5B3400E0B432 /* SLBackingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

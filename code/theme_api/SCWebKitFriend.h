@@ -14,5 +14,6 @@
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector;
 + (BOOL)isKeyExcludedFromWebScript:(const char *)name;
 - (instancetype)initWithWrappedFriend:(DESFriend *)friend;
+- (BOOL)isSelf;
 
 @end

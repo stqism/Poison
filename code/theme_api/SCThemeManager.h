@@ -5,6 +5,7 @@ NSString *const SCTranscriptThemeDidChangeNotification;
 @interface SCThemeManager : NSObject
 
 @property (strong) NSString *pathOfCurrentThemeDirectory;
+@property (readonly) NSDictionary *themeDictionary;
 
 + (instancetype)sharedManager;
 + (BOOL)isValidThemeAtPath:(NSString *)path;
@@ -12,5 +13,6 @@ NSString *const SCTranscriptThemeDidChangeNotification;
 - (NSURL *)baseTemplateURLOfCurrentTheme;
 - (NSURL *)baseDirectoryURLOfCurrentTheme;
 - (NSArray *)availableThemes;
+- (void)changeThemePath:(NSString *)themePath;
 
 @end

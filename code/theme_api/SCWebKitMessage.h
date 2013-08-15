@@ -8,7 +8,7 @@
 @property (readonly) NSString *content;
 @property (readonly) NSInteger statusType;
 @property (readonly) NSInteger friendStatus;
-@property (readonly) NSDate *dateReceived;
+@property (readonly) NSString *dateString;
 @property (readonly) NSInteger messageID;
 @property DESMessage *wrappedMessage;
 

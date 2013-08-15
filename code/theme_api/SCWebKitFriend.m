@@ -31,4 +31,12 @@
     return self.wrappedFriend.publicKey;
 }
 
+- (BOOL)isSelf {
+    return self.wrappedFriend.friendNumber == DESFriendSelf;
+}
+
+- (int)friendNumber {
+    return self.wrappedFriend.friendNumber;
+}
+
 @end

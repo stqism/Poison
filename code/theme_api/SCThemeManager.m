@@ -121,13 +121,18 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
     return [NSURL fileURLWithPath:themeBasePath];
 }
 
+- (NSDictionary *)themeDictionary {
+    return (NSDictionary*)themeDictionary;
+}
+
 - (void)changeThemePath:(NSString *)themePath {
     if ([SCThemeManager isValidThemeAtPath:themePath]) {
         themeBasePath = themePath;
         themeDictionary = [[NSDictionary dictionaryWithContentsOfFile:[themePath stringByAppendingPathComponent:@"theme.plist"]] mutableCopy];
         [[NSNotificationCenter defaultCenter] postNotificationName:SCTranscriptThemeDidChangeNotification object:self userInfo:nil];
+    } else {
+        NSLog(@"WARNING: -[SCThemeManager changeThemePath:] called with invalid path argument %@. The theme was not changed.", themePath);
     }
-    NSLog(@"WARNING: -[SCThemeManager changeThemePath:] called with invalid path argument %@. The theme was not changed.", themePath);
 }
 
 - (NSArray *)availableThemes {
