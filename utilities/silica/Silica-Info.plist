@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>shiina</string>
 	<key>CFBundleIdentifier</key>
-	<string>ca.kirara.silica</string>
+	<string>ca.kirara.developer.silica</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -40,11 +40,11 @@
 				<string>com.apple.package</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>ca.kirara.poison.chatStyleD</string>
+			<string>ca.kirara.poison.ChatStyle</string>
 			<key>UTTypeIconFile</key>
 			<string>shiina</string>
 			<key>UTTypeIdentifier</key>
-			<string>ca.kirara.poison.chatStyleD</string>
+			<string>ca.kirara.poison.ChatStyle</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

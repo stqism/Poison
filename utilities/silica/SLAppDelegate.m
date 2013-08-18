@@ -2,8 +2,47 @@
 #import "SCThemeManager.h"
 #import "SCWebKitFriend.h"
 #import "SCWebKitMessage.h"
+#import "SCWebKitContext.h"
 #import "SLBackingView.h"
+#import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
+
+@interface SLMockContext : NSObject <DESChatContext>
+
+@end
+
+@implementation SLMockContext
+@synthesize backlog;
+@synthesize participants;
+@synthesize maximumBacklogSize;
+
+- (instancetype)init {
+    return self;
+}
+
+- (instancetype)initWithPartner:(DESFriend *)aFriend {
+    return self;
+}
+
+- (instancetype)initWithParticipants:(NSArray *)participants {
+    return self;
+}
+
+- (DESFriendManager *)friendManager {
+    return nil;
+}
+
+- (void)setFriendManager:(DESFriendManager *)manager {
+    return;
+}
+
+- (void)addParticipant:(DESFriend *)theFriend {}
+- (void)removeParticipant:(DESFriend *)theFriend {}
+
+- (void)sendMessage:(NSString *)message {}
+- (void)pushMessage:(DESMessage *)aMessage {}
+
+@end
 
 @interface SLMockFriend : DESFriend
 
@@ -58,10 +97,12 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSLog(@"Silica is a work in progress. Behaviour should reflect the same revision of Poison that Silica is compiled against.\n"
           @"If it doesn't, and you are running the latest git of Silica, please file an issue on GitHub, including \"Silica\" or \"ThemeUtility\" in your issue title.");
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WebKitDeveloperExtras"];
     _mockFriend = [[SLMockFriend alloc] initAsMock];
     themeDictionary = [@{} mutableCopy];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme:) name:SCTranscriptThemeDidChangeNotification object:[SCThemeManager sharedManager]];
     self.webView.drawsBackground = NO;
+    self.webView.frameLoadDelegate = self;
     [self reloadTheme:nil];
 }
 
@@ -105,7 +146,8 @@
     self.color.color = [SCThemeManager sharedManager].backgroundColorOfCurrentTheme;
     self.backing.topLel = [SCThemeManager sharedManager].backgroundColorOfCurrentTheme;
     self.backing.needsDisplay = YES;
-    [self.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[SCThemeManager sharedManager].baseTemplateURLOfCurrentTheme]];
+    [self.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[SCThemeManager sharedManager].baseTemplateURLOfCurrentTheme cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10]];
+    
 }
 
 - (IBAction)pushTextMessage:(id)sender {
@@ -124,7 +166,7 @@
             mockMessage = [DESMessage userStatusChangeFromSender:_mockFriend newStatus:@"Testing changing their status message in Silica."];
             break;
     }
-    [self.webView.windowScriptObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
+    [self.webView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
 }
 
 - (IBAction)pushEnumeratedMessage:(id)sender {
@@ -134,14 +176,46 @@
             mockMessage = [DESMessage userStatusTypeChangeFromSender:_mockFriend newStatusType:DESStatusTypeAway];
             break;
         case DESMessageTypeStatusChange:
-            mockMessage = [DESMessage statusChangeFromSender:_mockFriend newStatus:DESFriendStatusRequestReceived];
+            mockMessage = [DESMessage statusChangeFromSender:_mockFriend newStatus:DESFriendStatusOnline];
             break;
     }
-    [self.webView.windowScriptObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
+    [self.webView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
 }
 
 - (IBAction)reloadTemplate:(id)sender {
-    [self.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[SCThemeManager sharedManager].baseTemplateURLOfCurrentTheme]];
+    [self.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[SCThemeManager sharedManager].baseTemplateURLOfCurrentTheme cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10]];
+}
+
+- (void)webView:(WebView *)webView didFinishLoadForFrame:(WebFrame *)frame {
+    [self injectConstants];
+}
+
+- (void)injectConstants {
+    /* This exports all DES constants to the webview. */
+    WebScriptObject *w = self.webView.windowScriptObject;
+    [w setValue:[NSNumber numberWithInteger:DESFriendSelf] forKey:@"DESFriendSelf"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendInvalid] forKey:@"DESFriendInvalid"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusOffline] forKey:@"DESFriendStatusOffline"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusOnline] forKey:@"DESFriendStatusOnline"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusRequestReceived] forKey:@"DESFriendStatusRequestReceived"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusRequestSent] forKey:@"DESFriendStatusRequestSent"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusConfirmed] forKey:@"DESFriendStatusConfirmed"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusSelf] forKey:@"DESFriendStatusSelf"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeOnline] forKey:@"DESStatusTypeOnline"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeAway] forKey:@"DESStatusTypeAway"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeBusy] forKey:@"DESStatusTypeBusy"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeInvalid] forKey:@"DESStatusTypeInvalid"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeChat] forKey:@"DESMessageTypeChat"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeAction] forKey:@"DESMessageTypeAction"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeNicknameChange] forKey:@"DESMessageTypeNicknameChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusChange] forKey:@"DESMessageTypeStatusChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeUserStatusChange] forKey:@"DESMessageTypeUserStatusChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusTypeChange] forKey:@"DESMessageTypeStatusTypeChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeSystem] forKey:@"DESMessageTypeSystem"];
+    [w setValue:[[SCWebKitContext alloc] initWithContext:[[SLMockContext alloc] init]] forKey:@"Conversation"];
 }
 
 - (IBAction)save:(id)sender {
@@ -160,7 +234,5 @@
         NSLog(@"Saved successfully to new directory: %@.", [open.URL path]);
     }
 }
-
-
 
 @end
