@@ -1,8 +1,10 @@
 #import <Cocoa/Cocoa.h>
 #import <Kudryavka/Kudryavka.h>
+#import <DeepEnd/DeepEnd.h>
 
 @class SCLoginWindowController, SCMainWindowController,
-       SCPreferencesWindowController, SCAboutWindowController, SCKudTestingWindowController, DESChatContext;
+       SCPreferencesWindowController, SCAboutWindowController,
+       SCKudTestingWindowController;
 @interface SCAppDelegate : NSObject <NSApplicationDelegate>
 
 /* Windows */
@@ -14,7 +16,8 @@
 @property (strong) NSArray *standaloneWindows;
 
 @property (unsafe_unretained) IBOutlet NSMenuItem *kudoTestingMenuItem;
+@property (strong) NSString *queuedPublicKey;
 - (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
-- (void)newWindowWithDESContext:(DESChatContext *)aContext;
+- (void)newWindowWithDESContext:(id<DESChatContext>)aContext;
 
 @end

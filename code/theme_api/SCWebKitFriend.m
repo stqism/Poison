@@ -1,22 +1,24 @@
 #import "SCWebKitFriend.h"
-#import <DeepEnd/DeepEnd.h>
 
 @implementation SCWebKitFriend
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector {
+    if (aSelector == @selector(initWithFriend:)) {
+        return YES;
+    }
     return NO;
 }
 
-+ (BOOL)isKeyExcludedFromWebScript:(const char *)name {
-    return NO;
-}
-
-- (instancetype)initWithWrappedFriend:(DESFriend *)friend {
+- (instancetype)initWithFriend:(DESFriend *)friend {
     self = [super init];
     if (self) {
-        self.wrappedFriend = friend;
+        _wrappedFriend = friend;
     }
     return self;
+}
+
+- (int)friendNumber {
+    return self.wrappedFriend.friendNumber;
 }
 
 - (NSString *)displayName {
@@ -27,16 +29,12 @@
     return self.wrappedFriend.userStatus;
 }
 
+- (NSNumber *)statusType {
+    return @(self.wrappedFriend.statusType);
+}
+
 - (NSString *)publicKey {
     return self.wrappedFriend.publicKey;
-}
-
-- (BOOL)isSelf {
-    return self.wrappedFriend.friendNumber == DESFriendSelf;
-}
-
-- (int)friendNumber {
-    return self.wrappedFriend.friendNumber;
 }
 
 @end

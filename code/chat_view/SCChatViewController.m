@@ -8,16 +8,10 @@
 
 @implementation SCChatViewController {
     NSFont *cachedFont;
-    NSFont *cachedMessageFont;
-    NSDateFormatter *cachedFormatter;
 }
 
 - (void)awakeFromNib {
     cachedFont = [NSFont systemFontOfSize:13];
-    cachedMessageFont = [NSFont fontWithName:@"Helvetica" size:12.0];
-    cachedFormatter = [[NSDateFormatter alloc] init];
-    cachedFormatter.dateStyle = NSDateFormatterNoStyle;
-    cachedFormatter.timeStyle = NSDateFormatterMediumStyle;
     self.headerView.topColor = [NSColor colorWithCalibratedWhite:0.95 alpha:1.0];;
     self.headerView.bottomColor = [NSColor colorWithCalibratedWhite:0.85 alpha:1.0];
     self.headerView.borderColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
@@ -31,10 +25,13 @@
     SCThemeManager *manager = [SCThemeManager sharedManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme:) name:SCTranscriptThemeDidChangeNotification object:manager];
     self.transcriptView.drawsBackground = NO;
+    self.transcriptView.frameLoadDelegate = self;
     [self reloadTheme:nil];
 }
 
-- (void)setContext:(DESChatContext *)context {
+- (void)setContext:(id<DESChatContext>)context {
+    if (context == _context)
+        return;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DESDidPushMessageToContextNotification object:_context];
     for (DESFriend *i in _context.participants) {
         [i removeObserver:self forKeyPath:@"displayName"];
@@ -43,8 +40,47 @@
     if (context) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagePushed:) name:DESDidPushMessageToContextNotification object:context];
         [self setTitleUsingContext:context];
+        [self.transcriptView reload:self];
+        [self injectConstants];
+        SCWebKitMessage *wm = [[SCWebKitMessage alloc] initWithMessage:nil];
+        for (DESMessage *i in context.backlog) {
+            wm.wrappedMessage = i;
+            [[self.transcriptView.mainFrame windowObject] callWebScriptMethod:@"pushMessage" withArguments:@[i]];
+        }
     }
     NSLog(@"Context changed");
+}
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+    [self injectConstants];
+    [self.transcriptView.windowScriptObject setValue:self.context forKey:@"Conversation"];
+}
+
+- (void)injectConstants {
+    /* This exports all DES constants to the webview. */
+    WebScriptObject *w = self.transcriptView.windowScriptObject;
+    [w setValue:[NSNumber numberWithInteger:DESFriendSelf] forKey:@"DESFriendSelf"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendInvalid] forKey:@"DESFriendInvalid"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusOffline] forKey:@"DESFriendStatusOffline"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusOnline] forKey:@"DESFriendStatusOnline"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusRequestReceived] forKey:@"DESFriendStatusRequestReceived"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusRequestSent] forKey:@"DESFriendStatusRequestSent"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusConfirmed] forKey:@"DESFriendStatusConfirmed"];
+    [w setValue:[NSNumber numberWithInteger:DESFriendStatusSelf] forKey:@"DESFriendStatusSelf"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeOnline] forKey:@"DESStatusTypeOnline"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeAway] forKey:@"DESStatusTypeAway"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeBusy] forKey:@"DESStatusTypeBusy"];
+    [w setValue:[NSNumber numberWithInteger:DESStatusTypeInvalid] forKey:@"DESStatusTypeInvalid"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeChat] forKey:@"DESMessageTypeChat"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeAction] forKey:@"DESMessageTypeAction"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeNicknameChange] forKey:@"DESMessageTypeNicknameChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusChange] forKey:@"DESMessageTypeStatusChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeUserStatusChange] forKey:@"DESMessageTypeUserStatusChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusTypeChange] forKey:@"DESMessageTypeStatusTypeChange"];
+    [w setValue:[NSNumber numberWithInteger:DESMessageTypeSystem] forKey:@"DESMessageTypeSystem"];
 }
 
 - (void)controlTextDidChange:(NSNotification *)obj {
@@ -86,7 +122,7 @@
     [self layoutViews:nil];
 }
 
-- (void)setTitleUsingContext:(DESChatContext *)context {
+- (void)setTitleUsingContext:(id<DESChatContext>)context {
     NSMutableArray *names = [[NSMutableArray alloc] initWithCapacity:[context.participants count]];
     for (DESFriend *i in [context.participants sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]]) {
         [names addObject:i.displayName];

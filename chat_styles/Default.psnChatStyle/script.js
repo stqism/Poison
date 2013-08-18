@@ -3,14 +3,21 @@
 
 function pushMessage(message) {
     console.log(message.type());
-    console.log(message.dateString().toLocaleString())
     switch (message.type()) {
-        case 0: {
+        case DESMessageTypeChat: {
             pushChatMessageFromMessage(message)
             break
         }
-        case 1: {
+        case DESMessageTypeAction: {
             pushActionMessageFromMessage(message)
+            break
+        }
+        case DESMessageTypeNicknameChange: {
+            pushAttrChangeMessageFromMessage(message)
+            break
+        }
+        case DESMessageTypeUserStatusChange: {
+            pushAttrChangeMessageFromMessage(message)
             break
         }
     }
@@ -24,7 +31,7 @@ function pushChatMessageFromMessage(message) {
     if (!lastContext || lastContext.className.split(" ").indexOf("chat") == -1 || parseInt(lastContext.getElementsByClassName("sender")[0].getAttribute("sid")) != message.sender().friendNumber()) {
         context = document.createElement("div")
         context.className = "context chat"
-        if (message.sender().isSelf()) {
+        if (message.sender().friendNumber() == DESFriendSelf) {
             context.className += " ours"
         } else {
             context.className += " theirs"
@@ -38,7 +45,7 @@ function pushChatMessageFromMessage(message) {
         // timestamp
         timestamp = document.createElement("div")
         timestamp.className = "context-item timestamp"
-        timestamp.textContent = message.dateString()
+        timestamp.textContent = message.localizedTimestamp()
         context.appendChild(timestamp)
         // body
         messages = document.createElement("div")
@@ -48,16 +55,17 @@ function pushChatMessageFromMessage(message) {
         needToAppend = true
     }
     content = document.createElement("p")
-    content.textContent = message.content()
+    content.textContent = message.body()
     lastContext.getElementsByClassName("messages")[0].appendChild(content)
     if (needToAppend) {
         document.getElementById("theme").appendChild(lastContext)
     }
 }
+
 function pushActionMessageFromMessage(message) {
     context = document.createElement("div")
     context.className = "context action"
-    if (message.sender().isSelf()) {
+    if (message.sender().friendNumber() == DESFriendSelf) {
         context.className += " ours"
     } else {
         context.className += " theirs"
@@ -65,16 +73,44 @@ function pushActionMessageFromMessage(message) {
     // sender
     sender = document.createElement("div")
     sender.className = "context-item sender"
-    sender.textContent = "* " + message.sender().displayName() + " " + message.content()
+    sender.textContent =  message.body()
     sender.setAttribute("sid", message.sender().friendNumber())
     context.appendChild(sender)
+    
     // timestamp
     timestamp = document.createElement("div")
     timestamp.className = "context-item timestamp"
-    timestamp.textContent = message.dateString()
+    timestamp.textContent = message.localizedTimestamp()
     context.appendChild(timestamp)
     clearfix = document.createElement("div")
     clearfix.style.clear = "both"
     context.appendChild(clearfix)
+    document.getElementById("theme").appendChild(context)
+}
+
+function pushAttrChangeMessageFromMessage(message) {
+    context = document.createElement("div")
+    context.className = "context attrchange"
+    if (message.sender().friendNumber() == DESFriendSelf) {
+        context.className += " ours"
+    } else {
+        context.className += " theirs"
+    }
+    // sender
+    m = document.createElement("div")
+    m.className = "context-item messages"
+    m.setAttribute("sid", message.sender().friendNumber())
+    p = document.createElement("p")
+    p.style.fontWeight = "bold";
+    p.style.textAlign = "center";
+    if (message.type() == DESMessageTypeNicknameChange) {
+        k = "nickname"
+    } else {
+        k = "status"
+    }
+    console.log(message.newValue())
+    p.textContent = ((message.type() == DESMessageTypeNicknameChange) ? message.oldValue() : message.sender().displayName()) + " changed their " + k + " to " + message.newValue() + "."
+    m.appendChild(p)
+    context.appendChild(m)
     document.getElementById("theme").appendChild(context)
 }

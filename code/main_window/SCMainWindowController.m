@@ -10,6 +10,7 @@
 #import "SCAddFriendSheetController.h"
 #import "SCChatViewController.h"
 #import "SCBootstrapSheetController.h"
+#import "SCAppDelegate.h"
 #import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
 
@@ -73,7 +74,7 @@
     ((SCShinyWindow*)self.window).indicator.action = @selector(presentBootstrappingSheet:);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
-            return;
+            [self checkKeyQueue];
         } else {
             [self presentBootstrappingSheet:self];
         }
@@ -145,6 +146,19 @@
     }
 }
 
+- (void)checkKeyQueue {
+    SCAppDelegate *delegate = [NSApp delegate];
+    if (delegate.queuedPublicKey && !self.window.attachedSheet) {
+        if (!_addFriendSheet)
+            _addFriendSheet = [[SCAddFriendSheetController alloc] initWithWindowNibName:@"AddFriend"];
+        [_addFriendSheet loadWindow];
+        [_addFriendSheet fillFields];
+        _addFriendSheet.keyField.stringValue = delegate.queuedPublicKey;
+        [NSApp beginSheet:_addFriendSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(addFriendSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+    }
+    delegate.queuedPublicKey = nil;
+}
+
 - (void)dealloc {
     [[DESSelf self] removeObserver:self forKeyPath:@"userStatus"];
     [[DESSelf self] removeObserver:self forKeyPath:@"displayName"];
@@ -174,6 +188,7 @@
 
 - (void)bootstrapSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
+    [self checkKeyQueue];
 }
 
 - (IBAction)presentCustomStatusSheet:(id)sender {

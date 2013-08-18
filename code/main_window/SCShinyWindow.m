@@ -4,7 +4,7 @@
 @implementation SCShinyWindow
 
 - (void)awakeFromNib {
-    self.indicator = [[SCDHTStatusView alloc] initWithFrame:(NSRect){CGPointZero, 16, 15}];
+    self.indicator = [[SCDHTStatusView alloc] initWithFrame:(NSRect){{0, 0}, {16, 15}}];
     self.indicator.connectedNodes = 0;
     self.indicator.autoresizingMask = NSViewMinXMargin | NSViewMinYMargin;
     [[self.contentView superview] setAutoresizesSubviews:YES];

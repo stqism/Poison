@@ -83,12 +83,21 @@
 		F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A849F417B88AE2004266D4 /* icon_minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A849F217B88AE2004266D4 /* icon_minus@2x.png */; };
 		F5A849F517B88AE2004266D4 /* icon_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A849F317B88AE2004266D4 /* icon_plus@2x.png */; };
+		F5A91FB917C03BC000B7C6DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
+		F5A91FBF17C03BC000B7C6DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5A91FBD17C03BC000B7C6DC /* InfoPlist.strings */; };
+		F5A91FC117C03BC000B7C6DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A91FC017C03BC000B7C6DC /* main.m */; };
+		F5A91FC517C03BC000B7C6DC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5A91FC317C03BC000B7C6DC /* Credits.rtf */; };
+		F5A91FC817C03BC000B7C6DC /* HBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A91FC717C03BC000B7C6DC /* HBAppDelegate.m */; };
+		F5A91FCB17C03BC100B7C6DC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A91FC917C03BC100B7C6DC /* MainMenu.xib */; };
 		F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2317AF1C31003423E0 /* user-icon-default.png */; };
 		F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */; };
 		F5A9CC3417AF2446003423E0 /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2917AF2446003423E0 /* PXListDocumentView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5A9CC3517AF2446003423E0 /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2C17AF2446003423E0 /* PXListView+UserInteraction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5A9CC3617AF2446003423E0 /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC2E17AF2446003423E0 /* PXListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A9CC3117AF2446003423E0 /* PXListViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F5B3A9BE17BD3E9800EE15CA /* DeepEnd.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
+		F5B3A9C717BD826000EE15CA /* SCWebKitContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B3A9C617BD826000EE15CA /* SCWebKitContext.m */; };
+		F5B3A9C817BD826000EE15CA /* SCWebKitContext.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B3A9C617BD826000EE15CA /* SCWebKitContext.m */; };
 		F5B9113517B1E2D200E29017 /* SCFriendListHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */; };
 		F5B9113817B203A500E29017 /* SCFriendListItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B9113717B203A500E29017 /* SCFriendListItemCell.m */; };
 		F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5B9113917B203CF00E29017 /* FriendCell.xib */; };
@@ -217,6 +226,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5B3A9BC17BD3E8500EE15CA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F5B3A9BE17BD3E9800EE15CA /* DeepEnd.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5DE01D917B9A429002D69E6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -334,6 +353,15 @@
 		F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DeepEnd.xcodeproj; path = DeepEnd/DeepEnd.xcodeproj; sourceTree = "<group>"; };
 		F5A849F217B88AE2004266D4 /* icon_minus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_minus@2x.png"; sourceTree = "<group>"; };
 		F5A849F317B88AE2004266D4 /* icon_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_plus@2x.png"; sourceTree = "<group>"; };
+		F5A91FB817C03BC000B7C6DC /* Hibiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hibiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A91FBC17C03BC000B7C6DC /* Hibiki-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hibiki-Info.plist"; sourceTree = "<group>"; };
+		F5A91FBE17C03BC000B7C6DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5A91FC017C03BC000B7C6DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F5A91FC217C03BC000B7C6DC /* Hibiki-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hibiki-Prefix.pch"; sourceTree = "<group>"; };
+		F5A91FC417C03BC000B7C6DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F5A91FC617C03BC000B7C6DC /* HBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBAppDelegate.h; sourceTree = "<group>"; };
+		F5A91FC717C03BC000B7C6DC /* HBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBAppDelegate.m; sourceTree = "<group>"; };
+		F5A91FCA17C03BC100B7C6DC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F5A9CC2317AF1C31003423E0 /* user-icon-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default.png"; sourceTree = "<group>"; };
 		F5A9CC2517AF1ECA003423E0 /* user-icon-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon-default@2x.png"; sourceTree = "<group>"; };
 		F5A9CC2817AF2446003423E0 /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListDocumentView.h; sourceTree = "<group>"; };
@@ -348,6 +376,8 @@
 		F5A9CC3117AF2446003423E0 /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
 		F5A9CC3217AF2446003423E0 /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
 		F5A9CC3317AF2446003423E0 /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		F5B3A9C517BD826000EE15CA /* SCWebKitContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitContext.h; sourceTree = "<group>"; };
+		F5B3A9C617BD826000EE15CA /* SCWebKitContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWebKitContext.m; sourceTree = "<group>"; };
 		F5B9113317B1E2D200E29017 /* SCFriendListHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendListHeaderCell.h; sourceTree = "<group>"; };
 		F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendListHeaderCell.m; sourceTree = "<group>"; };
 		F5B9113617B203A500E29017 /* SCFriendListItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendListItemCell.h; sourceTree = "<group>"; };
@@ -395,10 +425,10 @@
 		F5DE01D117B9567D002D69E6 /* SCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMessageCell.m; sourceTree = "<group>"; };
 		F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnChatStyle; sourceTree = "<group>"; };
 		F5DE01DF17B9A704002D69E6 /* Silica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Silica.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5DE01E317B9A704002D69E6 /* ThemeUtility-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ThemeUtility-Info.plist"; sourceTree = "<group>"; };
+		F5DE01E317B9A704002D69E6 /* Silica-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Silica-Info.plist"; sourceTree = "<group>"; };
 		F5DE01E517B9A704002D69E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5DE01E717B9A704002D69E6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F5DE01E917B9A704002D69E6 /* ThemeUtility-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThemeUtility-Prefix.pch"; sourceTree = "<group>"; };
+		F5DE01E917B9A704002D69E6 /* Silica-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Silica-Prefix.pch"; sourceTree = "<group>"; };
 		F5DE01EB17B9A704002D69E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		F5DE01ED17B9A704002D69E6 /* SLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
 		F5DE01EE17B9A704002D69E6 /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
@@ -432,6 +462,14 @@
 				F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */,
 				F58A9AE717ACB9EE00923A25 /* Kudryavka.framework in Frameworks */,
 				F59A05E417AC808900E9B15F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A91FB517C03BC000B7C6DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A91FB917C03BC000B7C6DC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +542,8 @@
 			children = (
 				F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */,
 				F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */,
+				F5B3A9C517BD826000EE15CA /* SCWebKitContext.h */,
+				F5B3A9C617BD826000EE15CA /* SCWebKitContext.m */,
 				F52BDECF17B9D7E1007CF88B /* SCWebKitFriend.h */,
 				F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */,
 				F52BDED217B9DFDA007CF88B /* SCWebKitMessage.h */,
@@ -607,6 +647,7 @@
 				F58A9AD817ACB85400923A25 /* Kudryavka */,
 				F5DD1B7417B40C48000AF9C6 /* scrypt */,
 				F5DE01E117B9A704002D69E6 /* ThemeUtility */,
+				F5A91FBA17C03BC000B7C6DC /* SoundSetUtility */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);
@@ -620,6 +661,7 @@
 				F5FF959917AD7A3700BB2F13 /* TestKudryavka */,
 				F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */,
 				F5DE01DF17B9A704002D69E6 /* Silica.app */,
+				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -753,6 +795,30 @@
 				F5A7E91417AD83B300B6ADA7 /* libDeepEnd-iOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F5A91FBA17C03BC000B7C6DC /* SoundSetUtility */ = {
+			isa = PBXGroup;
+			children = (
+				F5A91FC617C03BC000B7C6DC /* HBAppDelegate.h */,
+				F5A91FC717C03BC000B7C6DC /* HBAppDelegate.m */,
+				F5A91FC917C03BC100B7C6DC /* MainMenu.xib */,
+				F5A91FBB17C03BC000B7C6DC /* Supporting Files */,
+			);
+			name = SoundSetUtility;
+			path = utilities/hibiki;
+			sourceTree = "<group>";
+		};
+		F5A91FBB17C03BC000B7C6DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5A91FBC17C03BC000B7C6DC /* Hibiki-Info.plist */,
+				F5A91FBD17C03BC000B7C6DC /* InfoPlist.strings */,
+				F5A91FC017C03BC000B7C6DC /* main.m */,
+				F5A91FC217C03BC000B7C6DC /* Hibiki-Prefix.pch */,
+				F5A91FC317C03BC000B7C6DC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F5A9CC2717AF2446003423E0 /* PXListView */ = {
@@ -889,16 +955,17 @@
 				F58586BD17BC5B3400E0B432 /* SLBackingView.m */,
 				F5DE01E217B9A704002D69E6 /* Supporting Files */,
 			);
-			path = ThemeUtility;
+			name = ThemeUtility;
+			path = utilities/silica;
 			sourceTree = "<group>";
 		};
 		F5DE01E217B9A704002D69E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F5DE01E317B9A704002D69E6 /* ThemeUtility-Info.plist */,
+				F5DE01E317B9A704002D69E6 /* Silica-Info.plist */,
 				F5DE01E417B9A704002D69E6 /* InfoPlist.strings */,
 				F5DE01E717B9A704002D69E6 /* main.m */,
-				F5DE01E917B9A704002D69E6 /* ThemeUtility-Prefix.pch */,
+				F5DE01E917B9A704002D69E6 /* Silica-Prefix.pch */,
 				F5DE01EA17B9A704002D69E6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -982,6 +1049,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F59A05FD17AC808900E9B15F /* Build configuration list for PBXNativeTarget "Poison" */;
 			buildPhases = (
+				F5A91FB017BFFA6900B7C6DC /* ShellScript */,
 				F59A05DC17AC808900E9B15F /* Sources */,
 				F59A05DD17AC808900E9B15F /* Frameworks */,
 				F58A9AFA17ACC97800923A25 /* CopyFiles */,
@@ -997,6 +1065,23 @@
 			name = Poison;
 			productName = Poison;
 			productReference = F59A05E017AC808900E9B15F /* Poison.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F5A91FB717C03BC000B7C6DC /* Hibiki */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5A91FCC17C03BC100B7C6DC /* Build configuration list for PBXNativeTarget "Hibiki" */;
+			buildPhases = (
+				F5A91FB417C03BC000B7C6DC /* Sources */,
+				F5A91FB517C03BC000B7C6DC /* Frameworks */,
+				F5A91FB617C03BC000B7C6DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hibiki;
+			productName = Hibiki;
+			productReference = F5A91FB817C03BC000B7C6DC /* Hibiki.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F5DD1B6E17B40C27000AF9C6 /* scrypt */ = {
@@ -1023,6 +1108,7 @@
 				F5DE01DB17B9A704002D69E6 /* Sources */,
 				F5DE01DC17B9A704002D69E6 /* Frameworks */,
 				F5DE01DD17B9A704002D69E6 /* Resources */,
+				F5B3A9BC17BD3E8500EE15CA /* CopyFiles */,
 				F5758EC817BC4C8600CBCE64 /* CopyFiles */,
 			);
 			buildRules = (
@@ -1082,6 +1168,7 @@
 			targets = (
 				F59A05DF17AC808900E9B15F /* Poison */,
 				F5DE01DE17B9A704002D69E6 /* Silica */,
+				F5A91FB717C03BC000B7C6DC /* Hibiki */,
 				F58A9AD517ACB85400923A25 /* Kudryavka */,
 				F5FF959817AD7A3700BB2F13 /* TestKudryavka */,
 				F5DD1B6E17B40C27000AF9C6 /* scrypt */,
@@ -1161,6 +1248,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5A91FB617C03BC000B7C6DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A91FBF17C03BC000B7C6DC /* InfoPlist.strings in Resources */,
+				F5A91FC517C03BC000B7C6DC /* Credits.rtf in Resources */,
+				F5A91FCB17C03BC100B7C6DC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5DE01DD17B9A704002D69E6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1173,6 +1270,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F5A91FB017BFFA6900B7C6DC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rev=$(git rev-list HEAD --count)\nhash=$(git log -n 1 --pretty=format:%h)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $rev\" \"$INFOPLIST_FILE\"\n/usr/libexec/PlistBuddy -c \"Add :SCGitRef string $hash\" \"$INFOPLIST_FILE\" || /usr/libexec/PlistBuddy -c \"Set :SCGitRef $hash\" \"$INFOPLIST_FILE\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F58A9AD117ACB85400923A25 /* Sources */ = {
@@ -1224,6 +1338,16 @@
 				F52BDED117B9D7E1007CF88B /* SCWebKitFriend.m in Sources */,
 				F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */,
 				F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
+				F5B3A9C717BD826000EE15CA /* SCWebKitContext.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A91FB417C03BC000B7C6DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A91FC117C03BC000B7C6DC /* main.m in Sources */,
+				F5A91FC817C03BC000B7C6DC /* HBAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1254,6 +1378,7 @@
 				F5758EC617BC4C7300CBCE64 /* SCWebKitFriend.m in Sources */,
 				F5758ECD17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
 				F58586BE17BC5B3400E0B432 /* SLBackingView.m in Sources */,
+				F5B3A9C817BD826000EE15CA /* SCWebKitContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1374,6 +1499,30 @@
 				F5A3A86417B351030068AFA0 /* en */,
 			);
 			name = AboutWindow.xib;
+			sourceTree = "<group>";
+		};
+		F5A91FBD17C03BC000B7C6DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A91FBE17C03BC000B7C6DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5A91FC317C03BC000B7C6DC /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A91FC417C03BC000B7C6DC /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F5A91FC917C03BC100B7C6DC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A91FCA17C03BC100B7C6DC /* en */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */ = {
@@ -1521,6 +1670,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Poison-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1535,6 +1685,39 @@
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Poison-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "-Wall";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F5A91FCD17C03BC100B7C6DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilities/hibiki/Hibiki-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/hibiki/Hibiki-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F5A91FCE17C03BC100B7C6DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilities/hibiki/Hibiki-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/hibiki/Hibiki-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1573,12 +1756,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ThemeUtility/ThemeUtility-Prefix.pch";
+				GCC_PREFIX_HEADER = "utilities/silica/Silica-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "ThemeUtility/ThemeUtility-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/silica/Silica-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1591,8 +1775,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ThemeUtility/ThemeUtility-Prefix.pch";
-				INFOPLIST_FILE = "ThemeUtility/ThemeUtility-Info.plist";
+				GCC_PREFIX_HEADER = "utilities/silica/Silica-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/silica/Silica-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1643,6 +1828,15 @@
 			buildConfigurations = (
 				F59A05FE17AC808900E9B15F /* Debug */,
 				F59A05FF17AC808900E9B15F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5A91FCC17C03BC100B7C6DC /* Build configuration list for PBXNativeTarget "Hibiki" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A91FCD17C03BC100B7C6DC /* Debug */,
+				F5A91FCE17C03BC100B7C6DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

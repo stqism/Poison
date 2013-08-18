@@ -4,6 +4,45 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>psnChatStyle</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>shiina</string>
+			<key>CFBundleTypeName</key>
+			<string>Chat Style</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>ca.kirara.poison.ChatStyle</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>psnSounds</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>shiina</string>
+			<key>CFBundleTypeName</key>
+			<string>Sound Scheme</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>ca.kirara.poison.SoundSet</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<true/>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -20,8 +59,23 @@
 	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>PSON</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLIconFile</key>
+			<string>shiina</string>
+			<key>CFBundleURLName</key>
+			<string>ca.kirara.poison.FriendURL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tox</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>33</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSMinimumSystemVersion</key>
@@ -34,5 +88,48 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SCGitRef</key>
+	<string>d3d049f</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ca.kirara.poison.ChatStyle</string>
+			<key>UTTypeIconFile</key>
+			<string>shiina</string>
+			<key>UTTypeIdentifier</key>
+			<string>ca.kirara.poison.ChatStyle</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psnChatStyle</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ca.kirara.poison.SoundSet</string>
+			<key>UTTypeIconFile</key>
+			<string>shiina</string>
+			<key>UTTypeIdentifier</key>
+			<string>ca.kirara.poison.SoundSet</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psnSounds</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

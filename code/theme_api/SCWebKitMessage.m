@@ -1,54 +1,64 @@
 #import "SCWebKitMessage.h"
 
-static NSDateFormatter *sharedFormatter = nil;
+static NSDateFormatter *cachedFormatter = nil;
 
 @implementation SCWebKitMessage
 
 + (void)initialize {
-    sharedFormatter = [[NSDateFormatter alloc] init];
-    sharedFormatter.timeStyle = NSDateFormatterLongStyle;
-    sharedFormatter.dateStyle = NSDateFormatterNoStyle;
+    cachedFormatter = [[NSDateFormatter alloc] init];
+    cachedFormatter.timeStyle = NSDateFormatterMediumStyle;
+    cachedFormatter.dateStyle = NSDateFormatterMediumStyle;
+    cachedFormatter.doesRelativeDateFormatting = YES;
 }
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector {
-    return NO;
-}
-
-+ (BOOL)isKeyExcludedFromWebScript:(const char *)name {
+    if (aSelector == @selector(initWithMessage:)) {
+        return YES;
+    }
     return NO;
 }
 
 - (instancetype)initWithMessage:(DESMessage *)message {
     self = [super init];
     if (self) {
-        self.wrappedMessage = message;
-        self.sender = [[SCWebKitFriend alloc] initWithWrappedFriend:message.sender];
+        _wrappedMessage = message;
+        _sender = [[SCWebKitFriend alloc] initWithFriend:message.sender];
     }
     return self;
 }
 
-- (NSInteger)type {
-    return self.wrappedMessage.type;
+- (NSNumber *)type {
+    return @(self.wrappedMessage.type);
 }
 
-- (NSString *)content {
+- (id)newValue {
+    if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
+        return @(self.wrappedMessage.newValue);
+    } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
+        return self.wrappedMessage.currentAttribute;
+    }
+    return nil;
+}
+
+- (id)oldValue {
+    if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
+        return @(self.wrappedMessage.oldValue);
+    } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
+        return self.wrappedMessage.previousAttribute;
+    }
+    return nil;
+}
+
+- (NSString *)body {
     return self.wrappedMessage.content;
 }
 
-- (NSInteger)statusType {
-    return self.wrappedMessage.statusType;
+- (NSString *)localizedTimestamp {
+    return [cachedFormatter stringFromDate:self.wrappedMessage.dateReceived];
 }
 
-- (NSInteger)friendStatus {
-    return self.wrappedMessage.friendStatus;
-}
-
-- (NSString *)dateString {
-    return [sharedFormatter stringFromDate:self.wrappedMessage.dateReceived];
-}
-
-- (NSInteger)messageID {
-    return self.wrappedMessage.messageID;
+- (id)timestamp {
+    return @([self.wrappedMessage.dateReceived timeIntervalSince1970]);
 }
 
 @end

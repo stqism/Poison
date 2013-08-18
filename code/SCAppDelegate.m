@@ -19,11 +19,30 @@
     NSString *currentNickname;
 }
 
+- (void)applicationWillFinishLaunching:(NSNotification *)notification {
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     if (![NKDataSerializer isDebugBuild])
         [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
     self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
     [self.loginWindow showWindow:self];
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames {
+    NSLog(@"%@", filenames);
+}
+
+- (void)handleURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+    NSString *url = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
+    NSString *publicKey = [[url substringFromIndex:6] uppercaseString];
+    if (!DESFriendAddressIsValid(publicKey))
+        return;
+    NSLog(@"%@", publicKey);
+    self.queuedPublicKey = publicKey; /* We'll look at this later. */
+    if (_mainWindow)
+        [_mainWindow checkKeyQueue];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag {
@@ -86,7 +105,7 @@
     }
 }
 
-- (void)newWindowWithDESContext:(DESChatContext *)aContext {
+- (void)newWindowWithDESContext:(id<DESChatContext>)aContext {
     
 }
 

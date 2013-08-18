@@ -1,19 +1,15 @@
 #import <Foundation/Foundation.h>
 #import <DeepEnd/DeepEnd.h>
 
-@class DESFriend;
 @interface SCWebKitFriend : NSObject
 
-@property DESFriend *wrappedFriend;
-@property (readonly) NSString *displayName;
-@property (readonly) NSString *userStatus;
-@property (readonly) DESStatusType statusType;
-@property (readonly) NSString *publicKey;
-@property (readonly) DESFriendStatus status;
+@property (readonly) int friendNumber;
+@property (strong, readonly) NSString *displayName;
+@property (strong, readonly) NSString *userStatus;
+@property (readonly) NSNumber *statusType;
+@property (strong, readonly) NSString *publicKey;
+@property (readonly) DESFriend *wrappedFriend;
 
-+ (BOOL)isSelectorExcludedFromWebScript:(SEL)aSelector;
-+ (BOOL)isKeyExcludedFromWebScript:(const char *)name;
-- (instancetype)initWithWrappedFriend:(DESFriend *)friend;
-- (BOOL)isSelf;
+- (instancetype)initWithFriend:(DESFriend *)friend;
 
 @end

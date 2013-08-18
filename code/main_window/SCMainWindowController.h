@@ -26,5 +26,6 @@
 - (IBAction)presentNickChangeSheet:(id)sender;
 - (IBAction)presentFriendRequestsSheet:(id)sender;
 - (IBAction)presentAddFriendSheet:(id)sender;
+- (void)checkKeyQueue;
 
 @end
