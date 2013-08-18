@@ -3,7 +3,7 @@
 ## Poison
 
 Poison is a Mac-native GUI built on the [Tox](https://github.com/irungentoo/ProjectTox-Core) core, aiming to make Tox blend in with the look and feel of OS X.  
-Oh, and you can't chat. My bad!  
+Most features **sort of work**, but **chatting in particular is quite buggy**. I recommend you keep using the programs included with Core for now.  
 [![Build Status](https://travis-ci.org/stal888/Poison.png)](https://travis-ci.org/stal888/Poison)
 
 ## Screenshots
