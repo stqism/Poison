@@ -1,3 +1,5 @@
+**1.1 is now back in master. Further work will be done here so you don't have to follow random branches anymore.**
+
 ![](https://kirara.ca/g/icon_512x512.png)
 
 ## Poison
