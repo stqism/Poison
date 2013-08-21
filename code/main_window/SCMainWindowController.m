@@ -342,7 +342,10 @@
     if (!aFriend)
         return;
     NSUInteger row = [_friendList indexOfObject:aFriend];
-    self.listView.selectedRow = row + 1;
+    if (row == NSNotFound)
+        return;
+    else
+        self.listView.selectedRow = row + 1;
 }
 
 - (void)reloadList:(NSNotification *)notification {
