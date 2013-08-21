@@ -112,6 +112,8 @@
 		F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */; };
 		F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */; };
 		F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */; };
+		F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
+		F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D4201A17B6FAB800587ABE /* DHTInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */; };
 		F5DD1B8C17B40C77000AF9C6 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
 		F5DD1B8D17B40C77000AF9C6 /* crypto_aesctr.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */; };
@@ -136,8 +138,6 @@
 		F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
 		F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */; };
 		F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */; };
-		F5DE01CE17B954DD002D69E6 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01CD17B954DD002D69E6 /* MessageCell.xib */; };
-		F5DE01D217B9567D002D69E6 /* SCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE01D117B9567D002D69E6 /* SCMessageCell.m */; };
 		F5DE01DA17B9A43D002D69E6 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
 		F5DE01E017B9A704002D69E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
 		F5DE01E617B9A704002D69E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01E417B9A704002D69E6 /* InfoPlist.strings */; };
@@ -395,6 +395,7 @@
 		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginWindow.xib; sourceTree = "<group>"; };
 		F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGradientView.h; sourceTree = "<group>"; };
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
+		F5D36BB517C2DF7000AE9138 /* themelib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = themelib.js; sourceTree = "<group>"; };
 		F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DHTInfoCell.xib; sourceTree = "<group>"; };
 		F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libscrypt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypto_aesctr.c; sourceTree = "<group>"; };
@@ -420,9 +421,6 @@
 		F5DD1BE717B44D4F000AF9C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AddFriend.xib; sourceTree = "<group>"; };
 		F5DD1BEA17B45283000AF9C6 /* SCAddFriendSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAddFriendSheetController.h; sourceTree = "<group>"; };
 		F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAddFriendSheetController.m; sourceTree = "<group>"; };
-		F5DE01CD17B954DD002D69E6 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
-		F5DE01D017B9567D002D69E6 /* SCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMessageCell.h; sourceTree = "<group>"; };
-		F5DE01D117B9567D002D69E6 /* SCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMessageCell.m; sourceTree = "<group>"; };
 		F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnChatStyle; sourceTree = "<group>"; };
 		F5DE01DF17B9A704002D69E6 /* Silica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Silica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5DE01E317B9A704002D69E6 /* Silica-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Silica-Info.plist"; sourceTree = "<group>"; };
@@ -540,6 +538,7 @@
 		F52BDECE17B9D66B007CF88B /* theme_api */ = {
 			isa = PBXGroup;
 			children = (
+				F5D36BB517C2DF7000AE9138 /* themelib.js */,
 				F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */,
 				F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */,
 				F5B3A9C517BD826000EE15CA /* SCWebKitContext.h */,
@@ -555,8 +554,6 @@
 		F5556B8017B58F9A00E636FE /* chat_view */ = {
 			isa = PBXGroup;
 			children = (
-				F5DE01D017B9567D002D69E6 /* SCMessageCell.h */,
-				F5DE01D117B9567D002D69E6 /* SCMessageCell.m */,
 				F5C67D8817B8764200FE4D14 /* SCTextField.h */,
 				F5C67D8917B8764200FE4D14 /* SCTextField.m */,
 				F5556B8817B5B7D500E636FE /* SCBorderedGradientView.h */,
@@ -578,7 +575,7 @@
 			path = bootstrap_sheet;
 			sourceTree = "<group>";
 		};
-		F58A9AD817ACB85400923A25 /* Kudryavka */ = {
+		F58A9AD817ACB85400923A25 /* kudryavka */ = {
 			isa = PBXGroup;
 			children = (
 				F5FF959C17AD7A3700BB2F13 /* TestKudryavka */,
@@ -590,6 +587,7 @@
 				F58A9AEC17ACBDA700923A25 /* keychain */,
 				F58A9AD917ACB85400923A25 /* Supporting Files */,
 			);
+			name = kudryavka;
 			path = Kudryavka;
 			sourceTree = "<group>";
 		};
@@ -643,11 +641,11 @@
 				F59A061917AC873A00E9B15F /* localizable */,
 				F59A062117AC877C00E9B15F /* Poison-Info.plist */,
 				F59A062217AC877C00E9B15F /* Poison.entitlements */,
+				F5DE01E117B9A704002D69E6 /* silica */,
+				F5A91FBA17C03BC000B7C6DC /* hibiki */,
+				F58A9AD817ACB85400923A25 /* kudryavka */,
 				F5A9CC2717AF2446003423E0 /* PXListView */,
-				F58A9AD817ACB85400923A25 /* Kudryavka */,
 				F5DD1B7417B40C48000AF9C6 /* scrypt */,
-				F5DE01E117B9A704002D69E6 /* ThemeUtility */,
-				F5A91FBA17C03BC000B7C6DC /* SoundSetUtility */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);
@@ -725,7 +723,6 @@
 		F59A061617AC873A00E9B15F /* interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				F5DE01CD17B954DD002D69E6 /* MessageCell.xib */,
 				F5A3A86517B351030068AFA0 /* AboutWindow.xib */,
 				F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */,
 				F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */,
@@ -797,7 +794,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F5A91FBA17C03BC000B7C6DC /* SoundSetUtility */ = {
+		F5A91FBA17C03BC000B7C6DC /* hibiki */ = {
 			isa = PBXGroup;
 			children = (
 				F5A91FC617C03BC000B7C6DC /* HBAppDelegate.h */,
@@ -805,7 +802,7 @@
 				F5A91FC917C03BC100B7C6DC /* MainMenu.xib */,
 				F5A91FBB17C03BC000B7C6DC /* Supporting Files */,
 			);
-			name = SoundSetUtility;
+			name = hibiki;
 			path = utilities/hibiki;
 			sourceTree = "<group>";
 		};
@@ -945,7 +942,7 @@
 			path = chat_styles;
 			sourceTree = "<group>";
 		};
-		F5DE01E117B9A704002D69E6 /* ThemeUtility */ = {
+		F5DE01E117B9A704002D69E6 /* silica */ = {
 			isa = PBXGroup;
 			children = (
 				F5DE01ED17B9A704002D69E6 /* SLAppDelegate.h */,
@@ -955,7 +952,7 @@
 				F58586BD17BC5B3400E0B432 /* SLBackingView.m */,
 				F5DE01E217B9A704002D69E6 /* Supporting Files */,
 			);
-			name = ThemeUtility;
+			name = silica;
 			path = utilities/silica;
 			sourceTree = "<group>";
 		};
@@ -1243,8 +1240,8 @@
 				F5C67D8717B8643600FE4D14 /* status-light-online@2x.png in Resources */,
 				F5A849F417B88AE2004266D4 /* icon_minus@2x.png in Resources */,
 				F5A849F517B88AE2004266D4 /* icon_plus@2x.png in Resources */,
-				F5DE01CE17B954DD002D69E6 /* MessageCell.xib in Resources */,
 				F52DF77717BAADE90088DDDB /* InstallResource.xib in Resources */,
+				F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1266,6 +1263,7 @@
 				F5DE01EC17B9A704002D69E6 /* Credits.rtf in Resources */,
 				F5DE01F217B9A705002D69E6 /* MainMenu.xib in Resources */,
 				F52DF77917BABFF10088DDDB /* shiina.icns in Resources */,
+				F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1334,7 +1332,6 @@
 				F5556B8A17B5B7D500E636FE /* SCBorderedGradientView.m in Sources */,
 				F5556B8F17B5C18800E636FE /* SCBootstrapSheetController.m in Sources */,
 				F5C67D8A17B8764200FE4D14 /* SCTextField.m in Sources */,
-				F5DE01D217B9567D002D69E6 /* SCMessageCell.m in Sources */,
 				F52BDED117B9D7E1007CF88B /* SCWebKitFriend.m in Sources */,
 				F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */,
 				F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,

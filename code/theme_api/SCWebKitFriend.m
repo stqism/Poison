@@ -17,6 +17,10 @@
     return self;
 }
 
+- (void)setWrappedFriend:(DESFriend *)wrappedFriend {
+    _wrappedFriend = wrappedFriend;
+}
+
 - (int)friendNumber {
     return self.wrappedFriend.friendNumber;
 }

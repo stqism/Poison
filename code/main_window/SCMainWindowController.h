@@ -12,6 +12,7 @@
 @property (strong) IBOutlet NSImageView *statusLight;
 @property (strong) IBOutlet PXListView *listView;
 @property (strong) IBOutlet SCGradientView *toolbar;
+@property (strong) IBOutlet NSTextField *requestsCount;
 
 /* Sheets */
 @property (strong) IBOutlet NSPanel *statusChangeSheet;

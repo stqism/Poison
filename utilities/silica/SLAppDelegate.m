@@ -106,6 +106,11 @@
     [self reloadTheme:nil];
 }
 
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename {
+    [[SCThemeManager sharedManager] changeThemePath:filename];
+    return YES;
+}
+
 - (IBAction)loadTheme:(id)sender {
     NSOpenPanel *open = [[NSOpenPanel alloc] init];
     open.prompt = @"Select a theme...";
@@ -167,6 +172,7 @@
             break;
     }
     [self.webView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
+    [self.webView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessagePost" withArguments:nil];
 }
 
 - (IBAction)pushEnumeratedMessage:(id)sender {
@@ -215,7 +221,16 @@
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeUserStatusChange] forKey:@"DESMessageTypeUserStatusChange"];
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusTypeChange] forKey:@"DESMessageTypeStatusTypeChange"];
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeSystem] forKey:@"DESMessageTypeSystem"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageInfo] forKey:@"DESSystemMessageInfo"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageWarning] forKey:@"DESSystemMessageWarning"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageError] forKey:@"DESSystemMessageError"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageCritical] forKey:@"DESSystemMessageCritical"];
+    
     [w setValue:[[SCWebKitContext alloc] initWithContext:[[SLMockContext alloc] init]] forKey:@"Conversation"];
+    NSString *base = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"themelib" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    if (base)
+        [w evaluateWebScript:base];
 }
 
 - (IBAction)save:(id)sender {

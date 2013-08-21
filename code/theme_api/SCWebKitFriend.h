@@ -8,7 +8,7 @@
 @property (strong, readonly) NSString *userStatus;
 @property (readonly) NSNumber *statusType;
 @property (strong, readonly) NSString *publicKey;
-@property (readonly) DESFriend *wrappedFriend;
+@property (nonatomic) DESFriend *wrappedFriend;
 
 - (instancetype)initWithFriend:(DESFriend *)friend;
 

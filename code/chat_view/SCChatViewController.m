@@ -2,9 +2,12 @@
 #import "SCChatView.h"
 #import "SCBorderedGradientView.h"
 #import "SCWebKitMessage.h"
+#import "SCWebKitContext.h"
 #import "SCThemeManager.h"
 #import <WebKit/WebKit.h>
 #import <DeepEnd/DeepEnd.h>
+
+NSString *const kSCWebDocument = @"kSCWebDocument";
 
 @implementation SCChatViewController {
     NSFont *cachedFont;
@@ -41,24 +44,25 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagePushed:) name:DESDidPushMessageToContextNotification object:context];
         [self setTitleUsingContext:context];
         [self.transcriptView reload:self];
-        [self injectConstants];
-        SCWebKitMessage *wm = [[SCWebKitMessage alloc] initWithMessage:nil];
-        for (DESMessage *i in context.backlog) {
-            wm.wrappedMessage = i;
-            [[self.transcriptView.mainFrame windowObject] callWebScriptMethod:@"pushMessage" withArguments:@[i]];
-        }
     }
     NSLog(@"Context changed");
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     [self injectConstants];
-    [self.transcriptView.windowScriptObject setValue:self.context forKey:@"Conversation"];
+    [self.transcriptView.windowScriptObject setValue:[[SCWebKitContext alloc] initWithContext:self.context] forKey:@"Conversation"];
+    SCWebKitMessage *wm = [[SCWebKitMessage alloc] initWithMessage:nil];
+    @synchronized (self.context) {
+        for (DESMessage *i in self.context.backlog) {
+            wm.wrappedMessage = i;
+            [[self.transcriptView.mainFrame windowObject] callWebScriptMethod:@"pushMessage" withArguments:@[wm]];
+        }
+    }
 }
 
 - (void)injectConstants {
     /* This exports all DES constants to the webview. */
-    WebScriptObject *w = self.transcriptView.windowScriptObject;
+    WebScriptObject *w = self.transcriptView.mainFrame.windowObject;
     [w setValue:[NSNumber numberWithInteger:DESFriendSelf] forKey:@"DESFriendSelf"];
     [w setValue:[NSNumber numberWithInteger:DESFriendInvalid] forKey:@"DESFriendInvalid"];
     
@@ -81,6 +85,14 @@
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeUserStatusChange] forKey:@"DESMessageTypeUserStatusChange"];
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeStatusTypeChange] forKey:@"DESMessageTypeStatusTypeChange"];
     [w setValue:[NSNumber numberWithInteger:DESMessageTypeSystem] forKey:@"DESMessageTypeSystem"];
+    
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageInfo] forKey:@"DESSystemMessageInfo"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageWarning] forKey:@"DESSystemMessageWarning"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageError] forKey:@"DESSystemMessageError"];
+    [w setValue:[NSNumber numberWithInteger:DESSystemMessageCritical] forKey:@"DESSystemMessageCritical"];
+    NSString *base = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"themelib" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    if (base)
+        [w evaluateWebScript:base];
 }
 
 - (void)controlTextDidChange:(NSNotification *)obj {
@@ -107,7 +119,8 @@
 
 - (void)messagePushed:(NSNotification *)notification {
     DESMessage *message = notification.userInfo[@"message"];
-    [[self.transcriptView.mainFrame windowObject] callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:message]]];
+    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:message]]];
+    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessagePost" withArguments:nil];
 }
 
 - (IBAction)submitMessage:(id)sender {

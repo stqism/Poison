@@ -4,6 +4,7 @@
 #import "SCLoginWindowController.h"
 #import "SCMainWindowController.h"
 #import "SCKudTestingWindowController.h"
+#import "SCThemeManager.h"
 
 #import <DeepEnd/DeepEnd.h>
 #import <Kudryavka/Kudryavka.h>
@@ -26,6 +27,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     if (![NKDataSerializer isDebugBuild])
         [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
+    NSLog(@"%@", [[SCThemeManager sharedManager] availableThemes]);
     self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
     [self.loginWindow showWindow:self];
 }
@@ -149,7 +151,11 @@
 
 - (IBAction)copyPublicKey:(id)sender {
     [[NSPasteboard generalPasteboard] clearContents];
+    #ifdef SC_FUN_ALLOWED
+    [[NSPasteboard generalPasteboard] writeObjects:@[[NSString stringWithFormat:NSLocalizedString(@"Tox me on Tox: %@", @""), [DESSelf self].friendAddress]]];
+    #else
     [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].friendAddress]];
+    #endif
 }
 
 - (IBAction)showAddFriend:(id)sender {

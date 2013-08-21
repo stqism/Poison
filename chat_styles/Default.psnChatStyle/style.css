@@ -5,9 +5,12 @@ html, body {
 }
 div.context {
     width:100%;
-    border-bottom:1px #888 solid;
+    border-top:1px #888 solid;
     padding-top:0.5em;
     padding-bottom:0.5em;
+}
+div.context:first-child {
+    border-top:none;
 }
 div.context-item {
     display:block;

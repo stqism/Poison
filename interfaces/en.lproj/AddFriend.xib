@@ -39,12 +39,14 @@
 			<object class="NSWindowTemplate" id="1005">
 				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 240}, {353, 315}}</string>
+				<string key="NSWindowRect">{{196, 240}, {357, 334}}</string>
 				<int key="NSWTFlags">544736256</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
+				<string key="NSWindowContentMaxSize">{357, 414}</string>
+				<string key="NSWindowContentMinSize">{357, 414}</string>
 				<object class="NSView" key="NSWindowView" id="1006">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -52,7 +54,7 @@
 						<object class="NSTextField" id="730861609">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{20, 231}, {313, 40}}</string>
+							<string key="NSFrame">{{20, 233}, {313, 57}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="268546367"/>
@@ -62,7 +64,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="112205538">
 								<int key="NSCellFlags">-1805647871</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">EF9F4DDB00E6F50A9D49DF1B5EA11A58A399F087B892F5B176E56F089B552E20</string>
+								<string key="NSContents"/>
 								<object class="NSFont" key="NSSupport" id="1034392133">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
@@ -95,7 +97,7 @@
 						<object class="NSTextField" id="452808146">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, 278}, {201, 17}}</string>
+							<string key="NSFrame">{{17, 297}, {201, 17}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="730861609"/>
@@ -254,13 +256,14 @@
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 					</array>
-					<string key="NSFrameSize">{353, 315}</string>
+					<string key="NSFrameSize">{357, 334}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="452808146"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
-				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<string key="NSMinSize">{357, 436}</string>
+				<string key="NSMaxSize">{357, 436}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
 		</array>
@@ -385,8 +388,8 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="1006"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="452808146"/>
 							<reference ref="730861609"/>
+							<reference ref="452808146"/>
 							<reference ref="855303407"/>
 							<reference ref="268546367"/>
 							<reference ref="1040480080"/>
@@ -522,25 +525,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SCAddFriendSheetController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancelAction:">id</string>
-						<string key="messageStateDidChange:">NSButton</string>
-						<string key="submitAction:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancelAction:">
-							<string key="name">cancelAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="messageStateDidChange:">
-							<string key="name">messageStateDidChange:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="submitAction:">
-							<string key="name">submitAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cancelButton">NSButton</string>
 						<string key="keyField">NSTextField</string>

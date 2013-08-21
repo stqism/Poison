@@ -31,6 +31,9 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
     self = [super init];
     if (self) {
         searchPaths = anArray;
+        for (NSString *searchPath in anArray) {
+            [[NSFileManager defaultManager] createDirectoryAtPath:searchPath withIntermediateDirectories:YES attributes:nil error:nil];
+        }
         NSString *savedThemePref = [[NSUserDefaults standardUserDefaults] stringForKey:@"aiThemeDirectory"];
         if (!savedThemePref || ![SCThemeManager isValidThemeAtPath:savedThemePref]) {
             savedThemePref = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"psnChatStyle" inDirectory:@"Themes"];
@@ -136,7 +139,24 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
 }
 
 - (NSArray *)availableThemes {
-    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSMutableArray *discoveredThemes = [[NSMutableArray alloc] init];
+    for (NSString *searchPath in searchPaths) {
+        NSArray *a = [fm contentsOfDirectoryAtPath:searchPath error:&error];
+        if (error) {
+            NSLog(@"I fucked up: %@", error.userInfo);
+            error = nil;
+            continue;
+        }
+        for (NSString *themePath in a) {
+            NSString *s = [searchPath stringByAppendingPathComponent:themePath];
+            if ([SCThemeManager isValidThemeAtPath:s]) {
+                [discoveredThemes addObject:s];
+            }
+        }
+    }
+    return (NSArray*)discoveredThemes;
 }
 
 @end

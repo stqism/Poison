@@ -31,6 +31,7 @@
     SCAddFriendSheetController *_addFriendSheet;
     SCChatViewController *chatView;
     SCBootstrapSheetController *_bootstrapSheet;
+    NSUInteger selected;
 }
 
 - (void)windowDidLoad {
@@ -41,6 +42,9 @@
     self.window.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restrainSplitter:) name:NSWindowDidResizeNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESFriendArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmDeleteFriend:) name:@"deleteFriend" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFriendRequestCount:) name:DESFriendRequestArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
+    [self updateFriendRequestCount:nil];
     [(SCShinyWindow*)self.window repositionDHT];
     self.sidebarHead.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.sidebarHead.bottomColor = [NSColor colorWithCalibratedWhite:0.09 alpha:1.0];
@@ -56,6 +60,7 @@
     [self.userStatus.cell setTextColor:[NSColor controlColor]];
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
+    selected = -1;
     self.listView.delegate = self;
     [self reloadList:nil];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
@@ -157,6 +162,30 @@
         [NSApp beginSheet:_addFriendSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(addFriendSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
     }
     delegate.queuedPublicKey = nil;
+}
+
+- (void)updateFriendRequestCount:(NSNotification *)notification {
+    unsigned long c = (unsigned long)[DESToxNetworkConnection sharedConnection].friendManager.requests.count;
+    if (c)
+        self.requestsCount.stringValue = [NSString stringWithFormat:@"%lu", c];
+    else
+        self.requestsCount.stringValue = @"";
+}
+
+- (void)confirmDeleteFriend:(NSNotification *)notification {
+    if (self.window.attachedSheet)
+        return;
+    NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Do you really want to delete %@ from your friends list?", @""), ((DESFriend*)notification.userInfo[@"friend"]).displayName] defaultButton:@"Yes" alternateButton:@"No" otherButton:nil informativeTextWithFormat:NSLocalizedString(@"You cannot undo this, and all chat history will be lost.", @"")];
+    [alert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(deleteFriendConfirmDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)notification.userInfo[@"friend"]];
+}
+
+- (void)deleteFriendConfirmDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    DESFriend *f = (__bridge DESFriend*)contextInfo;
+    if (returnCode == NSOKButton) {
+        dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
+            [f->owner removeFriend:f];
+        });
+    }
 }
 
 - (void)dealloc {
@@ -313,7 +342,7 @@
     if (!aFriend)
         return;
     NSUInteger row = [_friendList indexOfObject:aFriend];
-    self.listView.selectedRow = row - 1;
+    self.listView.selectedRow = row + 1;
 }
 
 - (void)reloadList:(NSNotification *)notification {
@@ -326,7 +355,13 @@
 }
 
 - (void)listViewSelectionDidChange:(NSNotification *)aNotification {
-    chatView.context = [self friendInRow:self.listView.selectedRow].chatContext;
+    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0) {
+        if (selected != -1 && selected != 0)
+            self.listView.selectedRow = selected;
+    } else {
+        selected = self.listView.selectedRow;
+        chatView.context = [self friendInRow:self.listView.selectedRow].chatContext;
+    }
 }
 
 - (NSUInteger)numberOfRowsInListView:(PXListView *)aListView {

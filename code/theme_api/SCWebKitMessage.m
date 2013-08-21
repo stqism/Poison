@@ -27,6 +27,11 @@ static NSDateFormatter *cachedFormatter = nil;
     return self;
 }
 
+- (void)setWrappedMessage:(DESMessage *)wrappedMessage {
+    _wrappedMessage = wrappedMessage;
+    _sender.wrappedFriend = wrappedMessage.sender;
+}
+
 - (NSNumber *)type {
     return @(self.wrappedMessage.type);
 }
@@ -35,7 +40,7 @@ static NSDateFormatter *cachedFormatter = nil;
     if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
         return @(self.wrappedMessage.newValue);
     } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
-        return self.wrappedMessage.currentAttribute;
+        return self.wrappedMessage.newAttribute;
     }
     return nil;
 }
@@ -44,7 +49,7 @@ static NSDateFormatter *cachedFormatter = nil;
     if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
         return @(self.wrappedMessage.oldValue);
     } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
-        return self.wrappedMessage.previousAttribute;
+        return self.wrappedMessage.oldAttribute;
     }
     return nil;
 }
