@@ -14,9 +14,7 @@ before_script:
   - cd ..
 
 script:
-  - xcodebuild -workspace Poison.xcworkspace -scheme Poison
-  - xcodebuild -workspace Poison.xcworkspace -scheme Silica
-  - xcodebuild -workspace Poison.xcworkspace -scheme Hibiki
+  - xcodebuild -workspace Poison.xcworkspace -scheme Everything
 
 notifications:
   irc:

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5DD1B6E17B40C27000AF9C6"
-               BuildableName = "libscrypt.a"
-               BlueprintName = "scrypt"
+               BlueprintIdentifier = "F573859717C6B5C400B8E7EC"
+               BuildableName = "Everything"
+               BlueprintName = "Everything"
                ReferencedContainer = "container:Poison.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

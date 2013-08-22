@@ -6,6 +6,26 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F573859717C6B5C400B8E7EC /* Everything */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F573859817C6B5C400B8E7EC /* Build configuration list for PBXAggregateTarget "Everything" */;
+			buildPhases = (
+			);
+			dependencies = (
+				F573859C17C6B5D400B8E7EC /* PBXTargetDependency */,
+				F573859E17C6B5D500B8E7EC /* PBXTargetDependency */,
+				F57385A017C6B5D600B8E7EC /* PBXTargetDependency */,
+				F57385A817C6B5DE00B8E7EC /* PBXTargetDependency */,
+				F57385A217C6B5D700B8E7EC /* PBXTargetDependency */,
+				F57385A417C6B5DB00B8E7EC /* PBXTargetDependency */,
+				F57385A617C6B5DC00B8E7EC /* PBXTargetDependency */,
+			);
+			name = Everything;
+			productName = Everything;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		F500602217AD8B6800C864C4 /* DeepEnd.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F500602817ADA2AA00C864C4 /* SCPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F500602717ADA2AA00C864C4 /* SCPreferencesWindowController.m */; };
@@ -25,6 +45,14 @@
 		F52DF77717BAADE90088DDDB /* InstallResource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52DF77617BAADE90088DDDB /* InstallResource.xib */; };
 		F52DF77917BABFF10088DDDB /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
+		F547D6F317C68DE500D3E4C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F547D6F217C68DE500D3E4C5 /* main.m */; };
+		F547D6FB17C69E9E00D3E4C5 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
+		F547D6FC17C69ED900D3E4C5 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
+		F547D6FF17C69EE000D3E4C5 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
+		F547D70017C69EE700D3E4C5 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
+		F547D70117C69EF500D3E4C5 /* scryptenc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8017B40C77000AF9C6 /* scryptenc.c */; };
+		F547D70217C69F0A00D3E4C5 /* scryptenc_cpuperf.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */; };
+		F547D70417C69F4700D3E4C5 /* memlimit.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8517B40C77000AF9C6 /* memlimit.c */; };
 		F5556B7C17B5716600E636FE /* ConnectionInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5556B7B17B5716600E636FE /* ConnectionInspector.xib */; };
 		F5556B7F17B57F9B00E636FE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5556B7E17B57F9B00E636FE /* WebKit.framework */; };
 		F5556B8317B5908A00E636FE /* SCChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5556B8217B5908A00E636FE /* SCChatViewController.m */; };
@@ -35,6 +63,7 @@
 		F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
+		F57385A917C6B64B00B8E7EC /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F5758EC617BC4C7300CBCE64 /* SCWebKitFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */; };
 		F5758EC717BC4C7500CBCE64 /* SCWebKitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */; };
 		F5758EC917BC4C9000CBCE64 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
@@ -116,27 +145,6 @@
 		F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D4201A17B6FAB800587ABE /* DHTInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */; };
-		F5DD1B8C17B40C77000AF9C6 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
-		F5DD1B8D17B40C77000AF9C6 /* crypto_aesctr.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */; };
-		F5DD1B8E17B40C77000AF9C6 /* crypto_scrypt-nosse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7817B40C76000AF9C6 /* crypto_scrypt-nosse.c */; };
-		F5DD1B8F17B40C77000AF9C6 /* crypto_scrypt-ref.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7917B40C76000AF9C6 /* crypto_scrypt-ref.c */; };
-		F5DD1B9017B40C77000AF9C6 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
-		F5DD1B9117B40C77000AF9C6 /* crypto_scrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7B17B40C77000AF9C6 /* crypto_scrypt.h */; };
-		F5DD1B9217B40C77000AF9C6 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
-		F5DD1B9317B40C77000AF9C6 /* sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B7D17B40C77000AF9C6 /* sha256.h */; };
-		F5DD1B9417B40C77000AF9C6 /* scryptenc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8017B40C77000AF9C6 /* scryptenc.c */; };
-		F5DD1B9517B40C77000AF9C6 /* scryptenc.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8117B40C77000AF9C6 /* scryptenc.h */; };
-		F5DD1B9617B40C77000AF9C6 /* scryptenc_cpuperf.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */; };
-		F5DD1B9717B40C77000AF9C6 /* scryptenc_cpuperf.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8317B40C77000AF9C6 /* scryptenc_cpuperf.h */; };
-		F5DD1B9817B40C77000AF9C6 /* memlimit.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8517B40C77000AF9C6 /* memlimit.c */; };
-		F5DD1B9917B40C77000AF9C6 /* memlimit.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8617B40C77000AF9C6 /* memlimit.h */; };
-		F5DD1B9A17B40C77000AF9C6 /* readpass.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8717B40C77000AF9C6 /* readpass.c */; };
-		F5DD1B9B17B40C77000AF9C6 /* readpass.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8817B40C77000AF9C6 /* readpass.h */; };
-		F5DD1B9C17B40C77000AF9C6 /* sysendian.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8917B40C77000AF9C6 /* sysendian.h */; };
-		F5DD1B9D17B40C77000AF9C6 /* warn.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8A17B40C77000AF9C6 /* warn.c */; };
-		F5DD1B9E17B40C77000AF9C6 /* warn.h in Headers */ = {isa = PBXBuildFile; fileRef = F5DD1B8B17B40C77000AF9C6 /* warn.h */; };
-		F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */; };
-		F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
 		F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */; };
 		F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1BEB17B45283000AF9C6 /* SCAddFriendSheetController.m */; };
 		F5DE01DA17B9A43D002D69E6 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
@@ -154,6 +162,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F573859B17C6B5D400B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F59A05DF17AC808900E9B15F;
+			remoteInfo = Poison;
+		};
+		F573859D17C6B5D500B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5DE01DE17B9A704002D69E6;
+			remoteInfo = Silica;
+		};
+		F573859F17C6B5D600B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5A91FB717C03BC000B7C6DC;
+			remoteInfo = Hibiki;
+		};
+		F57385A117C6B5D700B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F58A9AD517ACB85400923A25;
+			remoteInfo = Kudryavka;
+		};
+		F57385A317C6B5DB00B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5FF959817AD7A3700BB2F13;
+			remoteInfo = TestKudryavka;
+		};
+		F57385A517C6B5DC00B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F547D6EF17C68DE500D3E4C5;
+			remoteInfo = genki;
+		};
+		F57385A717C6B5DE00B8E7EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F5E5824517AC095E00D9409B;
+			remoteInfo = DeepEnd;
+		};
 		F58A9AE517ACB9E800923A25 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
@@ -189,13 +246,6 @@
 			remoteGlobalIDString = F5E5824517AC095E00D9409B;
 			remoteInfo = DeepEnd;
 		};
-		F5DD1B9F17B413FC000AF9C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F5DD1B6E17B40C27000AF9C6;
-			remoteInfo = scrypt;
-		};
 		F5FF95A617AD7A7D00BB2F13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
@@ -206,6 +256,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F547D6EE17C68DE500D3E4C5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		F5758EC817BC4C8600CBCE64 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +345,8 @@
 		F52DF77617BAADE90088DDDB /* InstallResource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstallResource.xib; sourceTree = "<group>"; };
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
+		F547D6F017C68DE500D3E4C5 /* genki */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = genki; sourceTree = BUILT_PRODUCTS_DIR; };
+		F547D6F217C68DE500D3E4C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5556B7B17B5716600E636FE /* ConnectionInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionInspector.xib; sourceTree = "<group>"; };
 		F5556B7E17B57F9B00E636FE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F5556B8117B5908A00E636FE /* SCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCChatViewController.h; sourceTree = "<group>"; };
@@ -400,7 +461,6 @@
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
 		F5D36BB517C2DF7000AE9138 /* themelib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = themelib.js; sourceTree = "<group>"; };
 		F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DHTInfoCell.xib; sourceTree = "<group>"; };
-		F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libscrypt.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypto_aesctr.c; sourceTree = "<group>"; };
 		F5DD1B7717B40C76000AF9C6 /* crypto_aesctr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto_aesctr.h; sourceTree = "<group>"; };
 		F5DD1B7817B40C76000AF9C6 /* crypto_scrypt-nosse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-nosse.c"; sourceTree = "<group>"; };
@@ -442,12 +502,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F547D6ED17C68DE500D3E4C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F58A9AD217ACB85400923A25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5DD1BA317B4141A000AF9C6 /* libcrypto.dylib in Frameworks */,
-				F5DD1BA117B41401000AF9C6 /* libscrypt.a in Frameworks */,
+				F547D6FB17C69E9E00D3E4C5 /* libcrypto.dylib in Frameworks */,
 				F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */,
 				F58A9AF817ACC94E00923A25 /* Security.framework in Frameworks */,
 				F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */,
@@ -471,13 +537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5A91FB917C03BC000B7C6DC /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5DD1B6C17B40C27000AF9C6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +620,14 @@
 				F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */,
 			);
 			path = theme_api;
+			sourceTree = "<group>";
+		};
+		F547D6F117C68DE500D3E4C5 /* genki */ = {
+			isa = PBXGroup;
+			children = (
+				F547D6F217C68DE500D3E4C5 /* main.m */,
+			);
+			path = genki;
 			sourceTree = "<group>";
 		};
 		F5556B8017B58F9A00E636FE /* chat_view */ = {
@@ -658,6 +725,7 @@
 				F58A9AD817ACB85400923A25 /* kudryavka */,
 				F5A9CC2717AF2446003423E0 /* PXListView */,
 				F5DD1B7417B40C48000AF9C6 /* scrypt */,
+				F547D6F117C68DE500D3E4C5 /* genki */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);
@@ -669,9 +737,9 @@
 				F59A05E017AC808900E9B15F /* Poison.app */,
 				F58A9AD617ACB85400923A25 /* Kudryavka.framework */,
 				F5FF959917AD7A3700BB2F13 /* TestKudryavka */,
-				F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */,
 				F5DE01DF17B9A704002D69E6 /* Silica.app */,
 				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
+				F547D6F017C68DE500D3E4C5 /* genki */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1016,25 +1084,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F5DD1B6D17B40C27000AF9C6 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F5DD1B8D17B40C77000AF9C6 /* crypto_aesctr.h in Headers */,
-				F5DD1B9117B40C77000AF9C6 /* crypto_scrypt.h in Headers */,
-				F5DD1B9317B40C77000AF9C6 /* sha256.h in Headers */,
-				F5DD1B9517B40C77000AF9C6 /* scryptenc.h in Headers */,
-				F5DD1B9717B40C77000AF9C6 /* scryptenc_cpuperf.h in Headers */,
-				F5DD1B9917B40C77000AF9C6 /* memlimit.h in Headers */,
-				F5DD1B9B17B40C77000AF9C6 /* readpass.h in Headers */,
-				F5DD1B9C17B40C77000AF9C6 /* sysendian.h in Headers */,
-				F5DD1B9E17B40C77000AF9C6 /* warn.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		F547D6EF17C68DE500D3E4C5 /* genki */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F547D6F917C68DE500D3E4C5 /* Build configuration list for PBXNativeTarget "genki" */;
+			buildPhases = (
+				F547D6EC17C68DE500D3E4C5 /* Sources */,
+				F547D6ED17C68DE500D3E4C5 /* Frameworks */,
+				F547D6EE17C68DE500D3E4C5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = genki;
+			productName = genki;
+			productReference = F547D6F017C68DE500D3E4C5 /* genki */;
+			productType = "com.apple.product-type.tool";
+		};
 		F58A9AD517ACB85400923A25 /* Kudryavka */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F58A9AE217ACB85400923A25 /* Build configuration list for PBXNativeTarget "Kudryavka" */;
@@ -1047,7 +1116,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F5DD1BA017B413FC000AF9C6 /* PBXTargetDependency */,
 				F5A7E91717AD83C500B6ADA7 /* PBXTargetDependency */,
 			);
 			name = Kudryavka;
@@ -1093,23 +1161,6 @@
 			productName = Hibiki;
 			productReference = F5A91FB817C03BC000B7C6DC /* Hibiki.app */;
 			productType = "com.apple.product-type.application";
-		};
-		F5DD1B6E17B40C27000AF9C6 /* scrypt */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F5DD1B7317B40C28000AF9C6 /* Build configuration list for PBXNativeTarget "scrypt" */;
-			buildPhases = (
-				F5DD1B6B17B40C27000AF9C6 /* Sources */,
-				F5DD1B6C17B40C27000AF9C6 /* Frameworks */,
-				F5DD1B6D17B40C27000AF9C6 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = scrypt;
-			productName = scrypt;
-			productReference = F5DD1B6F17B40C27000AF9C6 /* libscrypt.a */;
-			productType = "com.apple.product-type.library.static";
 		};
 		F5DE01DE17B9A704002D69E6 /* Silica */ = {
 			isa = PBXNativeTarget;
@@ -1181,7 +1232,8 @@
 				F5A91FB717C03BC000B7C6DC /* Hibiki */,
 				F58A9AD517ACB85400923A25 /* Kudryavka */,
 				F5FF959817AD7A3700BB2F13 /* TestKudryavka */,
-				F5DD1B6E17B40C27000AF9C6 /* scrypt */,
+				F547D6EF17C68DE500D3E4C5 /* genki */,
+				F573859717C6B5C400B8E7EC /* Everything */,
 			);
 		};
 /* End PBXProject section */
@@ -1265,6 +1317,7 @@
 				F5A91FBF17C03BC000B7C6DC /* InfoPlist.strings in Resources */,
 				F5A91FC517C03BC000B7C6DC /* Credits.rtf in Resources */,
 				F5A91FCB17C03BC100B7C6DC /* MainMenu.xib in Resources */,
+				F57385A917C6B64B00B8E7EC /* shiina.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,6 +1353,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F547D6EC17C68DE500D3E4C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F547D6F317C68DE500D3E4C5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F58A9AD117ACB85400923A25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1311,6 +1372,12 @@
 				F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */,
 				F5A3A84C17B2AAB60068AFA0 /* NKToxDataWriter.m in Sources */,
 				F5A3A85117B2F2300068AFA0 /* SCKudTestingWindowController.m in Sources */,
+				F547D6FC17C69ED900D3E4C5 /* crypto_aesctr.c in Sources */,
+				F547D6FF17C69EE000D3E4C5 /* crypto_scrypt-sse.c in Sources */,
+				F547D70017C69EE700D3E4C5 /* sha256.c in Sources */,
+				F547D70117C69EF500D3E4C5 /* scryptenc.c in Sources */,
+				F547D70217C69F0A00D3E4C5 /* scryptenc_cpuperf.c in Sources */,
+				F547D70417C69F4700D3E4C5 /* memlimit.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1362,23 +1429,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F5DD1B6B17B40C27000AF9C6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F5DD1B8C17B40C77000AF9C6 /* crypto_aesctr.c in Sources */,
-				F5DD1B8E17B40C77000AF9C6 /* crypto_scrypt-nosse.c in Sources */,
-				F5DD1B8F17B40C77000AF9C6 /* crypto_scrypt-ref.c in Sources */,
-				F5DD1B9017B40C77000AF9C6 /* crypto_scrypt-sse.c in Sources */,
-				F5DD1B9217B40C77000AF9C6 /* sha256.c in Sources */,
-				F5DD1B9417B40C77000AF9C6 /* scryptenc.c in Sources */,
-				F5DD1B9617B40C77000AF9C6 /* scryptenc_cpuperf.c in Sources */,
-				F5DD1B9817B40C77000AF9C6 /* memlimit.c in Sources */,
-				F5DD1B9A17B40C77000AF9C6 /* readpass.c in Sources */,
-				F5DD1B9D17B40C77000AF9C6 /* warn.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F5DE01DB17B9A704002D69E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1404,6 +1454,41 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F573859C17C6B5D400B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F59A05DF17AC808900E9B15F /* Poison */;
+			targetProxy = F573859B17C6B5D400B8E7EC /* PBXContainerItemProxy */;
+		};
+		F573859E17C6B5D500B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5DE01DE17B9A704002D69E6 /* Silica */;
+			targetProxy = F573859D17C6B5D500B8E7EC /* PBXContainerItemProxy */;
+		};
+		F57385A017C6B5D600B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5A91FB717C03BC000B7C6DC /* Hibiki */;
+			targetProxy = F573859F17C6B5D600B8E7EC /* PBXContainerItemProxy */;
+		};
+		F57385A217C6B5D700B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F58A9AD517ACB85400923A25 /* Kudryavka */;
+			targetProxy = F57385A117C6B5D700B8E7EC /* PBXContainerItemProxy */;
+		};
+		F57385A417C6B5DB00B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5FF959817AD7A3700BB2F13 /* TestKudryavka */;
+			targetProxy = F57385A317C6B5DB00B8E7EC /* PBXContainerItemProxy */;
+		};
+		F57385A617C6B5DC00B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F547D6EF17C68DE500D3E4C5 /* genki */;
+			targetProxy = F57385A517C6B5DC00B8E7EC /* PBXContainerItemProxy */;
+		};
+		F57385A817C6B5DE00B8E7EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DeepEnd;
+			targetProxy = F57385A717C6B5DE00B8E7EC /* PBXContainerItemProxy */;
+		};
 		F58A9AE617ACB9E800923A25 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F58A9AD517ACB85400923A25 /* Kudryavka */;
@@ -1418,11 +1503,6 @@
 			isa = PBXTargetDependency;
 			name = DeepEnd;
 			targetProxy = F5A7E91817AD83CA00B6ADA7 /* PBXContainerItemProxy */;
-		};
-		F5DD1BA017B413FC000AF9C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F5DD1B6E17B40C27000AF9C6 /* scrypt */;
-			targetProxy = F5DD1B9F17B413FC000AF9C6 /* PBXContainerItemProxy */;
 		};
 		F5FF95A717AD7A7D00BB2F13 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1579,6 +1659,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F547D6F617C68DE500D3E4C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F547D6F717C68DE500D3E4C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F573859917C6B5C400B8E7EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F573859A17C6B5C400B8E7EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F58A9AE317ACB85400923A25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1735,32 +1857,6 @@
 			};
 			name = Release;
 		};
-		F5DD1B7017B40C28000AF9C6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CFLAGS = "-Wno-deprecated";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		F5DD1B7117B40C28000AF9C6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CFLAGS = "-Wno-deprecated";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		F5DE01F417B9A705002D69E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1816,6 +1912,23 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F547D6F917C68DE500D3E4C5 /* Build configuration list for PBXNativeTarget "genki" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F547D6F617C68DE500D3E4C5 /* Debug */,
+				F547D6F717C68DE500D3E4C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F573859817C6B5C400B8E7EC /* Build configuration list for PBXAggregateTarget "Everything" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F573859917C6B5C400B8E7EC /* Debug */,
+				F573859A17C6B5C400B8E7EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F58A9AE217ACB85400923A25 /* Build configuration list for PBXNativeTarget "Kudryavka" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1848,15 +1961,6 @@
 			buildConfigurations = (
 				F5A91FCD17C03BC100B7C6DC /* Debug */,
 				F5A91FCE17C03BC100B7C6DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F5DD1B7317B40C28000AF9C6 /* Build configuration list for PBXNativeTarget "scrypt" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F5DD1B7017B40C28000AF9C6 /* Debug */,
-				F5DD1B7117B40C28000AF9C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
