@@ -5,7 +5,7 @@
 @class SCLoginWindowController, SCMainWindowController,
        SCPreferencesWindowController, SCAboutWindowController,
        SCKudTestingWindowController;
-@interface SCAppDelegate : NSObject <NSApplicationDelegate>
+@interface SCAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 
 /* Windows */
 @property (strong) SCLoginWindowController *loginWindow;

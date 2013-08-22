@@ -16,6 +16,7 @@
 		F500604217ADFC2400C864C4 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = F500604417ADFC2400C864C4 /* Preferences.xib */; };
 		F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604617ADFC8C00C864C4 /* SCShinyWindow.m */; };
 		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
+		F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */; };
 		F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */; };
 		F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51E65C817B0A48200BF09D4 /* RequestsCell.xib */; };
 		F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */; };
@@ -271,6 +272,8 @@
 		F500604617ADFC8C00C864C4 /* SCShinyWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShinyWindow.m; sourceTree = "<group>"; };
 		F500604817AE06F600C864C4 /* SCDHTStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDHTStatusView.h; sourceTree = "<group>"; };
 		F500604917AE06F700C864C4 /* SCDHTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDHTStatusView.m; sourceTree = "<group>"; };
+		F506272717C53BB70069EDE4 /* SCStandaloneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStandaloneWindowController.h; sourceTree = "<group>"; };
+		F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStandaloneWindowController.m; sourceTree = "<group>"; };
 		F51E65C517B0A11600BF09D4 /* SCFriendRequestsSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendRequestsSheetController.h; sourceTree = "<group>"; };
 		F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendRequestsSheetController.m; sourceTree = "<group>"; };
 		F51E65C817B0A48200BF09D4 /* RequestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsCell.xib; sourceTree = "<group>"; };
@@ -524,6 +527,15 @@
 			path = main_window;
 			sourceTree = "<group>";
 		};
+		F506272517C53B950069EDE4 /* popout_window */ = {
+			isa = PBXGroup;
+			children = (
+				F506272717C53BB70069EDE4 /* SCStandaloneWindowController.h */,
+				F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */,
+			);
+			path = popout_window;
+			sourceTree = "<group>";
+		};
 		F51E65C417B0A0CB00BF09D4 /* friend_requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +713,7 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F506272517C53B950069EDE4 /* popout_window */,
 				F52BDECE17B9D66B007CF88B /* theme_api */,
 				F5556B8C17B5C15C00E636FE /* bootstrap_sheet */,
 				F5556B8017B58F9A00E636FE /* chat_view */,
@@ -1336,6 +1349,7 @@
 				F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */,
 				F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
 				F5B3A9C717BD826000EE15CA /* SCWebKitContext.m in Sources */,
+				F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

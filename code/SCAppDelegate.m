@@ -4,7 +4,9 @@
 #import "SCLoginWindowController.h"
 #import "SCMainWindowController.h"
 #import "SCKudTestingWindowController.h"
+#import "SCChatViewController.h"
 #import "SCThemeManager.h"
+#import "SCStandaloneWindowController.h"
 
 #import <DeepEnd/DeepEnd.h>
 #import <Kudryavka/Kudryavka.h>
@@ -28,6 +30,7 @@
     if (![NKDataSerializer isDebugBuild])
         [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
     NSLog(@"%@", [[SCThemeManager sharedManager] availableThemes]);
+    _standaloneWindows = [[NSMutableArray alloc] initWithCapacity:5];
     self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
     [self.loginWindow showWindow:self];
 }
@@ -108,7 +111,29 @@
 }
 
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext {
-    
+    NSMutableArray *cleanup = [[NSMutableArray alloc] initWithCapacity:_standaloneWindows.count];
+    for (SCStandaloneWindowController *win in _standaloneWindows) {
+        if (!win.window) {
+            [cleanup addObject:win];
+            continue;
+        } else if (win.chatController.context == aContext) {
+            [win.window makeKeyAndOrderFront:self];
+            return;
+        }
+    }
+    if ([cleanup count] != 0) {
+        for (id obj in cleanup) {
+            [(NSMutableArray*)_standaloneWindows removeObject:obj];
+        }
+    }
+    NSWindow *window = [[NSWindow alloc] initWithContentRect:NSMakeRect(_mainWindow.window.frame.origin.x + 22, _mainWindow.window.frame.origin.y - 22, 400, 300) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+    window.releasedWhenClosed = YES;
+    SCStandaloneWindowController *wctl = [[SCStandaloneWindowController alloc] initWithWindow:window];
+    SCChatViewController *ctl = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
+    ctl.context = aContext;
+    wctl.chatController = ctl;
+    [(NSMutableArray*)_standaloneWindows addObject:wctl];
+    [window makeKeyAndOrderFront:self];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
