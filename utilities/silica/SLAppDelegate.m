@@ -111,6 +111,10 @@
     return YES;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    return YES;
+}
+
 - (IBAction)loadTheme:(id)sender {
     NSOpenPanel *open = [[NSOpenPanel alloc] init];
     open.prompt = @"Select a theme...";
