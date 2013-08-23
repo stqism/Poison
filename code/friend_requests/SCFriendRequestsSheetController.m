@@ -35,41 +35,25 @@
 - (IBAction)acceptCurrentRequest:(id)sender {
     if (self.listView.selectedRow == -1)
         return;
-    NSUInteger selected = self.listView.selectedRow;
     DESFriend *theRequest = [DESToxNetworkConnection sharedConnection].friendManager.requests[self.listView.selectedRow];
-    dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
-        [[DESToxNetworkConnection sharedConnection].friendManager acceptRequestFromFriend:theRequest];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSUInteger newRowCount = [self numberOfRowsInListView:self.listView];
-            if (newRowCount == 0) {
-                [NSApp endSheet:self.window];
-            } else {
-                self.listView.selectedRow = selected;
-            }
-        });
-    });
+    [[DESToxNetworkConnection sharedConnection].friendManager acceptRequestFromFriend:theRequest];
 }
 
 - (IBAction)rejectCurrentRequest:(id)sender {
     if (self.listView.selectedRow == -1)
         return;
-    NSUInteger selected = self.listView.selectedRow;
     DESFriend *theRequest = [DESToxNetworkConnection sharedConnection].friendManager.requests[self.listView.selectedRow];
-    dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
-        [[DESToxNetworkConnection sharedConnection].friendManager rejectRequestFromFriend:theRequest];
-    });
-    NSUInteger newRowCount = [self numberOfRowsInListView:self.listView];
-    if (newRowCount == 0) {
-        [NSApp endSheet:self.window]; /* Close the sheet if there are no more requests */
-    } else {
-        self.listView.selectedRow = selected;
-    }
+    [[DESToxNetworkConnection sharedConnection].friendManager rejectRequestFromFriend:theRequest];
 }
 
 - (void)newFriendRequest:(NSNotification *)notification {
     NSUInteger row = self.listView.selectedRow;
     [self.listView reloadData];
-    self.listView.selectedRow = row;
+    if ([self numberOfRowsInListView:self.listView] == 0) {
+        [NSApp endSheet:self.window]; /* Close the sheet if there are no more requests */
+    } else {
+        self.listView.selectedRow = row;
+    }
 }
 
 - (void)dealloc {

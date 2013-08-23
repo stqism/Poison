@@ -627,7 +627,8 @@
 			children = (
 				F547D6F217C68DE500D3E4C5 /* main.c */,
 			);
-			path = genki;
+			name = genki;
+			path = utilities/genki;
 			sourceTree = "<group>";
 		};
 		F5556B8017B58F9A00E636FE /* chat_view */ = {
@@ -723,9 +724,9 @@
 				F5DE01E117B9A704002D69E6 /* silica */,
 				F5A91FBA17C03BC000B7C6DC /* hibiki */,
 				F58A9AD817ACB85400923A25 /* kudryavka */,
+				F547D6F117C68DE500D3E4C5 /* genki */,
 				F5A9CC2717AF2446003423E0 /* PXListView */,
 				F5DD1B7417B40C48000AF9C6 /* scrypt */,
-				F547D6F117C68DE500D3E4C5 /* genki */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);

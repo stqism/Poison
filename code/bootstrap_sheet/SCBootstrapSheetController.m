@@ -94,6 +94,9 @@
 #pragma mark - Auto bootstrap
 
 - (void)autostrapError {
+    self.cancelButton.enabled = YES;
+    self.modeSwitchButton.enabled = YES;
+    self.autostrapButton.enabled = YES;
     [self.autostrapProgress stopAnimation:self];
     self.autostrapProgress.hidden = YES;
     self.autostrapStatusLabel.hidden = YES;
@@ -102,7 +105,7 @@
 }
 
 - (NSString *)loadNodesFromURL:(NSURL *)aUrl {
-    NSURLRequest *req = [NSURLRequest requestWithURL:aUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:1.0];
+    NSURLRequest *req = [NSURLRequest requestWithURL:aUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30.0];
     NSHTTPURLResponse *resp = nil;
     NSError *err = nil;
     NSData *nodedata = [NSURLConnection sendSynchronousRequest:req returningResponse:&resp error:&err];

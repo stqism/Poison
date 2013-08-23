@@ -49,7 +49,6 @@
     [aFriend addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
     [self changeDisplayName:aFriend.displayName];
-    [self changeUserStatus:aFriend.userStatus];
     switch (referencedFriend.statusType) {
         case DESStatusTypeAway:
             self.statusLight.image = [NSImage imageNamed:@"status-light-away"];
@@ -73,6 +72,7 @@
     } else {
         self.statusLight.hidden = NO;
         [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
+        [self changeUserStatus:aFriend.userStatus];
     }
 }
 
@@ -106,6 +106,7 @@
             } else {
                 self.statusLight.hidden = NO;
                 [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
+                [self changeUserStatus:referencedFriend.userStatus];
             }
         }
     }
