@@ -35,11 +35,9 @@
 - (IBAction)submitAction:(id)sender {
     if (!DESFriendAddressIsValid(self.keyField.stringValue))
         return;
-    dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[DESToxNetworkConnection sharedConnection].friendManager addFriendWithAddress:self.keyField.stringValue message:self.sendsMessageCheck.state == NSOnState ? self.messageField.stringValue : @""];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [NSApp endSheet:self.window];
-        });
+        [NSApp performSelectorOnMainThread:@selector(endSheet:) withObject:self.window waitUntilDone:NO];
     });
 }
 

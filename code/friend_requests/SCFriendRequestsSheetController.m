@@ -35,18 +35,28 @@
 - (IBAction)acceptCurrentRequest:(id)sender {
     if (self.listView.selectedRow == -1)
         return;
+    self.acceptButton.enabled = NO;
+    self.rejectButton.enabled = NO;
     DESFriend *theRequest = [DESToxNetworkConnection sharedConnection].friendManager.requests[self.listView.selectedRow];
-    [[DESToxNetworkConnection sharedConnection].friendManager acceptRequestFromFriend:theRequest];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[DESToxNetworkConnection sharedConnection].friendManager acceptRequestFromFriend:theRequest];
+    });
 }
 
 - (IBAction)rejectCurrentRequest:(id)sender {
     if (self.listView.selectedRow == -1)
         return;
+    self.acceptButton.enabled = NO;
+    self.rejectButton.enabled = NO;
     DESFriend *theRequest = [DESToxNetworkConnection sharedConnection].friendManager.requests[self.listView.selectedRow];
-    [[DESToxNetworkConnection sharedConnection].friendManager rejectRequestFromFriend:theRequest];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[DESToxNetworkConnection sharedConnection].friendManager rejectRequestFromFriend:theRequest];
+    });
 }
 
 - (void)newFriendRequest:(NSNotification *)notification {
+    self.acceptButton.enabled = YES;
+    self.rejectButton.enabled = YES;
     NSUInteger row = self.listView.selectedRow;
     [self.listView reloadData];
     if ([self numberOfRowsInListView:self.listView] == 0) {
