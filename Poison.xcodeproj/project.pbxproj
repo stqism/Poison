@@ -45,7 +45,7 @@
 		F52DF77717BAADE90088DDDB /* InstallResource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52DF77617BAADE90088DDDB /* InstallResource.xib */; };
 		F52DF77917BABFF10088DDDB /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
-		F547D6F317C68DE500D3E4C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F547D6F217C68DE500D3E4C5 /* main.m */; };
+		F547D6F317C68DE500D3E4C5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F547D6F217C68DE500D3E4C5 /* main.c */; };
 		F547D6FB17C69E9E00D3E4C5 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
 		F547D6FC17C69ED900D3E4C5 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
 		F547D6FF17C69EE000D3E4C5 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
@@ -346,7 +346,7 @@
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
 		F547D6F017C68DE500D3E4C5 /* genki */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = genki; sourceTree = BUILT_PRODUCTS_DIR; };
-		F547D6F217C68DE500D3E4C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F547D6F217C68DE500D3E4C5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		F5556B7B17B5716600E636FE /* ConnectionInspector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionInspector.xib; sourceTree = "<group>"; };
 		F5556B7E17B57F9B00E636FE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F5556B8117B5908A00E636FE /* SCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCChatViewController.h; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 		F547D6F117C68DE500D3E4C5 /* genki */ = {
 			isa = PBXGroup;
 			children = (
-				F547D6F217C68DE500D3E4C5 /* main.m */,
+				F547D6F217C68DE500D3E4C5 /* main.c */,
 			);
 			path = genki;
 			sourceTree = "<group>";
@@ -1357,7 +1357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F547D6F317C68DE500D3E4C5 /* main.m in Sources */,
+				F547D6F317C68DE500D3E4C5 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,6 +1928,7 @@
 				F573859A17C6B5C400B8E7EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F58A9AE217ACB85400923A25 /* Build configuration list for PBXNativeTarget "Kudryavka" */ = {
 			isa = XCConfigurationList;
