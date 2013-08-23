@@ -80,7 +80,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
             [self checkKeyQueue];
-        } else {
+        } else if (!self.window.attachedSheet) {
             [self presentBootstrappingSheet:self];
         }
     });

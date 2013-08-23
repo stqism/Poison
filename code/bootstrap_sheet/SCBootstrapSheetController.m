@@ -76,17 +76,33 @@
     self.advContinueButton.enabled = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSHost *host = [NSHost hostWithName:self.hostField.stringValue];
-        NSLog(@"%@", [host address]);
-        if (![host address]) {
+        NSString *addr = [host address];
+        if (!addr) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The DNS name '%@' could not be resolved.", @""), self.hostField.stringValue];
                 [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:nil];
             });
         }
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+        NSNumber *port_obj = [fmt numberFromString:self.portField.stringValue];
+        if (!port_obj || [port_obj longLongValue] > 65535 || [port_obj longLongValue] < 1) {
+            NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"A port must be a number between 1 and 65535.", @"")];
+            [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:nil];
+        }
+        [[DESToxNetworkConnection sharedConnection] bootstrapWithAddress:addr port:[port_obj integerValue] publicKey:self.publicKeyField.stringValue];
+        sleep(4);
+        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
+            [self endSheet:self];
+        } else {
+            NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"There were not enough peers to have a healthy connection.", @"")];
+            [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:nil];
+        }
     });
 }
 
 - (void)performAdvActionOnErrorEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    self.advBackButton.enabled = YES;
+    self.advContinueButton.enabled = YES;
     [(__bridge id)contextInfo becomeFirstResponder];
     [(__bridge id)contextInfo selectAll:self];
 }
