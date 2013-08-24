@@ -30,7 +30,7 @@
 }
 
 - (NSString *)nameForPublicKey:(NSString *)clientID {
-    return [((DESFriend*)[self.wrappedContext.participants anyObject])->owner friendWithPublicKey:clientID].publicKey;
+    return [((DESFriend*)[self.wrappedContext.participants anyObject]).owner friendWithPublicKey:clientID].publicKey;
 }
 
 - (NSArray *)chatHistory {

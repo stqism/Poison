@@ -181,9 +181,8 @@
 
 - (void)deleteFriendConfirmDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     DESFriend *f = (__bridge DESFriend*)contextInfo;
-    
     if (returnCode == NSOKButton) {
-        [f->owner removeFriend:f];
+        [f.owner removeFriend:f];
     }
 }
 
