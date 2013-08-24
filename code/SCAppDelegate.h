@@ -19,5 +19,6 @@
 @property (strong) NSString *queuedPublicKey;
 - (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext;
+- (void)closeWindowsContainingDESContext:(id<DESChatContext>)ctx;
 
 @end

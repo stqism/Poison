@@ -4,6 +4,8 @@
 #import "SCWebKitMessage.h"
 #import "SCWebKitContext.h"
 #import "SCThemeManager.h"
+#import "SCAppDelegate.h"
+#import "SCMainWindowController.h"
 #import <WebKit/WebKit.h>
 #import <DeepEnd/DeepEnd.h>
 
@@ -42,9 +44,12 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
     _context = context;
     if (context) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagePushed:) name:DESDidPushMessageToContextNotification object:context];
-        [self setTitleUsingContext:context];
-        [self.transcriptView reload:self];
     }
+    for (DESFriend *i in context.participants) {
+        [i addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    [self setTitleUsingContext:context];
+    [self.transcriptView reload:self];
     NSLog(@"Context changed");
 }
 
@@ -139,9 +144,17 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
     NSMutableArray *names = [[NSMutableArray alloc] initWithCapacity:[context.participants count]];
     for (DESFriend *i in [context.participants sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]]) {
         [names addObject:i.displayName];
-        [i addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     }
     self.partnerName.stringValue = [names componentsJoinedByString:@", "];
+    if (context) {
+        if (self.view.window != ((SCAppDelegate*)[NSApp delegate]).mainWindow.window) {
+            self.view.window.title = [names componentsJoinedByString:@", "];
+        } else {
+            self.view.window.title = [NSString stringWithFormat:@"%@ \u2014 %@", [NSBundle mainBundle].infoDictionary[@"CFBundleName"], [names componentsJoinedByString:@", "]];
+        }
+    } else {
+        self.view.window.title = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

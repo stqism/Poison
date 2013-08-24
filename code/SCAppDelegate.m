@@ -127,6 +127,7 @@
         }
     }
     NSWindow *window = [[NSWindow alloc] initWithContentRect:NSMakeRect(_mainWindow.window.frame.origin.x + 22, _mainWindow.window.frame.origin.y - 22, 400, 300) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+    window.delegate = self;
     window.releasedWhenClosed = YES;
     SCStandaloneWindowController *wctl = [[SCStandaloneWindowController alloc] initWithWindow:window];
     SCChatViewController *ctl = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
@@ -134,6 +135,31 @@
     wctl.chatController = ctl;
     [(NSMutableArray*)_standaloneWindows addObject:wctl];
     [window makeKeyAndOrderFront:self];
+}
+
+- (void)closeWindowsContainingDESContext:(id<DESChatContext>)ctx {
+    NSMutableArray *cleanup = [[NSMutableArray alloc] initWithCapacity:_standaloneWindows.count];
+    for (SCStandaloneWindowController *win in _standaloneWindows) {
+        if (win.chatController.context == ctx) {
+            [cleanup addObject:ctx];
+        }
+    }
+    if ([cleanup count] != 0) {
+        for (SCStandaloneWindowController *obj in cleanup) {
+            obj.chatController.context = nil;
+            [(NSMutableArray*)_standaloneWindows removeObject:obj];
+            [obj.window close];
+        }
+    }
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+    for (SCStandaloneWindowController *win in _standaloneWindows) {
+        if (win.window == notification.object) {
+            win.chatController.context = nil;
+            return;
+        }
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

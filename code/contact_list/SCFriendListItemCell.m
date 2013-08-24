@@ -123,14 +123,6 @@
 
 - (IBAction)deleteFriend:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteFriend" object:nil userInfo:@{@"friend": referencedFriend}];
-    
-}
-
-- (void)mouseUp:(NSEvent *)theEvent {
-    [super mouseUp:theEvent];
-    if (theEvent.clickCount == 2) {
-        [self forkNewWindow:self];
-    }
 }
 
 - (void)prepareForReuse {

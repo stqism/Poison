@@ -181,10 +181,9 @@
 
 - (void)deleteFriendConfirmDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     DESFriend *f = (__bridge DESFriend*)contextInfo;
+    
     if (returnCode == NSOKButton) {
-        dispatch_async([DESToxNetworkConnection sharedConnection].messengerQueue, ^{
-            [f->owner removeFriend:f];
-        });
+        [f->owner removeFriend:f];
     }
 }
 
@@ -349,22 +348,45 @@
 }
 
 - (void)reloadList:(NSNotification *)notification {
-    @synchronized(self) {
-        DESFriend *selectedFriend = [self friendInRow:self.listView.selectedRow];
-        _friendList = [[DESToxNetworkConnection sharedConnection].friendManager.friends copy];
-        [self.listView reloadData];
-        [self selectFriend:selectedFriend];
+    NSArray *fl = [[DESToxNetworkConnection sharedConnection].friendManager.friends copy];
+    NSUInteger selIndex = self.listView.selectedRow;
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeRemove) {
+        [(SCAppDelegate*)[NSApp delegate] closeWindowsContainingDESContext:[self friendInRow:selIndex].chatContext];
+        if (((DESFriend*)notification.userInfo[DESArrayFriendKey]).chatContext == chatView.context) {
+            chatView.context = nil;
+        }
+        selIndex -= 1;
+    } else if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd && (selIndex == -1 || selIndex == 0)) {
+        selIndex = 1;
     }
+    if (selIndex == 0) {
+        selIndex = -1;
+        selected = 0;
+    }
+    _friendList = fl;
+    [self.listView reloadData];
+    self.listView.selectedRow = selIndex;
 }
 
 - (void)listViewSelectionDidChange:(NSNotification *)aNotification {
     if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0) {
-        if (selected != -1 && selected != 0)
+        if (selected != -1 && selected != 0) {
             self.listView.selectedRow = selected;
+        } else {
+            chatView.context = nil;
+        }
     } else {
         selected = self.listView.selectedRow;
         chatView.context = [self friendInRow:self.listView.selectedRow].chatContext;
     }
+}
+
+- (void)listView:(PXListView *)aListView rowDoubleClicked:(NSUInteger)rowIndex {
+    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0) {
+        return;
+    }
+    SCAppDelegate *delegate = [NSApp delegate];
+    [delegate newWindowWithDESContext:[self friendInRow:rowIndex].chatContext];
 }
 
 - (NSUInteger)numberOfRowsInListView:(PXListView *)aListView {

@@ -123,6 +123,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	{
 		PXListViewCell *cell = _visibleCells[i];
 		[_reusableCells addObject:cell];
+        [cell prepareForReuse];
 		[cell setHidden:YES];
 	}
 	
