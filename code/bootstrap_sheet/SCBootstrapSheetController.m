@@ -263,12 +263,12 @@
             self.autostrapButton.enabled = YES;
             self.modeSwitchButton.enabled = YES;
             self.cancelButton.enabled = YES;
+            if ([connection.connectedNodeCount integerValue] < 4) {
+                [self autostrapError];
+            } else {
+                [self endSheet:self];
+            }
         });
-        if ([connection.connectedNodeCount integerValue] < 4) {
-            [self autostrapError];
-        } else {
-            [self endSheet:self];
-        }
     });
 }
 
