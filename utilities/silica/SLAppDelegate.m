@@ -52,6 +52,12 @@
 @end
 
 @implementation SLMockFriend
+@synthesize displayName = _displayName;
+@synthesize userStatus = _userStatus;
+@synthesize publicKey = _publicKey;
+@synthesize friendNumber = _friendNumber;
+@synthesize status = _status;
+@synthesize statusType = _statusType;
 
 - (instancetype)initAsMock {
     self = [super init];
