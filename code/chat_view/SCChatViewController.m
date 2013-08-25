@@ -25,7 +25,7 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
     self.headerView.dragsWindow = YES;
     self.messageInput.stringValue = @"";
     self.messageInput.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutViews:) name:NSViewFrameDidChangeNotification object:self.messageInput];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutViews:) name:NSViewFrameDidChangeNotification object:self.textBackground];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutViews:) name:NSViewFrameDidChangeNotification object:self.view];
     [self layoutViews:nil];
     SCThemeManager *manager = [SCThemeManager sharedManager];
@@ -108,8 +108,9 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
 - (void)layoutViews:(NSNotification *)notification {
     NSRect sz = [self.messageInput.stringValue boundingRectWithSize:(NSSize){self.messageInput.bounds.size.width - 10, self.view.bounds.size.height / 2} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: cachedFont}];
     if (sz.size.height != self.messageInput.bounds.size.height) {
-        [self.messageInput setFrameSize:(NSSize){self.messageInput.bounds.size.width, MAX(22, MIN(sz.size.height + 5, self.view.frame.size.height / 2))}];
-        if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
+        [self.textBackground setFrame:(NSRect){{15, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height + 5, self.view.frame.size.height / 2)) + 10}}];
+        self.messageInput.frame = NSMakeRect(5, 5, self.textBackground.bounds.size.width - 10, self.textBackground.bounds.size.height - 10);
+        //if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
             [self.messageInput updateShadowLayerWithRect:self.messageInput.bounds];
     }
     [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];

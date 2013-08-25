@@ -104,27 +104,31 @@
 - (void)awakeFromNib {
     self.bezeled = YES;
     self.drawsBackground = NO;
+    self.wantsLayer = YES;
+    self.layer.masksToBounds = YES;
+    shadowLayer = [CAShapeLayer layer];
+    NSColor *shadowColor = [NSColor colorWithCalibratedWhite:0.0 alpha:1];
+    NSInteger numberOfComponents = [shadowColor numberOfComponents];
+    CGFloat components[numberOfComponents];
+    CGColorSpaceRef colorSpace = [shadowColor.colorSpace CGColorSpace];
+    [shadowColor getComponents:components];
+    CGColorRef c = CGColorCreate(colorSpace, components);
+    shadowLayer.shadowColor = c;
+    CGColorRelease(c);
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
-        self.wantsLayer = YES;
-        self.layer.masksToBounds = YES;
-        shadowLayer = [CAShapeLayer layer];
-        NSColor *shadowColor = [NSColor colorWithCalibratedWhite:0.0 alpha:1];
-        NSInteger numberOfComponents = [shadowColor numberOfComponents];
-        CGFloat components[numberOfComponents];
-        CGColorSpaceRef colorSpace = [shadowColor.colorSpace CGColorSpace];
-        [shadowColor getComponents:components];
-        CGColorRef c = CGColorCreate(colorSpace, components);
-        shadowLayer.shadowColor = c;
-        CGColorRelease(c);
+        shadowLayer.shadowRadius = 1.0;
         shadowLayer.shadowOffset = CGSizeMake(0.0f, 1.0f);
         shadowLayer.shadowOpacity = 0.3f;
-        shadowLayer.shadowRadius = 2.0;
-        shadowLayer.fillRule = kCAFillRuleEvenOdd;
-        maskLayer = [CAShapeLayer layer];
-        [self.layer addSublayer:shadowLayer];
-        shadowLayer.mask = maskLayer;
-        [self updateShadowLayerWithRect:self.bounds];
+    } else {
+        shadowLayer.shadowRadius = 0;
+        shadowLayer.shadowOffset = CGSizeMake(0.0f, -2.0f);
+        shadowLayer.shadowOpacity = 0.1f;
     }
+    shadowLayer.fillRule = kCAFillRuleEvenOdd;
+    maskLayer = [CAShapeLayer layer];
+    [self.layer addSublayer:shadowLayer];
+    shadowLayer.mask = maskLayer;
+    [self updateShadowLayerWithRect:self.bounds];
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow {
@@ -147,7 +151,7 @@
     NSBezierPath *borderPath = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
     [borderPath fill];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
-        NSGradient *fill = [[NSGradient alloc] initWithColorsAndLocations:[NSColor colorWithCalibratedWhite:0.95 alpha:1.0], 0.0, [NSColor whiteColor], 1.0, nil];
+        NSGradient *fill = [[NSGradient alloc] initWithColorsAndLocations:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0], 0.0, [NSColor whiteColor], 1.0, nil];
         [fill drawInBezierPath:[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, self.bounds.size.width - 2, self.bounds.size.height - 2) xRadius:3.42 yRadius:3.42] angle:90.0];
     } else {
         [[NSColor whiteColor] set];
