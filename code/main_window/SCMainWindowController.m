@@ -11,6 +11,7 @@
 #import "SCChatViewController.h"
 #import "SCBootstrapSheetController.h"
 #import "SCAppDelegate.h"
+#import "SCBootstrapManager.h"
 #import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
 
@@ -73,15 +74,48 @@
     if (!chatView)
         chatView = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
     [self.splitView replaceSubview:self.splitView.subviews[1] with:chatView.view];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     ((SCShinyWindow*)self.window).indicator.target = self;
     ((SCShinyWindow*)self.window).indicator.action = @selector(presentBootstrappingSheet:);
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
             [self checkKeyQueue];
-        } else if (!self.window.attachedSheet) {
-            [self presentBootstrappingSheet:self];
+        } else {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldUseSavedBSSettings"]) {
+                [self presentBootstrappingSheet:self];
+                return;
+            }
+            NSString *type = [[NSUserDefaults standardUserDefaults] stringForKey:@"bootstrapType"];
+            if ([type isEqualToString:@"auto"]) {
+                SCBootstrapManager *m = [[SCBootstrapManager alloc] init];
+                [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self presentBootstrappingSheet:self];
+                    });
+                }];
+            } else if ([type isEqualToString:@"manual"]) {
+                NSDictionary *d = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"manualBSSavedServer"];
+                if (![d isMemberOfClass:[NSDictionary class]] || !SCBootstrapDictIsValid(d)) {
+                    [self presentBootstrappingSheet:self];
+                }
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    NSHost *h = [NSHost hostWithName:d[@"host"]];
+                    NSString *addr = [h address];
+                    if (addr) {
+                        [[DESToxNetworkConnection sharedConnection] bootstrapWithAddress:addr port:[d[@"port"] unsignedShortValue] publicKey:d[@"publicKey"]];
+                    }
+                    double delayInSeconds = 4.0;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] < GOOD_CONNECTION_THRESHOLD) {
+                            [self presentBootstrappingSheet:self];
+                        }
+                    });
+                });
+            } else {
+                [self presentBootstrappingSheet:self];
+            }
         }
     });
 }
@@ -416,6 +450,24 @@
         [cell bindToFriend:[self friendInRow:row]];
         return cell;
     }
+}
+
+#pragma mark - Misc.
+
+BOOL SCBootstrapDictIsValid(NSDictionary *theDict) {
+    NSHost *dns = [NSHost hostWithName:theDict[@"host"]];
+    NSString *addr = [dns address];
+    if (!addr) {
+        return NO;
+    }
+    NSNumber *portobj = theDict[@"port"];
+    if (!portobj || [portobj longLongValue] < 1 || [portobj longLongValue] > 65535) {
+        return NO;
+    }
+    if (!DESPublicKeyIsValid(theDict[@"publicKey"])) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

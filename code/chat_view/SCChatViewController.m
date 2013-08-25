@@ -6,6 +6,7 @@
 #import "SCThemeManager.h"
 #import "SCAppDelegate.h"
 #import "SCMainWindowController.h"
+#import "SCTextField.h"
 #import <WebKit/WebKit.h>
 #import <DeepEnd/DeepEnd.h>
 
@@ -108,6 +109,8 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
     NSRect sz = [self.messageInput.stringValue boundingRectWithSize:(NSSize){self.messageInput.bounds.size.width - 10, self.view.bounds.size.height / 2} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: cachedFont}];
     if (sz.size.height != self.messageInput.bounds.size.height) {
         [self.messageInput setFrameSize:(NSSize){self.messageInput.bounds.size.width, MAX(22, MIN(sz.size.height + 5, self.view.frame.size.height / 2))}];
+        if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
+            [self.messageInput updateShadowLayerWithRect:self.messageInput.bounds];
     }
     [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
     CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;

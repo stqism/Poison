@@ -83,9 +83,13 @@
         self.helperLabel.stringValue = NSLocalizedString(@"Your nickname cannot be blank.", @"");
         self.helperLabel.textColor = [NSColor colorWithCalibratedRed:0.8 green:0.3 blue:0.3 alpha:1.0];
     } else {
+        if (self.rememberCheck.state == NSOnState)
+            [[NSUserDefaults standardUserDefaults] setObject:self.nicknameField.stringValue forKey:@"rememberedName"];
+        else
+            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"rememberedName"];
         NSDictionary *optDict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"];
         NSString *theUsername = [self.nicknameField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        if (optDict[theUsername]) {
+        if (optDict[theUsername] && [optDict[@"saveOption"] integerValue] != NKSerializerNoop) {
             SCAppDelegate *appDelegate = ((SCAppDelegate*)[NSApp delegate]);
             optDict = optDict[theUsername];
             [appDelegate beginConnectionWithUsername:theUsername saveMethod:[optDict[@"saveOption"] integerValue]];
@@ -97,6 +101,10 @@
 
 - (IBAction)returnPressed:(id)sender {
     [self submitNickname:sender];
+}
+
+- (IBAction)toggleRememberance:(NSButton *)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:sender.state == NSOnState forKey:@"rememberUserName"];
 }
 
 - (IBAction)selectKeychain:(id)sender {

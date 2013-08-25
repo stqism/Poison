@@ -2,4 +2,6 @@
 
 @interface SCTextField : NSTextField
 
+- (void)updateShadowLayerWithRect:(NSRect)rect;
+
 @end

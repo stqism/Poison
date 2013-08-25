@@ -61,7 +61,6 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{387, -1}, {93, 50}}</string>
 									<reference key="NSSuperview" ref="640402819"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="629535723"/>
 									<string key="NSReuseIdentifierKey">_NS:22</string>
 									<bool key="NSEnabled">YES</bool>
@@ -94,7 +93,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{14, 15}, {370, 19}}</string>
 											<reference key="NSSuperview" ref="171645410"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="723474643"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
@@ -121,7 +119,6 @@
 									</array>
 									<string key="NSFrameSize">{389, 49}</string>
 									<reference key="NSSuperview" ref="640402819"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="22866772"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<string key="NSClassName">SCShadowedView</string>
@@ -135,7 +132,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{328, 11}, {142, 17}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="171645410"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
@@ -168,7 +164,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{33, 11}, {168, 17}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="6675504"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
@@ -189,7 +184,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{12, 10}, {22, 18}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="799029291"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
@@ -221,7 +215,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{61, 41}, {359, 17}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="468562341"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
@@ -253,7 +246,7 @@
 											</set>
 											<string key="NSFrame">{{94, 66}, {292, 110}}</string>
 											<reference key="NSSuperview" ref="425197770"/>
-											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="646344619"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSImageCell" key="NSCell" id="28431462">
@@ -275,7 +268,6 @@
 									</array>
 									<string key="NSFrame">{{0, 49}, {480, 193}}</string>
 									<reference key="NSSuperview" ref="640402819"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="813007818"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<string key="NSClassName">SCGradientView</string>
@@ -283,7 +275,6 @@
 							</array>
 							<string key="NSFrameSize">{480, 242}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="425197770"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSClassName">NSView</string>
@@ -301,7 +292,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{369, 194}, {97, 32}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="947779412"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
@@ -326,7 +316,6 @@
 											<int key="NSvFlags">268</int>
 											<string key="NSFrame">{{14, 35}, {25, 25}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="237222815"/>
 											<string key="NSReuseIdentifierKey">_NS:1598</string>
 											<bool key="NSEnabled">YES</bool>
@@ -356,10 +345,9 @@
 										<object class="NSButton" id="418247812">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{14, 88}, {25, 25}}</string>
+											<string key="NSFrame">{{14, 73}, {25, 25}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="511140531"/>
+											<reference key="NSNextKeyView" ref="320100493"/>
 											<string key="NSReuseIdentifierKey">_NS:1598</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="320183441">
@@ -383,9 +371,8 @@
 										<object class="NSButton" id="947779412">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{14, 148}, {25, 25}}</string>
+											<string key="NSFrame">{{14, 129}, {25, 25}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="931687277"/>
 											<string key="NSReuseIdentifierKey">_NS:1598</string>
 											<bool key="NSEnabled">YES</bool>
@@ -410,15 +397,14 @@
 										<object class="NSTextField" id="726701195">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 31}, {434, 15}}</string>
+											<string key="NSFrame">{{40, 18}, {434, 28}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="906576029">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">Your keys will be deleted when Poison exits. This is good for testing purposes.</string>
+												<string key="NSContents">Data will be deleted when Poison exits. This should be used for testing purposes only.</string>
 												<object class="NSFont" key="NSSupport" id="543785983">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">11</double>
@@ -434,16 +420,15 @@
 										<object class="NSTextField" id="237222815">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 47}, {125, 17}}</string>
+											<string key="NSFrame">{{40, 47}, {102, 17}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="726701195"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="148539031">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">272630784</int>
-												<string key="NSContents">Don't save my keys</string>
+												<string key="NSContents">Don't save data</string>
 												<reference key="NSSupport" ref="526044295"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="237222815"/>
@@ -455,9 +440,8 @@
 										<object class="NSTextField" id="511140531">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 71}, {430, 42}}</string>
+											<string key="NSFrame">{{40, 72}, {430, 14}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="267309843"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -465,7 +449,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="894256100">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">You will be asked to unlock your key every time you start Poison. This option gives you greater control over security (you can keep your key on a separate volume)</string>
+												<string key="NSContents">You will be asked for this password whenever you start Poison.</string>
 												<reference key="NSSupport" ref="543785983"/>
 												<string key="NSCellIdentifier">_NS:9</string>
 												<reference key="NSControlView" ref="511140531"/>
@@ -477,16 +461,15 @@
 										<object class="NSTextField" id="320100493">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 114}, {243, 17}}</string>
+											<string key="NSFrame">{{40, 87}, {145, 17}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="418247812"/>
+											<reference key="NSNextKeyView" ref="511140531"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="277041306">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">272630784</int>
-												<string key="NSContents">Encrypted file with separate password</string>
+												<string key="NSContents">Use my own password</string>
 												<reference key="NSSupport" ref="526044295"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="320100493"/>
@@ -498,16 +481,15 @@
 										<object class="NSTextField" id="477291339">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 138}, {434, 28}}</string>
+											<string key="NSFrame">{{40, 112}, {434, 28}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="320100493"/>
+											<reference key="NSNextKeyView" ref="418247812"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="581880035">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">Saving your keys in the Keychain is the most convenient method. If you lock your keychain, you may be prompted for a password when Poison starts.</string>
+												<string key="NSContents">Poison will automatically load your data at startup. However, if you lock your Keychain, the Keychain password will be required.</string>
 												<reference key="NSSupport" ref="543785983"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="477291339"/>
@@ -519,16 +501,15 @@
 										<object class="NSTextField" id="931687277">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{40, 167}, {101, 17}}</string>
+											<string key="NSFrame">{{40, 141}, {257, 17}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="477291339"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="267611219">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">272630784</int>
-												<string key="NSContents">Keychain</string>
+												<string key="NSContents">Store the decryption key in my Keychain</string>
 												<reference key="NSSupport" ref="526044295"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="931687277"/>
@@ -540,16 +521,15 @@
 										<object class="NSTextField" id="297254567">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{12, 194}, {311, 14}}</string>
+											<string key="NSFrame">{{12, 166}, {358, 42}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="341350127"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="735899099">
 												<int key="NSCellFlags">67108864</int>
 												<int key="NSCellFlags2">272629760</int>
-												<string key="NSContents">Your key is how friends identify you on the Tox network.</string>
+												<string key="NSContents">Poison stores your Tox data using strong encryption. You can choose to have Poison store the decryption key in your Keychain, or you can use a custom password.</string>
 												<reference key="NSSupport" ref="543785983"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="297254567"/>
@@ -561,16 +541,15 @@
 										<object class="NSTextField" id="504107118">
 											<reference key="NSNextResponder" ref="401669417"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{12, 209}, {247, 17}}</string>
+											<string key="NSFrame">{{12, 209}, {112, 17}}</string>
 											<reference key="NSSuperview" ref="401669417"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="297254567"/>
 											<string key="NSReuseIdentifierKey">_NS:1535</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="874343244">
 												<int key="NSCellFlags">68157504</int>
 												<int key="NSCellFlags2">272630784</int>
-												<string key="NSContents">How would you like to save your keys?</string>
+												<string key="NSContents">Protect your data</string>
 												<reference key="NSSupport" ref="526044295"/>
 												<string key="NSCellIdentifier">_NS:1535</string>
 												<reference key="NSControlView" ref="504107118"/>
@@ -582,7 +561,6 @@
 									</array>
 									<string key="NSFrameSize">{480, 242}</string>
 									<reference key="NSSuperview" ref="629535723"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="504107118"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<string key="NSClassName">SCShadowedView</string>
@@ -590,7 +568,6 @@
 							</array>
 							<string key="NSFrame">{{480, 0}, {480, 242}}</string>
 							<reference key="NSSuperview" ref="1006"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="401669417"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSClassName">NSView</string>
@@ -598,7 +575,6 @@
 					</array>
 					<string key="NSFrameSize">{960, 242}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="640402819"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
@@ -770,6 +746,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">rememberCheck</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="468562341"/>
+					</object>
+					<int key="connectionID">104</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleRememberance:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="468562341"/>
+					</object>
+					<int key="connectionID">105</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="1005"/>
 						<reference key="destination" ref="1001"/>
@@ -914,17 +906,17 @@
 						<int key="objectID">38</int>
 						<reference key="object" ref="401669417"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="931687277"/>
-							<reference ref="477291339"/>
-							<reference ref="320100493"/>
-							<reference ref="511140531"/>
 							<reference ref="237222815"/>
 							<reference ref="726701195"/>
-							<reference ref="947779412"/>
-							<reference ref="418247812"/>
 							<reference ref="267309843"/>
 							<reference ref="504107118"/>
 							<reference ref="297254567"/>
+							<reference ref="320100493"/>
+							<reference ref="511140531"/>
+							<reference ref="418247812"/>
+							<reference ref="931687277"/>
+							<reference ref="477291339"/>
+							<reference ref="947779412"/>
 							<reference ref="341350127"/>
 						</array>
 						<reference key="parent" ref="629535723"/>
@@ -1199,118 +1191,9 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">103</int>
+			<int key="maxID">105</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">SCBigGreenButton</string>
-					<string key="superclassName">NSButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCBigGreenButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCGradientView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCGradientView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCLoginWindowController</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="backgroundView">SCGradientView</string>
-						<string key="finishSetup">SCBigGreenButton</string>
-						<string key="helperLabel">NSTextField</string>
-						<string key="inputPanel">SCShadowedView</string>
-						<string key="nicknameField">NSTextField</string>
-						<string key="pageOne">NSView</string>
-						<string key="pageTwo">NSView</string>
-						<string key="pageTwoBackgroundView">SCShadowedView</string>
-						<string key="radioOptCustomFile">NSButton</string>
-						<string key="radioOptKeychain">NSButton</string>
-						<string key="radioOptNoSave">NSButton</string>
-						<string key="saveKeysButton">NSButton</string>
-						<string key="submitButton">SCBigGreenButton</string>
-						<string key="versionLabel">NSTextField</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="backgroundView">
-							<string key="name">backgroundView</string>
-							<string key="candidateClassName">SCGradientView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="finishSetup">
-							<string key="name">finishSetup</string>
-							<string key="candidateClassName">SCBigGreenButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="helperLabel">
-							<string key="name">helperLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="inputPanel">
-							<string key="name">inputPanel</string>
-							<string key="candidateClassName">SCShadowedView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="nicknameField">
-							<string key="name">nicknameField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pageOne">
-							<string key="name">pageOne</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pageTwo">
-							<string key="name">pageTwo</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pageTwoBackgroundView">
-							<string key="name">pageTwoBackgroundView</string>
-							<string key="candidateClassName">SCShadowedView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="radioOptCustomFile">
-							<string key="name">radioOptCustomFile</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="radioOptKeychain">
-							<string key="name">radioOptKeychain</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="radioOptNoSave">
-							<string key="name">radioOptNoSave</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="saveKeysButton">
-							<string key="name">saveKeysButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="submitButton">
-							<string key="name">submitButton</string>
-							<string key="candidateClassName">SCBigGreenButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="versionLabel">
-							<string key="name">versionLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCLoginWindowController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCShadowedView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCShadowedView.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">

@@ -1,4 +1,5 @@
 #import "SCTextField.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface NSColor (SCTFColors)
 
@@ -39,15 +40,91 @@
 
 @end
 
-@implementation SCTextField
+@implementation SCTextField {
+    CAShapeLayer *shadowLayer;
+    CAShapeLayer *maskLayer;
+}
 
 + (Class)cellClass {
     return [SCTextFieldCell class];
 }
 
+- (void)updateShadowLayerWithRect:(NSRect)rect {
+    shadowLayer.frame = self.bounds;
+    CGMutablePathRef innerPath = CGPathCreateMutable();
+    CGRect innerRect = CGRectInset(rect, 4, 4);
+    CGFloat inside_right = innerRect.origin.x + innerRect.size.width;
+    CGFloat outside_right = rect.origin.x + rect.size.width;
+    CGFloat inside_bottom = innerRect.origin.y + innerRect.size.height;
+    CGFloat outside_bottom = rect.origin.y + rect.size.height;
+    CGFloat inside_top = innerRect.origin.y;
+    CGFloat outside_top = rect.origin.y;
+    CGFloat outside_left = rect.origin.x;
+    CGPathMoveToPoint(innerPath, NULL, innerRect.origin.x, outside_top);
+    CGPathAddLineToPoint(innerPath, NULL, inside_right, outside_top);
+    CGPathAddArcToPoint(innerPath, NULL, outside_right, outside_top, outside_right, inside_top, 4);
+    CGPathAddLineToPoint(innerPath, NULL, outside_right, inside_bottom);
+    CGPathAddArcToPoint(innerPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, 4);
+    CGPathAddLineToPoint(innerPath, NULL, innerRect.origin.x, outside_bottom);
+    CGPathAddArcToPoint(innerPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, 4);
+    CGPathAddLineToPoint(innerPath, NULL, outside_left, inside_top);
+    CGPathAddArcToPoint(innerPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, 4);
+    CGPathCloseSubpath(innerPath);
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(-10, -10, self.bounds.size.width + 20, self.bounds.size.height + 20));
+    CGPathAddPath(path, NULL, innerPath);
+    CGPathCloseSubpath(path);
+    shadowLayer.path = path;
+    CGPathRelease(innerPath);
+    CGPathRelease(path);
+    CGMutablePathRef maskPath = CGPathCreateMutable();
+    rect = CGRectMake(rect.origin.x + 1, rect.origin.y + 1, rect.size.width - 2, rect.size.height - 2);
+    innerRect = CGRectInset(rect, 3.42, 3.42);
+    inside_right = innerRect.origin.x + innerRect.size.width;
+    outside_right = rect.origin.x + rect.size.width;
+    inside_bottom = innerRect.origin.y + innerRect.size.height;
+    outside_bottom = rect.origin.y + rect.size.height;
+    inside_top = innerRect.origin.y;
+    outside_top = rect.origin.y;
+    outside_left = rect.origin.x;
+    CGPathMoveToPoint(maskPath, NULL, innerRect.origin.x, outside_top);
+    CGPathAddLineToPoint(maskPath, NULL, inside_right, outside_top);
+    CGPathAddArcToPoint(maskPath, NULL, outside_right, outside_top, outside_right, inside_top, 3.42);
+    CGPathAddLineToPoint(maskPath, NULL, outside_right, inside_bottom);
+    CGPathAddArcToPoint(maskPath, NULL,  outside_right, outside_bottom, inside_right, outside_bottom, 3.42);
+    CGPathAddLineToPoint(maskPath, NULL, innerRect.origin.x, outside_bottom);
+    CGPathAddArcToPoint(maskPath, NULL,  outside_left, outside_bottom, outside_left, inside_bottom, 3.42);
+    CGPathAddLineToPoint(maskPath, NULL, outside_left, inside_top);
+    CGPathAddArcToPoint(maskPath, NULL,  outside_left, outside_top, innerRect.origin.x, outside_top, 3.42);
+    CGPathCloseSubpath(maskPath);
+    maskLayer.path = maskPath;
+    CGPathRelease(maskPath);
+}
+
 - (void)awakeFromNib {
     self.bezeled = YES;
     self.drawsBackground = NO;
+    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
+        self.wantsLayer = YES;
+        self.layer.masksToBounds = YES;
+        shadowLayer = [CAShapeLayer layer];
+        NSColor *shadowColor = [NSColor colorWithCalibratedWhite:0.0 alpha:1];
+        NSInteger numberOfComponents = [shadowColor numberOfComponents];
+        CGFloat components[numberOfComponents];
+        CGColorSpaceRef colorSpace = [shadowColor.colorSpace CGColorSpace];
+        [shadowColor getComponents:components];
+        CGColorRef c = CGColorCreate(colorSpace, components);
+        shadowLayer.shadowColor = c;
+        CGColorRelease(c);
+        shadowLayer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        shadowLayer.shadowOpacity = 0.3f;
+        shadowLayer.shadowRadius = 2.0;
+        shadowLayer.fillRule = kCAFillRuleEvenOdd;
+        maskLayer = [CAShapeLayer layer];
+        [self.layer addSublayer:shadowLayer];
+        shadowLayer.mask = maskLayer;
+        [self updateShadowLayerWithRect:self.bounds];
+    }
 }
 
 - (void)viewWillMoveToWindow:(NSWindow *)newWindow {
@@ -70,7 +147,7 @@
     NSBezierPath *borderPath = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
     [borderPath fill];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD) {
-        NSGradient *fill = [[NSGradient alloc] initWithColorsAndLocations:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0], 0.0, [NSColor whiteColor], 1.0, nil];
+        NSGradient *fill = [[NSGradient alloc] initWithColorsAndLocations:[NSColor colorWithCalibratedWhite:0.95 alpha:1.0], 0.0, [NSColor whiteColor], 1.0, nil];
         [fill drawInBezierPath:[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, self.bounds.size.width - 2, self.bounds.size.height - 2) xRadius:3.42 yRadius:3.42] angle:90.0];
     } else {
         [[NSColor whiteColor] set];

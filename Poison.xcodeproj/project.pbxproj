@@ -142,6 +142,7 @@
 		F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBF317AC8C7C009BA3E4 /* SCLoginWindowController.m */; };
 		F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */; };
 		F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */; };
+		F5C8F5AD17C985530008B94B /* SCBootstrapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C8F5AC17C985530008B94B /* SCBootstrapManager.m */; };
 		F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D4201A17B6FAB800587ABE /* DHTInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */; };
@@ -459,6 +460,8 @@
 		F5C7BBF817AC8CA4009BA3E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginWindow.xib; sourceTree = "<group>"; };
 		F5C7BBFC17AC8D3C009BA3E4 /* SCGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGradientView.h; sourceTree = "<group>"; };
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
+		F5C8F5AB17C985530008B94B /* SCBootstrapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBootstrapManager.h; sourceTree = "<group>"; };
+		F5C8F5AC17C985530008B94B /* SCBootstrapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBootstrapManager.m; sourceTree = "<group>"; };
 		F5D36BB517C2DF7000AE9138 /* themelib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = themelib.js; sourceTree = "<group>"; };
 		F5D4201917B6FAB800587ABE /* DHTInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DHTInfoCell.xib; sourceTree = "<group>"; };
 		F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypto_aesctr.c; sourceTree = "<group>"; };
@@ -649,6 +652,8 @@
 		F5556B8C17B5C15C00E636FE /* bootstrap_sheet */ = {
 			isa = PBXGroup;
 			children = (
+				F5C8F5AB17C985530008B94B /* SCBootstrapManager.h */,
+				F5C8F5AC17C985530008B94B /* SCBootstrapManager.m */,
 				F5556B8D17B5C18800E636FE /* SCBootstrapSheetController.h */,
 				F5556B8E17B5C18800E636FE /* SCBootstrapSheetController.m */,
 			);
@@ -1418,6 +1423,7 @@
 				F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */,
 				F5B3A9C717BD826000EE15CA /* SCWebKitContext.m in Sources */,
 				F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */,
+				F5C8F5AD17C985530008B94B /* SCBootstrapManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
