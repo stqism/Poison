@@ -9,7 +9,6 @@
 @implementation NKDataSerializer
 
 + (NKDataSerializer *)serializerUsingMethod:(NKSerializerType)method {
-    NKDebug(@"start");
     switch (method) {
         case NKSerializerKeychain:
             return [[NKKeychainDataSerializer alloc] init];

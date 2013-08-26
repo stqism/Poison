@@ -29,10 +29,24 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     if (![NKDataSerializer isDebugBuild])
         [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
-    NSLog(@"%@", [[SCThemeManager sharedManager] availableThemes]);
     _standaloneWindows = [[NSMutableArray alloc] initWithCapacity:5];
-    self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
-    [self.loginWindow showWindow:self];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"]) {
+        NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
+        NSLog(@"%@", rememberedUsername);
+        NSDictionary *saveOptions = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"];
+        if (!saveOptions[rememberedUsername] || ![saveOptions[rememberedUsername] isKindOfClass:[NSNumber class]]) {
+            self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
+            [self.loginWindow showWindow:self];
+        } else {
+            saveOptions = saveOptions[rememberedUsername];
+        }
+        if (rememberedUsername && ![[rememberedUsername stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+            [self beginConnectionWithUsername:rememberedUsername saveMethod:[saveOptions[@"saveOption"] integerValue]];
+        }
+    } else {
+        self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
+        [self.loginWindow showWindow:self];
+    }
 }
 
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames {

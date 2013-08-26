@@ -1212,8 +1212,20 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SC;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = stal;
+				TargetAttributes = {
+					F59A05DF17AC808900E9B15F = {
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = F59A05DB17AC808900E9B15F /* Build configuration list for PBXProject "Poison" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1809,7 +1821,7 @@
 		F59A05FE17AC808900E9B15F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "${PRODUCT_NAME}.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Poison.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -1826,7 +1838,7 @@
 		F59A05FF17AC808900E9B15F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "${PRODUCT_NAME}.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Poison.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";

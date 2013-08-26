@@ -5,7 +5,7 @@
 #import <Kudryavka/Kudryavka.h>
 
 @implementation SCLoginWindowController {
-    NKSerializerType saveMethod;
+    NSInteger saveMethod;
 }
 
 - (void)windowDidLoad {
@@ -134,9 +134,11 @@
     } else {
         SCAppDelegate *appDelegate = ((SCAppDelegate*)[NSApp delegate]);
         NSString *theUsername = [self.nicknameField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSMutableDictionary *optDict = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"] mutableCopy];
-        optDict[theUsername] = @{@"saveOption": @(saveMethod)};
-        [[NSUserDefaults standardUserDefaults] setObject:optDict forKey:@"nicknameSaveOptions"];
+        if (saveMethod != NKSerializerNoop) {
+            NSMutableDictionary *optDict = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"] mutableCopy];
+            optDict[theUsername] = @{@"saveOption": @(saveMethod)};
+            [[NSUserDefaults standardUserDefaults] setObject:optDict forKey:@"nicknameSaveOptions"];
+        }
         [appDelegate beginConnectionWithUsername:theUsername saveMethod:saveMethod];
     }
 }

@@ -43,8 +43,11 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSBezierPath *shadowPath = [NSBezierPath bezierPathWithRoundedRect:(NSRect){CGPointZero, {self.bounds.size.width, self.bounds.size.height - 1}} xRadius:2.0 yRadius:2.0];
-    [[NSColor colorWithCalibratedWhite:1.0 alpha:0.56] set];
+    NSBezierPath *shadowPath = [NSBezierPath bezierPathWithRoundedRect:(NSRect){{0, 0.3}, {self.bounds.size.width, self.bounds.size.height - 1}} xRadius:2.0 yRadius:2.0];
+    if ([self.window.screen respondsToSelector:@selector(backingScaleFactor)] && self.window.screen.backingScaleFactor > 1.0)
+        [[NSColor colorWithCalibratedWhite:1.0 alpha:0.4] set]; /* More HiDPi checks. */
+    else
+        [[NSColor colorWithCalibratedWhite:1.0 alpha:0.75] set];
     [shadowPath fill];
     NSBezierPath *bodyPath = [NSBezierPath bezierPathWithRoundedRect:(NSRect){{0, 1}, {self.bounds.size.width, self.bounds.size.height - 1}} xRadius:2.0 yRadius:2.0];
     NSGradient *bodyGradient = nil;
@@ -63,7 +66,6 @@
         drawString = NSLocalizedString(@"Disconnected", @"");
     NSFont *theFont = [NSFont boldSystemFontOfSize:self.frame.size.height - 4];
     [drawString drawAtPoint:(NSPoint){5, 0} withAttributes:@{NSFontAttributeName: theFont, NSForegroundColorAttributeName: [NSColor colorWithCalibratedWhite:0.0 alpha:0.3]}];
-
     [drawString drawAtPoint:(NSPoint){5, 1} withAttributes:@{NSFontAttributeName: theFont, NSForegroundColorAttributeName: [NSColor whiteColor]}];
 }
 

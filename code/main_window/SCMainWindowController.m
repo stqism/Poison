@@ -45,24 +45,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESFriendArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmDeleteFriend:) name:@"deleteFriend" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFriendRequestCount:) name:DESFriendRequestArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
-    [self updateFriendRequestCount:nil];
-    [(SCShinyWindow*)self.window repositionDHT];
-    self.sidebarHead.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
-    self.sidebarHead.bottomColor = [NSColor colorWithCalibratedWhite:0.09 alpha:1.0];
-    self.sidebarHead.shadowColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
-    self.sidebarHead.dragsWindow = YES;
-    self.sidebarHead.needsDisplay = YES;
-    self.toolbar.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
-    self.toolbar.bottomColor = [NSColor colorWithCalibratedWhite:0.15 alpha:1.0];
-    self.toolbar.shadowColor = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
-    self.toolbar.dragsWindow = YES;
-    self.toolbar.needsDisplay = YES;
-    [self.displayName.cell setTextColor:[NSColor whiteColor]];
-    [self.userStatus.cell setTextColor:[NSColor controlColor]];
-    self.userImage.layer.cornerRadius = 2.0;
-    self.userImage.layer.masksToBounds = YES;
     selected = -1;
     self.listView.delegate = self;
+    [self userInterfaceSetup];
     [self reloadList:nil];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         self.listView.scrollerKnobStyle = NSScrollerKnobStyleLight; /* Set in code to avoid IB warning. */
@@ -82,42 +67,66 @@
         if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
             [self checkKeyQueue];
         } else {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldUseSavedBSSettings"]) {
+            [self presentBootstrapOrDoItAutomatically];
+        }
+    });
+}
+
+- (void)userInterfaceSetup {
+    [self updateFriendRequestCount:nil];
+    [(SCShinyWindow*)self.window repositionDHT];
+    self.sidebarHead.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
+    self.sidebarHead.bottomColor = [NSColor colorWithCalibratedWhite:0.09 alpha:1.0];
+    self.sidebarHead.shadowColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
+    self.sidebarHead.dragsWindow = YES;
+    self.sidebarHead.needsDisplay = YES;
+    self.toolbar.topColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
+    self.toolbar.bottomColor = [NSColor colorWithCalibratedWhite:0.15 alpha:1.0];
+    self.toolbar.shadowColor = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
+    self.toolbar.dragsWindow = YES;
+    self.toolbar.needsDisplay = YES;
+    [self.displayName.cell setTextColor:[NSColor whiteColor]];
+    [self.userStatus.cell setTextColor:[NSColor controlColor]];
+    self.userImage.layer.cornerRadius = 2.0;
+    self.userImage.layer.masksToBounds = YES;
+}
+
+- (void)presentBootstrapOrDoItAutomatically {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldUseSavedBSSettings"]) {
+        NSString *type = [[NSUserDefaults standardUserDefaults] stringForKey:@"bootstrapType"];
+        if ([type isEqualToString:@"auto"]) {
+            SCBootstrapManager *m = [[SCBootstrapManager alloc] init];
+            [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentBootstrappingSheet:self];
+                });
+            }];
+        } else if ([type isEqualToString:@"manual"]) {
+            NSDictionary *d = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"manualBSSavedServer"];
+            if (![d isKindOfClass:[NSDictionary class]] || !SCBootstrapDictIsValid(d)) {
                 [self presentBootstrappingSheet:self];
                 return;
             }
-            NSString *type = [[NSUserDefaults standardUserDefaults] stringForKey:@"bootstrapType"];
-            if ([type isEqualToString:@"auto"]) {
-                SCBootstrapManager *m = [[SCBootstrapManager alloc] init];
-                [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self presentBootstrappingSheet:self];
-                    });
-                }];
-            } else if ([type isEqualToString:@"manual"]) {
-                NSDictionary *d = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"manualBSSavedServer"];
-                if (![d isMemberOfClass:[NSDictionary class]] || !SCBootstrapDictIsValid(d)) {
-                    [self presentBootstrappingSheet:self];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NSHost *h = [NSHost hostWithName:d[@"host"]];
+                NSString *addr = [h address];
+                if (addr) {
+                    [[DESToxNetworkConnection sharedConnection] bootstrapWithAddress:addr port:[d[@"port"] unsignedShortValue] publicKey:d[@"publicKey"]];
                 }
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    NSHost *h = [NSHost hostWithName:d[@"host"]];
-                    NSString *addr = [h address];
-                    if (addr) {
-                        [[DESToxNetworkConnection sharedConnection] bootstrapWithAddress:addr port:[d[@"port"] unsignedShortValue] publicKey:d[@"publicKey"]];
+                double delayInSeconds = 4.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] < GOOD_CONNECTION_THRESHOLD) {
+                        [self presentBootstrappingSheet:self];
                     }
-                    double delayInSeconds = 4.0;
-                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] < GOOD_CONNECTION_THRESHOLD) {
-                            [self presentBootstrappingSheet:self];
-                        }
-                    });
                 });
-            } else {
-                [self presentBootstrappingSheet:self];
-            }
+            });
+        } else {
+            [self presentBootstrappingSheet:self];
         }
-    });
+    } else {
+        [self presentBootstrappingSheet:self];
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

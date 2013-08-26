@@ -4,11 +4,6 @@
 
 @implementation NKKeychainDataSerializer
 
-/*
- * TODO:
- * - Figure out why this doesn't work under OS X 10.6.
- */
-
 - (BOOL)serializePrivateKey:(NSString *)thePrivateKey publicKey:(NSString *)thePublicKey options:(NSDictionary *)aDict error:(NSError **)error {
     if (aDict[@"overwrite"]) {
         [self clearStoredKeysForUsername:aDict[@"username"]];

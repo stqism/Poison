@@ -90,6 +90,12 @@
             NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"A port must be a number between 1 and 65535.", @"")];
             [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)(self.portField)];
         }
+        [[NSUserDefaults standardUserDefaults] setObject:@"manual" forKey:@"bootstrapType"];
+        [[NSUserDefaults standardUserDefaults] setObject:@{
+            @"host": self.hostField.stringValue,
+            @"port": port_obj,
+            @"publicKey": self.publicKeyField.stringValue,
+         } forKey:@"manualBSSavedServer"];
         [[DESToxNetworkConnection sharedConnection] bootstrapWithAddress:addr port:[port_obj integerValue] publicKey:self.publicKeyField.stringValue];
         sleep(4);
         if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
