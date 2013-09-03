@@ -7,10 +7,9 @@
 #import "SCAppDelegate.h"
 #import "SCMainWindowController.h"
 #import "SCTextField.h"
+#import "SCSafeUnicode.h"
 #import <WebKit/WebKit.h>
 #import <DeepEnd/DeepEnd.h>
-
-NSString *const kSCWebDocument = @"kSCWebDocument";
 
 @implementation SCChatViewController {
     NSFont *cachedFont;
@@ -50,6 +49,7 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
         [i addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     }
     [self setTitleUsingContext:context];
+    self.transcriptView.frameLoadDelegate = self;
     [self.transcriptView reload:self];
     NSLog(@"Context changed");
 }
@@ -107,16 +107,25 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
 
 - (void)layoutViews:(NSNotification *)notification {
     NSRect sz = [self.messageInput.stringValue boundingRectWithSize:(NSSize){self.messageInput.bounds.size.width - 10, self.view.bounds.size.height / 2} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: cachedFont}];
+    NSSize prevSize = self.messageInput.frame.size;
     if (sz.size.height != self.messageInput.bounds.size.height) {
-        [self.textBackground setFrame:(NSRect){{15, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height + 5, self.view.frame.size.height / 2)) + 10}}];
-        self.messageInput.frame = NSMakeRect(5, 5, self.textBackground.bounds.size.width - 10, self.textBackground.bounds.size.height - 10);
-        //if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
+        NSSize fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: cachedFont}];
+        [self.textBackground setFrame:(NSRect){{15, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height, fourLines.height) + 5) + 10}}];
+        // Only regenerate the shadow if the rect has changed.
+        NSRect candidateRect = NSMakeRect(5, 5, self.textBackground.bounds.size.width - 10, self.textBackground.bounds.size.height - 10);
+        if (!NSEqualRects(candidateRect, self.messageInput.frame)) {
+            self.messageInput.frame = candidateRect;
             [self.messageInput updateShadowLayerWithRect:self.messageInput.bounds];
+        }
     }
-    [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
-    CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;
-    self.transcriptView.frame = (NSRect){{0, transcriptYOffset}, {self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.size.height + transcriptYOffset)}};
-    self.view.needsDisplay = YES;
+    if (self.messageInput.frame.size.height + 19 != [self.view.window contentBorderThicknessForEdge:NSMinYEdge]) {
+        [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
+        CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;
+        self.transcriptView.frame = (NSRect){{0, transcriptYOffset}, {self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.size.height + transcriptYOffset)}};
+    }
+    if (!NSEqualSizes(prevSize, self.messageInput.frame.size)) {
+        self.view.needsDisplay = YES;
+    }
 }
 
 - (void)reloadTheme:(NSNotification *)notification {
@@ -147,7 +156,7 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
 - (void)setTitleUsingContext:(id<DESChatContext>)context {
     NSMutableArray *names = [[NSMutableArray alloc] initWithCapacity:[context.participants count]];
     for (DESFriend *i in [context.participants sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]]) {
-        [names addObject:i.displayName];
+        [names addObject:SC_SANITIZED_STRING(i.displayName)];
     }
     self.partnerName.stringValue = [names componentsJoinedByString:@", "];
     if (context) {
@@ -168,6 +177,7 @@ NSString *const kSCWebDocument = @"kSCWebDocument";
 }
 
 - (void)dealloc {
+    self.transcriptView.frameLoadDelegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (_context) {
         for (DESFriend *i in _context.participants) {

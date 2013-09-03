@@ -1,4 +1,7 @@
+#import "SCSafeUnicode.h"
 #import "SCWebKitMessage.h"
+
+NSString *const killString = @" \u0337\u0334\u0310";
 
 static NSDateFormatter *cachedFormatter = nil;
 
@@ -40,7 +43,7 @@ static NSDateFormatter *cachedFormatter = nil;
     if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
         return @(self.wrappedMessage.newValue);
     } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
-        return self.wrappedMessage.newAttribute;
+        return SC_SANITIZED_STRING(self.wrappedMessage.newAttribute);
     }
     return nil;
 }
@@ -49,13 +52,13 @@ static NSDateFormatter *cachedFormatter = nil;
     if (self.wrappedMessage.type == DESMessageTypeStatusChange || self.wrappedMessage.type == DESMessageTypeStatusTypeChange) {
         return @(self.wrappedMessage.oldValue);
     } else if (self.wrappedMessage.type == DESMessageTypeNicknameChange || self.wrappedMessage.type == DESMessageTypeUserStatusChange) {
-        return self.wrappedMessage.oldAttribute;
+        return SC_SANITIZED_STRING(self.wrappedMessage.oldAttribute);
     }
     return nil;
 }
 
 - (NSString *)body {
-    return self.wrappedMessage.content;
+    return SC_SANITIZED_STRING(self.wrappedMessage.content);
 }
 
 - (NSString *)localizedTimestamp {

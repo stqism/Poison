@@ -1,5 +1,6 @@
 #import "SCFriendListItemCell.h"
 #import "SCAppDelegate.h"
+#import "SCSafeUnicode.h"
 #import <DeepEnd/DeepEnd.h>
 
 @implementation SCFriendListItemCell {
@@ -27,7 +28,7 @@
         self.displayName.stringValue = referencedFriend ? referencedFriend.publicKey : @"";
         self.displayName.textColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
     } else {
-        self.displayName.stringValue = aName;
+        self.displayName.stringValue = SC_SANITIZED_STRING(aName);
         self.displayName.textColor = [NSColor whiteColor];
     }
     self.displayName.toolTip = self.displayName.stringValue;
@@ -37,7 +38,7 @@
     if ([aStatus isEqualToString:@""]) {
         self.userStatus.stringValue = referencedFriend ? [self defaultStringForStatusType:referencedFriend.statusType] : @"";
     } else {
-        self.userStatus.stringValue = aStatus;
+        self.userStatus.stringValue = SC_SANITIZED_STRING(aStatus);
     }
     self.userStatus.toolTip = aStatus;
 }

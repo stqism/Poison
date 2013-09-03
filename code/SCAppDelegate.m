@@ -3,7 +3,6 @@
 #import "SCPreferencesWindowController.h"
 #import "SCLoginWindowController.h"
 #import "SCMainWindowController.h"
-#import "SCKudTestingWindowController.h"
 #import "SCChatViewController.h"
 #import "SCThemeManager.h"
 #import "SCStandaloneWindowController.h"
@@ -27,8 +26,6 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    if (![NKDataSerializer isDebugBuild])
-        [self.kudoTestingMenuItem.menu removeItem:self.kudoTestingMenuItem]; /* Remove the Kudryavka testing option if it was not compiled for debugging. */
     _standaloneWindows = [[NSMutableArray alloc] initWithCapacity:5];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"]) {
         NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
@@ -84,6 +81,12 @@
     currentNickname = theUsername;
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
+    NSInteger speed = [[NSUserDefaults standardUserDefaults] integerForKey:@"DESRunLoopSpeed"];
+    if (!speed) {
+        speed = (NSInteger)(1 / DEFAULT_MESSENGER_TICK_RATE);
+        [[NSUserDefaults standardUserDefaults] setInteger:speed forKey:@"DESRunLoopSpeed"];
+    }
+    connection.runLoopSpeed = (1.0 / (double)speed);
     [connection connect];
     [connection.me addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     connection.me.displayName = theUsername;
@@ -155,7 +158,7 @@
     NSMutableArray *cleanup = [[NSMutableArray alloc] initWithCapacity:_standaloneWindows.count];
     for (SCStandaloneWindowController *win in _standaloneWindows) {
         if (win.chatController.context == ctx) {
-            [cleanup addObject:ctx];
+            [cleanup addObject:win];
         }
     }
     if ([cleanup count] != 0) {
@@ -192,12 +195,6 @@
     if (!self.preferencesWindow)
         self.preferencesWindow = [[SCPreferencesWindowController alloc] initWithWindowNibName:@"Preferences"];
     [self.preferencesWindow showWindow:self];
-}
-
-- (IBAction)showKudoTests:(id)sender {
-    if (!self.kTestingWindow)
-        self.kTestingWindow = [[SCKudTestingWindowController alloc] initWithWindowNibName:@"KudoTesting"];
-    [self.kTestingWindow showWindow:self];
 }
 
 - (IBAction)showNicknameSet:(id)sender {

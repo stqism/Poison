@@ -1,8 +1,8 @@
-#import "SCKudTestingWindowController.h"
+#import "SCKudTestingPaneController.h"
 #import <Kudryavka/Kudryavka.h>
 #import <Kudryavka/NKToxDataWriter.h>
 
-@implementation SCKudTestingWindowController
+@implementation SCKudTestingPaneController
 
 - (IBAction)trySaveData:(id)sender {
     NKToxDataWriter *writer = [[NKToxDataWriter alloc] initWithConnection:[DESToxNetworkConnection sharedConnection]];

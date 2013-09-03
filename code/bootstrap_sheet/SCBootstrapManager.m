@@ -123,7 +123,7 @@
         [self updateStatusOnMainThread:[NSString stringWithFormat:NSLocalizedString(@"Server: %@:%hu [%@]", @""), node[@"host"], [node[@"port"] unsignedShortValue], node[@"comment"]]];
         [connection bootstrapWithAddress:node[@"host"] port:[node[@"port"] unsignedShortValue] publicKey:node[@"key"]];
         sleep(2);
-        if ([connection.connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
+        if ([connection.connectedNodeCount integerValue] >= GOOD_CONNECTION_THRESHOLD) {
             break;
         }
     }

@@ -1,3 +1,4 @@
+#import "SCSafeUnicode.h"
 #import "SCWebKitFriend.h"
 
 @implementation SCWebKitFriend
@@ -26,11 +27,11 @@
 }
 
 - (NSString *)displayName {
-    return self.wrappedFriend.displayName;
+    return SC_SANITIZED_STRING(self.wrappedFriend.displayName);
 }
 
 - (NSString *)userStatus {
-    return self.wrappedFriend.userStatus;
+    return SC_SANITIZED_STRING(self.wrappedFriend.userStatus);
 }
 
 - (NSNumber *)statusType {

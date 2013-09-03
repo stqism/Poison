@@ -12,6 +12,7 @@
 #import "SCBootstrapSheetController.h"
 #import "SCAppDelegate.h"
 #import "SCBootstrapManager.h"
+#import "SCConnectionInspectorSheetController.h"
 #import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
 
@@ -60,11 +61,11 @@
         chatView = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
     [self.splitView replaceSubview:self.splitView.subviews[1] with:chatView.view];
     ((SCShinyWindow*)self.window).indicator.target = self;
-    ((SCShinyWindow*)self.window).indicator.action = @selector(presentBootstrappingSheet:);
+    ((SCShinyWindow*)self.window).indicator.action = @selector(presentInspectorOrBootstrappingSheet:);
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] > GOOD_CONNECTION_THRESHOLD) {
+        if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] >= GOOD_CONNECTION_THRESHOLD) {
             [self checkKeyQueue];
         } else {
             [self presentBootstrapOrDoItAutomatically];
@@ -96,11 +97,13 @@
         NSString *type = [[NSUserDefaults standardUserDefaults] stringForKey:@"bootstrapType"];
         if ([type isEqualToString:@"auto"]) {
             SCBootstrapManager *m = [[SCBootstrapManager alloc] init];
-            [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self presentBootstrappingSheet:self];
-                });
-            }];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self presentBootstrappingSheet:self];
+                    });
+                }];
+            });
         } else if ([type isEqualToString:@"manual"]) {
             NSDictionary *d = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"manualBSSavedServer"];
             if (![d isKindOfClass:[NSDictionary class]] || !SCBootstrapDictIsValid(d)) {
@@ -285,15 +288,22 @@
 - (IBAction)presentFriendRequestsSheet:(id)sender {
     if (!self.requestSheet)
         self.requestSheet = [[SCFriendRequestsSheetController alloc] initWithWindowNibName:@"Requests"];
-    [NSApp beginSheet:self.requestSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closeRequestsSheet:returnCode:contextInfo:) contextInfo:NULL];
+    [NSApp beginSheet:self.requestSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closedSheet:returnCode:contextInfo:) contextInfo:NULL];
     [self.requestSheet fillFields];
+}
+
+- (IBAction)presentInspectorSheet:(id)sender {
+    if (!self.inspectorSheet)
+        self.inspectorSheet = [[SCConnectionInspectorSheetController alloc] initWithWindowNibName:@"ConnectionInspector"];
+    [NSApp beginSheet:self.inspectorSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(closedSheet:returnCode:contextInfo:) contextInfo:NULL];
+    [self.inspectorSheet startTimer];
 }
 
 - (IBAction)confirmAndEndSheet:(NSButton *)sender {
     [NSApp endSheet:self.window.attachedSheet returnCode:sender.tag];
 }
 
-- (void)closeRequestsSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+- (void)closedSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
 }
 
@@ -333,13 +343,23 @@
     }
 }
 
-#pragma mark - NSWindow delegate
-
-- (void)restrainSplitter:(NSNotification *)notification {
-    CGFloat originalPosition = ((NSView*)[self.splitView subviews][0]).frame.size.width;
-    self.splitView.frame = ((NSView*)self.window.contentView).frame;
-    [self.splitView setPosition:originalPosition ofDividerAtIndex:0];
+- (IBAction)deleteFriendHighlightedInList:(id)sender {
+    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0)
+        return;
+    /* Pretend user clicked Delete Friend... in cell's menu. */
+    NSNotification *dummy = [NSNotification notificationWithName:@"deleteFriend" object:nil userInfo:@{@"friend": [self friendInRow:self.listView.selectedRow]}];
+    [self confirmDeleteFriend:dummy];
 }
+
+- (IBAction)presentInspectorOrBootstrappingSheet:(id)sender {
+    if ([[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue] >= GOOD_CONNECTION_THRESHOLD) {
+        [self presentInspectorSheet:sender];
+    } else {
+        [self presentBootstrappingSheet:sender];
+    }
+}
+
+#pragma mark - NSWindow delegate
 
 - (NSArray *)customWindowsToEnterFullScreenForWindow:(NSWindow *)window {
     ((SCShinyWindow*)self.window).indicator.hidden = YES;
@@ -355,7 +375,17 @@
     ((SCShinyWindow*)self.window).indicator.hidden = NO;
 }
 
+- (void)windowDidChangeBackingProperties:(NSNotification *)notification {
+    [(SCShinyWindow*)self.window repositionDHT];
+}
+
 #pragma mark - NSSplitView delegate
+
+- (void)restrainSplitter:(NSNotification *)notification {
+    CGFloat originalPosition = ((NSView*)[self.splitView subviews][0]).frame.size.width;
+    self.splitView.frame = ((NSView*)self.window.contentView).frame;
+    [self.splitView setPosition:originalPosition ofDividerAtIndex:0];
+}
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainSplitPosition:(CGFloat)proposedPosition ofSubviewAt:(NSInteger)dividerIndex {
     if (proposedPosition < 150) {

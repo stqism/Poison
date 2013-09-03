@@ -22,6 +22,7 @@
         }
     }
     self.messageField.stringValue = @"";
+    [self controlTextDidChange:nil];
 }
 
 - (IBAction)messageStateDidChange:(NSButton *)sender {
@@ -41,7 +42,7 @@
     });
 }
 
-- (void)controlTextDidChange:(NSNotification *)notification{
+- (void)controlTextDidChange:(NSNotification *)notification {
     if (DESFriendAddressIsValid(self.keyField.stringValue)) {
         self.sendButton.enabled = YES;
         self.keyField.textColor = [NSColor blackColor];

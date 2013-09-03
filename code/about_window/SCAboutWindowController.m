@@ -15,7 +15,7 @@
     self.topHalf.needsDisplay = YES;
     self.shadowedView.backgroundColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.shadowedView.shadowColor = [NSColor colorWithCalibratedWhite:0.118 alpha:1.0];
-    self.versionLabel.stringValue = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    self.versionLabel.stringValue = [NSString stringWithFormat:@"%@ (built from %@)", [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"], [NSBundle mainBundle].infoDictionary[@"SCGitRef"]];
     self.kVersion.stringValue = [NSBundle bundleWithIdentifier:@"ca.kirara.Kudryavka"].infoDictionary[@"CFBundleShortVersionString"];
     self.kDebug.stringValue = [NKDataSerializer isDebugBuild] ? @"YES" : @"NO";
     self.desVersion.stringValue = [NSBundle bundleWithIdentifier:@"ca.kirara.DeepEnd"].infoDictionary[@"CFBundleShortVersionString"];
@@ -27,7 +27,7 @@
 }
 
 - (IBAction)openToxSite:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://tox.im"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://tox.im"]];
 }
 
 @end

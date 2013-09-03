@@ -2,6 +2,7 @@
 #import "SCGradientView.h"
 #import "SCRequestCell.h"
 #import "PXListView.h"
+#import "SCSafeUnicode.h"
 #import <DeepEnd/DeepEnd.h>
 
 @implementation SCFriendRequestsSheetController {
@@ -97,7 +98,7 @@
         self.rejectButton.enabled = YES;
         self.dateField.stringValue = [formatter stringFromDate:theRequest.dateReceived];
         self.keyField.stringValue = theRequest.publicKey;
-        self.dataField.string = theRequest.requestInfo;
+        self.dataField.string = SC_SANITIZED_STRING(theRequest.requestInfo);
     }
     self.dataField.font = [NSFont systemFontOfSize:13];
     [self.listView cellForRowAtIndex:self.listView.selectedRow].needsDisplay = YES;

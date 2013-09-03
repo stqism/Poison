@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PXListViewDelegate.h"
 
-@class SCGradientView, PXListView, SCFriendRequestsSheetController, SCThinSplitView, WebView;
+@class SCGradientView, PXListView, SCFriendRequestsSheetController, SCThinSplitView, WebView, SCConnectionInspectorSheetController;
 @interface SCMainWindowController : NSWindowController <NSWindowDelegate, NSSplitViewDelegate, PXListViewDelegate>
 
 @property (strong) IBOutlet SCThinSplitView *splitView;
@@ -21,12 +21,14 @@
 @property (strong) IBOutlet NSTextField *statusSheetField;
 @property (strong) IBOutlet NSPopUpButton *statusSheetPopUp;
 @property (strong) SCFriendRequestsSheetController *requestSheet;
+@property (strong) SCConnectionInspectorSheetController *inspectorSheet;
 
 - (IBAction)presentBootstrappingSheet:(id)sender;
 - (IBAction)presentCustomStatusSheet:(id)sender;
 - (IBAction)presentNickChangeSheet:(id)sender;
 - (IBAction)presentFriendRequestsSheet:(id)sender;
 - (IBAction)presentAddFriendSheet:(id)sender;
+- (IBAction)presentInspectorSheet:(id)sender;
 - (void)checkKeyQueue;
 
 @end

@@ -20,7 +20,7 @@
 }
 
 - (IBAction)didChangeSettingsPane:(NSToolbarItem *)sender {
-    NSString *nibToLoad = [self.toolbar selectedItemIdentifier];
+    NSString *nibToLoad = sender.itemIdentifier;
     if ([nibToLoad isEqualToString:previousSelectedItemIdentifier]) return;
     CGFloat chromeHeight = self.window.frame.size.height - ((NSView*)self.window.contentView).bounds.size.height;
     NSNib *theNib = [[NSNib alloc] initWithNibNamed:nibToLoad bundle:[NSBundle mainBundle]];
