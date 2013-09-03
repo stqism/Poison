@@ -75,7 +75,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>62</string>
+	<string>63</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSMinimumSystemVersion</key>
@@ -89,7 +89,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SCGitRef</key>
-	<string>40a5a0e</string>
+	<string>f6e022e</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
