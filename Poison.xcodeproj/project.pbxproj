@@ -165,6 +165,9 @@
 		F5DE01EC17B9A704002D69E6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01EA17B9A704002D69E6 /* Credits.rtf */; };
 		F5DE01EF17B9A704002D69E6 /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DE01EE17B9A704002D69E6 /* SLAppDelegate.m */; };
 		F5DE01F217B9A705002D69E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5DE01F017B9A705002D69E6 /* MainMenu.xib */; };
+		F5E4821017D57BF000CC1783 /* icon_info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E4820F17D57BF000CC1783 /* icon_info@2x.png */; };
+		F5E4821217D57EF600CC1783 /* icon-frequests@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E4821117D57EF600CC1783 /* icon-frequests@2x.png */; };
+		F5E4821417D57F5400CC1783 /* pane-save-test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E4821317D57F5400CC1783 /* pane-save-test@2x.png */; };
 		F5ECC85017CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */; };
 		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
 		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
@@ -524,6 +527,9 @@
 		F5DE01EE17B9A704002D69E6 /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
 		F5DE01F117B9A705002D69E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F5E4820817D5701A00CC1783 /* SCSafeUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSafeUnicode.h; sourceTree = "<group>"; };
+		F5E4820F17D57BF000CC1783 /* icon_info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_info@2x.png"; sourceTree = "<group>"; };
+		F5E4821117D57EF600CC1783 /* icon-frequests@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-frequests@2x.png"; sourceTree = "<group>"; };
+		F5E4821317D57F5400CC1783 /* pane-save-test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pane-save-test@2x.png"; sourceTree = "<group>"; };
 		F5ECC84E17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCConnectionInspectorSheetController.h; sourceTree = "<group>"; };
 		F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCConnectionInspectorSheetController.m; sourceTree = "<group>"; };
 		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
@@ -888,7 +894,9 @@
 			isa = PBXGroup;
 			children = (
 				F59A062817AC88DA00E9B15F /* icon-frequests.png */,
+				F5E4821117D57EF600CC1783 /* icon-frequests@2x.png */,
 				F59A062917AC88DA00E9B15F /* icon_info.png */,
+				F5E4820F17D57BF000CC1783 /* icon_info@2x.png */,
 				F59A062A17AC88DA00E9B15F /* icon_minus.png */,
 				F5A849F217B88AE2004266D4 /* icon_minus@2x.png */,
 				F59A062B17AC88DA00E9B15F /* icon_plus.png */,
@@ -901,6 +909,7 @@
 				F59A062F17AC88DA00E9B15F /* status-light-online.png */,
 				F5C67D8617B8643600FE4D14 /* status-light-online@2x.png */,
 				F57D8BCA17D5591000516F25 /* pane-save-test.png */,
+				F5E4821317D57F5400CC1783 /* pane-save-test@2x.png */,
 				F59A063017AC88DA00E9B15F /* tox_logo.png */,
 				F5C67D7F17B861B000FE4D14 /* tox_logo@2x.png */,
 				F5A9CC2317AF1C31003423E0 /* user-icon-default.png */,
@@ -1356,12 +1365,14 @@
 				F59A063917AC88DA00E9B15F /* tox_logo.png in Resources */,
 				F59107EA17CC075700251B7A /* IdentityPane.xib in Resources */,
 				F59A064317AC897800E9B15F /* Localizable.strings in Resources */,
+				F5E4821017D57BF000CC1783 /* icon_info@2x.png in Resources */,
 				F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */,
 				F500604217ADFC2400C864C4 /* Preferences.xib in Resources */,
 				F500603F17ADFC1E00C864C4 /* GeneralPane.xib in Resources */,
 				F500603C17ADFC1B00C864C4 /* MainWindow.xib in Resources */,
 				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
 				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
+				F5E4821417D57F5400CC1783 /* pane-save-test@2x.png in Resources */,
 				F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */,
 				F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */,
 				F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */,
@@ -1370,6 +1381,7 @@
 				F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */,
 				F59107E917CC074800251B7A /* DHTPane.xib in Resources */,
 				F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */,
+				F5E4821217D57EF600CC1783 /* icon-frequests@2x.png in Resources */,
 				F5A3A86317B351030068AFA0 /* AboutWindow.xib in Resources */,
 				F57D8BCB17D5591000516F25 /* pane-save-test.png in Resources */,
 				F5DD1BE617B44D4F000AF9C6 /* AddFriend.xib in Resources */,
