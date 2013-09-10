@@ -31,7 +31,7 @@
     if (OS_VERSION_IS_BETTER_THAN_LION) {
         [NSUserNotificationCenter defaultUserNotificationCenter].delegate = [SCNotificationManager sharedManager];
     }
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"] && ![NSEvent modifierFlags] & NSAlternateKeyMask) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"] && !([NSEvent modifierFlags] & NSAlternateKeyMask)) {
         NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
         NSLog(@"%@", rememberedUsername);
         NSDictionary *saveOptions = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"];
