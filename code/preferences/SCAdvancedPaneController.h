@@ -2,4 +2,6 @@
 
 @interface SCAdvancedPaneController : NSViewController
 
+@property (strong) IBOutlet NSMatrix *radioGroup;
+
 @end

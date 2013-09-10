@@ -33,6 +33,7 @@
     SCAddFriendSheetController *_addFriendSheet;
     SCChatViewController *chatView;
     SCBootstrapSheetController *_bootstrapSheet;
+    NSMutableDictionary *unreadCounts;
     NSUInteger selected;
 }
 
@@ -60,6 +61,7 @@
     if (!chatView)
         chatView = [[SCChatViewController alloc] initWithNibName:@"ChatView" bundle:[NSBundle mainBundle]];
     [self.splitView replaceSubview:self.splitView.subviews[1] with:chatView.view];
+    chatView.context = nil;
     ((SCShinyWindow*)self.window).indicator.target = self;
     ((SCShinyWindow*)self.window).indicator.action = @selector(presentInspectorOrBootstrappingSheet:);
     double delayInSeconds = 2.0;
@@ -208,6 +210,14 @@
         [NSApp beginSheet:_addFriendSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(addFriendSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
     }
     delegate.queuedPublicKey = nil;
+}
+
+- (id<DESChatContext>)currentContext {
+    return chatView.context;
+}
+
+- (void)focusContext:(id<DESChatContext>)ctx {
+    [self selectFriend:[ctx.participants anyObject]];
 }
 
 - (void)updateFriendRequestCount:(NSNotification *)notification {

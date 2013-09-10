@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import <DeepEnd/DeepEnd.h>
 #import "PXListViewDelegate.h"
 
 @class SCGradientView, PXListView, SCFriendRequestsSheetController, SCThinSplitView, WebView, SCConnectionInspectorSheetController;
@@ -30,5 +31,7 @@
 - (IBAction)presentAddFriendSheet:(id)sender;
 - (IBAction)presentInspectorSheet:(id)sender;
 - (void)checkKeyQueue;
+- (id<DESChatContext>)currentContext;
+- (void)focusContext:(id<DESChatContext>)ctx;
 
 @end

@@ -1,4 +1,10 @@
 /* No comment provided by engineer. */
+"%.0f times/sec." = "%.0f times/sec.";
+
+/* No comment provided by engineer. */
+"A port must be a number between 1 and 65535." = "A port must be a number between 1 and 65535.";
+
+/* No comment provided by engineer. */
 "Advanced" = "Advanced";
 
 /* No comment provided by engineer. */
@@ -12,6 +18,9 @@
 
 /* No comment provided by engineer. */
 "Disconnected" = "Disconnected";
+
+/* No comment provided by engineer. */
+"Do you really want to delete %@ from your friends list?" = "Do you really want to delete %@ from your friends list?";
 
 /* No comment provided by engineer. */
 "Failed to automatically bootstrap" = "Failed to automatically bootstrap";
@@ -50,6 +59,9 @@
 "Online" = "Online";
 
 /* No comment provided by engineer. */
+"Operation complete" = "Operation complete";
+
+/* No comment provided by engineer. */
 "Please select one of the options before continuing." = "Please select one of the options before continuing.";
 
 /* No comment provided by engineer. */
@@ -74,7 +86,19 @@
 "Server: %@:%hu [%@]" = "Server: %1$@:%2$hu [%3$@]";
 
 /* No comment provided by engineer. */
+"The cache was removed successfully." = "The cache was removed successfully.";
+
+/* No comment provided by engineer. */
 "The DNS name '%@' could not be resolved." = "The DNS name '%@' could not be resolved.";
+
+/* No comment provided by engineer. */
+"The theme folder was deleted." = "The theme folder was deleted.";
+
+/* No comment provided by engineer. */
+"There were not enough peers to have a healthy connection." = "There were not enough peers to have a healthy connection.";
+
+/* No comment provided by engineer. */
+"Tox me on Tox: %@" = "Tox me on Tox: %@";
 
 /* No comment provided by engineer. */
 "Try again" = "Try again";
@@ -89,5 +113,7 @@
 "Whoops!" = "Whoops!";
 
 /* No comment provided by engineer. */
-"Your nickname cannot be blank." = "Your nickname cannot be blank.";
+"You cannot undo this, and all chat history will be lost." = "You cannot undo this, and all chat history will be lost.";
 
+/* No comment provided by engineer. */
+"Your nickname cannot be blank." = "Your nickname cannot be blank.";

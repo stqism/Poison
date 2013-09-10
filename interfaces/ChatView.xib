@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.SystemVersion">13A497d</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.AppKitVersion">1240</string>
+		<string key="IBDocument.HIToolboxVersion">681.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="com.apple.InterfaceBuilder.CocoaPlugin">4457.9</string>
 			<string key="com.apple.WebKitIBPlugin">3330</string>
@@ -51,18 +51,20 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{5, 5}, {340, 22}}</string>
 								<reference key="NSSuperview" ref="432077927"/>
+								<reference key="NSNextKeyView" ref="1031848322"/>
 								<bool key="NSViewCanDrawConcurrently">YES</bool>
 								<string key="NSAntiCompressionPriority">{250, 750}</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="426108783">
 									<int key="NSCellFlags">-1805647871</int>
 									<int key="NSCellFlags2">268435456</int>
-									<string key="NSContents">&gt; tfw slow torrents (do not localize)</string>
+									<string key="NSContents"/>
 									<object class="NSFont" key="NSSupport" id="488547245">
-										<string key="NSName">LucidaGrande</string>
+										<string key="NSName">.LucidaGrandeUI</string>
 										<double key="NSSize">13</double>
 										<int key="NSfFlags">1044</int>
 									</object>
+									<string key="NSPlaceholderString"/>
 									<reference key="NSControlView" ref="1042531463"/>
 									<object class="NSColor" key="NSBackgroundColor">
 										<int key="NSColorSpace">6</int>
@@ -89,6 +91,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{15, 5}, {350, 32}}</string>
 						<reference key="NSSuperview" ref="905888700"/>
+						<reference key="NSNextKeyView" ref="1042531463"/>
 						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<bool key="NSViewCanDrawConcurrently">YES</bool>
 						<string key="NSClassName">NSView</string>
@@ -163,12 +166,14 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{5, 5}, {448, 17}}</string>
 								<reference key="NSSuperview" ref="309392284"/>
+								<reference key="NSNextKeyView" ref="301323385"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="583273035">
 									<int key="NSCellFlags">67108928</int>
 									<int key="NSCellFlags2">272631808</int>
-									<string key="NSContents">:)</string>
+									<string key="NSContents">...</string>
 									<reference key="NSSupport" ref="488547245"/>
+									<string key="NSPlaceholderString"/>
 									<reference key="NSControlView" ref="715776820"/>
 									<object class="NSColor" key="NSBackgroundColor">
 										<int key="NSColorSpace">6</int>
@@ -192,11 +197,13 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 321}, {457, 25}}</string>
 						<reference key="NSSuperview" ref="905888700"/>
+						<reference key="NSNextKeyView" ref="715776820"/>
 						<string key="NSClassName">SCBorderedGradientView</string>
 					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{457, 346}</string>
+				<reference key="NSNextKeyView" ref="309392284"/>
 				<bool key="NSViewCanDrawConcurrently">YES</bool>
 				<string key="NSClassName">SCChatView</string>
 			</object>
@@ -283,6 +290,14 @@
 						<reference key="destination" ref="432077927"/>
 					</object>
 					<string key="id">69</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">proxyResponder</string>
+						<reference key="source" ref="905888700"/>
+						<reference key="destination" ref="1042531463"/>
+					</object>
+					<string key="id">7li-Bv-g5I</string>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -407,9 +422,11 @@
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="4.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="4.showNotes"/>
+				<dictionary class="NSMutableDictionary" key="60.IBAttributePlaceholdersKey"/>
 				<string key="60.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="60.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="60.showNotes"/>
+				<dictionary class="NSMutableDictionary" key="61.IBAttributePlaceholdersKey"/>
 				<string key="61.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="61.showNotes"/>
 				<string key="65.IBPluginDependency">com.apple.WebKitIBPlugin</string>

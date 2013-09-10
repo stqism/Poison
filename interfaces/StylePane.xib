@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.SystemVersion">13A538g</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.AppKitVersion">1246.11</string>
+		<string key="IBDocument.HIToolboxVersion">688.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">4457.9</string>
@@ -35,8 +35,9 @@
 			<object class="NSCustomView" id="482935763">
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1292</int>
+				<array class="NSMutableArray" key="NSSubviews"/>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
-				<string key="NSFrameSize">{480, 272}</string>
+				<string key="NSFrameSize">{451, 272}</string>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSViewController" id="705374021"/>
@@ -82,6 +83,7 @@
 					<object class="IBObjectRecord">
 						<string key="id">1</string>
 						<reference key="object" ref="482935763"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">

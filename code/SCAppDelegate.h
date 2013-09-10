@@ -14,11 +14,13 @@
 @property (strong) SCAboutWindowController *aboutWindow;
 @property (strong) SCKudTestingWindowController *kTestingWindow;
 @property (strong) NSArray *standaloneWindows;
-
-@property (unsafe_unretained) IBOutlet NSMenuItem *kudoTestingMenuItem;
 @property (strong) NSString *queuedPublicKey;
+
 - (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext;
 - (void)closeWindowsContainingDESContext:(id<DESChatContext>)ctx;
+
+- (id<DESChatContext>)currentChatContext;
+- (void)giveFocusToChatContext:(id<DESChatContext>)ctx;
 
 @end

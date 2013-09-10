@@ -4,6 +4,7 @@
 #import "SCWebKitMessage.h"
 #import "SCWebKitContext.h"
 #import "SLBackingView.h"
+#import "SCBorderedGradientView.h"
 #import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
 
@@ -15,6 +16,7 @@
 @synthesize backlog;
 @synthesize participants;
 @synthesize maximumBacklogSize;
+@synthesize uuid;
 
 - (instancetype)init {
     return self;
@@ -40,6 +42,7 @@
 - (void)removeParticipant:(DESFriend *)theFriend {}
 
 - (void)sendMessage:(NSString *)message {}
+- (void)sendAction:(NSString *)message {}
 - (void)pushMessage:(DESMessage *)aMessage {}
 
 @end
@@ -86,6 +89,11 @@
 @property (unsafe_unretained) IBOutlet NSTextField *descr;
 @property (unsafe_unretained) IBOutlet NSTextField *version;
 @property (unsafe_unretained) IBOutlet NSColorWell *color;
+@property (unsafe_unretained) IBOutlet NSColorWell *textColor;
+@property (unsafe_unretained) IBOutlet NSColorWell *topColor;
+@property (unsafe_unretained) IBOutlet NSColorWell *middleColor;
+@property (unsafe_unretained) IBOutlet NSColorWell *bottomColor;
+@property (unsafe_unretained) IBOutlet NSColorWell *borderColor;
 @property (strong) SLMockFriend *mockFriend;
 
 @end
@@ -139,10 +147,35 @@
 
 - (IBAction)colorEdited:(id)sender {
     CGFloat red = 0.0, green = 0.0, blue = 0.0;
-    [self.color.color getRed:&red green:&green blue:&blue alpha:NULL];
-    themeDictionary[@"aiThemeBackgroundColor"] = [NSString stringWithFormat:@"%02X%02X%02X", (int)(red * 255), (int)(green * 255), (int)(blue * 255)];
-    self.backing.topLel = self.color.color;
-    self.backing.needsDisplay = YES;
+    [[((NSColorWell*)sender).color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]] getRed:&red green:&green blue:&blue alpha:NULL];
+    themeDictionary[((NSColorWell*)sender).identifier] = [NSString stringWithFormat:@"%02X%02X%02X", (int)(red * 255), (int)(green * 255), (int)(blue * 255)];
+    switch (((NSColorWell*)sender).tag) {
+        case 0:
+            self.backing.topLel = ((NSColorWell*)sender).color;
+            self.backing.needsDisplay = YES;
+            break;
+        case 1:
+            self.topBar.topColor = ((NSColorWell*)sender).color;
+            self.topBar.needsDisplay = YES;
+            break;
+        case 2:
+            self.topBar.shadowColor = ((NSColorWell*)sender).color;
+            self.topBar.needsDisplay = YES;
+            break;
+        case 3:
+            self.topBar.bottomColor = ((NSColorWell*)sender).color;
+            self.topBar.needsDisplay = YES;
+            break;
+        case 4:
+            self.topBarLabel.textColor = ((NSColorWell*)sender).color;
+            break;
+        case 5:
+            self.topBar.borderColor = ((NSColorWell*)sender).color;
+            self.topBar.needsDisplay = YES;
+            break;
+        default:
+            break;
+    }
 }
 
 - (IBAction)selfCheckEdited:(NSButton *)sender {
@@ -152,6 +185,16 @@
 - (void)reloadTheme:(NSNotification *)notification {
     themeDictionary = [[SCThemeManager sharedManager].themeDictionary mutableCopy];
     self.window.title = [NSString stringWithFormat:@"Silica: %@", [[SCThemeManager sharedManager].baseDirectoryURLOfCurrentTheme path]];
+    self.topBar.topColor = [SCThemeManager sharedManager].barTopColorOfCurrentTheme;
+    self.topColor.color = [SCThemeManager sharedManager].barTopColorOfCurrentTheme;
+    self.topBar.shadowColor = [SCThemeManager sharedManager].barHighlightColorOfCurrentTheme;
+    self.middleColor.color = [SCThemeManager sharedManager].barHighlightColorOfCurrentTheme;
+    self.topBar.bottomColor = [SCThemeManager sharedManager].barBottomColorOfCurrentTheme;
+    self.bottomColor.color = [SCThemeManager sharedManager].barBottomColorOfCurrentTheme;
+    self.topBar.borderColor = [SCThemeManager sharedManager].barBorderColorOfCurrentTheme;
+    self.borderColor.color = [SCThemeManager sharedManager].barBorderColorOfCurrentTheme;
+    self.topBarLabel.textColor = [SCThemeManager sharedManager].barTextColorOfCurrentTheme;
+    self.textColor.color = [SCThemeManager sharedManager].barTextColorOfCurrentTheme;
     NSLog(@"Theme loaded from %@: ", [SCThemeManager sharedManager].baseDirectoryURLOfCurrentTheme.path);
     self.name.stringValue = themeDictionary[@"aiThemeHumanReadableName"];
     self.template.stringValue = themeDictionary[@"aiThemeBaseTemplateName"];
@@ -181,8 +224,7 @@
             mockMessage = [DESMessage userStatusChangeFromSender:_mockFriend newStatus:@"Testing changing their status message in Silica."];
             break;
     }
-    [self.webView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
-    [self.webView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessagePost" withArguments:nil];
+    [self.webView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
 }
 
 - (IBAction)pushEnumeratedMessage:(id)sender {
@@ -195,7 +237,7 @@
             mockMessage = [DESMessage statusChangeFromSender:_mockFriend newStatus:DESFriendStatusOnline];
             break;
     }
-    [self.webView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
+    [self.webView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:mockMessage]]];
 }
 
 - (IBAction)reloadTemplate:(id)sender {
@@ -255,6 +297,7 @@
     NSInteger success = [open runModal];
     if (success == NSOKButton) {
         [[NSFileManager defaultManager] copyItemAtURL:[SCThemeManager sharedManager].baseDirectoryURLOfCurrentTheme toURL:open.URL error:nil];
+        [themeDictionary writeToFile:[NSString stringWithFormat:@"%@/theme.plist", [open.URL path]] atomically:YES];
         [[SCThemeManager sharedManager] changeThemePath:[open.URL path]];
         NSLog(@"Saved successfully to new directory: %@.", [open.URL path]);
     }

@@ -5,7 +5,17 @@
 	<key>aiThemeAuthor</key>
 	<string>stal</string>
 	<key>aiThemeBackgroundColor</key>
-	<string>F2F2F2</string>
+	<string>E2E8F3</string>
+	<key>aiThemeBarBorderColor</key>
+	<string>B6B9C4</string>
+	<key>aiThemeBarBottomColor</key>
+	<string>D9DDE2</string>
+	<key>aiThemeBarHighlightColor</key>
+	<string>FFFFFF</string>
+	<key>aiThemeBarTextColor</key>
+	<string>000000</string>
+	<key>aiThemeBarTopColor</key>
+	<string>E4E9F3</string>
 	<key>aiThemeBaseTemplateName</key>
 	<string>themebase.html</string>
 	<key>aiThemeDescription</key>

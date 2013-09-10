@@ -43,6 +43,7 @@
 @implementation SCTextField {
     CAShapeLayer *shadowLayer;
     CAShapeLayer *maskLayer;
+    NSRange selectedRange;
 }
 
 + (Class)cellClass {
@@ -140,6 +141,18 @@
 
 - (void)focusChanged:(NSNotification *)notification {
     self.needsDisplay = YES;
+}
+
+- (void)clearSelection {
+    selectedRange = NSMakeRange(0, 0);
+}
+
+- (void)saveSelection {
+    selectedRange = [self.window fieldEditor:YES forObject:self].selectedRange;
+}
+
+- (void)restoreSelection {
+    [self.window fieldEditor:YES forObject:self].selectedRange = selectedRange;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

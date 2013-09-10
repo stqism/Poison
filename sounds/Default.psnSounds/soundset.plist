@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aiThemeAuthor</key>
+	<string>lilirishman133</string>
+	<key>aiThemeDescription</key>
+	<string>Default sounds</string>
+	<key>aiThemeHumanReadableName</key>
+	<string>Default</string>
+	<key>aiThemeShortVersionString</key>
+	<string>1.0</string>
+	<key>hiSounds</key>
+	<dict>
+		<key>hiEventConnected</key>
+		<string>connect.wav</string>
+		<key>hiEventDisconnected</key>
+		<string>disc.wav</string>
+		<key>hiEventFriendConnected</key>
+		<string>flogin.wav</string>
+		<key>hiEventFriendDisconnected</key>
+		<string>flogout.wav</string>
+		<key>hiEventNewChatMessage</key>
+		<string>newmsg.wav</string>
+		<key>hiEventNewFriendRequest</key>
+		<string>nreq.wav</string>
+		<key>hiEventError</key>
+		<string>error.wav</string>
+	</dict>
+</dict>
+</plist>

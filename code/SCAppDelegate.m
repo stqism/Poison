@@ -6,6 +6,7 @@
 #import "SCChatViewController.h"
 #import "SCThemeManager.h"
 #import "SCStandaloneWindowController.h"
+#import "SCNotificationManager.h"
 
 #import <DeepEnd/DeepEnd.h>
 #import <Kudryavka/Kudryavka.h>
@@ -27,7 +28,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     _standaloneWindows = [[NSMutableArray alloc] initWithCapacity:5];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"]) {
+    if (OS_VERSION_IS_BETTER_THAN_LION) {
+        [NSUserNotificationCenter defaultUserNotificationCenter].delegate = [SCNotificationManager sharedManager];
+    }
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"] && ![NSEvent modifierFlags] & NSAlternateKeyMask) {
         NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
         NSLog(@"%@", rememberedUsername);
         NSDictionary *saveOptions = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"];
@@ -114,9 +118,44 @@
     }
 }
 
+- (id<DESChatContext>)currentChatContext {
+    NSWindow *keyWindow = [NSApp keyWindow];
+    if (!keyWindow)
+        return nil;
+    if (keyWindow == self.mainWindow.window) {
+        return self.mainWindow.currentContext;
+    } else {
+        for (SCStandaloneWindowController *win in self.standaloneWindows) {
+            if (win.window == keyWindow) {
+                return win.chatController.context;
+            }
+        }
+    }
+    return nil;
+}
+
+- (void)giveFocusToChatContext:(id<DESChatContext>)ctx {
+    NSWindow *keyWindow = [NSApp keyWindow];
+    if (keyWindow == self.mainWindow.window) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow focusContext:ctx];
+    } else {
+        for (SCStandaloneWindowController *win in self.standaloneWindows) {
+            if (win.chatController.context == ctx) {
+                [win.window makeKeyAndOrderFront:self];
+                return;
+            }
+        }
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow focusContext:ctx];
+    }
+}
+
 #pragma mark - Notifications
 
 - (void)connectionInitialized:(NSNotification *)notification {
+    if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
+        [[NSProcessInfo processInfo] disableAutomaticTermination:@"The connection is connected."];
     [self saveKeys];
     if (self.loginWindow)
         [self.loginWindow.window close];

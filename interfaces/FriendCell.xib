@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.SystemVersion">13A476u</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.AppKitVersion">1238.11</string>
+		<string key="IBDocument.HIToolboxVersion">678.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">4457.9</string>
@@ -41,12 +41,46 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSImageView" id="793889665">
+						<reference key="NSNextResponder" ref="1005"/>
+						<int key="NSvFlags">297</int>
+						<set class="NSMutableSet" key="NSDragTypes">
+							<string>Apple PDF pasteboard type</string>
+							<string>Apple PICT pasteboard type</string>
+							<string>Apple PNG pasteboard type</string>
+							<string>NSFilenamesPboardType</string>
+							<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+							<string>NeXT TIFF v4.0 pasteboard type</string>
+						</set>
+						<string key="NSFrame">{{176, 13}, {16, 16}}</string>
+						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<string key="NSHuggingPriority">{251, 251}</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSImageCell" key="NSCell" id="12493700">
+							<int key="NSCellFlags">134217728</int>
+							<int key="NSCellFlags2">33554432</int>
+							<object class="NSCustomResource" key="NSContents">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">unread-blue</string>
+							</object>
+							<string key="NSCellIdentifier">_NS:9</string>
+							<int key="NSAlign">0</int>
+							<int key="NSScale">0</int>
+							<int key="NSStyle">0</int>
+							<bool key="NSAnimates">NO</bool>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<bool key="NSEditable">YES</bool>
+					</object>
 					<object class="NSTextField" id="347171004">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">290</int>
-						<string key="NSFrame">{{64, 6}, {131, 14}}</string>
+						<string key="NSFrame">{{64, 6}, {106, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="793889665"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="413396083">
@@ -54,7 +88,7 @@
 							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents">Somebody's status.</string>
 							<object class="NSFont" key="NSSupport">
-								<string key="NSName">LucidaGrande</string>
+								<string key="NSName">.LucidaGrandeUI</string>
 								<double key="NSSize">11</double>
 								<int key="NSfFlags">3100</int>
 							</object>
@@ -79,7 +113,7 @@
 					<object class="NSTextField" id="126565724">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{48, 21}, {147, 17}}</string>
+						<string key="NSFrame">{{48, 21}, {122, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="529785870"/>
@@ -90,7 +124,7 @@
 							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents">Somebody's name.</string>
 							<object class="NSFont" key="NSSupport">
-								<string key="NSName">LucidaGrande</string>
+								<string key="NSName">.LucidaGrandeUI</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
 							</object>
@@ -283,6 +317,14 @@
 					</object>
 					<string key="id">22</string>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">unreadIndicator</string>
+						<reference key="source" ref="1005"/>
+						<reference key="destination" ref="793889665"/>
+					</object>
+					<string key="id">hvK-yY-jdA</string>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -318,6 +360,7 @@
 							<reference ref="529785870"/>
 							<reference ref="126565724"/>
 							<reference ref="347171004"/>
+							<reference ref="793889665"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -398,6 +441,19 @@
 						<reference key="object" ref="487635758"/>
 						<reference key="parent" ref="431371635"/>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">Vz4-wp-3Jb</string>
+						<reference key="object" ref="793889665"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="12493700"/>
+						</array>
+						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">6BQ-4f-I4l</string>
+						<reference key="object" ref="12493700"/>
+						<reference key="parent" ref="793889665"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -442,9 +498,11 @@
 				<real value="-1" key="5.IBViewIntegration.shadowOffsetHeight"/>
 				<real value="0.0" key="5.IBViewIntegration.shadowOffsetWidth"/>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="6BQ-4f-I4l.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="Vz4-wp-3Jb.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -464,9 +522,29 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SCFriendListItemCell</string>
 					<string key="superclassName">PXListViewCell</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="copyPublicKey:">id</string>
+						<string key="deleteFriend:">id</string>
+						<string key="forkNewWindow:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="copyPublicKey:">
+							<string key="name">copyPublicKey:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="deleteFriend:">
+							<string key="name">deleteFriend:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forkNewWindow:">
+							<string key="name">forkNewWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="displayName">NSTextField</string>
 						<string key="statusLight">NSImageView</string>
+						<string key="unreadIndicator">NSImageView</string>
 						<string key="userImage">NSImageView</string>
 						<string key="userStatus">NSTextField</string>
 					</dictionary>
@@ -477,6 +555,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="statusLight">
 							<string key="name">statusLight</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="unreadIndicator">
+							<string key="name">unreadIndicator</string>
 							<string key="candidateClassName">NSImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="userImage">
@@ -515,6 +597,7 @@
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="status-light-online">{11, 11}</string>
+			<string key="unread-blue">{16, 16}</string>
 			<string key="user-icon-default">{32, 32}</string>
 		</dictionary>
 	</data>

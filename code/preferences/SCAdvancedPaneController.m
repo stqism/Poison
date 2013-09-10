@@ -1,4 +1,5 @@
 #import "SCAdvancedPaneController.h"
+#import "SCNotificationManager.h"
 
 @implementation SCAdvancedPaneController
 
@@ -28,6 +29,14 @@
         NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Operation complete", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The theme folder was deleted.", @"")];
         [alert beginSheetModalForWindow:self.view.window modalDelegate:nil didEndSelector:nil contextInfo:NULL];
     }
+}
+
+- (IBAction)postTestNotification:(id)sender {
+    NSUserNotification *testNot = [[NSUserNotification alloc] init];
+    testNot.title = @"Test Notification";
+    testNot.informativeText = @"This is the text of the test notification.";
+    [testNot setIcon:[NSImage imageNamed:@"Poison"]];
+    [[SCNotificationManager sharedManager] postNotification:testNot ofType:self.radioGroup.selectedTag];
 }
 
 @end

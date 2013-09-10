@@ -110,7 +110,6 @@
         failBlock();
         return;
     }
-    NSLog(@"%@", content);
     NSMutableArray *usableNodes = [[self parseNodes:content] mutableCopy];
     NSUInteger cnt = [usableNodes count];
     for (NSUInteger i = 0; i < cnt; ++i) {
@@ -120,6 +119,7 @@
     }
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     for (NSDictionary *node in usableNodes) {
+        NSLog(@"Hit server %@ %hu %@", node[@"host"], [node[@"port"] unsignedShortValue], node[@"comment"]);
         [self updateStatusOnMainThread:[NSString stringWithFormat:NSLocalizedString(@"Server: %@:%hu [%@]", @""), node[@"host"], [node[@"port"] unsignedShortValue], node[@"comment"]]];
         [connection bootstrapWithAddress:node[@"host"] port:[node[@"port"] unsignedShortValue] publicKey:node[@"key"]];
         sleep(2);

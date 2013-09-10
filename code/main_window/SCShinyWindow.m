@@ -1,5 +1,6 @@
 #import "SCShinyWindow.h"
 #import "SCDHTStatusView.h"
+#import <objc/runtime.h>
 
 @implementation SCShinyWindow
 

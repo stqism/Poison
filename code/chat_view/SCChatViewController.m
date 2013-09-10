@@ -8,34 +8,35 @@
 #import "SCMainWindowController.h"
 #import "SCTextField.h"
 #import "SCSafeUnicode.h"
+#import "SCSoundManager.h"
 #import <WebKit/WebKit.h>
 #import <DeepEnd/DeepEnd.h>
 
-@implementation SCChatViewController {
-    NSFont *cachedFont;
-}
+@implementation SCChatViewController
 
 - (void)awakeFromNib {
-    cachedFont = [NSFont systemFontOfSize:13];
-    self.headerView.topColor = [NSColor colorWithCalibratedWhite:0.95 alpha:1.0];;
-    self.headerView.bottomColor = [NSColor colorWithCalibratedWhite:0.85 alpha:1.0];
-    self.headerView.borderColor = [NSColor colorWithCalibratedWhite:0.6 alpha:1.0];
-    self.headerView.shadowColor = [NSColor whiteColor];
+    SCThemeManager *manager = [SCThemeManager sharedManager];
+    self.headerView.topColor = [manager barTopColorOfCurrentTheme];
+    self.headerView.bottomColor = [manager barBottomColorOfCurrentTheme];
+    self.headerView.borderColor = [manager barBorderColorOfCurrentTheme];
+    self.headerView.shadowColor = [manager barHighlightColorOfCurrentTheme];
+    ((SCChatView*)self.view).topColor = [manager backgroundColorOfCurrentTheme];
+    self.partnerName.textColor = [manager barTextColorOfCurrentTheme];
     self.headerView.dragsWindow = YES;
+    self.partnerName.stringValue = @"";
     self.messageInput.stringValue = @"";
     self.messageInput.delegate = self;
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutViews:) name:NSViewFrameDidChangeNotification object:self.textBackground];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutViews:) name:NSViewFrameDidChangeNotification object:self.view];
     [self layoutViews:nil];
-    SCThemeManager *manager = [SCThemeManager sharedManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTheme:) name:SCTranscriptThemeDidChangeNotification object:manager];
     self.transcriptView.drawsBackground = NO;
     self.transcriptView.frameLoadDelegate = self;
+    self.transcriptView.UIDelegate = self;
     [self reloadTheme:nil];
 }
 
 - (void)setContext:(id<DESChatContext>)context {
-    if (context == _context)
+    if (context && context == _context)
         return;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DESDidPushMessageToContextNotification object:_context];
     for (DESFriend *i in _context.participants) {
@@ -44,6 +45,11 @@
     _context = context;
     if (context) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagePushed:) name:DESDidPushMessageToContextNotification object:context];
+        self.sendButton.enabled = YES;
+        self.messageInput.enabled = YES;
+    } else {
+        self.sendButton.enabled = NO;
+        self.messageInput.enabled = NO;
     }
     for (DESFriend *i in context.participants) {
         [i addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
@@ -57,13 +63,14 @@
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
     [self injectConstants];
     [self.transcriptView.windowScriptObject setValue:[[SCWebKitContext alloc] initWithContext:self.context] forKey:@"Conversation"];
-    SCWebKitMessage *wm = [[SCWebKitMessage alloc] initWithMessage:nil];
     @synchronized (self.context) {
+        NSMutableArray *ma = [[NSMutableArray alloc] initWithCapacity:[self.context.backlog count]];
         for (DESMessage *i in self.context.backlog) {
-            wm.wrappedMessage = i;
-            [[self.transcriptView.mainFrame windowObject] callWebScriptMethod:@"pushMessage" withArguments:@[wm]];
+            [ma addObject:[[SCWebKitMessage alloc] initWithMessage:i]];
         }
+        [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessageArray" withArguments:@[ma]];
     }
+    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCScrollViewToBottom" withArguments:nil];
 }
 
 - (void)injectConstants {
@@ -106,10 +113,10 @@
 }
 
 - (void)layoutViews:(NSNotification *)notification {
-    NSRect sz = [self.messageInput.stringValue boundingRectWithSize:(NSSize){self.messageInput.bounds.size.width - 10, self.view.bounds.size.height / 2} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: cachedFont}];
+    NSRect sz = [self.messageInput.stringValue boundingRectWithSize:(NSSize){self.messageInput.bounds.size.width - 10, self.view.bounds.size.height / 2} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: self.messageInput.font}];
     NSSize prevSize = self.messageInput.frame.size;
     if (sz.size.height != self.messageInput.bounds.size.height) {
-        NSSize fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: cachedFont}];
+        NSSize fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: self.messageInput.font}];
         [self.textBackground setFrame:(NSRect){{15, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height, fourLines.height) + 5) + 10}}];
         // Only regenerate the shadow if the rect has changed.
         NSRect candidateRect = NSMakeRect(5, 5, self.textBackground.bounds.size.width - 10, self.textBackground.bounds.size.height - 10);
@@ -119,9 +126,11 @@
         }
     }
     if (self.messageInput.frame.size.height + 19 != [self.view.window contentBorderThicknessForEdge:NSMinYEdge]) {
+        CGFloat delta = (self.messageInput.frame.size.height + 19) - [self.view.window contentBorderThicknessForEdge:NSMinYEdge];
         [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
         CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;
         self.transcriptView.frame = (NSRect){{0, transcriptYOffset}, {self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.size.height + transcriptYOffset)}};
+        [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCScrollByPointNumber" withArguments:@[@(delta)]];
     }
     if (!NSEqualSizes(prevSize, self.messageInput.frame.size)) {
         self.view.needsDisplay = YES;
@@ -130,15 +139,21 @@
 
 - (void)reloadTheme:(NSNotification *)notification {
     SCThemeManager *manager = [SCThemeManager sharedManager];
+    self.headerView.topColor = [manager barTopColorOfCurrentTheme];
+    self.headerView.bottomColor = [manager barBottomColorOfCurrentTheme];
+    self.headerView.borderColor = [manager barBorderColorOfCurrentTheme];
+    self.headerView.shadowColor = [manager barHighlightColorOfCurrentTheme];
+    self.headerView.needsDisplay = YES;
     ((SCChatView*)self.view).topColor = [manager backgroundColorOfCurrentTheme];
+    self.view.needsDisplay = YES;
+    self.partnerName.textColor = [manager barTextColorOfCurrentTheme];
     NSURLRequest *request = [NSURLRequest requestWithURL:[manager baseTemplateURLOfCurrentTheme]];
     [self.transcriptView.mainFrame loadRequest:request];
 }
 
 - (void)messagePushed:(NSNotification *)notification {
     DESMessage *message = notification.userInfo[@"message"];
-    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"pushMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:message]]];
-    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessagePost" withArguments:nil];
+    [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCPostMessage" withArguments:@[[[SCWebKitMessage alloc] initWithMessage:message]]];
 }
 
 - (IBAction)submitMessage:(id)sender {
@@ -148,8 +163,13 @@
         [self layoutViews:nil];
         return;
     }
-    [self.context sendMessage:payload];
+    if ([NSEvent modifierFlags] & NSShiftKeyMask) {
+        [self.context sendAction:payload];
+    } else {
+        [self.context sendMessage:payload];
+    }
     self.messageInput.stringValue = @"";
+    [self.messageInput clearSelection];
     [self layoutViews:nil];
 }
 
@@ -175,6 +195,18 @@
         [self setTitleUsingContext:_context];
     }
 }
+
+- (void)controlTextDidEndEditing:(NSNotification *)aNotification {
+    [self.messageInput saveSelection];
+}
+
+/*- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems {
+    if ([element[WebElementIsSelectedKey] boolValue]) {
+        return defaultMenuItems;
+    } else {
+        return @[];
+    }
+}*/
 
 - (void)dealloc {
     self.transcriptView.frameLoadDelegate = nil;

@@ -96,24 +96,48 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
     return [NSColor colorWithCalibratedRed:((CGFloat)output[0]) / 255.0 green:((CGFloat)output[1]) / 255.0 blue:((CGFloat)output[2]) / 255.0 alpha:1.0];
 }
 
-- (NSColor *)backgroundColorOfCurrentTheme {
-    id dictValue = themeDictionary[@"aiThemeBackgroundColor"];
+- (NSColor *)colorObjectForKey:(NSString *)key {
+    id dictValue = themeDictionary[key];
     if ([dictValue isKindOfClass:[NSColor class]]) {
         return (NSColor*)dictValue;
     } else if (!dictValue) {
-        themeDictionary[@"aiThemeBackgroundColor"] = [NSColor whiteColor];
+        themeDictionary[key] = [NSColor whiteColor];
         return [NSColor whiteColor];
     } else if ([dictValue isKindOfClass:[NSString class]]) {
         NSColor *bgc = [self parseHTMLColor:dictValue];
         if (!bgc) {
-            themeDictionary[@"aiThemeBackgroundColor"] = [NSColor whiteColor];
+            themeDictionary[key] = [NSColor whiteColor];
             return [NSColor whiteColor];
         } else {
-            themeDictionary[@"aiThemeBackgroundColor"] = bgc;
+            themeDictionary[key] = bgc;
             return bgc;
         }
     }
     return [NSColor whiteColor];
+}
+
+- (NSColor *)backgroundColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBackgroundColor"];
+}
+
+- (NSColor *)barTopColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBarTopColor"];
+}
+
+- (NSColor *)barHighlightColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBarHighlightColor"];
+}
+
+- (NSColor *)barBottomColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBarBottomColor"];
+}
+
+- (NSColor *)barTextColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBarTextColor"];
+}
+
+- (NSColor *)barBorderColorOfCurrentTheme {
+    return [self colorObjectForKey:@"aiThemeBarBorderColor"];
 }
 
 - (NSURL *)baseTemplateURLOfCurrentTheme {

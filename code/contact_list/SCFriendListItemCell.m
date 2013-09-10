@@ -12,6 +12,10 @@
     self.userImage.layer.cornerRadius = 2.0;
     self.userImage.layer.masksToBounds = YES;
     originalOriginX = self.userStatus.frame.origin.x;
+    if ([NSColor currentControlTint] == NSBlueControlTint)
+        self.unreadIndicator.image = [NSImage imageNamed:@"unread-blue"];
+    else
+        self.unreadIndicator.image = [NSImage imageNamed:@"unread-grey"];
 }
 
 - (NSString *)defaultStringForStatusType:(DESStatusType)kind {
@@ -41,6 +45,20 @@
         self.userStatus.stringValue = SC_SANITIZED_STRING(aStatus);
     }
     self.userStatus.toolTip = aStatus;
+}
+
+- (void)changeUnreadIndicatorState:(BOOL)hidden {
+    if (hidden) {
+        self.unreadIndicator.hidden = YES;
+    } else {
+        self.unreadIndicator.hidden = NO;
+    }
+    [self.displayName setFrameSize:(NSSize){self.frame.size.width - self.statusLight.frame.origin.x - 8 - (self.unreadIndicator.isHidden ? 0 : 16), self.displayName.frame.size.height}];
+    if (referencedFriend.status != DESFriendStatusOnline) {
+        [self.userStatus setFrame:(NSRect){{self.statusLight.frame.origin.x, self.userStatus.frame.origin.y}, {self.frame.size.width - self.statusLight.frame.origin.x - 8 - (self.unreadIndicator.isHidden ? 0 : 16), self.userStatus.frame.size.height}}];
+    } else {
+        [self.userStatus setFrame:(NSRect){{originalOriginX, self.userStatus.frame.origin.y}, {self.frame.size.width - originalOriginX - 8 - (self.unreadIndicator.isHidden ? 0 : 16), self.userStatus.frame.size.height}}];
+    }
 }
 
 - (void)bindToFriend:(DESFriend *)aFriend {
@@ -97,7 +115,7 @@
             }
             if (referencedFriend.status != DESFriendStatusOnline) {
                 self.statusLight.hidden = YES;
-                [self.userStatus setFrameOrigin:(NSPoint){self.statusLight.frame.origin.x, self.userStatus.frame.origin.y}];
+                [self.userStatus setFrame:(NSRect){{self.statusLight.frame.origin.x, self.userStatus.frame.origin.y}, {self.frame.size.width - self.statusLight.frame.origin.x - 8 - (self.unreadIndicator.isHidden ? 0 : 16), self.userStatus.frame.size.height}}];
                 switch (referencedFriend.status) {
                     case DESFriendStatusConfirmed: self.userStatus.stringValue = NSLocalizedString(@"Offline", @"");
                     case DESFriendStatusRequestSent: self.userStatus.stringValue = NSLocalizedString(@"Request sent...", @"");
@@ -106,7 +124,7 @@
                 }
             } else {
                 self.statusLight.hidden = NO;
-                [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
+                [self.userStatus setFrame:(NSRect){{originalOriginX, self.userStatus.frame.origin.y}, {self.frame.size.width - originalOriginX - 8 - (self.unreadIndicator.isHidden ? 0 : 16), self.userStatus.frame.size.height}}];
                 [self changeUserStatus:referencedFriend.userStatus];
             }
         }
