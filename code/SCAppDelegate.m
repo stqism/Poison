@@ -118,39 +118,6 @@ char *const SCUnreadCountStoreKey = "";
     }
 }
 
-- (id<DESChatContext>)currentChatContext {
-    NSWindow *keyWindow = [NSApp keyWindow];
-    if (!keyWindow)
-        return nil;
-    if (keyWindow == self.mainWindow.window) {
-        return self.mainWindow.currentContext;
-    } else {
-        for (SCStandaloneWindowController *win in self.standaloneWindows) {
-            if (win.window == keyWindow) {
-                return win.chatController.context;
-            }
-        }
-    }
-    return nil;
-}
-
-- (void)giveFocusToChatContext:(id<DESChatContext>)ctx {
-    NSWindow *keyWindow = [NSApp keyWindow];
-    if (keyWindow == self.mainWindow.window) {
-        [self.mainWindow.window makeKeyAndOrderFront:self];
-        [self.mainWindow focusContext:ctx];
-    } else {
-        for (SCStandaloneWindowController *win in self.standaloneWindows) {
-            if (win.chatController.context == ctx) {
-                [win.window makeKeyAndOrderFront:self];
-                return;
-            }
-        }
-        [self.mainWindow.window makeKeyAndOrderFront:self];
-        [self.mainWindow focusContext:ctx];
-    }
-}
-
 #pragma mark - Notifications
 
 - (void)connectionInitialized:(NSNotification *)notification {
@@ -191,6 +158,39 @@ char *const SCUnreadCountStoreKey = "";
 }
 
 #pragma mark - Working with Chat Contexts
+
+- (id<DESChatContext>)currentChatContext {
+    NSWindow *keyWindow = [NSApp keyWindow];
+    if (!keyWindow)
+        return nil;
+    if (keyWindow == self.mainWindow.window) {
+        return self.mainWindow.currentContext;
+    } else {
+        for (SCStandaloneWindowController *win in self.standaloneWindows) {
+            if (win.window == keyWindow) {
+                return win.chatController.context;
+            }
+        }
+    }
+    return nil;
+}
+
+- (void)giveFocusToChatContext:(id<DESChatContext>)ctx {
+    NSWindow *keyWindow = [NSApp keyWindow];
+    if (keyWindow == self.mainWindow.window) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow focusContext:ctx];
+    } else {
+        for (SCStandaloneWindowController *win in self.standaloneWindows) {
+            if (win.chatController.context == ctx) {
+                [win.window makeKeyAndOrderFront:self];
+                return;
+            }
+        }
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow focusContext:ctx];
+    }
+}
 
 - (void)clearUnreadCountForChatContext:(id<DESChatContext>)ctx {
     objc_setAssociatedObject(ctx, SCUnreadCountStoreKey, @(0), OBJC_ASSOCIATION_RETAIN);
