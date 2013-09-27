@@ -290,6 +290,9 @@ char *const SCUnreadCountStoreKey = "";
     }
     NSUserNotification *nc = [[NSUserNotification alloc] init];
     nc.title = ((id<DESChatContext>)notification.object).name;
+    nc.subtitle = (![((id<DESChatContext>)notification.object).name isEqualToString:msg.sender.displayName]) ? msg.sender.displayName : nil;
+    /* Display the sender's name if it's not also the context's name.
+     * This is true for group chats, etc. */
     if (msg.type == DESMessageTypeChat)
         nc.informativeText = msg.content;
     else
