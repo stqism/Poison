@@ -14,6 +14,7 @@
 @property (strong) IBOutlet PXListView *listView;
 @property (strong) IBOutlet SCGradientView *toolbar;
 @property (strong) IBOutlet NSTextField *requestsCount;
+@property (strong) IBOutlet NSSegmentedControl *modeSelector;
 
 /* Sheets */
 @property (strong) IBOutlet NSPanel *statusChangeSheet;
@@ -29,6 +30,7 @@
 - (IBAction)presentNickChangeSheet:(id)sender;
 - (IBAction)presentFriendRequestsSheet:(id)sender;
 - (IBAction)presentAddFriendSheet:(id)sender;
+- (IBAction)presentGroupChatSheet:(id)sender;
 - (IBAction)presentInspectorSheet:(id)sender;
 - (void)checkKeyQueue;
 - (id<DESChatContext>)currentContext;

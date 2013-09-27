@@ -7,9 +7,12 @@
 #import "SCThemeManager.h"
 #import "SCStandaloneWindowController.h"
 #import "SCNotificationManager.h"
+#import <objc/runtime.h>
 
 #import <DeepEnd/DeepEnd.h>
 #import <Kudryavka/Kudryavka.h>
+
+char *const SCUnreadCountStoreKey = "";
 
 @interface SCAppDelegate ()
 
@@ -19,7 +22,7 @@
 
 @implementation SCAppDelegate {
     NKSerializerType saveMode;
-    NSString *currentNickname;
+    NSString *originalUsername;
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
@@ -82,7 +85,7 @@
 
 - (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method {
     saveMode = method;
-    currentNickname = theUsername;
+    originalUsername = theUsername;
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
     NSInteger speed = [[NSUserDefaults standardUserDefaults] integerForKey:@"DESRunLoopSpeed"];
@@ -92,16 +95,13 @@
     }
     connection.runLoopSpeed = (1.0 / (double)speed);
     [connection connect];
-    [connection.me addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
-    connection.me.displayName = theUsername;
-    connection.me.userStatus = @"Online";
 }
 
 - (void)saveKeys {
     NKDataSerializer *kud = [NKDataSerializer serializerUsingMethod:saveMode];
     NSError *error = nil;
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
-    NSDictionary *options = @{@"username": currentNickname, @"overwrite": @YES};
+    NSDictionary *options = @{@"username": originalUsername, @"overwrite": @YES};
     if (![kud hasDataForOptions:options]) {
         BOOL ok = [kud serializePrivateKey:connection.me.privateKey publicKey:connection.me.publicKey options:options error:&error];
         if (!ok && ![error.userInfo[@"silent"] boolValue]) {
@@ -154,6 +154,12 @@
 #pragma mark - Notifications
 
 - (void)connectionInitialized:(NSNotification *)notification {
+    DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
+    connection.me.displayName = originalUsername;
+    connection.me.userStatus = @"Online";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postFriendRequestNotificationIfNeeded:) name:DESFriendRequestArrayDidChangeNotification object:connection.friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToFriend:) name:DESFriendArrayDidChangeNotification object:connection.friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToContext:) name:DESChatContextArrayDidChangeNotification object:connection.friendManager];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         [[NSProcessInfo processInfo] disableAutomaticTermination:@"The connection is connected."];
     [self saveKeys];
@@ -164,6 +170,31 @@
     for (NSMenuItem *item in self.networkMenu.submenu.itemArray) {
         item.enabled = YES;
     }
+}
+
+- (void)subscribeToFriend:(NSNotification *)notification {
+    NSObject<DESChatContext> *f = notification.userInfo[DESArrayObjectKey];
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        [f addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+    } else {
+        [f removeObserver:self forKeyPath:@"status"];
+    }
+}
+
+- (void)subscribeToContext:(NSNotification *)notification {
+    NSObject<DESChatContext> *f = notification.userInfo[DESArrayObjectKey];
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatContextHadMessagePosted:) name:DESDidPushMessageToContextNotification object:f];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DESDidPushMessageToContextNotification object:f];
+    }
+}
+
+#pragma mark - Working with Chat Contexts
+
+- (void)clearUnreadCountForChatContext:(id<DESChatContext>)ctx {
+    objc_setAssociatedObject(ctx, SCUnreadCountStoreKey, @(0), OBJC_ASSOCIATION_RETAIN);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"unreadCountChanged" object:ctx userInfo:@{@"newCount": @(0)}];
 }
 
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext {
@@ -182,7 +213,7 @@
             [(NSMutableArray*)_standaloneWindows removeObject:obj];
         }
     }
-    NSWindow *window = [[NSWindow alloc] initWithContentRect:NSMakeRect(_mainWindow.window.frame.origin.x + 22, _mainWindow.window.frame.origin.y - 22, 400, 300) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+    NSWindow *window = [[NSWindow alloc] initWithContentRect:NSMakeRect(_mainWindow.window.frame.origin.x + 22, _mainWindow.window.frame.origin.y - 22, 400, 299) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
     window.delegate = self;
     window.releasedWhenClosed = YES;
     SCStandaloneWindowController *wctl = [[SCStandaloneWindowController alloc] initWithWindow:window];
@@ -190,6 +221,7 @@
     ctl.context = aContext;
     wctl.chatController = ctl;
     [(NSMutableArray*)_standaloneWindows addObject:wctl];
+    [window setFrame:NSMakeRect(_mainWindow.window.frame.origin.x + 22, _mainWindow.window.frame.origin.y - 22, 400, 300) display:YES];
     [window makeKeyAndOrderFront:self];
 }
 
@@ -209,6 +241,15 @@
     }
 }
 
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    for (SCStandaloneWindowController *win in _standaloneWindows) {
+        if (win.window == notification.object) {
+            [self clearUnreadCountForChatContext:win.chatController.context];
+            return;
+        }
+    }
+}
+
 - (void)windowWillClose:(NSNotification *)notification {
     for (SCStandaloneWindowController *win in _standaloneWindows) {
         if (win.window == notification.object) {
@@ -218,8 +259,60 @@
     }
 }
 
+#pragma mark - User Notifications
+
+- (void)postFriendRequestNotificationIfNeeded:(NSNotification *)notification {
+    if (!OS_VERSION_IS_BETTER_THAN_LION)
+        return;
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        NSUserNotification *unotification = [[NSUserNotification alloc] init];
+        unotification.title = NSLocalizedString(@"New Friend Request", @"");
+        unotification.subtitle = [NSString stringWithFormat:NSLocalizedString(@"From: %@", @""), ((DESFriend*)notification.userInfo[DESArrayObjectKey]).publicKey];
+        unotification.informativeText = ((DESFriend*)notification.userInfo[DESArrayObjectKey]).requestInfo;
+        [[SCNotificationManager sharedManager] postNotification:unotification ofType:SCEventTypeNewFriendRequest];
+        [NSApp requestUserAttention:NSInformationalRequest];
+    }
+}
+
+- (void)chatContextHadMessagePosted:(NSNotification *)notification {
+    DESMessage *msg = notification.userInfo[DESMessageKey];
+    if ((msg.type != DESMessageTypeChat && msg.type != DESMessageTypeAction) || msg.sender == [DESSelf selfWithConnection:((id<DESChatContext>)notification.object).friendManager.connection]) {
+        return;
+    }
+    if ([self currentChatContext] != notification.object && notification.object != _mainWindow.currentContext) {
+        id a = objc_getAssociatedObject(notification.object, SCUnreadCountStoreKey);
+        if (![a isKindOfClass:[NSNumber class]]) {
+            objc_setAssociatedObject(notification.object, SCUnreadCountStoreKey, @(1), OBJC_ASSOCIATION_RETAIN);
+        } else {
+            objc_setAssociatedObject(notification.object, SCUnreadCountStoreKey, @([a integerValue] + 1), OBJC_ASSOCIATION_RETAIN);
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"unreadCountChanged" object:notification.object userInfo:@{@"newCount": @([a integerValue] + 1)}];
+    }
+    NSUserNotification *nc = [[NSUserNotification alloc] init];
+    nc.title = ((id<DESChatContext>)notification.object).name;
+    if (msg.type == DESMessageTypeChat)
+        nc.informativeText = msg.content;
+    else
+        nc.informativeText = [NSString stringWithFormat:@"\u2022 %@ %@", msg.sender.displayName, msg.content];
+    nc.userInfo = @{@"chatContext": ((id<DESChatContext>)notification.object).uuid};
+    nc.icon = [NSImage imageNamed:@"user-icon-default"];
+    [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeNewChatMessage];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    currentNickname = change[NSKeyValueChangeNewKey];
+    if ([keyPath isEqualToString:@"status"]) {
+        DESFriend *obj = (DESFriend*)object;
+        NSUserNotification *nc = [[NSUserNotification alloc] init];
+        nc.title = obj.displayName;
+        nc.userInfo = @{@"chatContext": obj.chatContext.uuid};
+        if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline) {
+            nc.subtitle = NSLocalizedString(@"is now online.", @"");
+            [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendConnected];
+        } else {
+            nc.subtitle = NSLocalizedString(@"is now offline.", @"");
+            [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendDisconnected];
+        }
+    }
 }
 
 #pragma mark - Menus
@@ -279,5 +372,33 @@
         [self.mainWindow presentBootstrappingSheet:self];
     }
 }
+
+- (IBAction)showDHTInspector:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow.window makeKeyAndOrderFront:self];
+        [self.mainWindow presentInspectorSheet:self];
+    }
+}
+
+- (IBAction)connectToxIRC:(id)sender {
+    if (![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"ircs://chat.freenode.net:6697/tox"]]) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://webchat.freenode.net/?channels=#tox"]];
+    }
+}
+
+- (IBAction)connectDeveloperIRC:(id)sender {
+    if (![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"ircs://chat.freenode.net:6697/tox"]]) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://webchat.freenode.net/?channels=#tox"]];
+    }
+}
+
+- (IBAction)openToxSite:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://tox.im/"]];
+}
+
+- (IBAction)openGitHubAgain:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/stal888/Poison"]];
+}
+
 
 @end

@@ -177,7 +177,8 @@ SHA256_Transform(uint32_t * state, const unsigned char block[64])
 	/* Clean the stack. */
 	memset(W, 0, 256);
 	memset(S, 0, 32);
-	t0 = t1 = 0;
+	memset(&t0, 0, 4);
+    memset(&t1, 0, 4);
 }
 
 static unsigned char PAD[64] = {

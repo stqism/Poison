@@ -19,9 +19,6 @@
 }
 
 - (void)setChatController:(SCChatViewController *)chatController {
-    for (DESFriend *i in _chatController.context.participants) {
-        [i removeObserver:self forKeyPath:@"displayName"];
-    }
     _chatController = chatController;
     self.window.contentView = _chatController.view;
     [_chatController setTitleUsingContext:_chatController.context];

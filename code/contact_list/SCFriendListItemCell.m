@@ -67,6 +67,7 @@
     [aFriend addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     [aFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUnread:) name:@"unreadCountChanged" object:aFriend.chatContext];
     [self changeDisplayName:aFriend.displayName];
     switch (referencedFriend.statusType) {
         case DESStatusTypeAway:
@@ -131,13 +132,20 @@
     }
 }
 
+- (void)updateUnread:(NSNotification *)notification {
+    if ([notification.userInfo[@"newCount"] integerValue] > 0)
+        [self changeUnreadIndicatorState:NO];
+    else
+        [self changeUnreadIndicatorState:YES];
+}
+
 - (IBAction)copyPublicKey:(id)sender {
     [[NSPasteboard generalPasteboard] clearContents];
     [[NSPasteboard generalPasteboard] writeObjects:@[referencedFriend.publicKey]];
 }
 
 - (IBAction)forkNewWindow:(id)sender {
-    [(SCAppDelegate*)[NSApp delegate] newWindowWithDESContext:[[DESToxNetworkConnection sharedConnection].friendManager chatContextForFriend:referencedFriend]];
+    [(SCAppDelegate*)[NSApp delegate] newWindowWithDESContext:referencedFriend.chatContext];
 }
 
 - (IBAction)deleteFriend:(id)sender {
@@ -149,6 +157,7 @@
     [referencedFriend removeObserver:self forKeyPath:@"displayName"];
     [referencedFriend removeObserver:self forKeyPath:@"statusType"];
     [referencedFriend removeObserver:self forKeyPath:@"status"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"unreadCountChanged" object:referencedFriend.chatContext];
     referencedFriend = nil;
 }
 

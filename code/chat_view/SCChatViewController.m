@@ -39,9 +39,7 @@
     if (context && context == _context)
         return;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DESDidPushMessageToContextNotification object:_context];
-    for (DESFriend *i in _context.participants) {
-        [i removeObserver:self forKeyPath:@"displayName"];
-    }
+    [(NSObject*)_context removeObserver:self forKeyPath:@"name"];
     _context = context;
     if (context) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagePushed:) name:DESDidPushMessageToContextNotification object:context];
@@ -51,9 +49,7 @@
         self.sendButton.enabled = NO;
         self.messageInput.enabled = NO;
     }
-    for (DESFriend *i in context.participants) {
-        [i addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
-    }
+    [(NSObject*)context addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
     [self setTitleUsingContext:context];
     self.transcriptView.frameLoadDelegate = self;
     [self.transcriptView reload:self];
@@ -174,16 +170,16 @@
 }
 
 - (void)setTitleUsingContext:(id<DESChatContext>)context {
-    NSMutableArray *names = [[NSMutableArray alloc] initWithCapacity:[context.participants count]];
-    for (DESFriend *i in [context.participants sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]]) {
-        [names addObject:SC_SANITIZED_STRING(i.displayName)];
+    NSString *ctxName = context.name;
+    if (!ctxName) {
+        ctxName = @"";
     }
-    self.partnerName.stringValue = [names componentsJoinedByString:@", "];
+    self.partnerName.stringValue = ctxName;
     if (context) {
         if (self.view.window != ((SCAppDelegate*)[NSApp delegate]).mainWindow.window) {
-            self.view.window.title = [names componentsJoinedByString:@", "];
+            self.view.window.title = ctxName;
         } else {
-            self.view.window.title = [NSString stringWithFormat:@"%@ \u2014 %@", [NSBundle mainBundle].infoDictionary[@"CFBundleName"], [names componentsJoinedByString:@", "]];
+            self.view.window.title = [NSString stringWithFormat:@"%@ \u2014 %@", [NSBundle mainBundle].infoDictionary[@"CFBundleName"], ctxName];
         }
     } else {
         self.view.window.title = [NSBundle mainBundle].infoDictionary[@"CFBundleName"];
@@ -191,7 +187,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"displayName"]) {
+    if ([keyPath isEqualToString:@"name"]) {
         [self setTitleUsingContext:_context];
     }
 }
@@ -212,9 +208,7 @@
     self.transcriptView.frameLoadDelegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (_context) {
-        for (DESFriend *i in _context.participants) {
-            [i removeObserver:self forKeyPath:@"displayName"];
-        }
+        [(NSObject*)_context removeObserver:self forKeyPath:@"name"];
     }
 }
 

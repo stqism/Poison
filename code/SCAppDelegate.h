@@ -20,6 +20,7 @@
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext;
 - (void)closeWindowsContainingDESContext:(id<DESChatContext>)ctx;
 
+- (void)clearUnreadCountForChatContext:(id<DESChatContext>)ctx;
 - (id<DESChatContext>)currentChatContext;
 - (void)giveFocusToChatContext:(id<DESChatContext>)ctx;
 

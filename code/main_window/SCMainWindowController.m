@@ -13,8 +13,17 @@
 #import "SCAppDelegate.h"
 #import "SCBootstrapManager.h"
 #import "SCConnectionInspectorSheetController.h"
+#import "SCNotificationManager.h"
+#import "SCGroupChatSheetController.h"
+#import "SCFriendListGroupCell.h"
+#import "SCGroupRequestCell.h"
 #import <DeepEnd/DeepEnd.h>
 #import <WebKit/WebKit.h>
+
+typedef NS_ENUM(NSInteger, SCListMode) {
+    SCListModeFriends = 0,
+    SCListModeGroups = 1,
+};
 
 @interface SCThinSplitView : NSSplitView
 
@@ -28,13 +37,28 @@
 
 @end
 
+@interface SCMenuButton : NSButton
+
+@end
+
+@implementation SCMenuButton
+
+- (void)mouseDown:(NSEvent *)theEvent {
+    [NSMenu popUpContextMenu:self.menu withEvent:theEvent forView:self];
+}
+
+@end
+
 @implementation SCMainWindowController {
     NSArray *_friendList;
+    NSArray *_groupList;
     SCAddFriendSheetController *_addFriendSheet;
+    SCGroupChatSheetController *_groupChatSheet;
     SCChatViewController *chatView;
     SCBootstrapSheetController *_bootstrapSheet;
-    NSMutableDictionary *unreadCounts;
-    NSUInteger selected;
+    NSUInteger selectedGroup;
+    NSUInteger selectedFriend;
+    SCListMode listMode;
 }
 
 - (void)windowDidLoad {
@@ -45,9 +69,23 @@
     self.window.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restrainSplitter:) name:NSWindowDidResizeNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESFriendArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESGroupRequestArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadList:) name:DESChatContextArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmDeleteFriend:) name:@"deleteFriend" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(confirmDeleteGroup:) name:@"leaveGroupChat" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(joinGroupChat:) name:@"joinGroup" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rejectGroupChat:) name:@"rejectGroup" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFriendRequestCount:) name:DESFriendRequestArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
-    selected = -1;
+    selectedGroup = -1;
+    selectedFriend = -1;
+    NSString *modeStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"harmonicsCurrentSelected"];
+    if ([modeStr isEqualToString:@"groups"]) {
+        listMode = SCListModeGroups;
+        self.modeSelector.selectedSegment = 1;
+    } else {
+        listMode = SCListModeFriends;
+        self.modeSelector.selectedSegment = 0;
+    }
     self.listView.delegate = self;
     [self userInterfaceSetup];
     [self reloadList:nil];
@@ -56,6 +94,8 @@
     [[DESSelf self] addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
     [[DESSelf self] addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     [[DESSelf self] addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
+    self.displayName.stringValue = [DESSelf self].displayName;
+    self.userStatus.stringValue = [DESSelf self].userStatus;
     [[DESToxNetworkConnection sharedConnection] addObserver:self forKeyPath:@"connectedNodeCount" options:NSKeyValueObservingOptionNew context:NULL];
     ((SCShinyWindow*)self.window).indicator.connectedNodes = [[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue];
     if (!chatView)
@@ -229,10 +269,17 @@
 }
 
 - (void)confirmDeleteFriend:(NSNotification *)notification {
-    if (self.window.attachedSheet)
+    if (self.window.attachedSheet || !notification.userInfo[@"friend"])
         return;
     NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Do you really want to delete %@ from your friends list?", @""), ((DESFriend*)notification.userInfo[@"friend"]).displayName] defaultButton:@"Yes" alternateButton:@"No" otherButton:nil informativeTextWithFormat:NSLocalizedString(@"You cannot undo this, and all chat history will be lost.", @"")];
     [alert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(deleteFriendConfirmDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)notification.userInfo[@"friend"]];
+}
+
+- (void)confirmDeleteGroup:(NSNotification *)notification {
+    if (self.window.attachedSheet || !notification.userInfo[@"chat"])
+        return;
+    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Do you really want to leave this group chat?", @"") defaultButton:@"Yes" alternateButton:@"No" otherButton:nil informativeTextWithFormat:NSLocalizedString(@"You won't be able to join again without an invitation.", @"")];
+    [alert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(deleteGroupConfirmDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)notification.userInfo[@"chat"]];
 }
 
 - (void)deleteFriendConfirmDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
@@ -240,6 +287,31 @@
     if (returnCode == NSOKButton) {
         [f.owner removeFriend:f];
     }
+}
+
+- (void)deleteGroupConfirmDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    id<DESChatContext> f = (__bridge id)contextInfo;
+    if (returnCode == NSOKButton) {
+        [f.friendManager removeGroupChat:f];
+    }
+}
+
+- (void)joinGroupChat:(NSNotification *)notification {
+    DESGroupChat *grp = notification.userInfo[@"invite"];
+    id<DESChatContext> ret = [grp.owner joinGroupChat:grp];
+    if (!ret) {
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to join group chat", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The group chat could not be joined because an error occurred.", @"")];
+        [alert beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+    }
+}
+
+- (void)rejectGroupChat:(NSNotification *)notification {
+    DESGroupChat *grp = notification.userInfo[@"invite"];
+    [grp.owner rejectGroupChatInvitation:grp];
+}
+
+- (IBAction)modeChange:(NSSegmentedControl *)sender {
+    [self changeListMode:sender.selectedSegment];
 }
 
 - (void)dealloc {
@@ -261,6 +333,19 @@
 
 - (void)addFriendSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
+    _addFriendSheet = nil;
+}
+
+- (IBAction)presentGroupChatSheet:(id)sender {
+    if (!_groupChatSheet)
+        _groupChatSheet = [[SCGroupChatSheetController alloc] initWithWindowNibName:@"NewGroupChat"];
+    [_groupChatSheet loadWindow];
+    [NSApp beginSheet:_groupChatSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(groupChatSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+}
+
+- (void)groupChatSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    [sheet orderOut:self];
+    _groupChatSheet = nil;
 }
 
 - (IBAction)presentBootstrappingSheet:(id)sender {
@@ -272,6 +357,7 @@
 - (void)bootstrapSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
     [self checkKeyQueue];
+    _bootstrapSheet = nil;
 }
 
 - (IBAction)presentCustomStatusSheet:(id)sender {
@@ -321,13 +407,14 @@
     NSString *proposed = nil;
     [sheet orderOut:self];
     switch (returnCode) {
-        case 1: /* Nickname was changed. */
+        case 1: {/* Nickname was changed. */
             proposed = [self.nickSheetField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if ([proposed isEqualToString:@""]) return;
             if (![[DESToxNetworkConnection sharedConnection].me.displayName isEqualToString:proposed]) {
                 [DESToxNetworkConnection sharedConnection].me.displayName = proposed;
             }
             break;
+        }
         case 2: {
             proposed = [self.statusSheetField.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if ([proposed isEqualToString:@""]) return;
@@ -354,10 +441,14 @@
 }
 
 - (IBAction)deleteFriendHighlightedInList:(id)sender {
-    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0)
+    if (self.listView.selectedRow == -1)
         return;
     /* Pretend user clicked Delete Friend... in cell's menu. */
-    NSNotification *dummy = [NSNotification notificationWithName:@"deleteFriend" object:nil userInfo:@{@"friend": [self friendInRow:self.listView.selectedRow]}];
+    NSNotification *dummy = nil;
+    if (listMode == SCListModeFriends)
+        dummy = [NSNotification notificationWithName:@"deleteFriend" object:nil userInfo:@{@"friend": [self friendInRow:self.listView.selectedRow]}];
+    else
+        dummy = [NSNotification notificationWithName:@"leaveGroup" object:nil userInfo:@{@"chat": [self groupChatInRow:self.listView.selectedRow]}];
     [self confirmDeleteFriend:dummy];
 }
 
@@ -413,58 +504,176 @@
 
 #pragma mark - PXListView delegate
 
+/* TODO: VERY IMPORTANT: cleanup this code!!!
+ * Adding the groupchat tab to it made it really messy. 
+ * Maybe split the PXListViewDelegate methods off to their own
+ * class? */
+
+- (void)changeListMode:(SCListMode)mode {
+    if (mode == listMode)
+        return;
+    self.modeSelector.selectedSegment = (mode == SCListModeGroups);
+    listMode = mode;
+    NSString *modeStr = (mode == SCListModeGroups) ? @"groups" : @"friends";
+    [[NSUserDefaults standardUserDefaults] setObject:modeStr forKey:@"harmonicsCurrentSelected"];
+    [_listView reloadData];
+    _listView.selectedRow = (mode == SCListModeGroups ? selectedGroup : selectedFriend);
+}
+
 - (DESFriend *)friendInRow:(NSUInteger)row {
-    if (row == 0 || row == -1)
+    if (row == -1 || row >= [_friendList count])
         return nil;
-    return _friendList[row - 1];
+    return _friendList[row];
+}
+
+- (id<DESChatContext>)groupChatInRow:(NSUInteger)row {
+    if (row == -1 || row >= [_groupList count])
+        return nil;
+    if ([_groupList[row] isKindOfClass:[DESGroupChat class]])
+        return nil;
+    else
+        return _groupList[row];
 }
 
 - (void)selectFriend:(DESFriend *)aFriend {
-    if (!aFriend)
+    if (!aFriend || listMode != SCListModeFriends)
         return;
     NSUInteger row = [_friendList indexOfObject:aFriend];
     if (row == NSNotFound)
         return;
     else
-        self.listView.selectedRow = row + 1;
+        self.listView.selectedRow = row;
 }
 
-- (void)reloadList:(NSNotification *)notification {
+- (void)reloadListModeFriends:(NSNotification *)notification {
     NSArray *fl = [[DESToxNetworkConnection sharedConnection].friendManager.friends copy];
     NSUInteger selIndex = self.listView.selectedRow;
+    DESFriend *f = ((DESFriend*)notification.userInfo[DESArrayObjectKey]);
+    if (!f) {
+        [self.listView reloadData];
+        self.listView.selectedRow = selIndex;
+        return;
+    }
     if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeRemove) {
-        [(SCAppDelegate*)[NSApp delegate] closeWindowsContainingDESContext:[self friendInRow:selIndex].chatContext];
-        if (((DESFriend*)notification.userInfo[DESArrayFriendKey]).chatContext == chatView.context) {
+        [(SCAppDelegate*)[NSApp delegate] closeWindowsContainingDESContext:f.chatContext];
+        if (f.chatContext == chatView.context) {
             chatView.context = nil;
         }
         selIndex -= 1;
-    } else if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd && (selIndex == -1 || selIndex == 0)) {
-        selIndex = 1;
-    }
-    if (selIndex == 0) {
-        selIndex = -1;
-        selected = 0;
+    } else if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        if (selIndex == -1)
+            selIndex = 0;
     }
     _friendList = fl;
-    [self.listView reloadData];
-    self.listView.selectedRow = selIndex;
+    if (selIndex >= [_friendList count]) {
+        selIndex = -1;
+        selectedFriend = -1;
+    }
+    if (listMode == SCListModeFriends) {
+        [self.listView reloadData];
+        self.listView.selectedRow = selIndex;
+    }
+}
+
+- (void)reloadListModeGroups:(NSNotification *)notification {
+    DESFriendManager *fm = [DESToxNetworkConnection sharedConnection].friendManager;
+    NSArray *inviteList = [fm.groupRequests copy];
+    NSArray *groupContexts = [fm.chatContexts filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id<DESChatContext> obj, NSDictionary *bindings) {
+        return [[obj class] type] == DESContextTypeGroupChat;
+    }]];
+    NSMutableArray *c = [[NSMutableArray alloc] initWithCapacity:[inviteList count] + [groupContexts count]];
+    [c addObjectsFromArray:groupContexts];
+    [c addObjectsFromArray:inviteList];
+    NSInteger numberOfGroupRequests = [inviteList count];
+    if (numberOfGroupRequests) {
+        [self.modeSelector setLabel:[NSString stringWithFormat:NSLocalizedString(@"Groups (%li)", @""), numberOfGroupRequests] forSegment:1];
+    } else {
+        [self.modeSelector setLabel:[NSString stringWithFormat:NSLocalizedString(@"Groups", @""), numberOfGroupRequests] forSegment:1];
+    }
+    _groupList = c;
+    NSUInteger selIndex = self.listView.selectedRow;
+    /* We can make the assumption that invites will never be selected,
+     * so we don't have to muck around with invisible boundaries etc... */
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeRemove) {
+        [(SCAppDelegate*)[NSApp delegate] closeWindowsContainingDESContext:notification.userInfo[DESArrayObjectKey]];
+        if (notification.userInfo[DESArrayObjectKey] == chatView.context) {
+            chatView.context = nil;
+        }
+        selIndex -= 1;
+    } else if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        if (selIndex == -1)
+            selIndex = 0;
+    }
+    if (selIndex >= [groupContexts count]) {
+        selIndex = -1;
+        selectedGroup = -1;
+    }
+    if (listMode == SCListModeGroups) {
+        [self.listView reloadData];
+        self.listView.selectedRow = selIndex;
+    }
+}
+
+- (void)reloadList:(NSNotification *)notification {
+    if (notification.name == DESFriendArrayDidChangeNotification) {
+        [self reloadListModeFriends:notification];
+    } else {
+        [self reloadListModeGroups:notification];
+    }
+}
+
+- (void)listViewSelectionDidChangeModeFriends:(NSNotification *)aNotification {
+    DESFriend *friend = [self friendInRow:self.listView.selectedRow];
+    if (friend) {
+        chatView.context = friend.chatContext;
+        [(SCAppDelegate*)[NSApp delegate] clearUnreadCountForChatContext:friend.chatContext];
+    }
+    [(SCFriendListItemCell*)[self.listView cellForRowAtIndex:self.listView.selectedRow] changeUnreadIndicatorState:YES];
+}
+
+- (void)listViewSelectionDidChangeModeGroups:(NSNotification *)aNotification {
+    id<DESChatContext> grp = [self groupChatInRow:self.listView.selectedRow];
+    if (grp) {
+        chatView.context = grp;
+        [(SCAppDelegate*)[NSApp delegate] clearUnreadCountForChatContext:grp];
+    } else {
+        if ([self groupChatInRow:selectedGroup]) {
+            self.listView.selectedRow = selectedGroup;
+        } else {
+            selectedGroup = -1;
+            self.listView.selectedRow = -1;
+        }
+    }
 }
 
 - (void)listViewSelectionDidChange:(NSNotification *)aNotification {
-    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0) {
-        if (selected != -1 && selected != 0) {
-            self.listView.selectedRow = selected;
+    if (self.listView.selectedRow == -1) {
+        if (listMode == SCListModeFriends) {
+            if (selectedFriend != -1) {
+                self.listView.selectedRow = selectedFriend;
+            } else {
+                chatView.context = nil;
+            }
         } else {
-            chatView.context = nil;
+            if (selectedGroup != -1) {
+                self.listView.selectedRow = selectedGroup;
+            } else {
+                chatView.context = nil;
+            }
         }
     } else {
-        selected = self.listView.selectedRow;
-        chatView.context = [self friendInRow:self.listView.selectedRow].chatContext;
+        if (listMode == SCListModeFriends) {
+            selectedFriend = self.listView.selectedRow;
+            [self listViewSelectionDidChangeModeFriends:aNotification];
+        } else {
+            selectedGroup = self.listView.selectedRow;
+            [self listViewSelectionDidChangeModeGroups:aNotification];
+        }
     }
 }
 
 - (void)listView:(PXListView *)aListView rowDoubleClicked:(NSUInteger)rowIndex {
-    if (self.listView.selectedRow == -1 || self.listView.selectedRow == 0) {
+    if (self.listView.selectedRow == -1) {
         return;
     }
     SCAppDelegate *delegate = [NSApp delegate];
@@ -472,33 +681,51 @@
 }
 
 - (NSUInteger)numberOfRowsInListView:(PXListView *)aListView {
-    return [_friendList count] + 1;
+    if (listMode == SCListModeFriends)
+        return [_friendList count];
+    else
+        return [_groupList count];
 }
 
 - (CGFloat)listView:(PXListView *)aListView heightOfRow:(NSUInteger)row {
-    if (row == 0)
-        return 17;
-    else
-        return 42;
+    return 42;
+}
+
+- (PXListViewCell *)listView:(PXListView *)aListView friendModeCellForRow:(NSUInteger)row {
+    SCFriendListItemCell *cell = nil;
+    if (!(cell = (SCFriendListItemCell*)[aListView dequeueCellWithReusableIdentifier:@"FriendCell"])) {
+        cell = [SCFriendListItemCell cellLoadedFromNibNamed:@"FriendCell" bundle:[NSBundle mainBundle] reusableIdentifier:@"FriendCell"];
+    }
+    DESFriend *friend = [self friendInRow:row];
+    [cell bindToFriend:friend];
+    return cell;
+}
+
+- (PXListViewCell *)listView:(PXListView *)aListView groupsModeCellForRow:(NSUInteger)row {
+    id listobj = _groupList[row];
+    if ([listobj conformsToProtocol:@protocol(DESChatContext)]) {
+        SCFriendListGroupCell *cell = nil;
+        if (!(cell = (SCFriendListGroupCell*)[aListView dequeueCellWithReusableIdentifier:@"GroupCell"])) {
+            cell = [SCFriendListGroupCell cellLoadedFromNibNamed:@"GroupCell" bundle:[NSBundle mainBundle] reusableIdentifier:@"GroupCell"];
+        }
+        [cell bindToChatContext:listobj];
+        return cell;
+    } else if ([listobj isKindOfClass:[DESGroupChat class]]) {
+        SCGroupRequestCell *cell = nil;
+        if (!(cell = (SCGroupRequestCell*)[aListView dequeueCellWithReusableIdentifier:@"GroupRequestCell"])) {
+            cell = [SCGroupRequestCell cellLoadedFromNibNamed:@"GroupRequestCell" bundle:[NSBundle mainBundle] reusableIdentifier:@"GroupRequestCell"];
+        }
+        [cell bindToGroupChat:listobj];
+        return cell;
+    }
+    return nil;
 }
 
 - (PXListViewCell *)listView:(PXListView *)aListView cellForRow:(NSUInteger)row {
-    if (row == 0) {
-        SCFriendListHeaderCell *cell = nil;
-        if (!(cell = (SCFriendListHeaderCell*)[aListView dequeueCellWithReusableIdentifier:@"SectHeader"])) {
-            cell = [[SCFriendListHeaderCell alloc] initWithFrame:NSMakeRect(0, 0, 100, 17)];
-            cell.reusableIdentifier = @"SectHeader";
-        }
-        cell.stringValue = NSLocalizedString(@"Friends", @"");
-        return cell;
-    } else {
-        SCFriendListItemCell *cell = nil;
-        if (!(cell = (SCFriendListItemCell*)[aListView dequeueCellWithReusableIdentifier:@"FriendCell"])) {
-            cell = [SCFriendListItemCell cellLoadedFromNibNamed:@"FriendCell" bundle:[NSBundle mainBundle] reusableIdentifier:@"FriendCell"];
-        }
-        [cell bindToFriend:[self friendInRow:row]];
-        return cell;
-    }
+    if (listMode == SCListModeFriends)
+        return [self listView:aListView friendModeCellForRow:row];
+    else
+        return [self listView:aListView groupsModeCellForRow:row];
 }
 
 #pragma mark - Misc.

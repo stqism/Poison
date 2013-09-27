@@ -24,9 +24,14 @@
 }
 
 - (void)fillFields {
+    self.acceptButton.enabled = NO;
+    self.rejectButton.enabled = NO;
+    self.dateField.stringValue = @"--";
+    self.keyField.stringValue = @"";
+    self.dataField.string = @"";
+    [self.listView reloadData];
     if ([self numberOfRowsInListView:self.listView] > 0)
         self.listView.selectedRow = 0;
-    [self.listView reloadData];
 }
 
 - (IBAction)finishedSheet:(id)sender {

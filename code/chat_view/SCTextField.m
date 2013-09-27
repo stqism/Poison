@@ -173,4 +173,8 @@
     [self.cell drawInteriorWithFrame:self.bounds inView:self];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

@@ -35,14 +35,18 @@
 		F500604717ADFC8C00C864C4 /* SCShinyWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604617ADFC8C00C864C4 /* SCShinyWindow.m */; };
 		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
 		F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */; };
+		F5096E2D17EA7DDE00B7F77A /* SCCapsuleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5096E2C17EA7DDE00B7F77A /* SCCapsuleContainer.m */; };
 		F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */; };
 		F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51E65C817B0A48200BF09D4 /* RequestsCell.xib */; };
 		F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */; };
 		F52BDED117B9D7E1007CF88B /* SCWebKitFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */; };
 		F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */; };
+		F52CACB117E4E59A0064677A /* NewGroupChat.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52CACB017E4E59A0064677A /* NewGroupChat.xib */; };
+		F52CACB617E4EB320064677A /* SCGroupChatSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F52CACB517E4EB320064677A /* SCGroupChatSheetController.m */; };
 		F52DF77717BAADE90088DDDB /* InstallResource.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52DF77617BAADE90088DDDB /* InstallResource.xib */; };
 		F52DF77917BABFF10088DDDB /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */; };
+		F536410117F0B7EF002298A5 /* GroupRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F536410017F0B7EF002298A5 /* GroupRequestCell.xib */; };
 		F5383D9517CC03DB00DA0195 /* SCAdvancedPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5383D9417CC03DB00DA0195 /* SCAdvancedPaneController.m */; };
 		F5383D9817CC042400DA0195 /* AdvancedPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5383D9717CC042400DA0195 /* AdvancedPane.xib */; };
 		F547D6F317C68DE500D3E4C5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F547D6F217C68DE500D3E4C5 /* main.c */; };
@@ -65,6 +69,9 @@
 		F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F55E797F17AF4B9C0044092B /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55E797E17AF4B9C0044092B /* ChatView.xib */; };
 		F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */; };
+		F56B506F17F3B88F0007DE6F /* GroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F56B506E17F3B88F0007DE6F /* GroupCell.xib */; };
+		F56B507317F3B8CE0007DE6F /* SCFriendListGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F56B507217F3B8CE0007DE6F /* SCFriendListGroupCell.m */; };
+		F56B507617F3C5EC0007DE6F /* SCGroupRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F56B507517F3C5EC0007DE6F /* SCGroupRequestCell.m */; };
 		F57385A917C6B64B00B8E7EC /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F5758EC617BC4C7300CBCE64 /* SCWebKitFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */; };
 		F5758EC717BC4C7500CBCE64 /* SCWebKitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */; };
@@ -163,6 +170,10 @@
 		F5D148F817D6AD88003BEA73 /* SCSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D148F717D6AD88003BEA73 /* SCSoundManager.m */; };
 		F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
 		F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
+		F5D864D217F28A8500FE4A78 /* icon_group_ignore.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D864CE17F28A8500FE4A78 /* icon_group_ignore.png */; };
+		F5D864D317F28A8500FE4A78 /* icon_group_ignore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D864CF17F28A8500FE4A78 /* icon_group_ignore@2x.png */; };
+		F5D864D417F28A8500FE4A78 /* icon_group_join.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D864D017F28A8500FE4A78 /* icon_group_join.png */; };
+		F5D864D517F28A8500FE4A78 /* icon_group_join@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D864D117F28A8500FE4A78 /* icon_group_join@2x.png */; };
 		F5DD111A17D8293F00123D8A /* unread-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DD111617D8293F00123D8A /* unread-blue.png */; };
 		F5DD111B17D8293F00123D8A /* unread-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DD111717D8293F00123D8A /* unread-grey@2x.png */; };
 		F5DD111C17D8293F00123D8A /* unread-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DD111817D8293F00123D8A /* unread-blue@2x.png */; };
@@ -367,6 +378,8 @@
 		F500604917AE06F700C864C4 /* SCDHTStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDHTStatusView.m; sourceTree = "<group>"; };
 		F506272717C53BB70069EDE4 /* SCStandaloneWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStandaloneWindowController.h; sourceTree = "<group>"; };
 		F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStandaloneWindowController.m; sourceTree = "<group>"; };
+		F5096E2B17EA7DDE00B7F77A /* SCCapsuleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCapsuleContainer.h; sourceTree = "<group>"; };
+		F5096E2C17EA7DDE00B7F77A /* SCCapsuleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCapsuleContainer.m; sourceTree = "<group>"; };
 		F51E65C517B0A11600BF09D4 /* SCFriendRequestsSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendRequestsSheetController.h; sourceTree = "<group>"; };
 		F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendRequestsSheetController.m; sourceTree = "<group>"; };
 		F51E65C817B0A48200BF09D4 /* RequestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsCell.xib; sourceTree = "<group>"; };
@@ -376,9 +389,13 @@
 		F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWebKitFriend.m; sourceTree = "<group>"; };
 		F52BDED217B9DFDA007CF88B /* SCWebKitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitMessage.h; sourceTree = "<group>"; };
 		F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWebKitMessage.m; sourceTree = "<group>"; };
+		F52CACB017E4E59A0064677A /* NewGroupChat.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewGroupChat.xib; sourceTree = "<group>"; };
+		F52CACB417E4EB320064677A /* SCGroupChatSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGroupChatSheetController.h; sourceTree = "<group>"; };
+		F52CACB517E4EB320064677A /* SCGroupChatSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGroupChatSheetController.m; sourceTree = "<group>"; };
 		F52DF77617BAADE90088DDDB /* InstallResource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstallResource.xib; sourceTree = "<group>"; };
 		F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
+		F536410017F0B7EF002298A5 /* GroupRequestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupRequestCell.xib; sourceTree = "<group>"; };
 		F5383D9317CC03DB00DA0195 /* SCAdvancedPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAdvancedPaneController.h; sourceTree = "<group>"; };
 		F5383D9417CC03DB00DA0195 /* SCAdvancedPaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAdvancedPaneController.m; sourceTree = "<group>"; };
 		F5383D9717CC042400DA0195 /* AdvancedPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedPane.xib; sourceTree = "<group>"; };
@@ -397,6 +414,11 @@
 		F55E797E17AF4B9C0044092B /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatView.xib; sourceTree = "<group>"; };
 		F55E798417AF52EE0044092B /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
 		F55E798517AF52EE0044092B /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
+		F56B506E17F3B88F0007DE6F /* GroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCell.xib; sourceTree = "<group>"; };
+		F56B507117F3B8CE0007DE6F /* SCFriendListGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFriendListGroupCell.h; sourceTree = "<group>"; };
+		F56B507217F3B8CE0007DE6F /* SCFriendListGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFriendListGroupCell.m; sourceTree = "<group>"; };
+		F56B507417F3C5EC0007DE6F /* SCGroupRequestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGroupRequestCell.h; sourceTree = "<group>"; };
+		F56B507517F3C5EC0007DE6F /* SCGroupRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGroupRequestCell.m; sourceTree = "<group>"; };
 		F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCThemeManager.h; sourceTree = "<group>"; };
 		F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
 		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
@@ -521,6 +543,10 @@
 		F5D148F617D6AD88003BEA73 /* SCSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSoundManager.h; sourceTree = "<group>"; };
 		F5D148F717D6AD88003BEA73 /* SCSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSoundManager.m; sourceTree = "<group>"; };
 		F5D36BB517C2DF7000AE9138 /* themelib.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = themelib.js; sourceTree = "<group>"; };
+		F5D864CE17F28A8500FE4A78 /* icon_group_ignore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_ignore.png; sourceTree = "<group>"; };
+		F5D864CF17F28A8500FE4A78 /* icon_group_ignore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_ignore@2x.png"; sourceTree = "<group>"; };
+		F5D864D017F28A8500FE4A78 /* icon_group_join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_join.png; sourceTree = "<group>"; };
+		F5D864D117F28A8500FE4A78 /* icon_group_join@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_join@2x.png"; sourceTree = "<group>"; };
 		F5DD111617D8293F00123D8A /* unread-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-blue.png"; sourceTree = "<group>"; };
 		F5DD111717D8293F00123D8A /* unread-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-grey@2x.png"; sourceTree = "<group>"; };
 		F5DD111817D8293F00123D8A /* unread-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-blue@2x.png"; sourceTree = "<group>"; };
@@ -656,6 +682,8 @@
 		F500603517ADEF6100C864C4 /* main_window */ = {
 			isa = PBXGroup;
 			children = (
+				F5096E2B17EA7DDE00B7F77A /* SCCapsuleContainer.h */,
+				F5096E2C17EA7DDE00B7F77A /* SCCapsuleContainer.m */,
 				F500604817AE06F600C864C4 /* SCDHTStatusView.h */,
 				F500604917AE06F700C864C4 /* SCDHTStatusView.m */,
 				F500604517ADFC8C00C864C4 /* SCShinyWindow.h */,
@@ -701,6 +729,15 @@
 				F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */,
 			);
 			path = theme_api;
+			sourceTree = "<group>";
+		};
+		F52CACB317E4EB150064677A /* add_group_chat */ = {
+			isa = PBXGroup;
+			children = (
+				F52CACB417E4EB320064677A /* SCGroupChatSheetController.h */,
+				F52CACB517E4EB320064677A /* SCGroupChatSheetController.m */,
+			);
+			path = add_group_chat;
 			sourceTree = "<group>";
 		};
 		F547D6F117C68DE500D3E4C5 /* genki */ = {
@@ -866,6 +903,7 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F52CACB317E4EB150064677A /* add_group_chat */,
 				F5D148F017D6AC3C003BEA73 /* notification */,
 				F5ECC84C17CEEA7C000E01D2 /* connection_inspector */,
 				F506272517C53B950069EDE4 /* popout_window */,
@@ -905,7 +943,10 @@
 				F5A3A85817B342C20068AFA0 /* Requests.xib */,
 				F51E65C817B0A48200BF09D4 /* RequestsCell.xib */,
 				F5DD1BE817B44D4F000AF9C6 /* AddFriend.xib */,
+				F52CACB017E4E59A0064677A /* NewGroupChat.xib */,
 				F5B9113917B203CF00E29017 /* FriendCell.xib */,
+				F56B506E17F3B88F0007DE6F /* GroupCell.xib */,
+				F536410017F0B7EF002298A5 /* GroupRequestCell.xib */,
 				F55E797E17AF4B9C0044092B /* ChatView.xib */,
 				F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */,
 				F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */,
@@ -952,6 +993,10 @@
 				F5DD111817D8293F00123D8A /* unread-blue@2x.png */,
 				F5DD111917D8293F00123D8A /* unread-grey.png */,
 				F5DD111717D8293F00123D8A /* unread-grey@2x.png */,
+				F5D864CE17F28A8500FE4A78 /* icon_group_ignore.png */,
+				F5D864CF17F28A8500FE4A78 /* icon_group_ignore@2x.png */,
+				F5D864D017F28A8500FE4A78 /* icon_group_join.png */,
+				F5D864D117F28A8500FE4A78 /* icon_group_join@2x.png */,
 			);
 			path = ui_images;
 			sourceTree = "<group>";
@@ -1031,8 +1076,12 @@
 			children = (
 				F5B9113317B1E2D200E29017 /* SCFriendListHeaderCell.h */,
 				F5B9113417B1E2D200E29017 /* SCFriendListHeaderCell.m */,
+				F56B507117F3B8CE0007DE6F /* SCFriendListGroupCell.h */,
+				F56B507217F3B8CE0007DE6F /* SCFriendListGroupCell.m */,
 				F5B9113617B203A500E29017 /* SCFriendListItemCell.h */,
 				F5B9113717B203A500E29017 /* SCFriendListItemCell.m */,
+				F56B507417F3C5EC0007DE6F /* SCGroupRequestCell.h */,
+				F56B507517F3C5EC0007DE6F /* SCGroupRequestCell.m */,
 			);
 			path = contact_list;
 			sourceTree = "<group>";
@@ -1412,16 +1461,20 @@
 				F59A062017AC873A00E9B15F /* InfoPlist.strings in Resources */,
 				F59A062417AC877C00E9B15F /* Poison.entitlements in Resources */,
 				F59A062617AC887300E9B15F /* Poison.iconset in Resources */,
+				F5D864D217F28A8500FE4A78 /* icon_group_ignore.png in Resources */,
 				F59A063117AC88DA00E9B15F /* icon-frequests.png in Resources */,
 				F59A063217AC88DA00E9B15F /* icon_info.png in Resources */,
 				F59A254217D6E3800015F103 /* Default.psnSounds in Resources */,
 				F59A063317AC88DA00E9B15F /* icon_minus.png in Resources */,
+				F5D864D417F28A8500FE4A78 /* icon_group_join.png in Resources */,
 				F59A063417AC88DA00E9B15F /* icon_plus.png in Resources */,
+				F5D864D517F28A8500FE4A78 /* icon_group_join@2x.png in Resources */,
 				F59A063517AC88DA00E9B15F /* icon_smiley.png in Resources */,
 				F59A063617AC88DA00E9B15F /* status-light-away.png in Resources */,
 				F59A063717AC88DA00E9B15F /* status-light-offline.png in Resources */,
 				F59A063817AC88DA00E9B15F /* status-light-online.png in Resources */,
 				F59A063917AC88DA00E9B15F /* tox_logo.png in Resources */,
+				F56B506F17F3B88F0007DE6F /* GroupCell.xib in Resources */,
 				F59107EA17CC075700251B7A /* IdentityPane.xib in Resources */,
 				F59A064317AC897800E9B15F /* Localizable.strings in Resources */,
 				F5E4821017D57BF000CC1783 /* icon_info@2x.png in Resources */,
@@ -1436,7 +1489,10 @@
 				F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */,
 				F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */,
 				F5DD111D17D8293F00123D8A /* unread-grey.png in Resources */,
+				F5D864D317F28A8500FE4A78 /* icon_group_ignore@2x.png in Resources */,
 				F57C3A3C17B160A000325A24 /* shiina.icns in Resources */,
+				F536410117F0B7EF002298A5 /* GroupRequestCell.xib in Resources */,
+				F52CACB117E4E59A0064677A /* NewGroupChat.xib in Resources */,
 				F5DD111B17D8293F00123D8A /* unread-grey@2x.png in Resources */,
 				F5A3A85A17B34E580068AFA0 /* BootstrapSheet.xib in Resources */,
 				F5B9113A17B203CF00E29017 /* FriendCell.xib in Resources */,
@@ -1542,6 +1598,7 @@
 				F5C7BBF017AC8C0B009BA3E4 /* SCAppDelegate.m in Sources */,
 				F5C7BBF117AC8C0C009BA3E4 /* main.m in Sources */,
 				F59107FF17CC080E00251B7A /* SCGeneralPaneController.m in Sources */,
+				F5096E2D17EA7DDE00B7F77A /* SCCapsuleContainer.m in Sources */,
 				F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */,
 				F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */,
 				F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */,
@@ -1560,12 +1617,15 @@
 				F5A9CC3717AF2446003423E0 /* PXListViewCell.m in Sources */,
 				F59107FD17CC080E00251B7A /* SCAlertsPaneController.m in Sources */,
 				F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */,
+				F52CACB617E4EB320064677A /* SCGroupChatSheetController.m in Sources */,
+				F56B507617F3C5EC0007DE6F /* SCGroupRequestCell.m in Sources */,
 				F591080217CC080E00251B7A /* SCStylePaneController.m in Sources */,
 				F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */,
 				F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */,
 				F5B9113517B1E2D200E29017 /* SCFriendListHeaderCell.m in Sources */,
 				F5B9113817B203A500E29017 /* SCFriendListItemCell.m in Sources */,
 				F5A3A86217B350960068AFA0 /* SCAboutWindowController.m in Sources */,
+				F56B507317F3B8CE0007DE6F /* SCFriendListGroupCell.m in Sources */,
 				F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */,
 				F5556B8317B5908A00E636FE /* SCChatViewController.m in Sources */,
 				F5556B8617B5947500E636FE /* SCChatView.m in Sources */,
@@ -1970,6 +2030,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Poison Code Signing";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -1980,7 +2041,9 @@
 				OTHER_CFLAGS = (
 					"-Wall",
 					"-DTRY_TO_PREVENT_UNICODE_CRASH",
+					"-Werror",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1990,6 +2053,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Poison Code Signing";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -1999,7 +2063,9 @@
 				OTHER_CFLAGS = (
 					"-Wall",
 					"-DTRY_TO_PREVENT_UNICODE_CRASH",
+					"-Werror",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
