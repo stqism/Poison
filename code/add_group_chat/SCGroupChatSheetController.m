@@ -7,7 +7,6 @@
 
 - (void)awakeFromNib {
     [super windowDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshFriendsList:) name:DESFriendArrayDidChangeNotification object:[DESToxNetworkConnection sharedConnection].friendManager];
     self.friendsList.dataSource = self;
     [self refreshFriendsList:nil];
 }
@@ -17,7 +16,10 @@
 }
 
 - (IBAction)createGroupChat:(id)sender {
-    [[DESToxNetworkConnection sharedConnection].friendManager createGroupChatWithName:self.nameField.stringValue];
+    id<DESChatContext> ctx = [[DESToxNetworkConnection sharedConnection].friendManager createGroupChatWithName:self.nameField.stringValue];
+    [self.friendsList.selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [ctx addParticipant:friends[idx]];
+    }];
 }
 
 - (void)refreshFriendsList:(NSNotification *)notification {
@@ -36,10 +38,6 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     return ((DESFriend*)friends[row]).displayName;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

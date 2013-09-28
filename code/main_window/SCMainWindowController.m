@@ -257,7 +257,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
 }
 
 - (void)focusContext:(id<DESChatContext>)ctx {
-    [self selectFriend:[ctx.participants anyObject]];
+    [self selectContext:ctx];
 }
 
 - (void)updateFriendRequestCount:(NSNotification *)notification {
@@ -535,14 +535,29 @@ typedef NS_ENUM(NSInteger, SCListMode) {
         return _groupList[row];
 }
 
-- (void)selectFriend:(DESFriend *)aFriend {
-    if (!aFriend || listMode != SCListModeFriends)
+- (void)selectContext:(id<DESChatContext>)aContext {
+    if (!aContext)
         return;
-    NSUInteger row = [_friendList indexOfObject:aFriend];
-    if (row == NSNotFound)
-        return;
-    else
-        self.listView.selectedRow = row;
+    if (aContext.type == DESContextTypeOneToOne && listMode != SCListModeFriends) {
+        [self changeListMode:SCListModeFriends];
+    } else if (aContext.type == DESContextTypeGroupChat && listMode != SCListModeGroups) {
+        [self changeListMode:SCListModeGroups];
+    }
+    if (aContext.type == DESContextTypeOneToOne) {
+        [_friendList enumerateObjectsUsingBlock:^(DESFriend *obj, NSUInteger idx, BOOL *stop) {
+            if (obj.chatContext == aContext) {
+                self.listView.selectedRow = idx;
+                *stop = YES;
+            }
+        }];
+    } else {
+        [_groupList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if (obj == aContext) {
+                self.listView.selectedRow = idx;
+                *stop = YES;
+            }
+        }];
+    }
 }
 
 - (void)reloadListModeFriends:(NSNotification *)notification {
@@ -579,7 +594,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     DESFriendManager *fm = [DESToxNetworkConnection sharedConnection].friendManager;
     NSArray *inviteList = [fm.groupRequests copy];
     NSArray *groupContexts = [fm.chatContexts filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id<DESChatContext> obj, NSDictionary *bindings) {
-        return [[obj class] type] == DESContextTypeGroupChat;
+        return [obj type] == DESContextTypeGroupChat;
     }]];
     NSMutableArray *c = [[NSMutableArray alloc] initWithCapacity:[inviteList count] + [groupContexts count]];
     [c addObjectsFromArray:groupContexts];
