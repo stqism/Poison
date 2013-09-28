@@ -18,7 +18,6 @@
 				F57385A017C6B5D600B8E7EC /* PBXTargetDependency */,
 				F57385A817C6B5DE00B8E7EC /* PBXTargetDependency */,
 				F57385A217C6B5D700B8E7EC /* PBXTargetDependency */,
-				F57385A417C6B5DB00B8E7EC /* PBXTargetDependency */,
 				F57385A617C6B5DC00B8E7EC /* PBXTargetDependency */,
 			);
 			name = Everything;
@@ -193,9 +192,6 @@
 		F5ECC85017CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */; };
 		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
 		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
-		F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
-		F5FF959E17AD7A3700BB2F13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FF959D17AD7A3700BB2F13 /* main.m */; };
-		F5FF95A817AD7A8000BB2F13 /* Kudryavka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58A9AD617ACB85400923A25 /* Kudryavka.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,13 +222,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = F58A9AD517ACB85400923A25;
 			remoteInfo = Kudryavka;
-		};
-		F57385A317C6B5DB00B8E7EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F5FF959817AD7A3700BB2F13;
-			remoteInfo = TestKudryavka;
 		};
 		F57385A517C6B5DC00B8E7EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -282,13 +271,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = F5E5824517AC095E00D9409B;
 			remoteInfo = DeepEnd;
-		};
-		F5FF95A617AD7A7D00BB2F13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F58A9AD517ACB85400923A25;
-			remoteInfo = Kudryavka;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -354,15 +336,6 @@
 			);
 			name = "Copy Bundled Themes";
 			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5FF959717AD7A3700BB2F13 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -592,9 +565,7 @@
 		F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCConnectionInspectorSheetController.m; sourceTree = "<group>"; };
 		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
 		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
-		F5FF959917AD7A3700BB2F13 /* TestKudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestKudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5FF959A17AD7A3700BB2F13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		F5FF959D17AD7A3700BB2F13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,15 +614,6 @@
 				F55DCCC117BAF75600641071 /* DeepEnd.framework in Frameworks */,
 				F55DCCBF17BAF75200641071 /* WebKit.framework in Frameworks */,
 				F5DE01E017B9A704002D69E6 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5FF959617AD7A3700BB2F13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F5FF95A817AD7A8000BB2F13 /* Kudryavka.framework in Frameworks */,
-				F5FF959B17AD7A3700BB2F13 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +740,6 @@
 		F58A9AD817ACB85400923A25 /* kudryavka */ = {
 			isa = PBXGroup;
 			children = (
-				F5FF959C17AD7A3700BB2F13 /* TestKudryavka */,
 				F58A9ADF17ACB85400923A25 /* Kudryavka.h */,
 				F58A9AE017ACB85400923A25 /* Kudryavka.m */,
 				F5FE73B217AEC97C001EF4A3 /* keyserver */,
@@ -858,7 +819,6 @@
 			children = (
 				F59A05E017AC808900E9B15F /* Poison.app */,
 				F58A9AD617ACB85400923A25 /* Kudryavka.framework */,
-				F5FF959917AD7A3700BB2F13 /* TestKudryavka */,
 				F5DE01DF17B9A704002D69E6 /* Silica.app */,
 				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
 				F547D6F017C68DE500D3E4C5 /* genki */,
@@ -1234,15 +1194,6 @@
 			path = keyserver;
 			sourceTree = "<group>";
 		};
-		F5FF959C17AD7A3700BB2F13 /* TestKudryavka */ = {
-			isa = PBXGroup;
-			children = (
-				F5FF959D17AD7A3700BB2F13 /* main.m */,
-			);
-			name = TestKudryavka;
-			path = test;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1358,24 +1309,6 @@
 			productReference = F5DE01DF17B9A704002D69E6 /* Silica.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F5FF959817AD7A3700BB2F13 /* TestKudryavka */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F5FF95A317AD7A3700BB2F13 /* Build configuration list for PBXNativeTarget "TestKudryavka" */;
-			buildPhases = (
-				F5FF959517AD7A3700BB2F13 /* Sources */,
-				F5FF959617AD7A3700BB2F13 /* Frameworks */,
-				F5FF959717AD7A3700BB2F13 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F5FF95A717AD7A7D00BB2F13 /* PBXTargetDependency */,
-			);
-			name = TestKudryavka;
-			productName = TestKudryavka;
-			productReference = F5FF959917AD7A3700BB2F13 /* TestKudryavka */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1420,7 +1353,6 @@
 				F5DE01DE17B9A704002D69E6 /* Silica */,
 				F5A91FB717C03BC000B7C6DC /* Hibiki */,
 				F58A9AD517ACB85400923A25 /* Kudryavka */,
-				F5FF959817AD7A3700BB2F13 /* TestKudryavka */,
 				F547D6EF17C68DE500D3E4C5 /* genki */,
 				F573859717C6B5C400B8E7EC /* Everything */,
 			);
@@ -1668,14 +1600,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F5FF959517AD7A3700BB2F13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F5FF959E17AD7A3700BB2F13 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1698,11 +1622,6 @@
 			isa = PBXTargetDependency;
 			target = F58A9AD517ACB85400923A25 /* Kudryavka */;
 			targetProxy = F57385A117C6B5D700B8E7EC /* PBXContainerItemProxy */;
-		};
-		F57385A417C6B5DB00B8E7EC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F5FF959817AD7A3700BB2F13 /* TestKudryavka */;
-			targetProxy = F57385A317C6B5DB00B8E7EC /* PBXContainerItemProxy */;
 		};
 		F57385A617C6B5DC00B8E7EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1728,11 +1647,6 @@
 			isa = PBXTargetDependency;
 			name = DeepEnd;
 			targetProxy = F5A7E91817AD83CA00B6ADA7 /* PBXContainerItemProxy */;
-		};
-		F5FF95A717AD7A7D00BB2F13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F58A9AD517ACB85400923A25 /* Kudryavka */;
-			targetProxy = F5FF95A617AD7A7D00BB2F13 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2030,7 +1944,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Poison Code Signing";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -2053,7 +1967,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "Poison Code Signing";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "code/Poison-Prefix.pch";
@@ -2141,24 +2055,6 @@
 			};
 			name = Release;
 		};
-		F5FF95A417AD7A3700BB2F13 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		F5FF95A517AD7A3700BB2F13 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2221,15 +2117,6 @@
 			buildConfigurations = (
 				F5DE01F417B9A705002D69E6 /* Debug */,
 				F5DE01F517B9A705002D69E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F5FF95A317AD7A3700BB2F13 /* Build configuration list for PBXNativeTarget "TestKudryavka" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F5FF95A417AD7A3700BB2F13 /* Debug */,
-				F5FF95A517AD7A3700BB2F13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
