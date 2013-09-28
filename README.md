@@ -1,5 +1,3 @@
-**1.1 is now back in master. Further work will be done here so you don't have to follow random branches anymore.**
-
 ![](https://kirara.ca/g/icon_512x512.png)
 
 ## Poison
@@ -18,7 +16,7 @@ Since Poison is in early development, the UI might change in the near future. He
 
 ## Testing builds
 
-... are not available yet. Check back later!  
+You can download pre-built versions of Poison [here](https://kirara.ca/poison/releases/) and on the [GitHub releases page](https://github.com/stal888/Poison/releases).  
 You can also build manually (requires libsodium installed to /usr/local at the moment). Just run ``xcodebuild -workspace Poison.xcworkspace -scheme Poison``.  
 
 ## Coding guidelines
