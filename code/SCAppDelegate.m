@@ -192,6 +192,14 @@ char *const SCUnreadCountStoreKey = "";
     }
 }
 
+- (NSInteger)unreadCountForChatContext:(id<DESChatContext>)ctx {
+    id a = objc_getAssociatedObject(ctx, SCUnreadCountStoreKey);
+    if (!a)
+        return 0;
+    else
+        return [a integerValue];
+}
+
 - (void)clearUnreadCountForChatContext:(id<DESChatContext>)ctx {
     objc_setAssociatedObject(ctx, SCUnreadCountStoreKey, @(0), OBJC_ASSOCIATION_RETAIN);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"unreadCountChanged" object:ctx userInfo:@{@"newCount": @(0)}];

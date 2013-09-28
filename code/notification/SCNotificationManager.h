@@ -9,6 +9,7 @@ typedef NS_ENUM(NSInteger, SCEventType) {
     SCEventTypeNewChatMessage,
     SCEventTypeNewFriendRequest,
     SCEventTypeError,
+    SCEventTypeNewGroupInvite,
 };
 
 @interface NSUserNotification (SetIcon)

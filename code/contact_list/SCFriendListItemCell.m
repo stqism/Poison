@@ -94,6 +94,7 @@
         [self.userStatus setFrameOrigin:(NSPoint){originalOriginX, self.userStatus.frame.origin.y}];
         [self changeUserStatus:aFriend.userStatus];
     }
+    [self changeUnreadIndicatorState:[(SCAppDelegate*)[NSApp delegate] unreadCountForChatContext:referencedFriend.chatContext] == 0];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

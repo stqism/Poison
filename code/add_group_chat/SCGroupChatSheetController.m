@@ -20,6 +20,8 @@
     [self.friendsList.selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         [ctx addParticipant:friends[idx]];
     }];
+    self.friendsList.dataSource = nil;
+    [self cancelSheet:self];
 }
 
 - (void)refreshFriendsList:(NSNotification *)notification {

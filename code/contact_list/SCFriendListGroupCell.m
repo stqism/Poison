@@ -12,6 +12,7 @@
     chatContext = ctx;
     self.displayName.stringValue = ctx.name;
     self.userStatus.stringValue = @"--";
+    [self changeUnreadIndicatorState:[(SCAppDelegate*)[NSApp delegate] unreadCountForChatContext:ctx] == 0];
 }
 
 - (void)changeUnreadIndicatorState:(BOOL)hidden {
