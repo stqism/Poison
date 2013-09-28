@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.SystemVersion">13A584</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
+		<string key="IBDocument.AppKitVersion">1262</string>
+		<string key="IBDocument.HIToolboxVersion">695.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">4457.9</string>
+			<string key="NS.object.0">4510</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -39,7 +39,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="601360721">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="509567820">
@@ -47,7 +47,6 @@
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{33, 213}, {235, 18}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="158571027"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -56,7 +55,7 @@
 							<int key="NSCellFlags2">268435456</int>
 							<string key="NSContents">Automatically connect to the DHT</string>
 							<object class="NSFont" key="NSSupport" id="759075249">
-								<string key="NSName">LucidaGrande</string>
+								<string key="NSName">.LucidaGrandeUI</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
 							</object>
@@ -83,7 +82,6 @@
 						<int key="NSvFlags">1036</int>
 						<string key="NSFrame">{{35, 150}, {381, 5}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="57330823"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
@@ -116,7 +114,6 @@
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{47, 169}, {356, 38}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="285740099"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -374,7 +371,6 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{35, 20}, {381, 40}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSAntiCompressionPriority">{250, 750}</string>
 						<bool key="NSEnabled">YES</bool>
@@ -398,13 +394,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							</object>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="104553216">
 						<reference key="NSNextResponder" ref="601360721"/>
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{32, 67}, {126, 17}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="191480666"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -424,13 +420,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							</object>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="646126263">
 						<reference key="NSNextResponder" ref="601360721"/>
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{358, 95}, {9, 17}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="725587956"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -445,13 +441,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference key="NSTextColor" ref="452034484"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="725587956">
 						<reference key="NSNextResponder" ref="601360721"/>
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{366, 92}, {50, 22}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="104553216"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -468,13 +464,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference key="NSTextColor" ref="191418322"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="104130816">
 						<reference key="NSNextResponder" ref="601360721"/>
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{35, 92}, {323, 22}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="646126263"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -491,13 +487,13 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference key="NSTextColor" ref="191418322"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="57330823">
 						<reference key="NSNextResponder" ref="601360721"/>
 						<int key="NSvFlags">1292</int>
 						<string key="NSFrame">{{32, 122}, {387, 17}}</string>
 						<reference key="NSSuperview" ref="601360721"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="104130816"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSAntiCompressionPriority">{250, 750}</string>
@@ -513,12 +509,11 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<reference key="NSTextColor" ref="452034484"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{451, 252}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="509567820"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -847,68 +842,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">SCDHTPaneController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="bootstrapDetailsChanged:">id</string>
-						<string key="checkBoxChanged:">NSButton</string>
-						<string key="radioButtonChanged:">NSMatrix</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="bootstrapDetailsChanged:">
-							<string key="name">bootstrapDetailsChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="checkBoxChanged:">
-							<string key="name">checkBoxChanged:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="radioButtonChanged:">
-							<string key="name">radioButtonChanged:</string>
-							<string key="candidateClassName">NSMatrix</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="autoconnectCheck">NSButton</string>
-						<string key="hostField">NSTextField</string>
-						<string key="portField">NSTextField</string>
-						<string key="publicKeyField">NSTextField</string>
-						<string key="radioMatrix">NSMatrix</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="autoconnectCheck">
-							<string key="name">autoconnectCheck</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="hostField">
-							<string key="name">hostField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="portField">
-							<string key="name">portField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="publicKeyField">
-							<string key="name">publicKeyField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="radioMatrix">
-							<string key="name">radioMatrix</string>
-							<string key="candidateClassName">NSMatrix</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCDHTPaneController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>

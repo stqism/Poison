@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4457.9</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.SystemVersion">13A584</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
+		<string key="IBDocument.AppKitVersion">1262</string>
+		<string key="IBDocument.HIToolboxVersion">695.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">4457.9</string>
+			<string key="NS.object.0">4510</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -83,7 +83,7 @@
 							<int key="NSCellFlags2">272631808</int>
 							<string key="NSContents">Some text</string>
 							<object class="NSFont" key="NSSupport">
-								<string key="NSName">LucidaGrande</string>
+								<string key="NSName">.LucidaGrandeUI</string>
 								<double key="NSSize">11</double>
 								<int key="NSfFlags">3100</int>
 							</object>
@@ -108,6 +108,7 @@
 							</object>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSButton" id="110240752">
 						<reference key="NSNextResponder" ref="542870686"/>
@@ -121,7 +122,7 @@
 							<int key="NSCellFlags2">268435456</int>
 							<string key="NSContents">Don't ask me about this again</string>
 							<object class="NSFont" key="NSSupport" id="775168900">
-								<string key="NSName">LucidaGrande</string>
+								<string key="NSName">.LucidaGrandeUI</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
 							</object>
@@ -155,7 +156,7 @@
 							<int key="NSCellFlags2">272629760</int>
 							<string key="NSContents">Would you like Poison to choose a server for you?</string>
 							<object class="NSFont" key="NSSupport">
-								<string key="NSName">LucidaGrande-Bold</string>
+								<string key="NSName">.LucidaGrandeUI-Bold</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">2072</int>
 							</object>
@@ -172,6 +173,7 @@
 							</object>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSButton" id="815027497">
 						<reference key="NSNextResponder" ref="542870686"/>
@@ -272,6 +274,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="992851370"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
@@ -314,6 +317,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							</object>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="863893883">
 						<reference key="NSNextResponder" ref="255139612"/>
@@ -332,6 +336,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="992851370"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="299295466">
 						<reference key="NSNextResponder" ref="255139612"/>
@@ -350,6 +355,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="992851370"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="155512125">
 						<reference key="NSNextResponder" ref="255139612"/>
@@ -370,6 +376,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="935784232"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSTextField" id="446181713">
 						<reference key="NSNextResponder" ref="255139612"/>
@@ -390,6 +397,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="935784232"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 					<object class="NSButton" id="849291720">
 						<reference key="NSNextResponder" ref="255139612"/>
@@ -481,6 +489,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 							<reference key="NSTextColor" ref="992851370"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+						<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
@@ -1089,6 +1098,7 @@ aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
