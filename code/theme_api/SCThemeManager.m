@@ -35,7 +35,12 @@ NSString *const SCTranscriptThemeDidChangeNotification = @"SCTranscriptThemeDidC
             [[NSFileManager defaultManager] createDirectoryAtPath:searchPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
         NSString *savedThemePref = [[NSUserDefaults standardUserDefaults] stringForKey:@"aiThemeDirectory"];
-        if (!savedThemePref || ![SCThemeManager isValidThemeAtPath:savedThemePref]) {
+        BOOL themeIsWithinSearchPaths = NO;
+        for (NSString *searchPath in anArray) {
+            if ([[savedThemePref stringByDeletingLastPathComponent] isEqualToString:searchPath])
+                themeIsWithinSearchPaths = YES;
+        }
+        if (!savedThemePref || ![SCThemeManager isValidThemeAtPath:savedThemePref] || !themeIsWithinSearchPaths) {
             savedThemePref = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"psnChatStyle" inDirectory:@"Themes"];
             [[NSUserDefaults standardUserDefaults] setObject:savedThemePref forKey:@"aiThemeDirectory"];
         }
