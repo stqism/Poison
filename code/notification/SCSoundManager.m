@@ -69,6 +69,7 @@ static SCSoundManager *sharedInstance = nil;
         @"hiEventNewChatMessage",
         @"hiEventNewFriendRequest",
         @"hiEventError",
+        @"hiEventNewGroupInvite"
     ];
     BOOL isDir = NO;
     for (NSString *eType in checkFiles) {
@@ -108,6 +109,8 @@ static SCSoundManager *sharedInstance = nil;
             return @"hiEventNewFriendRequest";
         case SCEventTypeError:
             return @"hiEventError";
+        case SCEventTypeNewGroupInvite:
+            return @"hiEventNewGroupInvite";
         default:
             return nil;
     }

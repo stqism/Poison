@@ -32,6 +32,8 @@
 }
 
 - (IBAction)postTestNotification:(id)sender {
+    if (!OS_VERSION_IS_BETTER_THAN_LION)
+        return;
     NSUserNotification *testNot = [[NSUserNotification alloc] init];
     testNot.title = @"Test Notification";
     testNot.informativeText = @"This is the text of the test notification.";

@@ -26,6 +26,8 @@
 		<string>nreq.wav</string>
 		<key>hiEventError</key>
 		<string>error.wav</string>
+		<key>hiEventNewGroupInvite</key>
+		<string>nreq.wav</string>
 	</dict>
 </dict>
 </plist>

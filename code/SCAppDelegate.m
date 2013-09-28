@@ -7,6 +7,7 @@
 #import "SCThemeManager.h"
 #import "SCStandaloneWindowController.h"
 #import "SCNotificationManager.h"
+#import "SCSoundManager.h"
 #import <objc/runtime.h>
 
 #import <DeepEnd/DeepEnd.h>
@@ -127,6 +128,7 @@ char *const SCUnreadCountStoreKey = "";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postFriendRequestNotificationIfNeeded:) name:DESFriendRequestArrayDidChangeNotification object:connection.friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToFriend:) name:DESFriendArrayDidChangeNotification object:connection.friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToContext:) name:DESChatContextArrayDidChangeNotification object:connection.friendManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyForGroupInvite:) name:DESGroupRequestArrayDidChangeNotification object:connection.friendManager];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         [[NSProcessInfo processInfo] disableAutomaticTermination:@"The connection is connected."];
     [self saveKeys];
@@ -270,15 +272,19 @@ char *const SCUnreadCountStoreKey = "";
 #pragma mark - User Notifications
 
 - (void)postFriendRequestNotificationIfNeeded:(NSNotification *)notification {
-    if (!OS_VERSION_IS_BETTER_THAN_LION)
-        return;
     if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
-        NSUserNotification *unotification = [[NSUserNotification alloc] init];
-        unotification.title = NSLocalizedString(@"New Friend Request", @"");
-        unotification.subtitle = [NSString stringWithFormat:NSLocalizedString(@"From: %@", @""), ((DESFriend*)notification.userInfo[DESArrayObjectKey]).publicKey];
-        unotification.informativeText = ((DESFriend*)notification.userInfo[DESArrayObjectKey]).requestInfo;
-        [[SCNotificationManager sharedManager] postNotification:unotification ofType:SCEventTypeNewFriendRequest];
-        [NSApp requestUserAttention:NSInformationalRequest];
+        if (!OS_VERSION_IS_BETTER_THAN_LION) {
+            NSSound *eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeNewFriendRequest];
+            [eventSound play];
+            [NSApp requestUserAttention:NSInformationalRequest];
+        } else {
+            NSUserNotification *unotification = [[NSUserNotification alloc] init];
+            unotification.title = NSLocalizedString(@"New Friend Request", @"");
+            unotification.subtitle = [NSString stringWithFormat:NSLocalizedString(@"From: %@", @""), ((DESFriend*)notification.userInfo[DESArrayObjectKey]).publicKey];
+            unotification.informativeText = ((DESFriend*)notification.userInfo[DESArrayObjectKey]).requestInfo;
+            [[SCNotificationManager sharedManager] postNotification:unotification ofType:SCEventTypeNewFriendRequest];
+            [NSApp requestUserAttention:NSInformationalRequest];
+        }
     }
 }
 
@@ -296,32 +302,61 @@ char *const SCUnreadCountStoreKey = "";
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"unreadCountChanged" object:notification.object userInfo:@{@"newCount": @([a integerValue] + 1)}];
     }
-    NSUserNotification *nc = [[NSUserNotification alloc] init];
-    nc.title = ((id<DESChatContext>)notification.object).name;
-    nc.subtitle = (![((id<DESChatContext>)notification.object).name isEqualToString:msg.sender.displayName]) ? msg.sender.displayName : nil;
-    /* Display the sender's name if it's not also the context's name.
-     * This is true for group chats, etc. */
-    if (msg.type == DESMessageTypeChat)
-        nc.informativeText = msg.content;
-    else
-        nc.informativeText = [NSString stringWithFormat:@"\u2022 %@ %@", msg.sender.displayName, msg.content];
-    nc.userInfo = @{@"chatContext": ((id<DESChatContext>)notification.object).uuid};
-    nc.icon = [NSImage imageNamed:@"user-icon-default"];
-    [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeNewChatMessage];
+    if (OS_VERSION_IS_BETTER_THAN_LION) {
+        NSUserNotification *nc = [[NSUserNotification alloc] init];
+        nc.title = ((id<DESChatContext>)notification.object).name;
+        nc.subtitle = (![((id<DESChatContext>)notification.object).name isEqualToString:msg.sender.displayName]) ? msg.sender.displayName : nil;
+        /* Display the sender's name if it's not also the context's name.
+         * This is true for group chats, etc. */
+        if (msg.type == DESMessageTypeChat)
+            nc.informativeText = msg.content;
+        else
+            nc.informativeText = [NSString stringWithFormat:@"\u2022 %@ %@", msg.sender.displayName, msg.content];
+        nc.userInfo = @{@"chatContext": ((id<DESChatContext>)notification.object).uuid};
+        nc.icon = [NSImage imageNamed:@"user-icon-default"];
+        [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeNewChatMessage];
+    } else {
+        NSSound *eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeNewChatMessage];
+        [eventSound play];
+    }
+}
+
+- (void)notifyForGroupInvite:(NSNotification *)notification {
+    if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
+        DESGroupChat *o = notification.userInfo[DESArrayObjectKey];
+        if (OS_VERSION_IS_BETTER_THAN_LION) {
+            NSUserNotification *nc = [[NSUserNotification alloc] init];
+            nc.title = NSLocalizedString(@"Invited to Group Chat", @"");
+            nc.informativeText = [NSString stringWithFormat:NSLocalizedString(@"You were invited to a group chat by %@.", @""), o.inviter.displayName];
+            [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeNewGroupInvite];
+        } else {
+            NSSound *eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeNewGroupInvite];
+            [eventSound play];
+        }
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"status"]) {
-        DESFriend *obj = (DESFriend*)object;
-        NSUserNotification *nc = [[NSUserNotification alloc] init];
-        nc.title = obj.displayName;
-        nc.userInfo = @{@"chatContext": obj.chatContext.uuid};
-        if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline) {
-            nc.subtitle = NSLocalizedString(@"is now online.", @"");
-            [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendConnected];
+        if (!OS_VERSION_IS_BETTER_THAN_LION) {
+            NSSound *eventSound;
+            if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline)
+                eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendConnected];
+            else
+                eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendDisconnected];
+            [eventSound play];
         } else {
-            nc.subtitle = NSLocalizedString(@"is now offline.", @"");
-            [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendDisconnected];
+            DESFriend *obj = (DESFriend*)object;
+            NSUserNotification *nc = [[NSUserNotification alloc] init];
+            nc.title = obj.displayName;
+            nc.userInfo = @{@"chatContext": obj.chatContext.uuid};
+            if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline) {
+                nc.subtitle = NSLocalizedString(@"is now online.", @"");
+                [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendConnected];
+            } else {
+                nc.subtitle = NSLocalizedString(@"is now offline.", @"");
+                [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendDisconnected];
+            }
         }
     }
 }
