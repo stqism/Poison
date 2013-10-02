@@ -22,6 +22,11 @@
 - (NSData *)archivedDataWithConnection:(DESToxNetworkConnection *)aConnection;
 - (NSData *)encryptedDataWithConnection:(DESToxNetworkConnection *)aConnection password:(NSString *)pass;
 - (NSData *)encryptedDataWithConnection:(DESToxNetworkConnection *)aConnection password:(NSString *)pass comment:(NSString *)comment;
+
+- (NSData *)encryptedBlobWithData:(NSData *)data password:(NSString *)pass;
+- (NSData *)encryptedBlobWithData:(NSData *)data password:(NSString *)pass comment:(NSString *)comment;
+
+- (NSData *)decryptedDataFromBlob:(NSData *)blob password:(NSString *)pass;
 - (NSDictionary *)decryptDataBlob:(NSData *)blob withPassword:(NSString *)pass;
 - (NSDictionary *)unarchiveClearData:(NSData *)blob;
 

@@ -60,6 +60,21 @@
 }
 
 - (NSData *)encryptedDataWithConnection:(DESToxNetworkConnection *)aConnection password:(NSString *)pass comment:(NSString *)comment {
+    uint8_t *buf = NULL;
+    size_t len = 0;
+    [self encodeDataIntoBuffer:&buf outputLength:&len source:aConnection];
+    if (!buf) {
+        return nil;
+    } else {
+        return [self encryptedBlobWithData:[NSData dataWithBytes:buf length:len] password:pass comment:comment];
+    }
+}
+
+- (NSData *)encryptedBlobWithData:(NSData *)data password:(NSString *)pass {
+    return [self encryptedBlobWithData:data password:pass comment:nil];
+}
+
+- (NSData *)encryptedBlobWithData:(NSData *)data password:(NSString *)pass comment:(NSString *)comment {
     /* Compute key using scrypt. */
     uint8_t salt[KUDRYAVKA_SALT_LENGTH];
 	int logN = 0;
@@ -67,12 +82,10 @@
 	uint32_t r = 0;
 	uint32_t p = 0;
     randombytes(salt, KUDRYAVKA_SALT_LENGTH);
-    NKDebug(@"salt:%@", DESConvertPrivateKeyToString(salt));
 	/* Pick values for N, r, p. */
 	if (pickparams(0, 0.5, 2.0, &logN, &r, &p) != 0)
 		return nil;
 	N = (uint64_t)(1) << logN;
-    NKDebug(@"%llu, %u, %u", N, r, p);
     const char *passwd = [pass UTF8String];
     size_t pass_sz = [pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
 	/* Generate the derived keys. */
@@ -81,17 +94,14 @@
         free(key);
         return nil;
     }
-    NKDebug(@"%@", DESConvertPrivateKeyToString(key));
     const char *cc = NULL;
     uint32_t cclen = 0;
     if (comment) {
-         cc = [comment UTF8String];
-         cclen = (uint32_t)[comment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        cc = [comment UTF8String];
+        cclen = (uint32_t)[comment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     }
-    /* Get the cleartext from aConnection */
-    uint8_t *buf = NULL;
-    size_t len = 0;
-    [self encodeDataIntoBuffer:&buf outputLength:&len source:aConnection];
+    const uint8_t *buf = [data bytes];
+    size_t len = [data length];
     if (!buf) {
         free(key);
         return nil;
@@ -122,26 +132,20 @@
     int ret = crypto_secretbox(cp, cleartext, mlen, salt, key);
     if (ret == -1) {
         free(cleartext);
-        free(buf);
         free(eblock);
         free(key);
         return nil;
     }
     cp += mlen;
-    NKDebug(@"%ld", cp - eblock - mlen);
     ret = crypto_auth(cp, cp - mlen, mlen, key);
-    NKDebug(@"%i", crypto_auth_verify(cp, cp - mlen, mlen, key));
-    NKDebug(@"%@", DESConvertPrivateKeyToString(cp));
     if (ret == -1) {
         free(cleartext);
-        free(buf);
         free(eblock);
         free(key);
         return nil;
     }
     NSData *d = [NSData dataWithBytes:eblock length:eblocklen];
     free(cleartext);
-    free(buf);
     free(eblock);
     free(key);
     return d;
@@ -221,6 +225,14 @@
 }
 
 - (NSDictionary *)decryptDataBlob:(NSData *)blob withPassword:(NSString *)pass {
+    NSData *clear = [self decryptedDataFromBlob:blob password:pass];
+    if (clear) {
+        return [self unarchiveClearData:clear];
+    }
+    return nil;
+}
+
+- (NSData *)decryptedDataFromBlob:(NSData *)blob password:(NSString *)pass {
     const uint8_t *b = [blob bytes];
     uint8_t *cp = (uint8_t*)b + 4;
     uint8_t magic1[4] = {0x6B, 0x75, 0x64, 0x6F};
@@ -244,12 +256,10 @@
 	uint32_t r = [self readInt32FromBuffer:cp + 8];
 	uint32_t p = [self readInt32FromBuffer:cp + 12];
     cp += 16;
-    NKDebug(@"%llu, %u, %u", N, r, p);
     LENGTH_CHECK(blob, 24 + comment_size + KUDRYAVKA_SALT_LENGTH);
     uint8_t salt[KUDRYAVKA_SALT_LENGTH];
     memcpy(salt, cp, KUDRYAVKA_SALT_LENGTH);
     cp += KUDRYAVKA_SALT_LENGTH;
-    NKDebug(@"salt:%@", DESConvertPrivateKeyToString(salt));
 	/* Pick values for N, r, p. */
     const char *passwd = [pass UTF8String];
     size_t pass_sz = [pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
@@ -258,14 +268,10 @@
 	if (crypto_scrypt((uint8_t*)passwd, pass_sz, salt, KUDRYAVKA_SALT_LENGTH, N, r, p, key, KUDRYAVKA_KEY_LENGTH)) {
         return nil;
     }
-    NKDebug(@"%@", DESConvertPrivateKeyToString(key));
     LENGTH_CHECK(blob, 32 + KUDRYAVKA_SALT_LENGTH + comment_size);
     uint64_t blocklen = [self readInt64FromBuffer:cp];
     cp += 8;
     LENGTH_CHECK(blob, 32 + comment_size + blocklen + crypto_auth_BYTES);
-    NKDebug(@"%ld", cp - b);
-    NKDebug(@"blocklen: %lu", (unsigned long)blocklen);
-    NKDebug(@"%@", DESConvertPrivateKeyToString(cp + blocklen));
     cp += blocklen;
     int ret = crypto_auth_verify(cp, cp - blocklen, blocklen, key);
     cp -= blocklen;
@@ -291,7 +297,7 @@
         free(ciphertext);
         NSData *clearblob = [NSData dataWithBytes:cleartext + crypto_secretbox_ZEROBYTES length:blocklen];
         free(cleartext);
-        return [self unarchiveClearData:clearblob];
+        return clearblob;
     }
 }
 
