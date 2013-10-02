@@ -564,7 +564,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     NSArray *fl = [[DESToxNetworkConnection sharedConnection].friendManager.friends copy];
     NSUInteger selIndex = self.listView.selectedRow;
     DESFriend *f = ((DESFriend*)notification.userInfo[DESArrayObjectKey]);
-    if (!f) {
+    if (!f && notification) {
         [self.listView reloadData];
         self.listView.selectedRow = selIndex;
         return;
@@ -580,9 +580,11 @@ typedef NS_ENUM(NSInteger, SCListMode) {
             selIndex = 0;
     }
     _friendList = fl;
-    if (selIndex >= [_friendList count]) {
+    if (selIndex >= [_friendList count] && [fl count] <= 0) {
         selIndex = -1;
         selectedFriend = -1;
+    } else if ([fl count] > 0) {
+        selIndex = 0;
     }
     if (listMode == SCListModeFriends) {
         [self.listView reloadData];
@@ -630,7 +632,10 @@ typedef NS_ENUM(NSInteger, SCListMode) {
 }
 
 - (void)reloadList:(NSNotification *)notification {
-    if (notification.name == DESFriendArrayDidChangeNotification) {
+    if (!notification) {
+        [self reloadListModeFriends:nil];
+        [self reloadListModeGroups:nil];
+    } else if (notification.name == DESFriendArrayDidChangeNotification) {
         [self reloadListModeFriends:notification];
     } else {
         [self reloadListModeGroups:notification];

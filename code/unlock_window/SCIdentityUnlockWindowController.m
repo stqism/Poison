@@ -28,12 +28,22 @@
 }
 
 - (IBAction)performUnlock:(id)sender {
+    if (self.confirmPasswordField && ![self.confirmPasswordField.stringValue isEqualToString:self.passwordField.stringValue]) {
+        self.unlockButton.enabled = YES;
+        [self.window shakeWindow:^{
+            [self.confirmPasswordField selectText:self];
+        }];
+        return;
+    }
     self.unlockButton.enabled = NO;
     NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:self.unlockingIdentity];
     NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
+    SCAppDelegate *delegate = (SCAppDelegate*)[NSApp delegate];
     if (!blob) {
-        ((SCAppDelegate*)[NSApp delegate]).encPassword = self.passwordField.stringValue;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:[NSApp delegate]];
+        delegate.encPassword = self.passwordField.stringValue;
+        if (self.savesToKeychain.state == NSOnState)
+            [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:self.unlockingIdentity];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:delegate];
         [NSApp stopModal];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -49,7 +59,10 @@
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [NSApp stopModal];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:[NSApp delegate] userInfo:d];
+                    delegate.encPassword = self.passwordField.stringValue;
+                    if (self.savesToKeychain.state == NSOnState)
+                        [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:self.unlockingIdentity];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:delegate userInfo:d];
                 });
             }
         });

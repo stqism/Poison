@@ -382,6 +382,7 @@
         cp += 4 + nl;
         [friends addObject:fr];
     }
+    d[@"friends"] = friends;
     return d;
 }
 

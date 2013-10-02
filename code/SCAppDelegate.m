@@ -122,8 +122,7 @@ char *const SCUnreadCountStoreKey = "";
     item[(id)kSecAttrAccount] = user;
     item[(id)kSecAttrService] = theService;
     SecItemDelete((__bridge CFDictionaryRef)(item));
-    OSStatus ret = SecKeychainAddGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[user lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [user UTF8String], (UInt32)[pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [pass UTF8String], NULL);
-    NSLog(@"%i", (int)ret);
+    SecKeychainAddGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[user lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [user UTF8String], (UInt32)[pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [pass UTF8String], NULL);
 }
 
 - (void)beginConnectionWithUsername:(NSString *)theUsername {
@@ -165,37 +164,42 @@ char *const SCUnreadCountStoreKey = "";
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     connection.me.displayName = originalUsername;
     connection.me.userStatus = @"Online";
-    NSString *dataPass = nil;
-    dataPass = [self findPasswordInKeychain:originalUsername];
-    if (!dataPass) {
-        SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
+    NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
+    NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
+    BOOL isDir = NO;
+    if (!blob && [[NSFileManager defaultManager] fileExistsAtPath:profilePath isDirectory:&isDir] && isDir) {
+        SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"GetPassword"];
         unlocker.unlockingIdentity = originalUsername;
         [unlocker beginModalSession];
         [unlocker close];
+        return;
     } else {
-        NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
-        NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
-        if (!blob) {
-            self.encPassword = dataPass;
-            [self dataFileUnlocked:nil];
-            return;
+        NSString *dataPass = nil;
+        dataPass = [self findPasswordInKeychain:originalUsername];
+        if (!dataPass) {
+            SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
+            unlocker.unlockingIdentity = originalUsername;
+            [unlocker beginModalSession];
+            [unlocker close];
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NKDataSerializer *kud = [[NKDataSerializer alloc] init];
+                NSDictionary *d = [kud decryptDataBlob:blob withPassword:dataPass];
+                if (!d) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
+                        unlocker.unlockingIdentity = originalUsername;
+                        [unlocker beginModalSession];
+                        [unlocker close];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.encPassword = dataPass;
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:self userInfo:d];
+                    });
+                }
+            });
         }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NKDataSerializer *kud = [[NKDataSerializer alloc] init];
-            NSDictionary *d = [kud decryptDataBlob:blob withPassword:dataPass];
-            if (!d) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
-                    unlocker.unlockingIdentity = originalUsername;
-                    [unlocker beginModalSession];
-                    [unlocker close];
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:self userInfo:d];
-                });
-            }
-        });
     }
 }
 

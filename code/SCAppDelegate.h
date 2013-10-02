@@ -27,4 +27,8 @@
 - (id<DESChatContext>)currentChatContext;
 - (void)giveFocusToChatContext:(id<DESChatContext>)ctx;
 
+- (NSString *)findPasswordInKeychain:(NSString *)name;
+- (void)clearPasswordFromKeychain:(NSString *)pass username:(NSString *)user;
+- (void)dumpPasswordToKeychain:(NSString *)pass username:(NSString *)user;
+
 @end
