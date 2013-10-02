@@ -8,6 +8,7 @@
 #import "SCStandaloneWindowController.h"
 #import "SCNotificationManager.h"
 #import "SCSoundManager.h"
+#import "SCIdentityUnlockWindowController.h"
 #import <objc/runtime.h>
 
 #import <DeepEnd/DeepEnd.h>
@@ -22,7 +23,6 @@ char *const SCUnreadCountStoreKey = "";
 @end
 
 @implementation SCAppDelegate {
-    NKSerializerType saveMode;
     NSString *originalUsername;
 }
 
@@ -38,15 +38,11 @@ char *const SCUnreadCountStoreKey = "";
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"] && !([NSEvent modifierFlags] & NSAlternateKeyMask)) {
         NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
         NSLog(@"%@", rememberedUsername);
-        NSDictionary *saveOptions = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"nicknameSaveOptions"];
-        if (!saveOptions[rememberedUsername] || ![saveOptions[rememberedUsername] isKindOfClass:[NSNumber class]]) {
+        if (rememberedUsername && ![[rememberedUsername stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+            [self beginConnectionWithUsername:rememberedUsername];
+        } else {
             self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
             [self.loginWindow showWindow:self];
-        } else {
-            saveOptions = saveOptions[rememberedUsername];
-        }
-        if (rememberedUsername && ![[rememberedUsername stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
-            [self beginConnectionWithUsername:rememberedUsername saveMethod:[saveOptions[@"saveOption"] integerValue]];
         }
     } else {
         self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
@@ -84,8 +80,53 @@ char *const SCUnreadCountStoreKey = "";
     [self.mainWindow showWindow:self];
 }
 
-- (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method {
-    saveMode = method;
+- (void)saveData {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
+        if ([[NSFileManager defaultManager] createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil]) {
+            NKDataSerializer *kud = [[NKDataSerializer alloc] init];
+            [[kud encryptedDataWithConnection:[DESToxNetworkConnection sharedConnection] password:self.encPassword] writeToFile:[profilePath stringByAppendingPathComponent:@"data.txd"] atomically:YES];
+            NSLog(@"Data was saved.");
+        } else {
+            NSLog(@"Data couldn't be saved.");
+        }
+    });
+}
+
+- (NSString *)findPasswordInKeychain:(NSString *)name {
+    UInt32 length = 0;
+    uint8_t *buffer;
+    NSString *theService = @"ca.kirara.Poison.passwordStore";
+    OSStatus ret = SecKeychainFindGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[name lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [name UTF8String], &length, (void**)&buffer, NULL);
+    if (ret != errSecSuccess) {
+        return nil;
+    }
+    NSString *pass = [[NSString alloc] initWithBytes:buffer length:length encoding:NSUTF8StringEncoding];
+    SecKeychainItemFreeContent(NULL, buffer);
+    return pass;
+}
+
+- (void)clearPasswordFromKeychain:(NSString *)pass username:(NSString *)user {
+    NSString *theService = @"ca.kirara.Poison.passwordStore";
+    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:4];
+    item[(id)kSecClass] = (__bridge id)(kSecClassGenericPassword);
+    item[(id)kSecAttrAccount] = user;
+    item[(id)kSecAttrService] = theService;
+    SecItemDelete((__bridge CFDictionaryRef)(item));
+}
+
+- (void)dumpPasswordToKeychain:(NSString *)pass username:(NSString *)user {
+    NSString *theService = @"ca.kirara.Poison.passwordStore";
+    NSMutableDictionary *item = [[NSMutableDictionary alloc] initWithCapacity:4];
+    item[(id)kSecClass] = (__bridge id)(kSecClassGenericPassword);
+    item[(id)kSecAttrAccount] = user;
+    item[(id)kSecAttrService] = theService;
+    SecItemDelete((__bridge CFDictionaryRef)(item));
+    OSStatus ret = SecKeychainAddGenericPassword(NULL, (UInt32)[theService lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [theService UTF8String], (UInt32)[user lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [user UTF8String], (UInt32)[pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [pass UTF8String], NULL);
+    NSLog(@"%i", (int)ret);
+}
+
+- (void)beginConnectionWithUsername:(NSString *)theUsername {
     originalUsername = theUsername;
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
@@ -98,40 +139,88 @@ char *const SCUnreadCountStoreKey = "";
     [connection connect];
 }
 
-- (void)saveKeys {
-    NKDataSerializer *kud = [NKDataSerializer serializerUsingMethod:saveMode];
-    NSError *error = nil;
-    DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
-    NSDictionary *options = @{@"username": originalUsername, @"overwrite": @YES};
-    if (![kud hasDataForOptions:options]) {
-        BOOL ok = [kud serializePrivateKey:connection.me.privateKey publicKey:connection.me.publicKey options:options error:&error];
-        if (!ok && ![error.userInfo[@"silent"] boolValue]) {
-            NSRunAlertPanel(NSLocalizedString(@"Save error", @""), NSLocalizedString(@"Failed to save key: %@ Sorry about that.", @""), @"OK", nil, nil, error.userInfo[@"cause"]);
-        }
+- (void)connectNewAccountWithUsername:(NSString *)theUsername password:(NSString *)pass inKeychain:(BOOL)yeahnah {
+    originalUsername = theUsername;
+    self.encPassword = pass;
+    if (yeahnah) {
+        [self dumpPasswordToKeychain:pass username:theUsername];
     } else {
-        /* There are keys saved. */
-        NSDictionary *keys = [kud loadKeysWithOptions:options error:&error];
-        if (!keys) {
-            NSRunAlertPanel(NSLocalizedString(@"Load error", @""), NSLocalizedString(@"Failed to load keys: %@ Sorry about that.", @""), @"OK", nil, nil, error.userInfo[@"cause"]);
-        } else {
-            [connection setPrivateKey:keys[@"privateKey"] publicKey:keys[@"publicKey"]];
-        }
+        [self clearPasswordFromKeychain:pass username:theUsername];
     }
+    DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
+    NSInteger speed = [[NSUserDefaults standardUserDefaults] integerForKey:@"DESRunLoopSpeed"];
+    if (!speed) {
+        speed = (NSInteger)(1 / DEFAULT_MESSENGER_TICK_RATE);
+        [[NSUserDefaults standardUserDefaults] setInteger:speed forKey:@"DESRunLoopSpeed"];
+    }
+    connection.runLoopSpeed = (1.0 / (double)speed);
+    [connection connect];
 }
 
 #pragma mark - Notifications
 
 - (void)connectionInitialized:(NSNotification *)notification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataFileUnlocked:) name:@"UnlockSuccessful" object:self];
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     connection.me.displayName = originalUsername;
     connection.me.userStatus = @"Online";
+    NSString *dataPass = nil;
+    dataPass = [self findPasswordInKeychain:originalUsername];
+    if (!dataPass) {
+        SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
+        unlocker.unlockingIdentity = originalUsername;
+        [unlocker beginModalSession];
+        [unlocker close];
+    } else {
+        NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
+        NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
+        if (!blob) {
+            self.encPassword = dataPass;
+            [self dataFileUnlocked:nil];
+            return;
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NKDataSerializer *kud = [[NKDataSerializer alloc] init];
+            NSDictionary *d = [kud decryptDataBlob:blob withPassword:dataPass];
+            if (!d) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
+                    unlocker.unlockingIdentity = originalUsername;
+                    [unlocker beginModalSession];
+                    [unlocker close];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:self userInfo:d];
+                });
+            }
+        });
+    }
+}
+
+- (void)dataFileUnlocked:(NSNotification *)notification {
+    DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postFriendRequestNotificationIfNeeded:) name:DESFriendRequestArrayDidChangeNotification object:connection.friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToFriend:) name:DESFriendArrayDidChangeNotification object:connection.friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subscribeToContext:) name:DESChatContextArrayDidChangeNotification object:connection.friendManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyForGroupInvite:) name:DESGroupRequestArrayDidChangeNotification object:connection.friendManager];
+    if (notification.userInfo) {
+        connection.me.displayName = notification.userInfo[@"displayName"];
+        connection.me.userStatus = notification.userInfo[@"userStatus"];
+        connection.me.statusType = [notification.userInfo[@"statusType"] integerValue];
+        [connection setPrivateKey:notification.userInfo[@"privateKey"] publicKey:notification.userInfo[@"publicKey"]];
+        for (NSDictionary *i in notification.userInfo[@"friends"]) {
+            [connection.friendManager addFriendWithoutRequest:i[@"publicKey"]];
+        }
+    } else {
+        [self saveData];
+    }
+    [connection.me addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
+    [connection.me addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
+    [connection.me addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     if (OS_VERSION_IS_BETTER_THAN_SNOW_LEOPARD)
         [[NSProcessInfo processInfo] disableAutomaticTermination:@"The connection is connected."];
-    [self saveKeys];
     if (self.loginWindow)
         [self.loginWindow.window close];
     [self showMainWindow];
@@ -139,15 +228,17 @@ char *const SCUnreadCountStoreKey = "";
     for (NSMenuItem *item in self.networkMenu.submenu.itemArray) {
         item.enabled = YES;
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UnlockSuccessful" object:self];
 }
 
 - (void)subscribeToFriend:(NSNotification *)notification {
-    NSObject<DESChatContext> *f = notification.userInfo[DESArrayObjectKey];
+    DESFriend *f = notification.userInfo[DESArrayObjectKey];
     if (notification.userInfo[DESArrayOperationKey] == DESArrayOperationTypeAdd) {
         [f addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
     } else {
         [f removeObserver:self forKeyPath:@"status"];
     }
+    [self saveData];
 }
 
 - (void)subscribeToContext:(NSNotification *)notification {
@@ -337,25 +428,29 @@ char *const SCUnreadCountStoreKey = "";
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"status"]) {
-        if (!OS_VERSION_IS_BETTER_THAN_LION) {
-            NSSound *eventSound;
-            if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline)
-                eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendConnected];
-            else
-                eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendDisconnected];
-            [eventSound play];
-        } else {
-            DESFriend *obj = (DESFriend*)object;
-            NSUserNotification *nc = [[NSUserNotification alloc] init];
-            nc.title = obj.displayName;
-            nc.userInfo = @{@"chatContext": obj.chatContext.uuid};
-            if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline) {
-                nc.subtitle = NSLocalizedString(@"is now online.", @"");
-                [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendConnected];
+    if (object == [DESToxNetworkConnection sharedConnection].me) {
+        [self saveData];
+    } else {
+        if ([keyPath isEqualToString:@"status"]) {
+            if (!OS_VERSION_IS_BETTER_THAN_LION) {
+                NSSound *eventSound;
+                if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline)
+                    eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendConnected];
+                else
+                    eventSound = [[SCSoundManager sharedManager] soundForEventType:SCEventTypeFriendDisconnected];
+                [eventSound play];
             } else {
-                nc.subtitle = NSLocalizedString(@"is now offline.", @"");
-                [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendDisconnected];
+                DESFriend *obj = (DESFriend*)object;
+                NSUserNotification *nc = [[NSUserNotification alloc] init];
+                nc.title = obj.displayName;
+                nc.userInfo = @{@"chatContext": obj.chatContext.uuid};
+                if ([change[NSKeyValueChangeNewKey] integerValue] == DESFriendStatusOnline) {
+                    nc.subtitle = NSLocalizedString(@"is now online.", @"");
+                    [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendConnected];
+                } else {
+                    nc.subtitle = NSLocalizedString(@"is now offline.", @"");
+                    [[SCNotificationManager sharedManager] postNotification:nc ofType:SCEventTypeFriendDisconnected];
+                }
             }
         }
     }

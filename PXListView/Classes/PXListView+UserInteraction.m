@@ -22,7 +22,7 @@
 static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval theTimeout )
 {
 	if( theTimeout == 0.0 )
-		theTimeout = 1.5;
+		theTimeout = 0.01;
 	
 	NSPoint			startPos = [startEvent locationInWindow];
 	NSTimeInterval	startTime = [NSDate timeIntervalSinceReferenceDate];

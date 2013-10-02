@@ -1,33 +1,17 @@
 #import "SCKudTestingPaneController.h"
 #import <Kudryavka/Kudryavka.h>
-#import <Kudryavka/NKToxDataWriter.h>
+#import <DeepEnd/DeepEnd.h>
 
 @implementation SCKudTestingPaneController
 
 - (IBAction)trySaveData:(id)sender {
-    NKToxDataWriter *writer = [[NKToxDataWriter alloc] initWithConnection:[DESToxNetworkConnection sharedConnection]];
-    uint8_t *buf = nil;
-    size_t buflen = 0;
+    NKDataSerializer *kud = [[NKDataSerializer alloc] init];
     NSDate *start = [NSDate date];
-    [writer encodeDataIntoBuffer:&buf outputLength:&buflen];
+    NSData *arc = [kud archivedDataWithConnection:[DESToxNetworkConnection sharedConnection]];
     NSTimeInterval end = [[NSDate date] timeIntervalSinceDate:start];
     self.timeField.stringValue = [NSString stringWithFormat:@"%f", end];
-    self.lengthField.stringValue = [NSString stringWithFormat:@"%zu", buflen];
-    [[NSData dataWithBytes:buf length:buflen] writeToFile:[NSString stringWithFormat:@"%@/data", NSHomeDirectory()] atomically:YES];
-    free(buf);
-}
-
-- (IBAction)trySaveEncrypted:(id)sender {
-    NKToxDataWriter *writer = [[NKToxDataWriter alloc] initWithConnection:[DESToxNetworkConnection sharedConnection]];
-    uint8_t *buf = nil;
-    size_t buflen = 0;
-    NSDate *start = [NSDate date];
-    [writer encodeDataIntoEncryptedBuffer:&buf withPassword:@"password" outputLength:&buflen];
-    NSTimeInterval end = [[NSDate date] timeIntervalSinceDate:start];
-    self.timeField.stringValue = [NSString stringWithFormat:@"%f", end];
-    self.lengthField.stringValue = [NSString stringWithFormat:@"%zu", buflen];
-    [[NSData dataWithBytes:buf length:buflen] writeToFile:[NSString stringWithFormat:@"%@/data", NSHomeDirectory()] atomically:YES];
-    free(buf);
+    self.lengthField.stringValue = [NSString stringWithFormat:@"%zu", [arc length]];
+    [arc writeToFile:[NSString stringWithFormat:@"%@/data", NSHomeDirectory()] atomically:YES];
 }
 
 @end

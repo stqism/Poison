@@ -15,8 +15,10 @@
 @property (strong) SCKudTestingWindowController *kTestingWindow;
 @property (strong) NSArray *standaloneWindows;
 @property (strong) NSString *queuedPublicKey;
+@property (strong) NSString *encPassword;
 
-- (void)beginConnectionWithUsername:(NSString *)theUsername saveMethod:(NKSerializerType)method;
+- (void)beginConnectionWithUsername:(NSString *)theUsername;
+- (void)connectNewAccountWithUsername:(NSString *)theUsername password:(NSString *)pass inKeychain:(BOOL)yeahnah;
 - (void)newWindowWithDESContext:(id<DESChatContext>)aContext;
 - (void)closeWindowsContainingDESContext:(id<DESChatContext>)ctx;
 

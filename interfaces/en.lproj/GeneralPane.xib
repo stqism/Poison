@@ -51,7 +51,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{73, 165}, {150, 18}}</string>
 						<reference key="NSSuperview" ref="148476697"/>
-						<int key="NSTag">10</int>
+						<int key="NSTag">15</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="829721837">
 							<int key="NSCellFlags">67108864</int>
@@ -85,7 +85,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{73, 187}, {168, 18}}</string>
 						<reference key="NSSuperview" ref="148476697"/>
-						<int key="NSTag">20</int>
+						<int key="NSTag">30</int>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="482069265">
 							<int key="NSCellFlags">67108864</int>

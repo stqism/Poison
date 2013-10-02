@@ -126,7 +126,8 @@
         [self.view.window setContentBorderThickness:self.messageInput.frame.size.height + 19 forEdge:NSMinYEdge];
         CGFloat transcriptYOffset = self.messageInput.frame.size.height + 19;
         self.transcriptView.frame = (NSRect){{0, transcriptYOffset}, {self.view.frame.size.width, self.view.frame.size.height - (self.headerView.frame.size.height + transcriptYOffset)}};
-        [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCScrollByPointNumber" withArguments:@[@(delta)]];
+        if (delta > 0)
+            [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCScrollByPointNumber" withArguments:@[@(delta)]];
     }
     if (!NSEqualSizes(prevSize, self.messageInput.frame.size)) {
         self.view.needsDisplay = YES;

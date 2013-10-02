@@ -18,6 +18,7 @@
 				F57385A017C6B5D600B8E7EC /* PBXTargetDependency */,
 				F57385A817C6B5DE00B8E7EC /* PBXTargetDependency */,
 				F57385A217C6B5D700B8E7EC /* PBXTargetDependency */,
+				F519860717FA445C00F05841 /* PBXTargetDependency */,
 				F57385A617C6B5DC00B8E7EC /* PBXTargetDependency */,
 			);
 			name = Everything;
@@ -35,9 +36,17 @@
 		F500604A17AE06F700C864C4 /* SCDHTStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F500604917AE06F700C864C4 /* SCDHTStatusView.m */; };
 		F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F506272817C53BB70069EDE4 /* SCStandaloneWindowController.m */; };
 		F5096E2D17EA7DDE00B7F77A /* SCCapsuleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5096E2C17EA7DDE00B7F77A /* SCCapsuleContainer.m */; };
+		F519860D17FA4ABE00F05841 /* Kudryavka.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9AE017ACB85400923A25 /* Kudryavka.m */; };
+		F519860E17FA4AC600F05841 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
+		F519860F17FA4AC900F05841 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
+		F519861017FA4AE800F05841 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
+		F519861117FA4AF400F05841 /* scryptenc_cpuperf.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */; };
+		F519861217FA4B2100F05841 /* memlimit.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8517B40C77000AF9C6 /* memlimit.c */; };
 		F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65C617B0A11600BF09D4 /* SCFriendRequestsSheetController.m */; };
 		F51E65C917B0A48200BF09D4 /* RequestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51E65C817B0A48200BF09D4 /* RequestsCell.xib */; };
 		F51E65CC17B0B04E00BF09D4 /* SCRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */; };
+		F5247DC517F68D6000ABBE1C /* UnlockData.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5247DC417F68D6000ABBE1C /* UnlockData.xib */; };
+		F5247DCA17F6922300ABBE1C /* SCIdentityUnlockWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5247DC917F6922300ABBE1C /* SCIdentityUnlockWindowController.m */; };
 		F52BDED117B9D7E1007CF88B /* SCWebKitFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */; };
 		F52BDED417B9DFDA007CF88B /* SCWebKitMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F52BDED317B9DFDA007CF88B /* SCWebKitMessage.m */; };
 		F52CACB117E4E59A0064677A /* NewGroupChat.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52CACB017E4E59A0064677A /* NewGroupChat.xib */; };
@@ -50,10 +59,6 @@
 		F5383D9817CC042400DA0195 /* AdvancedPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5383D9717CC042400DA0195 /* AdvancedPane.xib */; };
 		F547D6F317C68DE500D3E4C5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F547D6F217C68DE500D3E4C5 /* main.c */; };
 		F547D6FB17C69E9E00D3E4C5 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F5DD1BA217B4141A000AF9C6 /* libcrypto.dylib */; };
-		F547D6FC17C69ED900D3E4C5 /* crypto_aesctr.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7617B40C76000AF9C6 /* crypto_aesctr.c */; };
-		F547D6FF17C69EE000D3E4C5 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
-		F547D70017C69EE700D3E4C5 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
-		F547D70117C69EF500D3E4C5 /* scryptenc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8017B40C77000AF9C6 /* scryptenc.c */; };
 		F547D70217C69F0A00D3E4C5 /* scryptenc_cpuperf.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8217B40C77000AF9C6 /* scryptenc_cpuperf.c */; };
 		F547D70417C69F4700D3E4C5 /* memlimit.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B8517B40C77000AF9C6 /* memlimit.c */; };
 		F5556B7C17B5716600E636FE /* ConnectionInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5556B7B17B5716600E636FE /* ConnectionInspector.xib */; };
@@ -77,6 +82,9 @@
 		F5758EC917BC4C9000CBCE64 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
 		F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
 		F5758ECD17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
+		F577774517FA4195003AFA04 /* SCKudTestingPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84F17B2F2300068AFA0 /* SCKudTestingPaneController.m */; };
+		F577774C17FA435A003AFA04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
+		F577774F17FA435A003AFA04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F577774E17FA435A003AFA04 /* main.m */; };
 		F57C3A3C17B160A000325A24 /* shiina.icns in Resources */ = {isa = PBXBuildFile; fileRef = F57C3A3B17B160A000325A24 /* shiina.icns */; };
 		F57D8BCB17D5591000516F25 /* pane-save-test.png in Resources */ = {isa = PBXBuildFile; fileRef = F57D8BCA17D5591000516F25 /* pane-save-test.png */; };
 		F58586BE17BC5B3400E0B432 /* SLBackingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F58586BD17BC5B3400E0B432 /* SLBackingView.m */; };
@@ -85,13 +93,6 @@
 		F58A9ADD17ACB85400923A25 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F58A9ADB17ACB85400923A25 /* InfoPlist.strings */; };
 		F58A9AE117ACB85400923A25 /* Kudryavka.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9AE017ACB85400923A25 /* Kudryavka.m */; };
 		F58A9AE717ACB9EE00923A25 /* Kudryavka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58A9AD617ACB85400923A25 /* Kudryavka.framework */; };
-		F58A9AEA17ACBDA400923A25 /* NKKeychainDataSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F58A9AE817ACBDA300923A25 /* NKKeychainDataSerializer.h */; };
-		F58A9AEB17ACBDA400923A25 /* NKKeychainDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9AE917ACBDA300923A25 /* NKKeychainDataSerializer.m */; };
-		F58A9AF117ACBDF800923A25 /* NKDummyDataSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F58A9AEF17ACBDF800923A25 /* NKDummyDataSerializer.h */; };
-		F58A9AF217ACBDF800923A25 /* NKDummyDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9AF017ACBDF800923A25 /* NKDummyDataSerializer.m */; };
-		F58A9AF517ACBEAD00923A25 /* NKCryptedFileDataSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F58A9AF317ACBEAD00923A25 /* NKCryptedFileDataSerializer.h */; };
-		F58A9AF617ACBEAD00923A25 /* NKCryptedFileDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F58A9AF417ACBEAD00923A25 /* NKCryptedFileDataSerializer.m */; };
-		F58A9AF817ACC94E00923A25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58A9AF717ACC94E00923A25 /* Security.framework */; };
 		F58A9AFB17ACC98900923A25 /* Kudryavka.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F58A9AD617ACB85400923A25 /* Kudryavka.framework */; };
 		F58A9AFD17ACCA7200923A25 /* Kudryavka.h in Headers */ = {isa = PBXBuildFile; fileRef = F58A9ADF17ACB85400923A25 /* Kudryavka.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59107E917CC074800251B7A /* DHTPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59107E817CC074800251B7A /* DHTPane.xib */; };
@@ -122,10 +123,7 @@
 		F59A254217D6E3800015F103 /* Default.psnSounds in Resources */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
 		F59A254317D6E3800015F103 /* Default.psnSounds in Resources */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
 		F59A254517D6E3F50015F103 /* Default.psnSounds in Copy Bundled Sound Sets */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
-		F5A3A84B17B2AAB60068AFA0 /* NKToxDataWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5A3A84C17B2AAB60068AFA0 /* NKToxDataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */; };
 		F5A3A85017B2F2300068AFA0 /* SCKudTestingPaneController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A3A84E17B2F2300068AFA0 /* SCKudTestingPaneController.h */; };
-		F5A3A85117B2F2300068AFA0 /* SCKudTestingPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84F17B2F2300068AFA0 /* SCKudTestingPaneController.m */; };
 		F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */; };
 		F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85817B342C20068AFA0 /* Requests.xib */; };
 		F5A3A85A17B34E580068AFA0 /* BootstrapSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */; };
@@ -165,6 +163,10 @@
 		F5C7BBF717AC8CA4009BA3E4 /* LoginWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */; };
 		F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */; };
 		F5C8F5AD17C985530008B94B /* SCBootstrapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C8F5AC17C985530008B94B /* SCBootstrapManager.m */; };
+		F5CF279717F74C7100B79565 /* NSWindow+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CF279617F74C7100B79565 /* NSWindow+Shake.m */; };
+		F5CF279B17F8DCBB00B79565 /* crypto_scrypt-sse.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7A17B40C77000AF9C6 /* crypto_scrypt-sse.c */; };
+		F5CF279C17F8DD0600B79565 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1B7C17B40C77000AF9C6 /* sha256.c */; };
+		F5CF279D17F922A300B79565 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58A9AF717ACC94E00923A25 /* Security.framework */; };
 		F5D148F317D6AC57003BEA73 /* SCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D148F217D6AC57003BEA73 /* SCNotificationManager.m */; };
 		F5D148F817D6AD88003BEA73 /* SCSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D148F717D6AD88003BEA73 /* SCSoundManager.m */; };
 		F5D36BB917C2DF8200AE9138 /* themelib.js in Resources */ = {isa = PBXBuildFile; fileRef = F5D36BB517C2DF7000AE9138 /* themelib.js */; };
@@ -190,11 +192,16 @@
 		F5E4821217D57EF600CC1783 /* icon-frequests@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E4821117D57EF600CC1783 /* icon-frequests@2x.png */; };
 		F5E4821417D57F5400CC1783 /* pane-save-test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E4821317D57F5400CC1783 /* pane-save-test@2x.png */; };
 		F5ECC85017CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */; };
-		F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */; };
-		F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F519860617FA445C00F05841 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F577774A17FA435A003AFA04;
+			remoteInfo = KudryavkaTool;
+		};
 		F573859B17C6B5D400B8E7EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
@@ -294,6 +301,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F577774917FA435A003AFA04 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		F58A9AFA17ACC97800923A25 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,6 +374,9 @@
 		F51E65C817B0A48200BF09D4 /* RequestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequestsCell.xib; sourceTree = "<group>"; };
 		F51E65CA17B0B04E00BF09D4 /* SCRequestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRequestCell.h; sourceTree = "<group>"; };
 		F51E65CB17B0B04E00BF09D4 /* SCRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRequestCell.m; sourceTree = "<group>"; };
+		F5247DC417F68D6000ABBE1C /* UnlockData.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnlockData.xib; sourceTree = "<group>"; };
+		F5247DC817F6922300ABBE1C /* SCIdentityUnlockWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIdentityUnlockWindowController.h; sourceTree = "<group>"; };
+		F5247DC917F6922300ABBE1C /* SCIdentityUnlockWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIdentityUnlockWindowController.m; sourceTree = "<group>"; };
 		F52BDECF17B9D7E1007CF88B /* SCWebKitFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitFriend.h; sourceTree = "<group>"; };
 		F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWebKitFriend.m; sourceTree = "<group>"; };
 		F52BDED217B9DFDA007CF88B /* SCWebKitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitMessage.h; sourceTree = "<group>"; };
@@ -394,6 +413,8 @@
 		F56B507517F3C5EC0007DE6F /* SCGroupRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGroupRequestCell.m; sourceTree = "<group>"; };
 		F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCThemeManager.h; sourceTree = "<group>"; };
 		F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
+		F577774B17FA435A003AFA04 /* KudryavkaTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KudryavkaTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		F577774E17FA435A003AFA04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Kudryavka/tool/main.m; sourceTree = SOURCE_ROOT; };
 		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
 		F57D8BCA17D5591000516F25 /* pane-save-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pane-save-test.png"; sourceTree = "<group>"; };
 		F58586BC17BC5B3400E0B432 /* SLBackingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLBackingView.h; sourceTree = "<group>"; };
@@ -406,12 +427,6 @@
 		F58A9ADE17ACB85400923A25 /* Kudryavka-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kudryavka-Prefix.pch"; sourceTree = "<group>"; };
 		F58A9ADF17ACB85400923A25 /* Kudryavka.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Kudryavka.h; sourceTree = "<group>"; };
 		F58A9AE017ACB85400923A25 /* Kudryavka.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Kudryavka.m; sourceTree = "<group>"; };
-		F58A9AE817ACBDA300923A25 /* NKKeychainDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeychainDataSerializer.h; sourceTree = "<group>"; };
-		F58A9AE917ACBDA300923A25 /* NKKeychainDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeychainDataSerializer.m; sourceTree = "<group>"; };
-		F58A9AEF17ACBDF800923A25 /* NKDummyDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKDummyDataSerializer.h; sourceTree = "<group>"; };
-		F58A9AF017ACBDF800923A25 /* NKDummyDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKDummyDataSerializer.m; sourceTree = "<group>"; };
-		F58A9AF317ACBEAD00923A25 /* NKCryptedFileDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKCryptedFileDataSerializer.h; sourceTree = "<group>"; };
-		F58A9AF417ACBEAD00923A25 /* NKCryptedFileDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKCryptedFileDataSerializer.m; sourceTree = "<group>"; };
 		F58A9AF717ACC94E00923A25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F59107E617CC06CD00251B7A /* IdentityPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdentityPane.xib; sourceTree = "<group>"; };
 		F59107E817CC074800251B7A /* DHTPane.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DHTPane.xib; sourceTree = "<group>"; };
@@ -454,8 +469,6 @@
 		F59A065417AC8AC900E9B15F /* SCAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F59A065517AC8AC900E9B15F /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
 		F59A254117D6E3800015F103 /* Default.psnSounds */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnSounds; sourceTree = "<group>"; };
-		F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKToxDataWriter.h; sourceTree = "<group>"; };
-		F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKToxDataWriter.m; sourceTree = "<group>"; };
 		F5A3A84E17B2F2300068AFA0 /* SCKudTestingPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKudTestingPaneController.h; sourceTree = "<group>"; };
 		F5A3A84F17B2F2300068AFA0 /* SCKudTestingPaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKudTestingPaneController.m; sourceTree = "<group>"; };
 		F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KudoTesting.xib; sourceTree = "<group>"; };
@@ -511,6 +524,8 @@
 		F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
 		F5C8F5AB17C985530008B94B /* SCBootstrapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBootstrapManager.h; sourceTree = "<group>"; };
 		F5C8F5AC17C985530008B94B /* SCBootstrapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBootstrapManager.m; sourceTree = "<group>"; };
+		F5CF279517F74C7100B79565 /* NSWindow+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Shake.h"; sourceTree = "<group>"; };
+		F5CF279617F74C7100B79565 /* NSWindow+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Shake.m"; sourceTree = "<group>"; };
 		F5D148F117D6AC57003BEA73 /* SCNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNotificationManager.h; sourceTree = "<group>"; };
 		F5D148F217D6AC57003BEA73 /* SCNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNotificationManager.m; sourceTree = "<group>"; };
 		F5D148F617D6AD88003BEA73 /* SCSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSoundManager.h; sourceTree = "<group>"; };
@@ -563,8 +578,6 @@
 		F5E4821317D57F5400CC1783 /* pane-save-test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pane-save-test@2x.png"; sourceTree = "<group>"; };
 		F5ECC84E17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCConnectionInspectorSheetController.h; sourceTree = "<group>"; };
 		F5ECC84F17CEEAB8000E01D2 /* SCConnectionInspectorSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCConnectionInspectorSheetController.m; sourceTree = "<group>"; };
-		F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKKeyServerSerializer.h; sourceTree = "<group>"; };
-		F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKKeyServerSerializer.m; sourceTree = "<group>"; };
 		F5FF959A17AD7A3700BB2F13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -576,13 +589,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F577774817FA435A003AFA04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F519861017FA4AE800F05841 /* DeepEnd.framework in Frameworks */,
+				F577774C17FA435A003AFA04 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F58A9AD217ACB85400923A25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F547D6FB17C69E9E00D3E4C5 /* libcrypto.dylib in Frameworks */,
 				F5A7E91B17AD83D000B6ADA7 /* DeepEnd.framework in Frameworks */,
-				F58A9AF817ACC94E00923A25 /* Security.framework in Frameworks */,
 				F58A9AD717ACB85400923A25 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,6 +612,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5CF279D17F922A300B79565 /* Security.framework in Frameworks */,
 				F5C67DB517B8833C00FE4D14 /* QuartzCore.framework in Frameworks */,
 				F5556B7F17B57F9B00E636FE /* WebKit.framework in Frameworks */,
 				F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */,
@@ -676,6 +698,15 @@
 			path = friend_requests;
 			sourceTree = "<group>";
 		};
+		F5247DC717F691EE00ABBE1C /* unlock_window */ = {
+			isa = PBXGroup;
+			children = (
+				F5247DC817F6922300ABBE1C /* SCIdentityUnlockWindowController.h */,
+				F5247DC917F6922300ABBE1C /* SCIdentityUnlockWindowController.m */,
+			);
+			path = unlock_window;
+			sourceTree = "<group>";
+		};
 		F52BDECE17B9D66B007CF88B /* theme_api */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,15 +768,20 @@
 			path = bootstrap_sheet;
 			sourceTree = "<group>";
 		};
+		F577774617FA42EF003AFA04 /* tool */ = {
+			isa = PBXGroup;
+			children = (
+				F577774E17FA435A003AFA04 /* main.m */,
+			);
+			path = tool;
+			sourceTree = "<group>";
+		};
 		F58A9AD817ACB85400923A25 /* kudryavka */ = {
 			isa = PBXGroup;
 			children = (
+				F577774617FA42EF003AFA04 /* tool */,
 				F58A9ADF17ACB85400923A25 /* Kudryavka.h */,
 				F58A9AE017ACB85400923A25 /* Kudryavka.m */,
-				F5FE73B217AEC97C001EF4A3 /* keyserver */,
-				F58A9AEE17ACBDD000923A25 /* dummy */,
-				F58A9AED17ACBDC300923A25 /* crypted_file */,
-				F58A9AEC17ACBDA700923A25 /* keychain */,
 				F58A9AD917ACB85400923A25 /* Supporting Files */,
 			);
 			name = kudryavka;
@@ -760,35 +796,6 @@
 				F58A9ADE17ACB85400923A25 /* Kudryavka-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F58A9AEC17ACBDA700923A25 /* keychain */ = {
-			isa = PBXGroup;
-			children = (
-				F58A9AE817ACBDA300923A25 /* NKKeychainDataSerializer.h */,
-				F58A9AE917ACBDA300923A25 /* NKKeychainDataSerializer.m */,
-			);
-			path = keychain;
-			sourceTree = "<group>";
-		};
-		F58A9AED17ACBDC300923A25 /* crypted_file */ = {
-			isa = PBXGroup;
-			children = (
-				F5A3A84917B2AAB60068AFA0 /* NKToxDataWriter.h */,
-				F5A3A84A17B2AAB60068AFA0 /* NKToxDataWriter.m */,
-				F58A9AF317ACBEAD00923A25 /* NKCryptedFileDataSerializer.h */,
-				F58A9AF417ACBEAD00923A25 /* NKCryptedFileDataSerializer.m */,
-			);
-			path = crypted_file;
-			sourceTree = "<group>";
-		};
-		F58A9AEE17ACBDD000923A25 /* dummy */ = {
-			isa = PBXGroup;
-			children = (
-				F58A9AEF17ACBDF800923A25 /* NKDummyDataSerializer.h */,
-				F58A9AF017ACBDF800923A25 /* NKDummyDataSerializer.m */,
-			);
-			path = dummy;
 			sourceTree = "<group>";
 		};
 		F59A05D717AC808900E9B15F = {
@@ -822,6 +829,7 @@
 				F5DE01DF17B9A704002D69E6 /* Silica.app */,
 				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
 				F547D6F017C68DE500D3E4C5 /* genki */,
+				F577774B17FA435A003AFA04 /* KudryavkaTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -877,6 +885,7 @@
 				F51E65C417B0A0CB00BF09D4 /* friend_requests */,
 				F5C7BBFB17AC8D0D009BA3E4 /* common */,
 				F500603517ADEF6100C864C4 /* main_window */,
+				F5247DC717F691EE00ABBE1C /* unlock_window */,
 				F5C7BBFA17AC8CEC009BA3E4 /* login_window */,
 				F59A065317AC8AC900E9B15F /* Poison-Prefix.pch */,
 				F59A065417AC8AC900E9B15F /* SCAppDelegate.h */,
@@ -911,6 +920,7 @@
 				F5A3A85C17B34E580068AFA0 /* BootstrapSheet.xib */,
 				F5C7BBF917AC8CA4009BA3E4 /* LoginWindow.xib */,
 				F5556B7B17B5716600E636FE /* ConnectionInspector.xib */,
+				F5247DC417F68D6000ABBE1C /* UnlockData.xib */,
 				F52DF77617BAADE90088DDDB /* InstallResource.xib */,
 			);
 			path = interfaces;
@@ -1068,6 +1078,8 @@
 				F5C7BBFD17AC8D3C009BA3E4 /* SCGradientView.m */,
 				F532D6A917AC9CC900FB48A2 /* SCShadowedView.h */,
 				F532D6AA17AC9CC900FB48A2 /* SCShadowedView.m */,
+				F5CF279517F74C7100B79565 /* NSWindow+Shake.h */,
+				F5CF279617F74C7100B79565 /* NSWindow+Shake.m */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1185,15 +1197,6 @@
 			path = connection_inspector;
 			sourceTree = "<group>";
 		};
-		F5FE73B217AEC97C001EF4A3 /* keyserver */ = {
-			isa = PBXGroup;
-			children = (
-				F5FE73B317AEC9B3001EF4A3 /* NKKeyServerSerializer.h */,
-				F5FE73B417AEC9B3001EF4A3 /* NKKeyServerSerializer.m */,
-			);
-			path = keyserver;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1202,11 +1205,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58A9AFD17ACCA7200923A25 /* Kudryavka.h in Headers */,
-				F5A3A84B17B2AAB60068AFA0 /* NKToxDataWriter.h in Headers */,
-				F58A9AEA17ACBDA400923A25 /* NKKeychainDataSerializer.h in Headers */,
-				F58A9AF117ACBDF800923A25 /* NKDummyDataSerializer.h in Headers */,
-				F58A9AF517ACBEAD00923A25 /* NKCryptedFileDataSerializer.h in Headers */,
-				F5FE73B517AEC9B3001EF4A3 /* NKKeyServerSerializer.h in Headers */,
 				F5A3A85017B2F2300068AFA0 /* SCKudTestingPaneController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1229,6 +1227,23 @@
 			name = genki;
 			productName = genki;
 			productReference = F547D6F017C68DE500D3E4C5 /* genki */;
+			productType = "com.apple.product-type.tool";
+		};
+		F577774A17FA435A003AFA04 /* KudryavkaTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F577775417FA435A003AFA04 /* Build configuration list for PBXNativeTarget "KudryavkaTool" */;
+			buildPhases = (
+				F577774717FA435A003AFA04 /* Sources */,
+				F577774817FA435A003AFA04 /* Frameworks */,
+				F577774917FA435A003AFA04 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KudryavkaTool;
+			productName = KudryavkaTool;
+			productReference = F577774B17FA435A003AFA04 /* KudryavkaTool */;
 			productType = "com.apple.product-type.tool";
 		};
 		F58A9AD517ACB85400923A25 /* Kudryavka */ = {
@@ -1355,6 +1370,7 @@
 				F58A9AD517ACB85400923A25 /* Kudryavka */,
 				F547D6EF17C68DE500D3E4C5 /* genki */,
 				F573859717C6B5C400B8E7EC /* Everything */,
+				F577774A17FA435A003AFA04 /* KudryavkaTool */,
 			);
 		};
 /* End PBXProject section */
@@ -1414,6 +1430,7 @@
 				F500604217ADFC2400C864C4 /* Preferences.xib in Resources */,
 				F500603F17ADFC1E00C864C4 /* GeneralPane.xib in Resources */,
 				F500603C17ADFC1B00C864C4 /* MainWindow.xib in Resources */,
+				F5247DC517F68D6000ABBE1C /* UnlockData.xib in Resources */,
 				F5A9CC2417AF1C31003423E0 /* user-icon-default.png in Resources */,
 				F5A9CC2617AF1ECA003423E0 /* user-icon-default@2x.png in Resources */,
 				F5E4821417D57F5400CC1783 /* pane-save-test@2x.png in Resources */,
@@ -1503,21 +1520,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F577774717FA435A003AFA04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F519861217FA4B2100F05841 /* memlimit.c in Sources */,
+				F519861117FA4AF400F05841 /* scryptenc_cpuperf.c in Sources */,
+				F519860F17FA4AC900F05841 /* sha256.c in Sources */,
+				F577774F17FA435A003AFA04 /* main.m in Sources */,
+				F519860D17FA4ABE00F05841 /* Kudryavka.m in Sources */,
+				F519860E17FA4AC600F05841 /* crypto_scrypt-sse.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F58A9AD117ACB85400923A25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5CF279C17F8DD0600B79565 /* sha256.c in Sources */,
+				F5CF279B17F8DCBB00B79565 /* crypto_scrypt-sse.c in Sources */,
 				F58A9AE117ACB85400923A25 /* Kudryavka.m in Sources */,
-				F58A9AEB17ACBDA400923A25 /* NKKeychainDataSerializer.m in Sources */,
-				F58A9AF217ACBDF800923A25 /* NKDummyDataSerializer.m in Sources */,
-				F58A9AF617ACBEAD00923A25 /* NKCryptedFileDataSerializer.m in Sources */,
-				F5FE73B617AEC9B3001EF4A3 /* NKKeyServerSerializer.m in Sources */,
-				F5A3A84C17B2AAB60068AFA0 /* NKToxDataWriter.m in Sources */,
-				F5A3A85117B2F2300068AFA0 /* SCKudTestingPaneController.m in Sources */,
-				F547D6FC17C69ED900D3E4C5 /* crypto_aesctr.c in Sources */,
-				F547D6FF17C69EE000D3E4C5 /* crypto_scrypt-sse.c in Sources */,
-				F547D70017C69EE700D3E4C5 /* sha256.c in Sources */,
-				F547D70117C69EF500D3E4C5 /* scryptenc.c in Sources */,
 				F547D70217C69F0A00D3E4C5 /* scryptenc_cpuperf.c in Sources */,
 				F547D70417C69F4700D3E4C5 /* memlimit.c in Sources */,
 			);
@@ -1550,6 +1572,7 @@
 				F59107FD17CC080E00251B7A /* SCAlertsPaneController.m in Sources */,
 				F55E798617AF52EE0044092B /* SCSometimesEditableTextField.m in Sources */,
 				F52CACB617E4EB320064677A /* SCGroupChatSheetController.m in Sources */,
+				F577774517FA4195003AFA04 /* SCKudTestingPaneController.m in Sources */,
 				F56B507617F3C5EC0007DE6F /* SCGroupRequestCell.m in Sources */,
 				F591080217CC080E00251B7A /* SCStylePaneController.m in Sources */,
 				F51E65C717B0A11600BF09D4 /* SCFriendRequestsSheetController.m in Sources */,
@@ -1561,6 +1584,7 @@
 				F5DD1BEC17B45283000AF9C6 /* SCAddFriendSheetController.m in Sources */,
 				F5556B8317B5908A00E636FE /* SCChatViewController.m in Sources */,
 				F5556B8617B5947500E636FE /* SCChatView.m in Sources */,
+				F5CF279717F74C7100B79565 /* NSWindow+Shake.m in Sources */,
 				F5556B8A17B5B7D500E636FE /* SCBorderedGradientView.m in Sources */,
 				F5556B8F17B5C18800E636FE /* SCBootstrapSheetController.m in Sources */,
 				F5C67D8A17B8764200FE4D14 /* SCTextField.m in Sources */,
@@ -1572,6 +1596,7 @@
 				F5D148F817D6AD88003BEA73 /* SCSoundManager.m in Sources */,
 				F506272917C53BB70069EDE4 /* SCStandaloneWindowController.m in Sources */,
 				F5C8F5AD17C985530008B94B /* SCBootstrapManager.m in Sources */,
+				F5247DCA17F6922300ABBE1C /* SCIdentityUnlockWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,6 +1628,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F519860717FA445C00F05841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F577774A17FA435A003AFA04 /* KudryavkaTool */;
+			targetProxy = F519860617FA445C00F05841 /* PBXContainerItemProxy */;
+		};
 		F573859C17C6B5D400B8E7EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F59A05DF17AC808900E9B15F /* Poison */;
@@ -1840,6 +1870,47 @@
 			};
 			name = Release;
 		};
+		F577775517FA435A003AFA04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "-DKUD_DEBUG";
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F577775617FA435A003AFA04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "-DKUD_DEBUG";
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F58A9AE317ACB85400923A25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1857,6 +1928,7 @@
 					"-Werror",
 					"-Wall",
 				);
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1878,6 +1950,7 @@
 					"-Werror",
 					"-Wall",
 				);
+				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2072,6 +2145,15 @@
 			buildConfigurations = (
 				F573859917C6B5C400B8E7EC /* Debug */,
 				F573859A17C6B5C400B8E7EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F577775417FA435A003AFA04 /* Build configuration list for PBXNativeTarget "KudryavkaTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F577775517FA435A003AFA04 /* Debug */,
+				F577775617FA435A003AFA04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

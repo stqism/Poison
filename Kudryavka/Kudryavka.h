@@ -15,22 +15,14 @@
  * Damn it.
  */
 
-typedef NS_ENUM(NSInteger, NKSerializerType) {
-    NKSerializerKeychain,
-    NKSerializerCustomFile,
-    NKSerializerNoop,
-    NKSerializerKeyserver,
-};
-
+@class DESToxNetworkConnection;
 @interface NKDataSerializer : NSObject
 
-+ (NKDataSerializer *)serializerUsingMethod:(NKSerializerType)method;
 + (BOOL)isDebugBuild;
-
-- (BOOL)serializePrivateKey:(NSString *)thePrivateKey publicKey:(NSString *)thePublicKey options:(NSDictionary *)aDict error:(NSError **)error;
-
-- (NSDictionary *)loadKeysWithOptions:(NSDictionary *)aDict error:(NSError **)error;
-
-- (BOOL)hasDataForOptions:(NSDictionary *)aDict;
+- (NSData *)archivedDataWithConnection:(DESToxNetworkConnection *)aConnection;
+- (NSData *)encryptedDataWithConnection:(DESToxNetworkConnection *)aConnection password:(NSString *)pass;
+- (NSData *)encryptedDataWithConnection:(DESToxNetworkConnection *)aConnection password:(NSString *)pass comment:(NSString *)comment;
+- (NSDictionary *)decryptDataBlob:(NSData *)blob withPassword:(NSString *)pass;
+- (NSDictionary *)unarchiveClearData:(NSData *)blob;
 
 @end

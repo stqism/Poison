@@ -1,7 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class SCGradientView, SCShadowedView, SCBigGreenButton;
-@interface SCLoginWindowController : NSWindowController
+@interface SCLoginWindowController : NSWindowController <NSTextFieldDelegate>
 
 @property (strong) IBOutlet SCGradientView *backgroundView;
 @property (strong) IBOutlet SCShadowedView *inputPanel;
@@ -15,9 +15,9 @@
 @property (strong) IBOutlet NSView *pageOne;
 @property (strong) IBOutlet NSView *pageTwo;
 
-@property (strong) IBOutlet NSButton *radioOptKeychain;
-@property (strong) IBOutlet NSButton *radioOptCustomFile;
-@property (strong) IBOutlet NSButton *radioOptNoSave;
-@property (strong) IBOutlet NSButton *saveKeysButton;
+@property (strong) IBOutlet NSButton *passwordSaveKeychainCheck;
+@property (strong) IBOutlet NSSecureTextField *passwordFieldOne;
+@property (strong) IBOutlet NSSecureTextField *passwordFieldTwo;
+
 
 @end
