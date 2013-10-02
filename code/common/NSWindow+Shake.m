@@ -5,7 +5,7 @@
 
 - (void)shakeWindow:(void (^)(void))completionHandler {
     self.animations = @{@"frameOrigin": [self shakeAnimation:self.frame]};
-    self.animator.frameOrigin = self.frame.origin;
+    [self.animator setFrameOrigin:self.frame.origin];
     if (completionHandler) {
         double delayInSeconds = 0.3;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
