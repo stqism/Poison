@@ -392,6 +392,28 @@
     return d;
 }
 
+- (NSString *)fileCommentFromBlob:(NSData *)blob {
+    const uint8_t *b = [blob bytes];
+    uint8_t *cp = (uint8_t*)b + 4;
+    uint8_t magic1[4] = {0x6B, 0x75, 0x64, 0x6F};
+    if (memcmp(b, magic1, 4)) {
+        NKDebug(@"Data blob failed MAGIC1 check. (expected 0x6B75646F)");
+        return nil;
+    }
+    uint32_t comment_size = [self readInt32FromBuffer:cp];
+    cp += 4;
+    LENGTH_CHECK(blob, 4 + comment_size);
+    if (comment_size) {
+        uint8_t *comment = malloc(comment_size);
+        memcpy(comment, cp, comment_size);
+        NSString *cmt = [[NSString alloc] initWithBytes:comment length:comment_size encoding:NSUTF8StringEncoding];
+        free(comment);
+        return cmt;
+    } else {
+        return @"";
+    }
+}
+
 - (void)writeInt32:(uint32_t)theInt toBuffer:(uint8_t *)buf {
     /* This could probably be done better. */
     buf[0] = theInt >> 24;

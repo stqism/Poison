@@ -34,7 +34,12 @@ static SCSoundManager *sharedInstance = nil;
             [[NSFileManager defaultManager] createDirectoryAtPath:searchPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
         NSString *savedThemePref = [[NSUserDefaults standardUserDefaults] stringForKey:@"hiSetDirectory"];
-        if (!savedThemePref || ![SCSoundManager isValidSoundSetAtPath:savedThemePref]) {
+        BOOL themeIsWithinSearchPaths = NO;
+        for (NSString *searchPath in anArray) {
+            if ([[savedThemePref stringByDeletingLastPathComponent] isEqualToString:searchPath])
+                themeIsWithinSearchPaths = YES;
+        }
+        if (!savedThemePref || ![SCSoundManager isValidSoundSetAtPath:savedThemePref] || !themeIsWithinSearchPaths) {
             savedThemePref = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"psnSounds" inDirectory:@"SoundSets"];
             [[NSUserDefaults standardUserDefaults] setObject:savedThemePref forKey:@"hiSetDirectory"];
         }

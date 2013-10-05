@@ -35,5 +35,6 @@
 - (void)checkKeyQueue;
 - (id<DESChatContext>)currentContext;
 - (void)focusContext:(id<DESChatContext>)ctx;
+- (void)willLogOut;
 
 @end

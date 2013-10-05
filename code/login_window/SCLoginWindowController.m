@@ -4,6 +4,7 @@
 #import "SCAppDelegate.h"
 #import "NSWindow+Shake.h"
 #import "SCBigGreenButton.h"
+#import "SCIdentityManager.h"
 #import <Kudryavka/Kudryavka.h>
 
 @implementation SCLoginWindowController {
@@ -33,14 +34,7 @@
     self.window.maxSize = (NSSize){480, 264};
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     self.versionLabel.stringValue = [NSString stringWithFormat:@"%@ %@", info[@"CFBundleName"], info[@"CFBundleShortVersionString"]];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *profilePath = [[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"];
-    [fm createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil];
-    names = [[fm contentsOfDirectoryAtPath:profilePath error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        BOOL dir = NO;
-        [fm fileExistsAtPath:evaluatedObject isDirectory:&dir];
-        return dir == NO;
-    }]];
+    names = [[SCIdentityManager sharedManager] knownUsers];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasRunBefore"]) {
         self.helperLabel.stringValue = NSLocalizedString(@"Welcome to Poison. Enter a nickname to get started.", @"");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRunBefore"];

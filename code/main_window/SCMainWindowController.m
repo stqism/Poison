@@ -37,18 +37,6 @@ typedef NS_ENUM(NSInteger, SCListMode) {
 
 @end
 
-@interface SCMenuButton : NSButton
-
-@end
-
-@implementation SCMenuButton
-
-- (void)mouseDown:(NSEvent *)theEvent {
-    [NSMenu popUpContextMenu:self.menu withEvent:theEvent forView:self];
-}
-
-@end
-
 @implementation SCMainWindowController {
     NSArray *_friendList;
     NSArray *_groupList;
@@ -314,11 +302,15 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     [self changeListMode:sender.selectedSegment];
 }
 
-- (void)dealloc {
+- (void)willLogOut {
     [[DESSelf self] removeObserver:self forKeyPath:@"userStatus"];
     [[DESSelf self] removeObserver:self forKeyPath:@"displayName"];
     [[DESSelf self] removeObserver:self forKeyPath:@"statusType"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)dealloc {
+    [self willLogOut];
 }
 
 #pragma mark - Sheets
@@ -448,7 +440,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     if (listMode == SCListModeFriends)
         dummy = [NSNotification notificationWithName:@"deleteFriend" object:nil userInfo:@{@"friend": [self friendInRow:self.listView.selectedRow]}];
     else
-        dummy = [NSNotification notificationWithName:@"leaveGroup" object:nil userInfo:@{@"chat": [self groupChatInRow:self.listView.selectedRow]}];
+        dummy = [NSNotification notificationWithName:@"leaveGroupChat" object:nil userInfo:@{@"chat": [self groupChatInRow:self.listView.selectedRow]}];
     [self confirmDeleteFriend:dummy];
 }
 

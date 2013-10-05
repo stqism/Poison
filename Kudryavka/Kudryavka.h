@@ -30,4 +30,6 @@
 - (NSDictionary *)decryptDataBlob:(NSData *)blob withPassword:(NSString *)pass;
 - (NSDictionary *)unarchiveClearData:(NSData *)blob;
 
+- (NSString *)fileCommentFromBlob:(NSData *)blob;
+
 @end

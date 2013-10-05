@@ -113,7 +113,7 @@
     NSSize prevSize = self.messageInput.frame.size;
     if (sz.size.height != self.messageInput.bounds.size.height) {
         NSSize fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: self.messageInput.font}];
-        [self.textBackground setFrame:(NSRect){{15, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height, fourLines.height) + 5) + 10}}];
+        [self.textBackground setFrame:(NSRect){{self.shareButton.frame.origin.x + self.shareButton.frame.size.width + 3, 5}, {self.messageInput.bounds.size.width + 10, MAX(22, MIN(sz.size.height, fourLines.height) + 5) + 10}}];
         // Only regenerate the shadow if the rect has changed.
         NSRect candidateRect = NSMakeRect(5, 5, self.textBackground.bounds.size.width - 10, self.textBackground.bounds.size.height - 10);
         if (!NSEqualRects(candidateRect, self.messageInput.frame)) {

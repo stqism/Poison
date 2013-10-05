@@ -82,6 +82,7 @@
 		F5758EC917BC4C9000CBCE64 /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5DE01D717B9A3E2002D69E6 /* Default.psnChatStyle */; };
 		F5758ECC17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
 		F5758ECD17BC4F3D00CBCE64 /* SCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */; };
+		F575B30317FE4AAE00605A0B /* SCIdentityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F575B30217FE4AAE00605A0B /* SCIdentityManager.m */; };
 		F577774517FA4195003AFA04 /* SCKudTestingPaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A3A84F17B2F2300068AFA0 /* SCKudTestingPaneController.m */; };
 		F577774C17FA435A003AFA04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FF959A17AD7A3700BB2F13 /* Foundation.framework */; };
 		F577774F17FA435A003AFA04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F577774E17FA435A003AFA04 /* main.m */; };
@@ -414,6 +415,8 @@
 		F56B507517F3C5EC0007DE6F /* SCGroupRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGroupRequestCell.m; sourceTree = "<group>"; };
 		F5758ECA17BC4F3D00CBCE64 /* SCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCThemeManager.h; sourceTree = "<group>"; };
 		F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
+		F575B30117FE4AAE00605A0B /* SCIdentityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIdentityManager.h; sourceTree = "<group>"; };
+		F575B30217FE4AAE00605A0B /* SCIdentityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIdentityManager.m; sourceTree = "<group>"; };
 		F577774B17FA435A003AFA04 /* KudryavkaTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KudryavkaTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		F577774E17FA435A003AFA04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Kudryavka/tool/main.m; sourceTree = SOURCE_ROOT; };
 		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
@@ -770,6 +773,15 @@
 			path = bootstrap_sheet;
 			sourceTree = "<group>";
 		};
+		F575B2FF17FE4A8C00605A0B /* identity_manager */ = {
+			isa = PBXGroup;
+			children = (
+				F575B30117FE4AAE00605A0B /* SCIdentityManager.h */,
+				F575B30217FE4AAE00605A0B /* SCIdentityManager.m */,
+			);
+			path = identity_manager;
+			sourceTree = "<group>";
+		};
 		F577774617FA42EF003AFA04 /* tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,6 +885,7 @@
 		F59A061517AC873A00E9B15F /* code */ = {
 			isa = PBXGroup;
 			children = (
+				F575B2FF17FE4A8C00605A0B /* identity_manager */,
 				F52CACB317E4EB150064677A /* add_group_chat */,
 				F5D148F017D6AC3C003BEA73 /* notification */,
 				F5ECC84C17CEEA7C000E01D2 /* connection_inspector */,
@@ -1560,6 +1573,7 @@
 				F5C7BBF517AC8C7C009BA3E4 /* SCLoginWindowController.m in Sources */,
 				F5C7BBFE17AC8D3C009BA3E4 /* SCGradientView.m in Sources */,
 				F532D6AB17AC9CC900FB48A2 /* SCShadowedView.m in Sources */,
+				F575B30317FE4AAE00605A0B /* SCIdentityManager.m in Sources */,
 				F591080017CC080E00251B7A /* SCIdentityPaneController.m in Sources */,
 				F58A9ACF17AC9ED500923A25 /* SCBigGreenButton.m in Sources */,
 				F59107FE17CC080E00251B7A /* SCDHTPaneController.m in Sources */,

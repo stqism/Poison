@@ -1,6 +1,7 @@
 #import "SCIdentityUnlockWindowController.h"
 #import "SCAppDelegate.h"
 #import "NSWindow+Shake.h"
+#import "SCIdentityManager.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SCIdentityUnlockWindowController
@@ -36,13 +37,13 @@
         return;
     }
     self.unlockButton.enabled = NO;
-    NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:self.unlockingIdentity];
+    NSString *profilePath = [[SCIdentityManager sharedManager] profilePathOfUser:self.unlockingIdentity];
     NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
     SCAppDelegate *delegate = (SCAppDelegate*)[NSApp delegate];
     if (!blob) {
         delegate.encPassword = self.passwordField.stringValue;
         if (self.savesToKeychain.state == NSOnState)
-            [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:self.unlockingIdentity];
+            [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:[[SCIdentityManager sharedManager] UUIDOfUser:self.unlockingIdentity]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:delegate];
         [NSApp stopModal];
     } else {
@@ -61,7 +62,7 @@
                     [NSApp stopModal];
                     delegate.encPassword = self.passwordField.stringValue;
                     if (self.savesToKeychain.state == NSOnState)
-                        [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:self.unlockingIdentity];
+                        [delegate dumpPasswordToKeychain:self.passwordField.stringValue username:[[SCIdentityManager sharedManager] UUIDOfUser:self.unlockingIdentity]];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:delegate userInfo:d];
                 });
             }

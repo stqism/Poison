@@ -13,5 +13,6 @@
 @property (strong) IBOutlet NSImageView *statusLight;
 @property (strong, nonatomic) id<DESChatContext> context;
 @property (strong) IBOutlet NSTextField *partnerName;
+@property (strong) IBOutlet NSPopUpButton *shareButton;
 
 @end

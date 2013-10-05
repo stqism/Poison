@@ -19,5 +19,4 @@
 @property (strong) IBOutlet NSSecureTextField *passwordFieldOne;
 @property (strong) IBOutlet NSSecureTextField *passwordFieldTwo;
 
-
 @end

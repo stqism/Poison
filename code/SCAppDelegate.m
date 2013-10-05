@@ -9,6 +9,7 @@
 #import "SCNotificationManager.h"
 #import "SCSoundManager.h"
 #import "SCIdentityUnlockWindowController.h"
+#import "SCIdentityManager.h"
 #import <objc/runtime.h>
 
 #import <DeepEnd/DeepEnd.h>
@@ -37,8 +38,9 @@ char *const SCUnreadCountStoreKey = "";
     }
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"rememberUserName"] && !([NSEvent modifierFlags] & NSAlternateKeyMask)) {
         NSString *rememberedUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"rememberedName"];
+        BOOL exists = ([[[SCIdentityManager sharedManager] knownUsers] indexOfObject:rememberedUsername] != NSNotFound);
         NSLog(@"%@", rememberedUsername);
-        if (rememberedUsername && ![[rememberedUsername stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+        if (rememberedUsername && ![[rememberedUsername stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""] && exists) {
             [self beginConnectionWithUsername:rememberedUsername];
         } else {
             self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
@@ -59,7 +61,6 @@ char *const SCUnreadCountStoreKey = "";
     NSString *publicKey = [[url substringFromIndex:6] uppercaseString];
     if (!DESFriendAddressIsValid(publicKey))
         return;
-    NSLog(@"%@", publicKey);
     self.queuedPublicKey = publicKey; /* We'll look at this later. */
     if (_mainWindow)
         [_mainWindow checkKeyQueue];
@@ -74,6 +75,13 @@ char *const SCUnreadCountStoreKey = "";
     return YES;
 }
 
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
+    [self saveData:^(BOOL success) {
+        [NSApp replyToApplicationShouldTerminate:YES];
+    }];
+    return NSTerminateLater;
+}
+
 - (void)showMainWindow {
     if (!self.mainWindow)
         self.mainWindow = [[SCMainWindowController alloc] initWithWindowNibName:@"MainWindow"];
@@ -81,14 +89,26 @@ char *const SCUnreadCountStoreKey = "";
 }
 
 - (void)saveData {
+    [self saveData:nil];
+}
+
+- (void)saveData:(void(^)(BOOL success))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
+        NSString *profilePath = [[SCIdentityManager sharedManager] profilePathOfUser:originalUsername];
         if ([[NSFileManager defaultManager] createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil]) {
             NKDataSerializer *kud = [[NKDataSerializer alloc] init];
-            [[kud encryptedDataWithConnection:[DESToxNetworkConnection sharedConnection] password:self.encPassword] writeToFile:[profilePath stringByAppendingPathComponent:@"data.txd"] atomically:YES];
+            [[kud encryptedDataWithConnection:[DESToxNetworkConnection sharedConnection] password:self.encPassword comment:@"Poison Data Format v.1"] writeToFile:[profilePath stringByAppendingPathComponent:@"data.txd"] atomically:YES];
             NSLog(@"Data was saved.");
+            if (completion)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(YES);
+                });
         } else {
             NSLog(@"Data couldn't be saved.");
+            if (completion)
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(NO);
+                });
         }
     });
 }
@@ -140,11 +160,13 @@ char *const SCUnreadCountStoreKey = "";
 
 - (void)connectNewAccountWithUsername:(NSString *)theUsername password:(NSString *)pass inKeychain:(BOOL)yeahnah {
     originalUsername = theUsername;
+    SCIdentityManager *m = [SCIdentityManager sharedManager];
+    [m createUser:theUsername];
     self.encPassword = pass;
     if (yeahnah) {
-        [self dumpPasswordToKeychain:pass username:theUsername];
+        [self dumpPasswordToKeychain:pass username:[m UUIDOfUser:theUsername]];
     } else {
-        [self clearPasswordFromKeychain:pass username:theUsername];
+        [self clearPasswordFromKeychain:pass username:[m UUIDOfUser:theUsername]];
     }
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionInitialized:) name:DESConnectionDidInitNotification object:connection];
@@ -157,6 +179,34 @@ char *const SCUnreadCountStoreKey = "";
     [connection connect];
 }
 
+- (IBAction)logOut:(id)sender {
+    if (self.mainWindow) {
+        [self.mainWindow close];
+        [self.mainWindow willLogOut];
+        self.mainWindow = nil;
+    }
+    if (self.loginWindow) {
+        [self.loginWindow close];
+        self.loginWindow = nil;
+    }
+    DESToxNetworkConnection *c = [DESToxNetworkConnection sharedConnection];
+    [c.me removeObserver:self forKeyPath:@"displayName"];
+    [c.me removeObserver:self forKeyPath:@"userStatus"];
+    [c.me removeObserver:self forKeyPath:@"statusType"];
+    for (DESFriend *i in c.friendManager.friends) {
+        [c removeObserver:self forKeyPath:@"status"];
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self saveData:^(BOOL success) {
+        [[DESToxNetworkConnection sharedConnection] disconnect];
+        self.encPassword = nil;
+        originalUsername = nil;
+        self.networkMenu.enabled = NO;
+        self.loginWindow = [[SCLoginWindowController alloc] initWithWindowNibName:@"LoginWindow"];
+        [self.loginWindow showWindow:self];
+    }];
+}
+
 #pragma mark - Notifications
 
 - (void)connectionInitialized:(NSNotification *)notification {
@@ -164,10 +214,11 @@ char *const SCUnreadCountStoreKey = "";
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     connection.me.displayName = originalUsername;
     connection.me.userStatus = @"Online";
-    NSString *profilePath = [[[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"Poison"] stringByAppendingPathComponent:@"Profiles"] stringByAppendingPathComponent:originalUsername];
+    SCIdentityManager *m = [SCIdentityManager sharedManager];
+    NSString *profilePath = [m profilePathOfUser:originalUsername];
     NSData *blob = [NSData dataWithContentsOfFile:[profilePath stringByAppendingPathComponent:@"data.txd"]];
     BOOL isDir = NO;
-    if (!blob && [[NSFileManager defaultManager] fileExistsAtPath:profilePath isDirectory:&isDir] && isDir) {
+    if (!blob && [[NSFileManager defaultManager] fileExistsAtPath:profilePath isDirectory:&isDir] && isDir && !self.encPassword) {
         SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"GetPassword"];
         unlocker.unlockingIdentity = originalUsername;
         [unlocker beginModalSession];
@@ -175,7 +226,7 @@ char *const SCUnreadCountStoreKey = "";
         return;
     } else {
         NSString *dataPass = nil;
-        dataPass = [self findPasswordInKeychain:originalUsername];
+        dataPass = [self findPasswordInKeychain:[m UUIDOfUser:originalUsername]];
         if (!dataPass) {
             SCIdentityUnlockWindowController *unlocker = [[SCIdentityUnlockWindowController alloc] initWithWindowNibName:@"UnlockData"];
             unlocker.unlockingIdentity = originalUsername;

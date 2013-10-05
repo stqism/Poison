@@ -37,6 +37,9 @@
 }
 
 - (void)updateInfoBox {
+    if (self.soundSelection.indexOfSelectedItem == -1) {
+        return;
+    }
     NSDictionary *selectedInfo = info[paths[self.soundSelection.indexOfSelectedItem]];
     NSString *name = selectedInfo[@"aiThemeHumanReadableName"];
     if (!name)
