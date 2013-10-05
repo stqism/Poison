@@ -17,7 +17,7 @@
         case 100:
             self.radioButton100.state = NSOnState;
             break;
-        case 20:
+        case 30:
             self.radioButton20.state = NSOnState;
             break;
         case 10:

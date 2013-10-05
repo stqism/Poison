@@ -76,10 +76,14 @@ char *const SCUnreadCountStoreKey = "";
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-    [self saveData:^(BOOL success) {
-        [NSApp replyToApplicationShouldTerminate:YES];
-    }];
-    return NSTerminateLater;
+    if ([DESToxNetworkConnection sharedConnection].connected) {
+        [self saveData:^(BOOL success) {
+            [NSApp replyToApplicationShouldTerminate:YES];
+        }];
+        return NSTerminateLater;
+    } else {
+        return NSTerminateNow;
+    }
 }
 
 - (void)showMainWindow {
@@ -233,6 +237,10 @@ char *const SCUnreadCountStoreKey = "";
             [unlocker beginModalSession];
             [unlocker close];
         } else {
+            if (!blob) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockSuccessful" object:self userInfo:nil];
+                return;
+            }
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 NKDataSerializer *kud = [[NKDataSerializer alloc] init];
                 NSDictionary *d = [kud decryptDataBlob:blob withPassword:dataPass];

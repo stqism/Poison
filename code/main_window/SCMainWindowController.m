@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     NSUInteger selectedGroup;
     NSUInteger selectedFriend;
     SCListMode listMode;
+    BOOL autoBootstrapNeedsToStop;
 }
 
 - (void)windowDidLoad {
@@ -129,10 +130,12 @@ typedef NS_ENUM(NSInteger, SCListMode) {
             SCBootstrapManager *m = [[SCBootstrapManager alloc] init];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 [m performAutomaticBootstrapWithSuccessCallback:^{} failureBlock:^{
+                    if (autoBootstrapNeedsToStop)
+                        return;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self presentBootstrappingSheet:self];
                     });
-                }];
+                } stop:&autoBootstrapNeedsToStop];
             });
         } else if ([type isEqualToString:@"manual"]) {
             NSDictionary *d = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"manualBSSavedServer"];

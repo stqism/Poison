@@ -2,6 +2,6 @@
 
 @interface SCBootstrapManager : NSObject
 
-- (void)performAutomaticBootstrapWithSuccessCallback:(void (^)(void))successBlock failureBlock:(void (^)(void))failBlock;
+- (void)performAutomaticBootstrapWithSuccessCallback:(void (^)(void))successBlock failureBlock:(void (^)(void))failBlock stop:(BOOL *)stop;
 
 @end

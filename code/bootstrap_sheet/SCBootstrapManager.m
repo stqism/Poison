@@ -101,7 +101,7 @@
     [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:) withObject:n waitUntilDone:YES];
 }
 
-- (void)performAutomaticBootstrapWithSuccessCallback:(void (^)(void))successBlock failureBlock:(void (^)(void))failBlock {
+- (void)performAutomaticBootstrapWithSuccessCallback:(void (^)(void))successBlock failureBlock:(void (^)(void))failBlock stop:(BOOL *)stop {
     NSString *content = [self nodesFromDisk];
     if (!content) {
         content = [self loadNodesFromURL:[NSURL URLWithString:@"https://kirara.ca/poison/Nodefile"]];
@@ -119,6 +119,10 @@
     }
     DESToxNetworkConnection *connection = [DESToxNetworkConnection sharedConnection];
     for (NSDictionary *node in usableNodes) {
+        if (stop && *stop) {
+            NSLog(@"Breaking because stop is YES.");
+            failBlock();
+        }
         NSLog(@"Hit server %@ %hu %@", node[@"host"], [node[@"port"] unsignedShortValue], node[@"comment"]);
         [self updateStatusOnMainThread:[NSString stringWithFormat:NSLocalizedString(@"Server: %@:%hu [%@]", @""), node[@"host"], [node[@"port"] unsignedShortValue], node[@"comment"]]];
         [connection bootstrapWithAddress:node[@"host"] port:[node[@"port"] unsignedShortValue] publicKey:node[@"key"]];

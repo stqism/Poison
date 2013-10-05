@@ -154,7 +154,7 @@
                 NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to automatically bootstrap", @"") defaultButton:NSLocalizedString(@"Try again", @"") alternateButton:NSLocalizedString(@"Advanced", @"") otherButton:NSLocalizedString(@"Cancel", @"") informativeTextWithFormat:NSLocalizedString(@"Poison has run out of usable servers to connect to. If you know a server, click \"Advanced\" to connect manually. Sorry about that.", @"")];
                 [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performActionOnErrorEnd:returnCode:contextInfo:) contextInfo:nil];
             });
-        }];
+        } stop:nil];
     });
 }
 
