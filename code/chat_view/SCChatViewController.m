@@ -160,10 +160,13 @@
         [self layoutViews:nil];
         return;
     }
+    NSArray *split = [payload componentsSeparatedByString:@"\n"];
     if ([NSEvent modifierFlags] & NSShiftKeyMask) {
-        [self.context sendAction:payload];
+        for (NSString *i in split)
+            [self.context sendAction:i];
     } else {
-        [self.context sendMessage:payload];
+        for (NSString *i in split)
+            [self.context sendMessage:i];
     }
     self.messageInput.stringValue = @"";
     [self.messageInput clearSelection];

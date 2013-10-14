@@ -157,13 +157,13 @@
     size_t sBlockSize = 17;
     /* The size of SELFDATA before applying string lengths.
      * Count a NUL too because NSStrings don't have them. */
-    sBlockSize += source.me.displayName.length + source.me.userStatus.length + 2;
+    sBlockSize += [source.me.displayName lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + [source.me.userStatus lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 2;
     /* Add our strings. */
     size_t fBlockSize = 12;
     NSArray *friendArray = [source.friendManager.friends copy];
     for (DESFriend *theFriend in friendArray) {
         /* Again, count our NULs. */
-        fBlockSize += DESPublicKeySize + theFriend.displayName.length + 5;
+        fBlockSize += DESPublicKeySize + [theFriend.displayName lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 5;
     }
     if (bufLen)
         *bufLen = (bBlockSize + sBlockSize + fBlockSize);
@@ -217,8 +217,9 @@
         }
         [self writeInt64:(uint64_t)floor([[[NSDate date] toGlobalTime] timeIntervalSince1970]) toBuffer:friendBlockTimestamp];
         /* Friend block end */
-        if (bufLen)
-            NSAssert(offset == *bufLen, @"Block is too large. Rethink size calculation.");
+        if (bufLen) {
+            NSAssert(offset == *bufLen, @"Block is too large. Rethink size calculation. %ld %ld", offset, *bufLen);
+        }
         return YES;
     }
     return YES;

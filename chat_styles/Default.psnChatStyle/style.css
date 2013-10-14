@@ -5,7 +5,7 @@ html, body {
 }
 div.context {
     width:100%;
-    border-top:1px #888 solid;
+    border-top:1px #999 solid;
     padding-top:0.5em;
     padding-bottom:0.5em;
 }
@@ -25,6 +25,7 @@ div.messages {
 div.messages > p {
     margin:0;
     color:#333;
+    word-wrap:break-word;
 }
 div.timestamp {
     vertical-align:top;
