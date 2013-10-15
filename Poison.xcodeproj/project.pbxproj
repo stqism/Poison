@@ -417,7 +417,7 @@
 		F5758ECB17BC4F3D00CBCE64 /* SCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCThemeManager.m; sourceTree = "<group>"; };
 		F575B30117FE4AAE00605A0B /* SCIdentityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIdentityManager.h; sourceTree = "<group>"; };
 		F575B30217FE4AAE00605A0B /* SCIdentityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIdentityManager.m; sourceTree = "<group>"; };
-		F577774B17FA435A003AFA04 /* KudryavkaTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KudryavkaTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		F577774B17FA435A003AFA04 /* kudryavka */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kudryavka; sourceTree = BUILT_PRODUCTS_DIR; };
 		F577774E17FA435A003AFA04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Kudryavka/tool/main.m; sourceTree = SOURCE_ROOT; };
 		F57C3A3B17B160A000325A24 /* shiina.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = shiina.icns; sourceTree = "<group>"; };
 		F57D8BCA17D5591000516F25 /* pane-save-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pane-save-test.png"; sourceTree = "<group>"; };
@@ -843,7 +843,7 @@
 				F5DE01DF17B9A704002D69E6 /* Silica.app */,
 				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
 				F547D6F017C68DE500D3E4C5 /* genki */,
-				F577774B17FA435A003AFA04 /* KudryavkaTool */,
+				F577774B17FA435A003AFA04 /* kudryavka */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1259,7 +1259,7 @@
 			);
 			name = KudryavkaTool;
 			productName = KudryavkaTool;
-			productReference = F577774B17FA435A003AFA04 /* KudryavkaTool */;
+			productReference = F577774B17FA435A003AFA04 /* kudryavka */;
 			productType = "com.apple.product-type.tool";
 		};
 		F58A9AD517ACB85400923A25 /* Kudryavka */ = {
@@ -1903,10 +1903,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/.";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "-DKUD_DEBUG";
 				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kudryavka;
 			};
 			name = Debug;
 		};
@@ -1922,10 +1923,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/.";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "-DKUD_DEBUG";
 				OTHER_LDFLAGS = /usr/local/lib/libsodium.a;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kudryavka;
 			};
 			name = Release;
 		};
