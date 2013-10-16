@@ -97,7 +97,7 @@ char *const SCUnreadCountStoreKey = "";
 }
 
 - (void)saveData:(void(^)(BOOL success))completion {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *profilePath = [[SCIdentityManager sharedManager] profilePathOfUser:originalUsername];
         if ([[NSFileManager defaultManager] createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil]) {
             NKDataSerializer *kud = [[NKDataSerializer alloc] init];
