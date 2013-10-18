@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
     [[DESSelf self] addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
     self.displayName.stringValue = [DESSelf self].displayName;
     self.userStatus.stringValue = [DESSelf self].userStatus;
+    [self observeValueForKeyPath:@"statusType" ofObject:[DESSelf self] change:@{} context:NULL];
     [[DESToxNetworkConnection sharedConnection] addObserver:self forKeyPath:@"connectedNodeCount" options:NSKeyValueObservingOptionNew context:NULL];
     ((SCShinyWindow*)self.window).indicator.connectedNodes = [[DESToxNetworkConnection sharedConnection].connectedNodeCount integerValue];
     if (!chatView)

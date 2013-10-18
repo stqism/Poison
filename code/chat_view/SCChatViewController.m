@@ -207,6 +207,14 @@
         return @[];
     }
 }*/
+- (IBAction)showFileTransfers:(NSButton *)sender {
+    self.transfersPopover.behavior = NSPopoverBehaviorTransient;
+    if (self.transfersPopover.shown) {
+        [self.transfersPopover close];
+    } else {
+        [self.transfersPopover showRelativeToRect:sender.frame ofView:self.headerView preferredEdge:NSMinYEdge];
+    }
+}
 
 - (void)dealloc {
     self.transcriptView.frameLoadDelegate = nil;

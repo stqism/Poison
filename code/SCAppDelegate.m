@@ -25,6 +25,7 @@ char *const SCUnreadCountStoreKey = "";
 
 @implementation SCAppDelegate {
     NSString *originalUsername;
+    BOOL dlComplete;
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
@@ -201,6 +202,7 @@ char *const SCUnreadCountStoreKey = "";
         [c removeObserver:self forKeyPath:@"status"];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    dlComplete = NO;
     [self saveData:^(BOOL success) {
         [[DESToxNetworkConnection sharedConnection] disconnect];
         self.encPassword = nil;
@@ -279,6 +281,7 @@ char *const SCUnreadCountStoreKey = "";
     } else {
         [self saveData];
     }
+    dlComplete = YES;
     [connection.me addObserver:self forKeyPath:@"displayName" options:NSKeyValueObservingOptionNew context:NULL];
     [connection.me addObserver:self forKeyPath:@"userStatus" options:NSKeyValueObservingOptionNew context:NULL];
     [connection.me addObserver:self forKeyPath:@"statusType" options:NSKeyValueObservingOptionNew context:NULL];
@@ -301,7 +304,8 @@ char *const SCUnreadCountStoreKey = "";
     } else {
         [f removeObserver:self forKeyPath:@"status"];
     }
-    [self saveData];
+    if (dlComplete)
+        [self saveData];
 }
 
 - (void)subscribeToContext:(NSNotification *)notification {

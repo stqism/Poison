@@ -14,5 +14,6 @@
 @property (strong, nonatomic) id<DESChatContext> context;
 @property (strong) IBOutlet NSTextField *partnerName;
 @property (strong) IBOutlet NSPopUpButton *shareButton;
+@property (strong) IBOutlet NSPopover *transfersPopover;
 
 @end
