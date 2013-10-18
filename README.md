@@ -11,6 +11,7 @@ Most features **sort of work**, but **chatting in particular is quite buggy**. I
 Since Poison is in early development, the UI might change in the near future. Here's what it looks like right now, though:  
 
 ![](http://wiki.tox.im/images/b/b3/Macgui1.png)  
+![](https://kirara.ca/g/Poison-readme/main_window_windows.png)  
 
 *More to come...*
 
