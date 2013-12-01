@@ -32,12 +32,18 @@
         success = [theNib instantiateNibWithOwner:self topLevelObjects:&objects];
     }
     if (success && [objects count] > 0) {
+        /* hack; retain the current prefcontroller to avoid a premature-release crash. */
+        NSViewController *retainedVC = currentPane;
         for (id theView in objects) {
             if ([theView isKindOfClass:[NSViewController class]]) {
                 currentPane = (NSViewController*)theView;
                 break;
             }
         }
+        /* do something with retainedVC to make warning go away
+         * (it might actually be used in the future!) */
+        if ([retainedVC respondsToSelector:@selector(preferencePaneWillDeallocate)])
+            [retainedVC performSelector:@selector(preferencePaneWillDeallocate)];
         [self.window.contentView setHidden:YES];
         [self.window setFrame:(NSRect){{self.window.frame.origin.x, self.window.frame.origin.y - (currentPane.view.frame.size.height + chromeHeight - self.window.frame.size.height)}, {currentPane.view.frame.size.width, currentPane.view.frame.size.height + chromeHeight}} display:YES animate:YES];
         [self.window setContentView:currentPane.view];

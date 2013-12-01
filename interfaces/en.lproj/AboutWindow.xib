@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">13A584</string>
+		<string key="IBDocument.SystemVersion">13A598</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
-		<string key="IBDocument.AppKitVersion">1262</string>
+		<string key="IBDocument.AppKitVersion">1265</string>
 		<string key="IBDocument.HIToolboxVersion">695.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -49,7 +49,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="522145492">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">1792</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSCustomView" id="939134398">
@@ -62,6 +62,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{-3, 8}, {301, 14}}</string>
 									<reference key="NSSuperview" ref="939134398"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="792604230">
 										<int key="NSCellFlags">68157504</int>
@@ -96,6 +97,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{89, 23}, {116, 17}}</string>
 									<reference key="NSSuperview" ref="939134398"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="668129695">
 										<int key="NSCellFlags">68157504</int>
@@ -130,6 +132,7 @@
 									</set>
 									<string key="NSFrame">{{83, 46}, {128, 128}}</string>
 									<reference key="NSSuperview" ref="939134398"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSImageCell" key="NSCell" id="51515579">
 										<int key="NSCellFlags">0</int>
@@ -150,6 +153,7 @@
 							<object class="NSPSMatrix" key="NSFrameMatrix"/>
 							<string key="NSFrame">{{0, 215}, {295, 186}}</string>
 							<reference key="NSSuperview" ref="522145492"/>
+							<reference key="NSWindow"/>
 							<string key="NSClassName">SCGradientView</string>
 						</object>
 						<object class="NSCustomView" id="899447770">
@@ -162,6 +166,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{174, 49}, {103, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="59661971">
 										<int key="NSCellFlags">68157504</int>
@@ -184,6 +189,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{17, 49}, {69, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="220323914">
 										<int key="NSCellFlags">68157504</int>
@@ -204,8 +210,9 @@
 									<reference key="NSNextResponder" ref="899447770"/>
 									<int key="NSvFlags">1804</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{162, 63}, {115, 17}}</string>
+									<string key="NSFrame">{{78, 63}, {199, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="276970844">
 										<int key="NSCellFlags">68157504</int>
@@ -226,13 +233,14 @@
 									<reference key="NSNextResponder" ref="899447770"/>
 									<int key="NSvFlags">1804</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{17, 63}, {140, 17}}</string>
+									<string key="NSFrame">{{17, 63}, {59, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="797611067">
 										<int key="NSCellFlags">68157504</int>
 										<int key="NSCellFlags2">272630784</int>
-										<string key="NSContents">DeepEnd framework: </string>
+										<string key="NSContents">DeepEnd: </string>
 										<reference key="NSSupport" ref="26"/>
 										<reference key="NSControlView" ref="335794726"/>
 										<reference key="NSBackgroundColor" ref="963900352"/>
@@ -250,6 +258,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{20, 115}, {254, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<string key="NSClassName">SCFriendListHeaderCell</string>
 								</object>
 								<object class="NSTextField" id="913328698">
@@ -258,6 +267,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{174, 82}, {103, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="365880223">
 										<int key="NSCellFlags">68157504</int>
@@ -280,6 +290,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{17, 82}, {69, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="650083017">
 										<int key="NSCellFlags">68157504</int>
@@ -300,8 +311,9 @@
 									<reference key="NSNextResponder" ref="899447770"/>
 									<int key="NSvFlags">1804</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{162, 96}, {115, 17}}</string>
+									<string key="NSFrame">{{90, 96}, {187, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="890527215">
 										<int key="NSCellFlags">68157504</int>
@@ -322,13 +334,14 @@
 									<reference key="NSNextResponder" ref="899447770"/>
 									<int key="NSvFlags">1804</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{17, 96}, {150, 17}}</string>
+									<string key="NSFrame">{{17, 96}, {69, 17}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="540176276">
 										<int key="NSCellFlags">68157504</int>
 										<int key="NSCellFlags2">272630784</int>
-										<string key="NSContents">Kudryavka framework: </string>
+										<string key="NSContents">Kudryavka: </string>
 										<reference key="NSSupport" ref="26"/>
 										<reference key="NSControlView" ref="999525905"/>
 										<reference key="NSBackgroundColor" ref="963900352"/>
@@ -343,6 +356,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{159, 13}, {121, 32}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<string key="NSHuggingPriority">{250, 750}</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSButtonCell" key="NSCell" id="759926488">
@@ -371,6 +385,7 @@
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{5, 137}, {285, 68}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="241007897">
@@ -393,6 +408,7 @@ ZSBhIGxhd3N1aXQuA</string>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
 									<string key="NSFrame">{{14, 13}, {150, 32}}</string>
 									<reference key="NSSuperview" ref="899447770"/>
+									<reference key="NSWindow"/>
 									<string key="NSHuggingPriority">{250, 750}</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSButtonCell" key="NSCell" id="684655194">
@@ -415,11 +431,14 @@ ZSBhIGxhd3N1aXQuA</string>
 							<object class="NSPSMatrix" key="NSFrameMatrix"/>
 							<string key="NSFrameSize">{294, 215}</string>
 							<reference key="NSSuperview" ref="522145492"/>
+							<reference key="NSWindow"/>
 							<string key="NSClassName">SCShadowedView</string>
 						</object>
 					</array>
 					<object class="NSPSMatrix" key="NSFrameMatrix"/>
 					<string key="NSFrameSize">{294, 401}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
@@ -884,7 +903,103 @@ ZSBhIGxhd3N1aXQuA</string>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">PXListViewCell</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PXListViewCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCAboutWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="openGithub:">id</string>
+						<string key="openToxSite:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="openGithub:">
+							<string key="name">openGithub:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openToxSite:">
+							<string key="name">openToxSite:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="desDebug">NSTextField</string>
+						<string key="desVersion">NSTextField</string>
+						<string key="kDebug">NSTextField</string>
+						<string key="kVersion">NSTextField</string>
+						<string key="shadowedView">SCShadowedView</string>
+						<string key="topHalf">SCGradientView</string>
+						<string key="versionLabel">NSTextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="desDebug">
+							<string key="name">desDebug</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="desVersion">
+							<string key="name">desVersion</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="kDebug">
+							<string key="name">kDebug</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="kVersion">
+							<string key="name">kVersion</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shadowedView">
+							<string key="name">shadowedView</string>
+							<string key="candidateClassName">SCShadowedView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="topHalf">
+							<string key="name">topHalf</string>
+							<string key="candidateClassName">SCGradientView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="versionLabel">
+							<string key="name">versionLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCAboutWindowController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCFriendListHeaderCell</string>
+					<string key="superclassName">PXListViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCFriendListHeaderCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCGradientView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCGradientView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCShadowedView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCShadowedView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">YES</bool>

@@ -27,7 +27,7 @@
     [self.backgroundColor set];
     [[NSBezierPath bezierPathWithRect:self.bounds] fill];
     CGPoint drawPoint = {(self.frame.size.width - textWidth) / 2, 2};
-    NSRect lineRect = NSMakeRect(11, floor(self.bounds.size.height / 2), self.bounds.size.width - 22, 1);
+    NSRect lineRect = NSMakeRect(0, floor(self.bounds.size.height / 2), self.bounds.size.width, 1);
     [self.textColor set];
     [[NSBezierPath bezierPathWithRect:lineRect] fill];
     [self.shadowColor set];
