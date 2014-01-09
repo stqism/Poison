@@ -83,7 +83,7 @@
 	uint32_t p = 0;
     randombytes(salt, KUDRYAVKA_SALT_LENGTH);
 	/* Pick values for N, r, p. */
-	if (pickparams(0, 0.5, 2.0, &logN, &r, &p) != 0)
+	if (pickparams(0, 0.5, 0.5, &logN, &r, &p) != 0)
 		return nil;
 	N = (uint64_t)(1) << logN;
     const char *passwd = [pass UTF8String];

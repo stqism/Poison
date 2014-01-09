@@ -199,7 +199,7 @@ char *const SCUnreadCountStoreKey = "";
     [c.me removeObserver:self forKeyPath:@"userStatus"];
     [c.me removeObserver:self forKeyPath:@"statusType"];
     for (DESFriend *i in c.friendManager.friends) {
-        [c removeObserver:self forKeyPath:@"status"];
+        [i removeObserver:self forKeyPath:@"status"];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     dlComplete = NO;
@@ -558,6 +558,12 @@ char *const SCUnreadCountStoreKey = "";
     #else
     [[NSPasteboard generalPasteboard] writeObjects:@[[DESSelf self].friendAddress]];
     #endif
+}
+
+- (IBAction)copyPublicKeyAsURL:(id)sender {
+    [[NSPasteboard generalPasteboard] clearContents];
+    NSString *url = [NSString stringWithFormat:@"tox://%@", [DESSelf self].friendAddress];
+    [[NSPasteboard generalPasteboard] writeObjects:@[url]];
 }
 
 - (IBAction)showAddFriend:(id)sender {

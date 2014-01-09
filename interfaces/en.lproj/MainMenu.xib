@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">13A584</string>
+		<string key="IBDocument.SystemVersion">13A603</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
-		<string key="IBDocument.AppKitVersion">1262</string>
+		<string key="IBDocument.AppKitVersion">1265</string>
 		<string key="IBDocument.HIToolboxVersion">695.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -189,6 +189,15 @@
 									<string key="NSTitle">Copy Address</string>
 									<string key="NSKeyEquiv">c</string>
 									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="25299979"/>
+									<reference key="NSMixedImage" ref="42337802"/>
+								</object>
+								<object class="NSMenuItem" id="213186857">
+									<reference key="NSMenu" ref="844439513"/>
+									<string key="NSTitle">Copy Address as URL</string>
+									<string key="NSKeyEquiv">c</string>
+									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="25299979"/>
 									<reference key="NSMixedImage" ref="42337802"/>
@@ -1214,6 +1223,14 @@
 					</object>
 					<string key="id">ZJ9-op-agu</string>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">copyPublicKeyAsURL:</string>
+						<reference key="source" ref="1026313112"/>
+						<reference key="destination" ref="213186857"/>
+					</object>
+					<string key="id">IHR-sQ-giw</string>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1356,6 +1373,7 @@
 							<reference ref="975757990"/>
 							<reference ref="478092967"/>
 							<reference ref="199499083"/>
+							<reference ref="213186857"/>
 						</array>
 						<reference key="parent" ref="40412712"/>
 					</object>
@@ -1804,6 +1822,11 @@
 						<reference key="object" ref="199499083"/>
 						<reference key="parent" ref="844439513"/>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">Njg-5F-9yS</string>
+						<reference key="object" ref="213186857"/>
+						<reference key="parent" ref="844439513"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1971,6 +1994,7 @@
 				<string key="DFW-sA-6J3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="L4w-ns-RE3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="LOv-wJ-foT.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="Njg-5F-9yS.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="OgJ-eZ-B3C.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="ZE4-Je-VRQ.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="bb1-od-Lac.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2013,6 +2037,7 @@
 						<string key="connectDeveloperIRC:">id</string>
 						<string key="connectToxIRC:">id</string>
 						<string key="copyPublicKey:">id</string>
+						<string key="copyPublicKeyAsURL:">id</string>
 						<string key="logOut:">id</string>
 						<string key="openGitHubAgain:">id</string>
 						<string key="openToxSite:">id</string>
@@ -2036,6 +2061,10 @@
 						</object>
 						<object class="IBActionInfo" key="copyPublicKey:">
 							<string key="name">copyPublicKey:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="copyPublicKeyAsURL:">
+							<string key="name">copyPublicKeyAsURL:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="logOut:">
