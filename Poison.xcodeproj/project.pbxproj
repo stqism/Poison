@@ -379,6 +379,7 @@
 		F5247DC417F68D6000ABBE1C /* UnlockData.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnlockData.xib; sourceTree = "<group>"; };
 		F5247DC817F6922300ABBE1C /* SCIdentityUnlockWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIdentityUnlockWindowController.h; sourceTree = "<group>"; };
 		F5247DC917F6922300ABBE1C /* SCIdentityUnlockWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIdentityUnlockWindowController.m; sourceTree = "<group>"; };
+		F52B85A1188F44E60030495D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F52BDECF17B9D7E1007CF88B /* SCWebKitFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitFriend.h; sourceTree = "<group>"; };
 		F52BDED017B9D7E1007CF88B /* SCWebKitFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWebKitFriend.m; sourceTree = "<group>"; };
 		F52BDED217B9DFDA007CF88B /* SCWebKitMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWebKitMessage.h; sourceTree = "<group>"; };
@@ -1368,6 +1369,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				nl,
 			);
 			mainGroup = F59A05D717AC808900E9B15F;
 			productRefGroup = F59A05E117AC808900E9B15F /* Products */;
@@ -1751,6 +1753,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F59A064417AC897800E9B15F /* en */,
+				F52B85A1188F44E60030495D /* nl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
