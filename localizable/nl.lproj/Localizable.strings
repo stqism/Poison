@@ -1,0 +1,119 @@
+/* No comment provided by engineer. */
+"%.0f times/sec." = "%.0f keer/sec.";
+
+/* No comment provided by engineer. */
+"A port must be a number between 1 and 65535." = "De poort moet tussen de 1 en 65535 liggen.";
+
+/* No comment provided by engineer. */
+"Advanced" = "Geadvanceerd";
+
+/* No comment provided by engineer. */
+"Away" = "Afwezig";
+
+/* No comment provided by engineer. */
+"Busy" = "Niet storen";
+
+/* No comment provided by engineer. */
+"Cancel" = "Annuleren";
+
+/* No comment provided by engineer. */
+"Disconnected" = "Vertrokken";
+
+/* No comment provided by engineer. */
+"Do you really want to delete %@ from your friends list?" = "Weet u zeker %@ te willen verwijderen?";
+
+/* No comment provided by engineer. */
+"Failed to automatically bootstrap" = "Heb niet automatisch met de DHT kunnen verbinden";
+
+/* No comment provided by engineer. */
+"Failed to bootstrap" = "Gefaald te verbinden met de DHT";
+
+/* No comment provided by engineer. */
+"Failed to load keys: %@ Sorry about that." = "De volgende keys zijn niet geladen: %@ Excuses voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Failed to save key: %@ Sorry about that." = "De volgende keys zijn niet opgeslagen: %@ Excuses voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Fetching server list..." = "Serverlijst ophalen...";
+
+/* No comment provided by engineer. */
+"Friends" = "Vrienden";
+
+/* No comment provided by engineer. */
+"Invalid" = "Ongeldig";
+
+/* No comment provided by engineer. */
+"Load error" = "Laadfout";
+
+/* No comment provided by engineer. */
+"Looking at server %i/%i" = "Server %1$i/%2$i bekijken";
+
+/* No comment provided by engineer. */
+"Offline" = "Offline";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Online" = "Online";
+
+/* No comment provided by engineer. */
+"Operation complete" = "Klaar";
+
+/* No comment provided by engineer. */
+"Please select one of the options before continuing." = "Selecteer een der onderstaande opties voordat u doorgaat.";
+
+/* No comment provided by engineer. */
+"Poison currently has limited connectivity to the Tox network. You may have trouble connecting to friends." = "Poison heeft momenteel beperkte verbinding met het Tox-netwerk. U kunt eventueel problemen tegenkomen wanneer u probeert te verbinden met vrienden.";
+
+/* No comment provided by engineer. */
+"Poison currently has no connectivity to the Tox network." = "Poison kan momenteel niet verbinden met het Tox-netwerk.";
+
+/* No comment provided by engineer. */
+"Poison has run out of usable servers to connect to. If you know a server, click \"Advanced\" to connect manually. Sorry about that." = "Poison heeft geen servers om verbinding mee te maken. Om handmatig een toe te voegen, klik op \"Geadvanceerd\". Excuses voor het ongemak.";
+
+/* No comment provided by engineer. */
+"Poison's connection to the Tox network is healthy." = "Poison's verbindingskwaliteit is voldoende.";
+
+/* No comment provided by engineer. */
+"Request sent..." = "Request verzonden...";
+
+/* No comment provided by engineer. */
+"Save error" = "Opslagsfout";
+
+/* No comment provided by engineer. */
+"Server: %@:%hu [%@]" = "Server: %1$@:%2$hu [%3$@]";
+
+/* No comment provided by engineer. */
+"The cache was removed successfully." = "Cache succesvol geleegd.";
+
+/* No comment provided by engineer. */
+"The DNS name '%@' could not be resolved." = "Kan geen verbinding maken met DNS-naam '%@'";
+
+/* No comment provided by engineer. */
+"The theme folder was deleted." = "De themafolder is verwijderd.";
+
+/* No comment provided by engineer. */
+"There were not enough peers to have a healthy connection." = "Er zijn onvoldoende peers om een fatsoenlijke verbinding te handhaven.";
+
+/* No comment provided by engineer. */
+"Tox me on Tox: %@" = "Tox me op Tox: %@";
+
+/* No comment provided by engineer. */
+"Try again" = "Probeer opnieuw";
+
+/* No comment provided by engineer. */
+"Welcome back. Please login with your nickname." = "Welkom terug. Log in met uw nickname.";
+
+/* No comment provided by engineer. */
+"Welcome to Poison. Enter a nickname to get started." = "Welkom bij Poison. Voer een nickname in om te beginnen.";
+
+/* No comment provided by engineer. */
+"Whoops!" = "Oeps!";
+
+/* No comment provided by engineer. */
+"You cannot undo this, and all chat history will be lost." = "Dit kan niet ongedaan worden, bovendien zal alle chatgeschiedenis verloren gaan.";
+
+/* No comment provided by engineer. */
+"Your nickname cannot be blank." = "Uw nickname kan niet leeg gelaten worden.";
