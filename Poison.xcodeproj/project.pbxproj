@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				F5A001DA18948BA500D2A1D7 /* PBXTargetDependency */,
 				F573859C17C6B5D400B8E7EC /* PBXTargetDependency */,
 				F573859E17C6B5D500B8E7EC /* PBXTargetDependency */,
 				F57385A017C6B5D600B8E7EC /* PBXTargetDependency */,
@@ -124,6 +125,15 @@
 		F59A254217D6E3800015F103 /* Default.psnSounds in Resources */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
 		F59A254317D6E3800015F103 /* Default.psnSounds in Resources */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
 		F59A254517D6E3F50015F103 /* Default.psnSounds in Copy Bundled Sound Sets */ = {isa = PBXBuildFile; fileRef = F59A254117D6E3800015F103 /* Default.psnSounds */; };
+		F5A001A718948AB500D2A1D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A05E317AC808900E9B15F /* Cocoa.framework */; };
+		F5A001AD18948AB500D2A1D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5A001AB18948AB500D2A1D7 /* InfoPlist.strings */; };
+		F5A001AF18948AB500D2A1D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A001AE18948AB500D2A1D7 /* main.m */; };
+		F5A001B318948AB500D2A1D7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5A001B118948AB500D2A1D7 /* Credits.rtf */; };
+		F5A001B618948AB500D2A1D7 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A001B518948AB500D2A1D7 /* SCAppDelegate.m */; };
+		F5A001D618948ACF00D2A1D7 /* DeepEnd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
+		F5A001D818948B5C00D2A1D7 /* Inspectox.icns in Resources */ = {isa = PBXBuildFile; fileRef = F5A001D718948B5C00D2A1D7 /* Inspectox.icns */; };
+		F5A001DB18948BE200D2A1D7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A001B718948AB500D2A1D7 /* MainMenu.xib */; };
+		F5A001DD18948C1F00D2A1D7 /* DeepEnd.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5A7E91217AD83B300B6ADA7 /* DeepEnd.framework */; };
 		F5A3A85017B2F2300068AFA0 /* SCKudTestingPaneController.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A3A84E17B2F2300068AFA0 /* SCKudTestingPaneController.h */; };
 		F5A3A85317B2F2620068AFA0 /* KudoTesting.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */; };
 		F5A3A85617B342C20068AFA0 /* Requests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A3A85817B342C20068AFA0 /* Requests.xib */; };
@@ -253,6 +263,20 @@
 			remoteGlobalIDString = F58A9AD517ACB85400923A25;
 			remoteInfo = Kudryavka;
 		};
+		F5A001D418948ACB00D2A1D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F5E5824517AC095E00D9409B;
+			remoteInfo = DeepEnd;
+		};
+		F5A001D918948BA500D2A1D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F59A05D817AC808900E9B15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5A001A518948AB500D2A1D7;
+			remoteInfo = Inspectox;
+		};
 		F5A7E91117AD83B300B6ADA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F5A7E90C17AD83B300B6ADA7 /* DeepEnd.xcodeproj */;
@@ -332,6 +356,16 @@
 				F59A254517D6E3F50015F103 /* Default.psnSounds in Copy Bundled Sound Sets */,
 			);
 			name = "Copy Bundled Sound Sets";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A001DC18948C1600D2A1D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F5A001DD18948C1F00D2A1D7 /* DeepEnd.framework in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F5B3A9BC17BD3E8500EE15CA /* CopyFiles */ = {
@@ -474,6 +508,26 @@
 		F59A065417AC8AC900E9B15F /* SCAppDelegate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F59A065517AC8AC900E9B15F /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
 		F59A254117D6E3800015F103 /* Default.psnSounds */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnSounds; sourceTree = "<group>"; };
+		F5A0019618948A9600D2A1D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F5A0019718948A9600D2A1D7 /* Inspectox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inspectox-Info.plist"; sourceTree = "<group>"; };
+		F5A0019818948A9600D2A1D7 /* Inspectox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inspectox-Prefix.pch"; sourceTree = "<group>"; };
+		F5A0019918948A9600D2A1D7 /* Inspectox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Inspectox.icns; sourceTree = "<group>"; };
+		F5A0019A18948A9600D2A1D7 /* SCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
+		F5A0019B18948A9600D2A1D7 /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
+		F5A0019D18948A9600D2A1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F5A0019F18948A9600D2A1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5A001A018948A9600D2A1D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F5A001A618948AB500D2A1D7 /* Inspectox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspectox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5A001AA18948AB500D2A1D7 /* Inspectox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Inspectox-Info.plist"; sourceTree = "<group>"; };
+		F5A001AC18948AB500D2A1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5A001AE18948AB500D2A1D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F5A001B018948AB500D2A1D7 /* Inspectox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Inspectox-Prefix.pch"; sourceTree = "<group>"; };
+		F5A001B218948AB500D2A1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F5A001B418948AB500D2A1D7 /* SCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
+		F5A001B518948AB500D2A1D7 /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
+		F5A001B818948AB500D2A1D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F5A001C118948AB500D2A1D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F5A001D718948B5C00D2A1D7 /* Inspectox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Inspectox.icns; sourceTree = "<group>"; };
 		F5A3A84E17B2F2300068AFA0 /* SCKudTestingPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKudTestingPaneController.h; sourceTree = "<group>"; };
 		F5A3A84F17B2F2300068AFA0 /* SCKudTestingPaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKudTestingPaneController.m; sourceTree = "<group>"; };
 		F5A3A85217B2F2620068AFA0 /* KudoTesting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KudoTesting.xib; sourceTree = "<group>"; };
@@ -624,6 +678,15 @@
 				F5A7E91A17AD83CD00B6ADA7 /* DeepEnd.framework in Frameworks */,
 				F58A9AE717ACB9EE00923A25 /* Kudryavka.framework in Frameworks */,
 				F59A05E417AC808900E9B15F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A001A318948AB500D2A1D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A001D618948ACF00D2A1D7 /* DeepEnd.framework in Frameworks */,
+				F5A001A718948AB500D2A1D7 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,8 +892,10 @@
 				F5A91FBA17C03BC000B7C6DC /* hibiki */,
 				F58A9AD817ACB85400923A25 /* kudryavka */,
 				F547D6F117C68DE500D3E4C5 /* genki */,
+				F5A0019418948A9600D2A1D7 /* inspectox */,
 				F5A9CC2717AF2446003423E0 /* PXListView */,
 				F5DD1B7417B40C48000AF9C6 /* scrypt */,
+				F5A001A818948AB500D2A1D7 /* Inspectox */,
 				F59A05E217AC808900E9B15F /* Frameworks */,
 				F59A05E117AC808900E9B15F /* Products */,
 			);
@@ -845,6 +910,7 @@
 				F5A91FB817C03BC000B7C6DC /* Hibiki.app */,
 				F547D6F017C68DE500D3E4C5 /* genki */,
 				F577774B17FA435A003AFA04 /* kudryavka */,
+				F5A001A618948AB500D2A1D7 /* Inspectox.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -858,6 +924,7 @@
 				F58A9AF717ACC94E00923A25 /* Security.framework */,
 				F59A05E317AC808900E9B15F /* Cocoa.framework */,
 				F5FF959A17AD7A3700BB2F13 /* Foundation.framework */,
+				F5A001C118948AB500D2A1D7 /* XCTest.framework */,
 				F59A05E517AC808900E9B15F /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -994,6 +1061,48 @@
 				F59A254117D6E3800015F103 /* Default.psnSounds */,
 			);
 			path = sounds;
+			sourceTree = "<group>";
+		};
+		F5A0019418948A9600D2A1D7 /* inspectox */ = {
+			isa = PBXGroup;
+			children = (
+				F5A0019518948A9600D2A1D7 /* MainMenu.xib */,
+				F5A0019718948A9600D2A1D7 /* Inspectox-Info.plist */,
+				F5A0019818948A9600D2A1D7 /* Inspectox-Prefix.pch */,
+				F5A0019918948A9600D2A1D7 /* Inspectox.icns */,
+				F5A0019A18948A9600D2A1D7 /* SCAppDelegate.h */,
+				F5A0019B18948A9600D2A1D7 /* SCAppDelegate.m */,
+				F5A0019C18948A9600D2A1D7 /* Credits.rtf */,
+				F5A0019E18948A9600D2A1D7 /* InfoPlist.strings */,
+				F5A001A018948A9600D2A1D7 /* main.m */,
+			);
+			name = inspectox;
+			path = utilities/inspectox;
+			sourceTree = "<group>";
+		};
+		F5A001A818948AB500D2A1D7 /* Inspectox */ = {
+			isa = PBXGroup;
+			children = (
+				F5A001B418948AB500D2A1D7 /* SCAppDelegate.h */,
+				F5A001B518948AB500D2A1D7 /* SCAppDelegate.m */,
+				F5A001B718948AB500D2A1D7 /* MainMenu.xib */,
+				F5A001A918948AB500D2A1D7 /* Supporting Files */,
+			);
+			name = Inspectox;
+			path = utilities/inspectox;
+			sourceTree = "<group>";
+		};
+		F5A001A918948AB500D2A1D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5A001AA18948AB500D2A1D7 /* Inspectox-Info.plist */,
+				F5A001D718948B5C00D2A1D7 /* Inspectox.icns */,
+				F5A001AB18948AB500D2A1D7 /* InfoPlist.strings */,
+				F5A001AE18948AB500D2A1D7 /* main.m */,
+				F5A001B018948AB500D2A1D7 /* Inspectox-Prefix.pch */,
+				F5A001B118948AB500D2A1D7 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F5A3A85F17B350810068AFA0 /* about_window */ = {
@@ -1305,6 +1414,25 @@
 			productReference = F59A05E017AC808900E9B15F /* Poison.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F5A001A518948AB500D2A1D7 /* Inspectox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5A001CE18948AB500D2A1D7 /* Build configuration list for PBXNativeTarget "Inspectox" */;
+			buildPhases = (
+				F5A001A218948AB500D2A1D7 /* Sources */,
+				F5A001A318948AB500D2A1D7 /* Frameworks */,
+				F5A001A418948AB500D2A1D7 /* Resources */,
+				F5A001DC18948C1600D2A1D7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5A001D518948ACB00D2A1D7 /* PBXTargetDependency */,
+			);
+			name = Inspectox;
+			productName = Inspectox;
+			productReference = F5A001A618948AB500D2A1D7 /* Inspectox.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F5A91FB717C03BC000B7C6DC /* Hibiki */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5A91FCC17C03BC100B7C6DC /* Build configuration list for PBXNativeTarget "Hibiki" */;
@@ -1370,6 +1498,7 @@
 			knownRegions = (
 				en,
 				nl,
+				Base,
 			);
 			mainGroup = F59A05D717AC808900E9B15F;
 			productRefGroup = F59A05E117AC808900E9B15F /* Products */;
@@ -1389,6 +1518,7 @@
 				F547D6EF17C68DE500D3E4C5 /* genki */,
 				F573859717C6B5C400B8E7EC /* Everything */,
 				F577774A17FA435A003AFA04 /* KudryavkaTool */,
+				F5A001A518948AB500D2A1D7 /* Inspectox */,
 			);
 		};
 /* End PBXProject section */
@@ -1484,6 +1614,17 @@
 				F52DF77717BAADE90088DDDB /* InstallResource.xib in Resources */,
 				F591080317CC0A3500251B7A /* AlertsPane.xib in Resources */,
 				F5D36BBB17C30CC800AE9138 /* themelib.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5A001A418948AB500D2A1D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A001DB18948BE200D2A1D7 /* MainMenu.xib in Resources */,
+				F5A001AD18948AB500D2A1D7 /* InfoPlist.strings in Resources */,
+				F5A001B318948AB500D2A1D7 /* Credits.rtf in Resources */,
+				F5A001D818948B5C00D2A1D7 /* Inspectox.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,6 +1761,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5A001A218948AB500D2A1D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5A001B618948AB500D2A1D7 /* SCAppDelegate.m in Sources */,
+				F5A001AF18948AB500D2A1D7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5A91FB417C03BC000B7C6DC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1687,6 +1837,16 @@
 			isa = PBXTargetDependency;
 			target = F58A9AD517ACB85400923A25 /* Kudryavka */;
 			targetProxy = F58A9AE517ACB9E800923A25 /* PBXContainerItemProxy */;
+		};
+		F5A001D518948ACB00D2A1D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DeepEnd;
+			targetProxy = F5A001D418948ACB00D2A1D7 /* PBXContainerItemProxy */;
+		};
+		F5A001DA18948BA500D2A1D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5A001A518948AB500D2A1D7 /* Inspectox */;
+			targetProxy = F5A001D918948BA500D2A1D7 /* PBXContainerItemProxy */;
 		};
 		F5A7E91717AD83C500B6ADA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1756,6 +1916,54 @@
 				F52B85A1188F44E60030495D /* nl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F5A0019518948A9600D2A1D7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A0019618948A9600D2A1D7 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F5A0019C18948A9600D2A1D7 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A0019D18948A9600D2A1D7 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F5A0019E18948A9600D2A1D7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A0019F18948A9600D2A1D7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5A001AB18948AB500D2A1D7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A001AC18948AB500D2A1D7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5A001B118948AB500D2A1D7 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A001B218948AB500D2A1D7 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F5A001B718948AB500D2A1D7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5A001B818948AB500D2A1D7 /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		F5A3A85817B342C20068AFA0 /* Requests.xib */ = {
@@ -2081,6 +2289,53 @@
 			};
 			name = Release;
 		};
+		F5A001CF18948AB500D2A1D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilities/inspectox/Inspectox-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/inspectox/Inspectox-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F5A001D018948AB500D2A1D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "utilities/inspectox/Inspectox-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/utilities/inspectox/Inspectox-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		F5A91FCD17C03BC100B7C6DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2207,6 +2462,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F5A001CE18948AB500D2A1D7 /* Build configuration list for PBXNativeTarget "Inspectox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5A001CF18948AB500D2A1D7 /* Debug */,
+				F5A001D018948AB500D2A1D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		F5A91FCC17C03BC100B7C6DC /* Build configuration list for PBXNativeTarget "Hibiki" */ = {
 			isa = XCConfigurationList;
