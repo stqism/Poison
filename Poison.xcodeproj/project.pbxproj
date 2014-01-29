@@ -2470,6 +2470,7 @@
 				F5A001D018948AB500D2A1D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F5A91FCC17C03BC100B7C6DC /* Build configuration list for PBXNativeTarget "Hibiki" */ = {
 			isa = XCConfigurationList;

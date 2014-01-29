@@ -4,6 +4,7 @@
 @implementation SCAppDelegate {
     NSTimer *aTimer;
     NSArray *closeNodes;
+    BOOL updating;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -13,6 +14,7 @@
     self.DEVersionLabel.stringValue = [NSString stringWithFormat:@"DE version: %@ (%@)", [NSBundle bundleForClass:[DESToxNetworkConnection class]].infoDictionary[@"DESGitRef"], [NSBundle bundleForClass:[DESToxNetworkConnection class]].infoDictionary[@"CFBundleShortVersionString"]];
     DESToxNetworkConnection *c = [DESToxNetworkConnection sharedConnection];
     [c connect];
+    updating = YES;
     aTimer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1.0 target:self selector:@selector(runLoopRun) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:aTimer forMode:NSRunLoopCommonModes];
     self.tableView.dataSource = self;
@@ -50,6 +52,8 @@
 }
 
 - (void)runLoopRun {
+    if (!updating)
+        return;
     DESToxNetworkConnection *c = [DESToxNetworkConnection sharedConnection];
     closeNodes = [c closeNodes];
     [self.tableView reloadData];
@@ -67,6 +71,33 @@
     } else {
         return @(time(NULL) - [closeNodes[row][DESDHTNodeTimestampKey] longValue]);
     }
+}
+
+- (void)exportDataToRealFile:(NSURL *)url {
+    NSLog(@"hello %@", url);
+    NSOutputStream *f = [[NSOutputStream alloc] initToFileAtPath:[url path] append:NO];
+    NSString *header = [NSString stringWithFormat:@"Inspectox Log // DE version: %@ (%@)\nThis log was produced %@.\n\nClose Nodes (%lu):\n", [NSBundle bundleForClass:[DESToxNetworkConnection class]].infoDictionary[@"DESGitRef"], [NSBundle bundleForClass:[DESToxNetworkConnection class]].infoDictionary[@"CFBundleShortVersionString"], [NSDate date], (unsigned long)[closeNodes count]];
+    [f open];
+    [f write:(const uint8_t*)[header UTF8String] maxLength:[header length]];
+    for (NSDictionary *i in closeNodes) {
+        NSString *node = [NSString stringWithFormat:@"%@:%hu\t%@\n", i[DESDHTNodeIPAddressKey], [i[DESDHTNodePortKey] shortValue], i[DESDHTNodePublicKey]];
+        [f write:(const uint8_t*)[node UTF8String] maxLength:[node length]];
+    }
+    [f close];
+}
+
+- (IBAction)exportResults:(id)sender {
+    updating = NO;
+    
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    panel.message = @"Where should I save your results?";
+    panel.title = @"Export";
+    [panel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            [self exportDataToRealFile:panel.URL];
+        }
+        updating = YES;
+    }];
 }
 
 @end
