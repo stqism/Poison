@@ -69,6 +69,11 @@
     [self.transcriptView.mainFrame.windowObject callWebScriptMethod:@"__SCScrollViewToBottom" withArguments:nil];
 }
 
+- (NSUInteger)webView:(WebView *)sender dragDestinationActionMaskForDraggingInfo:(id<NSDraggingInfo>)draggingInfo {
+    /* Only allow draganddrop if javascript wants it */
+    return WebDragDestinationActionDHTML;
+}
+
 - (void)injectConstants {
     /* This exports all DES constants to the webview. */
     WebScriptObject *w = self.transcriptView.mainFrame.windowObject;
