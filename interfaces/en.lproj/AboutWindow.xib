@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">13A598</string>
+		<string key="IBDocument.SystemVersion">13B42</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
 		<string key="IBDocument.AppKitVersion">1265</string>
-		<string key="IBDocument.HIToolboxVersion">695.00</string>
+		<string key="IBDocument.HIToolboxVersion">696.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">4510</string>
@@ -391,9 +391,9 @@
 									<object class="NSTextFieldCell" key="NSCell" id="241007897">
 										<int key="NSCellFlags">67108864</int>
 										<int key="NSCellFlags2">138412032</int>
-										<string type="base64-UTF8" key="NSContents">QSBzaGlueSBUb3ggR1VJIGZvciBPUyBYLgpXcml0dGVuIGJ5IEBzdGFsODg4LCBldC4gYWwuClBvaXNv
-biBpcyBmcmVlIHNvZnR3YXJlLiBJZiB5b3UgcGFpZCBmb3IgdGhpcyBjb3B5IG9mIFBvaXNvbiwgZmls
-ZSBhIGxhd3N1aXQuA</string>
+										<string type="base64-UTF8" key="NSContents">VG94IGZvciBPUyBYLCB3cml0dGVuIGJ5IHN0YWwsIGV0LiBhbC4KVGhpcyByZWxlYXNlIG9mIFBvaXNv
+biBpcyBkZWRpY2F0ZWQgdG8gSm9obiAoMTk4MyAtIDIwMTMpLCBtdXJkZXJlZCBpbiBjb2xkIGJsb29k
+IGJ5IHRoZSBKU0RGLg</string>
 										<reference key="NSSupport" ref="520766947"/>
 										<reference key="NSControlView" ref="828036747"/>
 										<reference key="NSBackgroundColor" ref="963900352"/>
@@ -916,20 +916,6 @@ ZSBhIGxhd3N1aXQuA</string>
 				<object class="IBPartialClassDescription">
 					<string key="className">SCAboutWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="openGithub:">id</string>
-						<string key="openToxSite:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="openGithub:">
-							<string key="name">openGithub:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openToxSite:">
-							<string key="name">openToxSite:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="desDebug">NSTextField</string>
 						<string key="desVersion">NSTextField</string>
