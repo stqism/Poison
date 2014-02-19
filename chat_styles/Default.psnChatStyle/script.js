@@ -55,7 +55,11 @@ function pushChatMessageFromMessage(message) {
         needToAppend = true
     }
     content = document.createElement("p")
-    content.textContent = message.body()
+    m = message.body()
+    if (m.length && m.charAt(0) == ">") {
+        content.className = "implications"
+    }
+    content.textContent = m
     lastContext.getElementsByClassName("messages")[0].appendChild(content)
     if (needToAppend) {
         document.getElementById("theme").appendChild(lastContext)
@@ -73,7 +77,7 @@ function pushActionMessageFromMessage(message) {
     // sender
     sender = document.createElement("div")
     sender.className = "context-item sender"
-    sender.textContent =  message.body()
+    sender.textContent = "\u2022 " + message.sender().displayName() + " " + message.body()
     sender.setAttribute("sid", message.sender().friendNumber())
     context.appendChild(sender)
     

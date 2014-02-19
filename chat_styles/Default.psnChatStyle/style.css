@@ -24,8 +24,11 @@ div.messages {
 }
 div.messages > p {
     margin:0;
-    color:#333;
+    color:#000;
     word-wrap:break-word;
+}
+div.messages > p.implications {
+    color:green;
 }
 div.timestamp {
     vertical-align:top;
