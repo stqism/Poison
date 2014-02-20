@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">13A598</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
+		<string key="IBDocument.SystemVersion">13B42</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4514</string>
 		<string key="IBDocument.AppKitVersion">1265</string>
-		<string key="IBDocument.HIToolboxVersion">695.00</string>
+		<string key="IBDocument.HIToolboxVersion">696.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">4510</string>
-			<string key="com.apple.WebKitIBPlugin">3336</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">4514</string>
+			<string key="com.apple.WebKitIBPlugin">3338</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -107,6 +107,7 @@
 									<reference ref="257478128"/>
 									<object class="NSMenuItem" id="635917654">
 										<reference key="NSMenu" ref="250111509"/>
+										<bool key="NSIsDisabled">YES</bool>
 										<string key="NSTitle">Send File...</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSKeyEquivModMask">1048576</int>
@@ -118,6 +119,7 @@
 									</object>
 									<object class="NSMenuItem" id="659303003">
 										<reference key="NSMenu" ref="250111509"/>
+										<bool key="NSIsDisabled">YES</bool>
 										<string key="NSTitle">Invite To Group Chat...</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSKeyEquivModMask">1048576</int>
@@ -129,6 +131,7 @@
 									</object>
 									<object class="NSMenuItem" id="857561782">
 										<reference key="NSMenu" ref="250111509"/>
+										<bool key="NSIsDisabled">YES</bool>
 										<string key="NSTitle">Begin Video Call</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSMnemonicLoc">2147483647</int>
@@ -139,6 +142,7 @@
 									</object>
 									<object class="NSMenuItem" id="382285949">
 										<reference key="NSMenu" ref="250111509"/>
+										<bool key="NSIsDisabled">YES</bool>
 										<string key="NSTitle">Begin Audio Call</string>
 										<string key="NSKeyEquiv"/>
 										<int key="NSMnemonicLoc">2147483647</int>
@@ -150,6 +154,7 @@
 								</array>
 								<reference key="NSMenuFont" ref="488547245"/>
 							</object>
+							<int key="NSSelectedIndex">-1</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">3</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -367,7 +372,7 @@
 				<bool key="NSAnimates">YES</bool>
 			</object>
 			<object class="NSCustomView" id="949450042">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSScrollView" id="418931589">
@@ -383,7 +388,6 @@
 										<int key="NSvFlags">256</int>
 										<string key="NSFrameSize">{260, 237}</string>
 										<reference key="NSSuperview" ref="81468396"/>
-										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -469,7 +473,6 @@
 								</array>
 								<string key="NSFrameSize">{260, 237}</string>
 								<reference key="NSSuperview" ref="418931589"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="948015204"/>
 								<string key="NSReuseIdentifierKey">_NS:11</string>
 								<reference key="NSDocView" ref="948015204"/>
@@ -481,7 +484,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 								<reference key="NSSuperview" ref="418931589"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="685460067"/>
 								<string key="NSReuseIdentifierKey">_NS:58</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -494,7 +496,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 								<reference key="NSSuperview" ref="418931589"/>
-								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -505,7 +506,6 @@
 						</array>
 						<string key="NSFrame">{{-1, 0}, {260, 237}}</string>
 						<reference key="NSSuperview" ref="949450042"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="81468396"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133680</int>
@@ -522,7 +522,6 @@
 						<int key="NSvFlags">10</int>
 						<string key="NSFrame">{{0, 234}, {259, 5}}</string>
 						<reference key="NSSuperview" ref="949450042"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -546,7 +545,6 @@
 						<int key="NSvFlags">269</int>
 						<string key="NSFrame">{{85, 242}, {88, 17}}</string>
 						<reference key="NSSuperview" ref="949450042"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:397</string>
 						<string key="NSHuggingPriority">{251, 750}</string>
 						<bool key="NSEnabled">YES</bool>
@@ -565,8 +563,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{259, 262}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="940992399"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -670,6 +666,14 @@
 						<reference key="destination" ref="21952467"/>
 					</object>
 					<string key="id">Vfd-gp-pjQ</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showGroupChatInvitePanel:</string>
+						<reference key="source" ref="528918835"/>
+						<reference key="destination" ref="659303003"/>
+					</object>
+					<string key="id">dXs-ZZ-7Nv</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1052,6 +1056,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SCChatViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="showFileTransfers:">NSButton</string>
+						<string key="showGroupChatInvitePanel:">id</string>
+						<string key="submitMessage:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="showFileTransfers:">
+							<string key="name">showFileTransfers:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBActionInfo" key="showGroupChatInvitePanel:">
+							<string key="name">showGroupChatInvitePanel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="submitMessage:">
+							<string key="name">submitMessage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="headerView">SCBorderedGradientView</string>
 						<string key="messageInput">SCTextField</string>

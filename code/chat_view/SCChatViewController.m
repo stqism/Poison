@@ -221,6 +221,10 @@
     }
 }
 
+- (IBAction)showGroupChatInvitePanel:(id)sender {
+    /* ... */
+}
+
 - (void)dealloc {
     self.transcriptView.frameLoadDelegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
