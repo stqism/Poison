@@ -87,9 +87,19 @@
         }
         NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
         NSNumber *port_obj = [fmt numberFromString:self.portField.stringValue];
+        
         if (!port_obj || [port_obj longLongValue] > 65535 || [port_obj longLongValue] < 1) {
-            NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"A port must be a number between 1 and 65535.", @"")];
-            [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)(self.portField)];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"A port must be a number between 1 and 65535.", @"")];
+                [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)(self.portField)];
+            });
+            return;
+        }
+        if (!DESPublicKeyIsValid(self.publicKeyField.stringValue)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *errorAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"Failed to bootstrap", @"") defaultButton:NSLocalizedString(@"OK", @"") alternateButton:nil otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The public key was not valid.", @"")];
+                [errorAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:@selector(performAdvActionOnErrorEnd:returnCode:contextInfo:) contextInfo:(__bridge void*)(self.publicKeyField)];
+            });
             return;
         }
         [[NSUserDefaults standardUserDefaults] setObject:@"manual" forKey:@"bootstrapType"];
@@ -113,7 +123,6 @@
     self.advBackButton.enabled = YES;
     self.advContinueButton.enabled = YES;
     [(__bridge id)contextInfo becomeFirstResponder];
-    [(__bridge id)contextInfo selectAll:self];
 }
 
 #pragma mark - Auto bootstrap
