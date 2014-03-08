@@ -42,6 +42,10 @@
     });
 }
 
+- (void)revalidate {
+    [self controlTextDidChange:nil];
+}
+
 - (void)controlTextDidChange:(NSNotification *)notification {
     if (DESFriendAddressIsValid(self.keyField.stringValue)) {
         self.sendButton.enabled = YES;

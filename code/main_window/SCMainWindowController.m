@@ -239,6 +239,7 @@ typedef NS_ENUM(NSInteger, SCListMode) {
         [_addFriendSheet loadWindow];
         [_addFriendSheet fillFields];
         _addFriendSheet.keyField.stringValue = delegate.queuedPublicKey;
+        [_addFriendSheet revalidate];
         [NSApp beginSheet:_addFriendSheet.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(addFriendSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
     }
     delegate.queuedPublicKey = nil;

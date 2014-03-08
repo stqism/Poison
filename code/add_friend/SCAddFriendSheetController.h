@@ -9,5 +9,6 @@
 @property (strong) IBOutlet NSButton *cancelButton;
 
 - (void)fillFields;
+- (void)revalidate;
 
 @end
