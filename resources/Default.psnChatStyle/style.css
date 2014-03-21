@@ -1,0 +1,46 @@
+html, body {
+    padding:0; margin:0;
+    font-family:Helvetica, sans-serif;
+    font-size:13px;
+}
+div.context {
+    width:100%;
+    border-top:1px #999 solid;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+}
+div.context:first-child {
+    border-top:none;
+}
+div.context-item {
+    display:block;
+    padding-left:0.5em;
+    padding-right:0.5em;
+}
+div.messages {
+    vertical-align:top;
+    box-sizing:border-box;
+    clear:both;
+}
+div.messages > p {
+    margin:0;
+    color:#000;
+    word-wrap:break-word;
+}
+div.messages > p.implications {
+    color:green;
+}
+div.timestamp {
+    vertical-align:top;
+    font-weight:lighter;
+    color:#AAA;
+    float:right;
+}
+div.sender {
+    font-weight:bold;
+    color:#000;
+    float:left;
+}
+div.ours > div.sender {
+    color:#0074cf;
+}

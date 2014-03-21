@@ -1,0 +1,20 @@
+# Poison To-do List
+*Please mark entries with "<-- DONE" when you finish them.*
+
+## Poison 1.x featureset
+
+* Single-window UI with optional secondary windows
+* Looks like a native Mac citizen
+* One-to-one and group chats
+* Saving and loading of Tox core data
+* Transcript view styled using WebKit
+* Notification Center support
+
+## Features wanted for Poison 2.0
+
+* Multi-window UI with each chat in its own window
+* Customizable user interface
+* Group chat user list + join/leave events
+* Support for working Tox A/V
+* File transfers
+* Cleaner internals (with modern API usage)

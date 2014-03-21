@@ -1,0 +1,37 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+
+#define SCLocalizedFormatString(k, c, ...) ([NSString stringWithFormat:NSLocalizedString(k, c), ##__VA_ARGS__])
+#define SCApplicationInfoDictKey(k) ([NSBundle mainBundle].infoDictionary[k])
+#define SCStringPreference(k) ([[NSUserDefaults standardUserDefaults] stringForKey:k])
+#define SCBoolPreference(k) ([[NSUserDefaults standardUserDefaults] boolForKey:k])
+
+#define SCCodeSigningStatusNoSign  (0)
+#define SCCodeSigningStatusOK      (1)
+#define SCCodeSigningStatusInvalid (2)
+
+extern uint8_t SCCodeSigningStatus;
+extern NSString *SCCodeSigningSigner;
+
+NS_INLINE NSURL *SCApplicationSupportDirectory(void) {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *candidates = [fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask];
+    NSURL *returnURL = [(NSURL*)candidates[0] URLByAppendingPathComponent:@"Poison2X" isDirectory:YES];
+    BOOL isDirectory = NO;
+    BOOL exists = [fileManager fileExistsAtPath:[returnURL path] isDirectory:&isDirectory];
+    if (!exists) {
+        [fileManager createDirectoryAtURL:returnURL withIntermediateDirectories:YES attributes:nil error:nil];
+    } else if (!isDirectory) {
+        [fileManager removeItemAtURL:returnURL error:nil];
+        [fileManager createDirectoryAtURL:returnURL withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return returnURL;
+}
+
+#endif

@@ -1,0 +1,252 @@
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Window";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Minimize";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Window";
+
+/* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
+"29.title" = "AMainMenu";
+
+/* Class = "NSMenuItem"; title = "Poison"; ObjectID = "56"; */
+"56.title" = "Poison";
+
+/* Class = "NSMenu"; title = "Poison"; ObjectID = "57"; */
+"57.title" = "Poison";
+
+/* Class = "NSMenuItem"; title = "About Poison"; ObjectID = "58"; */
+"58.title" = "About Poison";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Preferences…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide Poison"; ObjectID = "134"; */
+"134.title" = "Hide Poison";
+
+/* Class = "NSMenuItem"; title = "Quit Poison"; ObjectID = "136"; */
+"136.title" = "Quit Poison";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Hide Others";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
+"195.title" = "Stop Speaking";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
+"196.title" = "Start Speaking";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
+"197.title" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
+"198.title" = "Select All";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
+"199.title" = "Cut";
+
+/* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
+"200.title" = "Spelling and Grammar";
+
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
+"201.title" = "Check Document Now";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
+"202.title" = "Delete";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
+"203.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
+"204.title" = "Show Spelling and Grammar";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
+"205.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
+"207.title" = "Undo";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
+"208.title" = "Find Next";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
+"209.title" = "Find…";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
+"210.title" = "Jump to Selection";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
+"211.title" = "Speech";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
+"212.title" = "Speech";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
+"213.title" = "Find Previous";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
+"215.title" = "Redo";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
+"216.title" = "Spelling and Grammar";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
+"217.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
+"218.title" = "Find";
+
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
+"219.title" = "Check Spelling While Typing";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
+"220.title" = "Find";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
+"221.title" = "Use Selection for Find";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
+"239.title" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
+"295.title" = "View";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
+"296.title" = "View";
+
+/* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
+"297.title" = "Show Toolbar";
+
+/* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
+"298.title" = "Customize Toolbar…";
+
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
+"346.title" = "Check Grammar With Spelling";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
+"348.title" = "Substitutions";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
+"349.title" = "Substitutions";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
+"350.title" = "Smart Copy/Paste";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
+"351.title" = "Smart Quotes";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
+"354.title" = "Smart Links";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
+"450.title" = "Transformations";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
+"451.title" = "Transformations";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
+"452.title" = "Make Upper Case";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
+"454.title" = "Correct Spelling Automatically";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
+"457.title" = "Show Substitutions";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
+"460.title" = "Smart Dashes";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
+"462.title" = "Text Replacement";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
+"465.title" = "Make Lower Case";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
+"466.title" = "Capitalize";
+
+/* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
+"485.title" = "Paste and Match Style";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
+"490.title" = "Help";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
+"491.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "Poison Help"; ObjectID = "492"; */
+"492.title" = "Poison Help";
+
+/* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
+"534.title" = "Find and Replace…";
+
+/* Class = "NSTextFieldCell"; title = "Toxing on Poison 2.0-pre"; ObjectID = "12s-ot-pOl"; */
+"12s-ot-pOl.title" = "Toxing on Poison 2.0-pre";
+
+/* Class = "NSTextFieldCell"; title = "A native OS X interface for Tox.\nWritten by stal, et. al.\n\nThis release of Poison (2.0) is dedicated to Thaddeus \"Thad\" McMichael (03/04/2014)."; ObjectID = "9d6-tx-cjA"; */
+"9d6-tx-cjA.title" = "A native OS X interface for Tox.\nWritten by stal, et. al.\n\nThis release of Poison (2.0) is dedicated to Thaddeus \"Thad\" McMichael (03/04/2014).";
+
+/* Class = "NSButtonCell"; title = "Tox web site"; ObjectID = "Azy-SQ-brZ"; */
+"Azy-SQ-brZ.title" = "Tox web site";
+
+/* Class = "NSButtonCell"; title = "Poison on GitHub"; ObjectID = "EYU-Ik-zz5"; */
+"EYU-Ik-zz5.title" = "Poison on GitHub";
+
+/* Class = "NSMenuItem"; title = "Change Status..."; ObjectID = "HSH-MV-sZE"; */
+"HSH-MV-sZE.title" = "Change Status...";
+
+/* Class = "NSMenuItem"; title = "Network"; ObjectID = "Irl-qk-GjH"; */
+"Irl-qk-GjH.title" = "Network";
+
+/* Class = "NSTextFieldCell"; title = "Mac OS X User"; ObjectID = "KdG-5B-GGr"; */
+"KdG-5B-GGr.title" = "Mac OS X User";
+
+/* Class = "NSTextFieldCell"; title = "Version 2.0-pre"; ObjectID = "M3r-LN-fBW"; */
+"M3r-LN-fBW.title" = "Version 2.0-pre";
+
+/* Class = "NSMenuItem"; title = "Generate QR Code for my Tox ID..."; ObjectID = "RRd-Bz-ihz"; */
+"RRd-Bz-ihz.title" = "Generate QR Code for my Tox ID...";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "XBq-4p-HUq"; */
+"XBq-4p-HUq.title" = "Close";
+
+/* Class = "NSTextFieldCell"; title = "Poison"; ObjectID = "bQc-vE-cNy"; */
+"bQc-vE-cNy.title" = "Poison";
+
+/* Class = "NSWindow"; title = "Acknowledgements"; ObjectID = "bmI-XX-y06"; */
+"bmI-XX-y06.title" = "Acknowledgements";
+
+/* Class = "NSMenuItem"; title = "Add Friend..."; ObjectID = "cov-0m-caU"; */
+"cov-0m-caU.title" = "Add Friend...";
+
+/* Class = "NSMenuItem"; title = "Change Name..."; ObjectID = "dnK-Vl-RdM"; */
+"dnK-Vl-RdM.title" = "Change Name...";
+
+/* Class = "NSButtonCell"; title = "Acknowledgements"; ObjectID = "gWb-N8-Cam"; */
+"gWb-N8-Cam.title" = "Acknowledgements";
+
+/* Class = "NSMenuItem"; title = "You're not logged in."; ObjectID = "knR-3m-v1h"; */
+"knR-3m-v1h.title" = "You're not logged in.";
+
+/* Class = "NSMenu"; title = "Network"; ObjectID = "mIP-HX-h3A"; */
+"mIP-HX-h3A.title" = "Network";
+
+/* Class = "NSMenuItem"; title = "Copy Tox ID"; ObjectID = "tRJ-tr-UZd"; */
+"tRJ-tr-UZd.title" = "Copy Tox ID";
+
+/* Class = "NSMenuItem"; title = "Log Out..."; ObjectID = "x52-HS-lct"; */
+"x52-HS-lct.title" = "Log Out...";

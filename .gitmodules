@@ -1,0 +1,15 @@
+[submodule "ProjectTox-Core"]
+	path = ProjectTox-Core
+	url = git://github.com/irungentoo/ProjectTox-Core
+[submodule "scrypt-jane"]
+	path = scrypt-jane
+	url = https://github.com/floodyberry/scrypt-jane.git
+[submodule "objective-tox/core"]
+	path = objective-tox/core
+	url = git://github.com/irungentoo/ProjectTox-Core
+[submodule "objective_tox/core"]
+	path = objective_tox/core
+	url = git://github.com/irungentoo/ProjectTox-Core
+[submodule "txd_plus/scrypt-jane"]
+	path = txd_plus/scrypt-jane
+	url = git://github.com/floodyberry/scrypt-jane

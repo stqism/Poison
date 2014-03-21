@@ -1,0 +1,21 @@
+
+/* Class = "NSTextFieldCell"; title = "Enter a Tox ID:"; ObjectID = "5X7-cV-ELa"; */
+"5X7-cV-ELa.title" = "Enter a Tox ID:";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Hi! Please let me Tox you on Tox."; ObjectID = "6Dx-LJ-s4q"; */
+"6Dx-LJ-s4q.placeholderString" = "Hi! Please let me Tox you on Tox.";
+
+/* Class = "NSTextFieldCell"; title = "Hi! Please let me Tox you on Tox."; ObjectID = "6Dx-LJ-s4q"; */
+"6Dx-LJ-s4q.title" = "Hi! Please let me Tox you on Tox.";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9C7-pW-WRk"; */
+"9C7-pW-WRk.title" = "Cancel";
+
+/* Class = "NSTextFieldCell"; title = "And a friendly message (optional):"; ObjectID = "FVQ-dg-e50"; */
+"FVQ-dg-e50.title" = "And a friendly message (optional):";
+
+/* Class = "NSButtonCell"; title = "Add Friend"; ObjectID = "LAv-uq-bDH"; */
+"LAv-uq-bDH.title" = "Add Friend";
+
+/* Class = "NSTextFieldCell"; placeholderString = "0000000000000000000000000000000000000000000000000000000000000000000000000000"; ObjectID = "bEU-cg-lKQ"; */
+"bEU-cg-lKQ.placeholderString" = "0000000000000000000000000000000000000000000000000000000000000000000000000000";

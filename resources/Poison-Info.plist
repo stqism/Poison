@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>psnChatStyle</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Poison chat style</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>ca.kirara.poison.resource.chatStyle</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>psnSounds</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Poison sound set</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>ca.kirara.poison.resource.soundSet</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>Poison</string>
+	<key>CFBundleIdentifier</key>
+	<string>ca.kirara.poison.next</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Tox</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0-pre</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>Tox URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tox</string>
+				<string>toxmeontox</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>Poison Internal</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ca.kirara.poison</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.social-networking</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.7</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>onii-chan, i-it's knocking on the door to m-my baby maker!</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSNonHumanReadableCopyright</key>
+	<string>Copyright 2013 - 2014 Tox Development Team. All rights reserved.</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>ProjectHomepage</key>
+	<string>https://github.com/stal888/Poison</string>
+	<key>SCGitRef</key>
+	<string></string>
+	<key>SCReleaseGroupIdentity</key>
+	<string>You know Sakura Trick is the AOTS of Winter '14, and if you don't think it is, your opinion is invalid, right?</string>
+	<key>ToxHomepage</key>
+	<string>http://tox.im/</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Poison chat style</string>
+			<key>UTTypeIdentifier</key>
+			<string>ca.kirara.poison.resource.chatStyle</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psnChatStyle</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Poison sound set</string>
+			<key>UTTypeIdentifier</key>
+			<string>ca.kirara.poison.resource.soundSet</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>psnSounds</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

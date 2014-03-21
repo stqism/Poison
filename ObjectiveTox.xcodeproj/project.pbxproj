@@ -1,0 +1,677 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		F553FAF018DCE5D000CBA532 /* Everything */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything" */;
+			buildPhases = (
+			);
+			dependencies = (
+				F553FAF518DCE5D900CBA532 /* PBXTargetDependency */,
+				F553FAF718DCE5D900CBA532 /* PBXTargetDependency */,
+			);
+			name = Everything;
+			productName = Everything;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		F50F9C4E18C3AB7D00D06A0F /* DHT.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C2618C3AB5000D06A0F /* DHT.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C4F18C3AB7D00D06A0F /* LAN_discovery.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C2818C3AB5000D06A0F /* LAN_discovery.c */; };
+		F50F9C5018C3AB7D00D06A0F /* Lossless_UDP.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C2A18C3AB5000D06A0F /* Lossless_UDP.c */; };
+		F50F9C5118C3AB7D00D06A0F /* Messenger.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C2C18C3AB5000D06A0F /* Messenger.c */; };
+		F50F9C5218C3AB7D00D06A0F /* assoc.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C2E18C3AB5000D06A0F /* assoc.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5318C3AB7D00D06A0F /* friend_requests.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3018C3AB5000D06A0F /* friend_requests.c */; };
+		F50F9C5418C3AB7D00D06A0F /* group_chats.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3218C3AB5000D06A0F /* group_chats.c */; };
+		F50F9C5518C3AB7D00D06A0F /* net_crypto.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3518C3AB5000D06A0F /* net_crypto.c */; };
+		F50F9C5618C3AB7D00D06A0F /* network.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3718C3AB5000D06A0F /* network.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5718C3AB7D00D06A0F /* onion.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3918C3AB5000D06A0F /* onion.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5818C3AB7D00D06A0F /* onion_announce.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3B18C3AB5000D06A0F /* onion_announce.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5918C3AB7D00D06A0F /* onion_client.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3D18C3AB5000D06A0F /* onion_client.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5A18C3AB7D00D06A0F /* ping.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3F18C3AB5000D06A0F /* ping.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
+		F50F9C5B18C3AB7D00D06A0F /* tox.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4118C3AB5000D06A0F /* tox.c */; };
+		F50F9C5C18C3AB7D00D06A0F /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4318C3AB5000D06A0F /* util.c */; settings = {COMPILER_FLAGS = "-Wno-format"; }; };
+		F54180E918C3ACAB00AB220E /* DESRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1518C3AB4300D06A0F /* DESRequest.m */; };
+		F54180EB18C3ACAB00AB220E /* DESToxConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1718C3AB4300D06A0F /* DESToxConnection.m */; };
+		F54180EC18C3ACAB00AB220E /* DESKeyFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */; };
+		F54180F018C3ACD500AB220E /* txdplus_crypto.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4918C3AB5B00D06A0F /* txdplus_crypto.c */; };
+		F54180F318C3ACD500AB220E /* scrypt-jane.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */; settings = {COMPILER_FLAGS = "-DSCRYPT_KECCAK512 -DSCRYPT_CHACHA -no-integrated-as -march=native -Ofast -w"; }; };
+		F54180F518C3ADE600AB220E /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F54180F418C3ADE600AB220E /* libsodium.a */; };
+		F553FAEF18DCE1B500CBA532 /* des_core_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = F553FAEE18DCE1B500CBA532 /* des_core_ext.c */; };
+		F554115418C80C2A00CBB9E3 /* DESConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = F554115318C80C2A00CBB9E3 /* DESConversation.m */; };
+		F554115C18C8187700CBB9E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F554115B18C8187700CBB9E3 /* Foundation.framework */; };
+		F554116918C818BC00CBB9E3 /* observer.m in Sources */ = {isa = PBXBuildFile; fileRef = F554116818C818BC00CBB9E3 /* observer.m */; };
+		F554116C18C818DD00CBB9E3 /* libObjectiveTox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */; };
+		F558579918D608AD0053DD52 /* data_intermediate.c in Sources */ = {isa = PBXBuildFile; fileRef = F558579718D608AD0053DD52 /* data_intermediate.c */; };
+		F558579A18D608AD0053DD52 /* data.h in Headers */ = {isa = PBXBuildFile; fileRef = F558579818D608AD0053DD52 /* data.h */; };
+		F558579C18D608E90053DD52 /* data_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F558579B18D608E90053DD52 /* data_private.h */; };
+		F558579E18D6179C0053DD52 /* data_export.c in Sources */ = {isa = PBXBuildFile; fileRef = F558579D18D6179C0053DD52 /* data_export.c */; };
+		F55857A818D6633D0053DD52 /* txdplus_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F55857A718D6633D0053DD52 /* txdplus_private.h */; };
+		F5A57C5718C6A0AA00426BDC /* DESCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */; };
+		F5A57C5F18C6DB3E00426BDC /* DESFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5D18C6DB3E00426BDC /* DESFriend.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F553FAF418DCE5D900CBA532 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
+			remoteInfo = ObjectiveTox;
+		};
+		F553FAF618DCE5D900CBA532 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F554115818C8187700CBB9E3;
+			remoteInfo = DESObserver;
+		};
+		F554116A18C818D800CBB9E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
+			remoteInfo = ObjectiveTox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F554115718C8187700CBB9E3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveTox.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F50F9C1318C3AB4300D06A0F /* DESMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESMacros.h; sourceTree = "<group>"; };
+		F50F9C1518C3AB4300D06A0F /* DESRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESRequest.m; sourceTree = "<group>"; };
+		F50F9C1618C3AB4300D06A0F /* DESToxConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESToxConnection.h; sourceTree = "<group>"; };
+		F50F9C1718C3AB4300D06A0F /* DESToxConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESToxConnection.m; sourceTree = "<group>"; };
+		F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESKeyFunctions.m; sourceTree = "<group>"; };
+		F50F9C1918C3AB4300D06A0F /* ObjectiveTox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveTox.h; sourceTree = "<group>"; };
+		F50F9C1B18C3AB5000D06A0F /* event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = event.c; sourceTree = "<group>"; };
+		F50F9C1C18C3AB5000D06A0F /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		F50F9C1D18C3AB5000D06A0F /* media.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = media.c; sourceTree = "<group>"; };
+		F50F9C1E18C3AB5000D06A0F /* media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = media.h; sourceTree = "<group>"; };
+		F50F9C1F18C3AB5000D06A0F /* msi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = msi.c; sourceTree = "<group>"; };
+		F50F9C2018C3AB5000D06A0F /* msi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msi.h; sourceTree = "<group>"; };
+		F50F9C2118C3AB5000D06A0F /* rtp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtp.c; sourceTree = "<group>"; };
+		F50F9C2218C3AB5000D06A0F /* rtp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtp.h; sourceTree = "<group>"; };
+		F50F9C2318C3AB5000D06A0F /* toxav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = toxav.c; sourceTree = "<group>"; };
+		F50F9C2418C3AB5000D06A0F /* toxav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toxav.h; sourceTree = "<group>"; };
+		F50F9C2618C3AB5000D06A0F /* DHT.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DHT.c; sourceTree = "<group>"; };
+		F50F9C2718C3AB5000D06A0F /* DHT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHT.h; sourceTree = "<group>"; };
+		F50F9C2818C3AB5000D06A0F /* LAN_discovery.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LAN_discovery.c; sourceTree = "<group>"; };
+		F50F9C2918C3AB5000D06A0F /* LAN_discovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAN_discovery.h; sourceTree = "<group>"; };
+		F50F9C2A18C3AB5000D06A0F /* Lossless_UDP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Lossless_UDP.c; sourceTree = "<group>"; };
+		F50F9C2B18C3AB5000D06A0F /* Lossless_UDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lossless_UDP.h; sourceTree = "<group>"; };
+		F50F9C2C18C3AB5000D06A0F /* Messenger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Messenger.c; sourceTree = "<group>"; };
+		F50F9C2D18C3AB5000D06A0F /* Messenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messenger.h; sourceTree = "<group>"; };
+		F50F9C2E18C3AB5000D06A0F /* assoc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = assoc.c; sourceTree = "<group>"; };
+		F50F9C2F18C3AB5000D06A0F /* assoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assoc.h; sourceTree = "<group>"; };
+		F50F9C3018C3AB5000D06A0F /* friend_requests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = friend_requests.c; sourceTree = "<group>"; };
+		F50F9C3118C3AB5000D06A0F /* friend_requests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = friend_requests.h; sourceTree = "<group>"; };
+		F50F9C3218C3AB5000D06A0F /* group_chats.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = group_chats.c; sourceTree = "<group>"; };
+		F50F9C3318C3AB5000D06A0F /* group_chats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = group_chats.h; sourceTree = "<group>"; };
+		F50F9C3418C3AB5000D06A0F /* misc_tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc_tools.h; sourceTree = "<group>"; };
+		F50F9C3518C3AB5000D06A0F /* net_crypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = net_crypto.c; sourceTree = "<group>"; };
+		F50F9C3618C3AB5000D06A0F /* net_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net_crypto.h; sourceTree = "<group>"; };
+		F50F9C3718C3AB5000D06A0F /* network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = network.c; sourceTree = "<group>"; };
+		F50F9C3818C3AB5000D06A0F /* network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = network.h; sourceTree = "<group>"; };
+		F50F9C3918C3AB5000D06A0F /* onion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = onion.c; sourceTree = "<group>"; };
+		F50F9C3A18C3AB5000D06A0F /* onion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = onion.h; sourceTree = "<group>"; };
+		F50F9C3B18C3AB5000D06A0F /* onion_announce.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = onion_announce.c; sourceTree = "<group>"; };
+		F50F9C3C18C3AB5000D06A0F /* onion_announce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = onion_announce.h; sourceTree = "<group>"; };
+		F50F9C3D18C3AB5000D06A0F /* onion_client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = onion_client.c; sourceTree = "<group>"; };
+		F50F9C3E18C3AB5000D06A0F /* onion_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = onion_client.h; sourceTree = "<group>"; };
+		F50F9C3F18C3AB5000D06A0F /* ping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ping.c; sourceTree = "<group>"; };
+		F50F9C4018C3AB5000D06A0F /* ping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ping.h; sourceTree = "<group>"; };
+		F50F9C4118C3AB5000D06A0F /* tox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tox.c; sourceTree = "<group>"; };
+		F50F9C4218C3AB5000D06A0F /* tox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tox.h; sourceTree = "<group>"; };
+		F50F9C4318C3AB5000D06A0F /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		F50F9C4418C3AB5000D06A0F /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		F50F9C4918C3AB5B00D06A0F /* txdplus_crypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = txdplus_crypto.c; sourceTree = "<group>"; };
+		F50F9C4B18C3AB5B00D06A0F /* scrypt-jane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scrypt-jane.h"; path = "scrypt-jane/scrypt-jane.h"; sourceTree = "<group>"; };
+		F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "scrypt-jane.c"; path = "scrypt-jane/scrypt-jane.c"; sourceTree = "<group>"; };
+		F54180F418C3ADE600AB220E /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = _support/lib/libsodium.a; sourceTree = "<group>"; };
+		F553FAEE18DCE1B500CBA532 /* des_core_ext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des_core_ext.c; path = core_extensions/des_core_ext.c; sourceTree = "<group>"; };
+		F554115318C80C2A00CBB9E3 /* DESConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESConversation.m; sourceTree = "<group>"; };
+		F554115918C8187700CBB9E3 /* DESObserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DESObserver; sourceTree = BUILT_PRODUCTS_DIR; };
+		F554115B18C8187700CBB9E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F554116818C818BC00CBB9E3 /* observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = observer.m; sourceTree = "<group>"; };
+		F558579718D608AD0053DD52 /* data_intermediate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_intermediate.c; path = ../../core_extensions/data_intermediate.c; sourceTree = "<group>"; };
+		F558579818D608AD0053DD52 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data.h; path = ../../core_extensions/data.h; sourceTree = "<group>"; };
+		F558579B18D608E90053DD52 /* data_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data_private.h; path = ../../core_extensions/data_private.h; sourceTree = "<group>"; };
+		F558579D18D6179C0053DD52 /* data_export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_export.c; path = ../../core_extensions/data_export.c; sourceTree = "<group>"; };
+		F55857A718D6633D0053DD52 /* txdplus_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = txdplus_private.h; sourceTree = "<group>"; };
+		F55857A918D6800B0053DD52 /* txdplus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = txdplus.h; sourceTree = "<group>"; };
+		F58EE9AE18C598170033F2D4 /* ObjectiveTox-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveTox-Private.h"; sourceTree = "<group>"; };
+		F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESCallbacks.m; sourceTree = "<group>"; };
+		F5A57C5818C6B16900426BDC /* DESProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESProtocols.h; sourceTree = "<group>"; };
+		F5A57C5918C6B5C700426BDC /* DESConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESConstants.h; sourceTree = "<group>"; };
+		F5A57C5A18C6B81900426BDC /* DESKeyFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESKeyFunctions.h; sourceTree = "<group>"; };
+		F5A57C5B18C6C8C700426BDC /* DESAbstract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESAbstract.h; sourceTree = "<group>"; };
+		F5A57C5D18C6DB3E00426BDC /* DESFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESFriend.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F50F9C0318C3AAD800D06A0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54180F518C3ADE600AB220E /* libsodium.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F554115618C8187700CBB9E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F554116C18C818DD00CBB9E3 /* libObjectiveTox.a in Frameworks */,
+				F554115C18C8187700CBB9E3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F50F9BFD18C3AAD800D06A0F = {
+			isa = PBXGroup;
+			children = (
+				F54180F418C3ADE600AB220E /* libsodium.a */,
+				F50F9C4D18C3AB5B00D06A0F /* txd_extension */,
+				F50F9C4618C3AB5000D06A0F /* tox_core */,
+				F50F9C1A18C3AB4300D06A0F /* des2 */,
+				F554116718C818BC00CBB9E3 /* testing */,
+				F554115A18C8187700CBB9E3 /* Frameworks */,
+				F50F9C0718C3AAD800D06A0F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F50F9C0718C3AAD800D06A0F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */,
+				F554115918C8187700CBB9E3 /* DESObserver */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F50F9C1A18C3AB4300D06A0F /* des2 */ = {
+			isa = PBXGroup;
+			children = (
+				F50F9C1918C3AB4300D06A0F /* ObjectiveTox.h */,
+				F58EE9AE18C598170033F2D4 /* ObjectiveTox-Private.h */,
+				F5A57C5B18C6C8C700426BDC /* DESAbstract.h */,
+				F50F9C1318C3AB4300D06A0F /* DESMacros.h */,
+				F5A57C5818C6B16900426BDC /* DESProtocols.h */,
+				F5A57C5918C6B5C700426BDC /* DESConstants.h */,
+				F50F9C1518C3AB4300D06A0F /* DESRequest.m */,
+				F5A57C5D18C6DB3E00426BDC /* DESFriend.m */,
+				F554115318C80C2A00CBB9E3 /* DESConversation.m */,
+				F50F9C1618C3AB4300D06A0F /* DESToxConnection.h */,
+				F50F9C1718C3AB4300D06A0F /* DESToxConnection.m */,
+				F5A57C5A18C6B81900426BDC /* DESKeyFunctions.h */,
+				F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */,
+				F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */,
+				F553FAEE18DCE1B500CBA532 /* des_core_ext.c */,
+			);
+			name = des2;
+			path = objective_tox;
+			sourceTree = "<group>";
+		};
+		F50F9C2518C3AB5000D06A0F /* toxav */ = {
+			isa = PBXGroup;
+			children = (
+				F50F9C1B18C3AB5000D06A0F /* event.c */,
+				F50F9C1C18C3AB5000D06A0F /* event.h */,
+				F50F9C1D18C3AB5000D06A0F /* media.c */,
+				F50F9C1E18C3AB5000D06A0F /* media.h */,
+				F50F9C1F18C3AB5000D06A0F /* msi.c */,
+				F50F9C2018C3AB5000D06A0F /* msi.h */,
+				F50F9C2118C3AB5000D06A0F /* rtp.c */,
+				F50F9C2218C3AB5000D06A0F /* rtp.h */,
+				F50F9C2318C3AB5000D06A0F /* toxav.c */,
+				F50F9C2418C3AB5000D06A0F /* toxav.h */,
+			);
+			path = toxav;
+			sourceTree = "<group>";
+		};
+		F50F9C4518C3AB5000D06A0F /* toxcore */ = {
+			isa = PBXGroup;
+			children = (
+				F50F9C2618C3AB5000D06A0F /* DHT.c */,
+				F50F9C2718C3AB5000D06A0F /* DHT.h */,
+				F50F9C2818C3AB5000D06A0F /* LAN_discovery.c */,
+				F50F9C2918C3AB5000D06A0F /* LAN_discovery.h */,
+				F50F9C2A18C3AB5000D06A0F /* Lossless_UDP.c */,
+				F50F9C2B18C3AB5000D06A0F /* Lossless_UDP.h */,
+				F50F9C2C18C3AB5000D06A0F /* Messenger.c */,
+				F50F9C2D18C3AB5000D06A0F /* Messenger.h */,
+				F50F9C2E18C3AB5000D06A0F /* assoc.c */,
+				F50F9C2F18C3AB5000D06A0F /* assoc.h */,
+				F50F9C3018C3AB5000D06A0F /* friend_requests.c */,
+				F50F9C3118C3AB5000D06A0F /* friend_requests.h */,
+				F50F9C3218C3AB5000D06A0F /* group_chats.c */,
+				F50F9C3318C3AB5000D06A0F /* group_chats.h */,
+				F50F9C3418C3AB5000D06A0F /* misc_tools.h */,
+				F50F9C3518C3AB5000D06A0F /* net_crypto.c */,
+				F50F9C3618C3AB5000D06A0F /* net_crypto.h */,
+				F50F9C3718C3AB5000D06A0F /* network.c */,
+				F50F9C3818C3AB5000D06A0F /* network.h */,
+				F50F9C3918C3AB5000D06A0F /* onion.c */,
+				F50F9C3A18C3AB5000D06A0F /* onion.h */,
+				F50F9C3B18C3AB5000D06A0F /* onion_announce.c */,
+				F50F9C3C18C3AB5000D06A0F /* onion_announce.h */,
+				F50F9C3D18C3AB5000D06A0F /* onion_client.c */,
+				F50F9C3E18C3AB5000D06A0F /* onion_client.h */,
+				F50F9C3F18C3AB5000D06A0F /* ping.c */,
+				F50F9C4018C3AB5000D06A0F /* ping.h */,
+				F50F9C4118C3AB5000D06A0F /* tox.c */,
+				F50F9C4218C3AB5000D06A0F /* tox.h */,
+				F50F9C4318C3AB5000D06A0F /* util.c */,
+				F50F9C4418C3AB5000D06A0F /* util.h */,
+				F558579718D608AD0053DD52 /* data_intermediate.c */,
+				F558579D18D6179C0053DD52 /* data_export.c */,
+				F558579818D608AD0053DD52 /* data.h */,
+				F558579B18D608E90053DD52 /* data_private.h */,
+			);
+			path = toxcore;
+			sourceTree = "<group>";
+		};
+		F50F9C4618C3AB5000D06A0F /* tox_core */ = {
+			isa = PBXGroup;
+			children = (
+				F50F9C2518C3AB5000D06A0F /* toxav */,
+				F50F9C4518C3AB5000D06A0F /* toxcore */,
+			);
+			name = tox_core;
+			path = objective_tox/core;
+			sourceTree = "<group>";
+		};
+		F50F9C4D18C3AB5B00D06A0F /* txd_extension */ = {
+			isa = PBXGroup;
+			children = (
+				F55857A918D6800B0053DD52 /* txdplus.h */,
+				F55857A718D6633D0053DD52 /* txdplus_private.h */,
+				F50F9C4918C3AB5B00D06A0F /* txdplus_crypto.c */,
+				F50F9C4B18C3AB5B00D06A0F /* scrypt-jane.h */,
+				F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */,
+			);
+			name = txd_extension;
+			path = txd_plus;
+			sourceTree = "<group>";
+		};
+		F554115A18C8187700CBB9E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F554115B18C8187700CBB9E3 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F554116718C818BC00CBB9E3 /* testing */ = {
+			isa = PBXGroup;
+			children = (
+				F554116818C818BC00CBB9E3 /* observer.m */,
+			);
+			name = testing;
+			path = objective_tox/testing;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F50F9C0418C3AAD800D06A0F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F55857A818D6633D0053DD52 /* txdplus_private.h in Headers */,
+				F558579C18D608E90053DD52 /* data_private.h in Headers */,
+				F558579A18D608AD0053DD52 /* data.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F50F9C0518C3AAD800D06A0F /* ObjectiveTox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F50F9C0A18C3AAD800D06A0F /* Build configuration list for PBXNativeTarget "ObjectiveTox" */;
+			buildPhases = (
+				F5DAB46318C95CB40046ED96 /* ShellScript */,
+				F50F9C0218C3AAD800D06A0F /* Sources */,
+				F50F9C0318C3AAD800D06A0F /* Frameworks */,
+				F50F9C0418C3AAD800D06A0F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjectiveTox;
+			productName = ObjectiveTox;
+			productReference = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F554115818C8187700CBB9E3 /* DESObserver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "DESObserver" */;
+			buildPhases = (
+				F554115518C8187700CBB9E3 /* Sources */,
+				F554115618C8187700CBB9E3 /* Frameworks */,
+				F554115718C8187700CBB9E3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F554116B18C818D800CBB9E3 /* PBXTargetDependency */,
+			);
+			name = DESObserver;
+			productName = DESObserver;
+			productReference = F554115918C8187700CBB9E3 /* DESObserver */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F50F9BFE18C3AAD800D06A0F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Tox;
+			};
+			buildConfigurationList = F50F9C0118C3AAD800D06A0F /* Build configuration list for PBXProject "ObjectiveTox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F50F9BFD18C3AAD800D06A0F;
+			productRefGroup = F50F9C0718C3AAD800D06A0F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F50F9C0518C3AAD800D06A0F /* ObjectiveTox */,
+				F554115818C8187700CBB9E3 /* DESObserver */,
+				F553FAF018DCE5D000CBA532 /* Everything */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F5DAB46318C95CB40046ED96 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"DES build: checking your dependencies!\"\n\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\n\nmake_libsodium() {\n    echo \"Need to build libsodium. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libsodium\n    git clone \"https://github.com/jedisct1/libsodium\" libsodium && cd libsodium\n    ./autogen.sh\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nif [ ! -f \"$PROJECT_DIR/_support/lib/libsodium.a\" ]; then\n    make_libsodium\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F50F9C0218C3AAD800D06A0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54180F018C3ACD500AB220E /* txdplus_crypto.c in Sources */,
+				F54180F318C3ACD500AB220E /* scrypt-jane.c in Sources */,
+				F5A57C5718C6A0AA00426BDC /* DESCallbacks.m in Sources */,
+				F553FAEF18DCE1B500CBA532 /* des_core_ext.c in Sources */,
+				F54180E918C3ACAB00AB220E /* DESRequest.m in Sources */,
+				F54180EB18C3ACAB00AB220E /* DESToxConnection.m in Sources */,
+				F54180EC18C3ACAB00AB220E /* DESKeyFunctions.m in Sources */,
+				F50F9C4E18C3AB7D00D06A0F /* DHT.c in Sources */,
+				F50F9C4F18C3AB7D00D06A0F /* LAN_discovery.c in Sources */,
+				F50F9C5018C3AB7D00D06A0F /* Lossless_UDP.c in Sources */,
+				F5A57C5F18C6DB3E00426BDC /* DESFriend.m in Sources */,
+				F50F9C5118C3AB7D00D06A0F /* Messenger.c in Sources */,
+				F50F9C5218C3AB7D00D06A0F /* assoc.c in Sources */,
+				F50F9C5318C3AB7D00D06A0F /* friend_requests.c in Sources */,
+				F50F9C5418C3AB7D00D06A0F /* group_chats.c in Sources */,
+				F558579918D608AD0053DD52 /* data_intermediate.c in Sources */,
+				F50F9C5518C3AB7D00D06A0F /* net_crypto.c in Sources */,
+				F558579E18D6179C0053DD52 /* data_export.c in Sources */,
+				F50F9C5618C3AB7D00D06A0F /* network.c in Sources */,
+				F50F9C5718C3AB7D00D06A0F /* onion.c in Sources */,
+				F554115418C80C2A00CBB9E3 /* DESConversation.m in Sources */,
+				F50F9C5818C3AB7D00D06A0F /* onion_announce.c in Sources */,
+				F50F9C5918C3AB7D00D06A0F /* onion_client.c in Sources */,
+				F50F9C5A18C3AB7D00D06A0F /* ping.c in Sources */,
+				F50F9C5B18C3AB7D00D06A0F /* tox.c in Sources */,
+				F50F9C5C18C3AB7D00D06A0F /* util.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F554115518C8187700CBB9E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F554116918C818BC00CBB9E3 /* observer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F553FAF518DCE5D900CBA532 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
+			targetProxy = F553FAF418DCE5D900CBA532 /* PBXContainerItemProxy */;
+		};
+		F553FAF718DCE5D900CBA532 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F554115818C8187700CBB9E3 /* DESObserver */;
+			targetProxy = F553FAF618DCE5D900CBA532 /* PBXContainerItemProxy */;
+		};
+		F554116B18C818D800CBB9E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
+			targetProxy = F554116A18C818D800CBB9E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F50F9C0818C3AAD800D06A0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/_support/include",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/_support/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F50F9C0918C3AAD800D06A0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/_support/include",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/_support/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F50F9C0B18C3AAD800D06A0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/stal/Projects/Atroquinine/_support/lib,
+				);
+				OTHER_CFLAGS = "-DTXD_SECURE_MEMORY";
+				PRODUCT_NAME = "${TARGET_NAME}";
+			};
+			name = Debug;
+		};
+		F50F9C0C18C3AAD800D06A0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/stal/Projects/Atroquinine/_support/lib,
+				);
+				OTHER_CFLAGS = "-DTXD_SECURE_MEMORY";
+				PRODUCT_NAME = "${TARGET_NAME}";
+			};
+			name = Release;
+		};
+		F553FAF218DCE5D000CBA532 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F553FAF318DCE5D000CBA532 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F554116518C8187700CBB9E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F554116618C8187700CBB9E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F50F9C0118C3AAD800D06A0F /* Build configuration list for PBXProject "ObjectiveTox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F50F9C0818C3AAD800D06A0F /* Debug */,
+				F50F9C0918C3AAD800D06A0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F50F9C0A18C3AAD800D06A0F /* Build configuration list for PBXNativeTarget "ObjectiveTox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F50F9C0B18C3AAD800D06A0F /* Debug */,
+				F50F9C0C18C3AAD800D06A0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F553FAF218DCE5D000CBA532 /* Debug */,
+				F553FAF318DCE5D000CBA532 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "DESObserver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F554116518C8187700CBB9E3 /* Debug */,
+				F554116618C8187700CBB9E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F50F9BFE18C3AAD800D06A0F /* Project object */;
+}
