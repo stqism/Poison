@@ -13,5 +13,7 @@
 
 @interface SCAppDelegate : NSObject <NSApplicationDelegate, DESToxConnectionDelegate>
 @property (strong, nonatomic) NSWindowController *mainWindowController;
-- (void)makeApplicationReadyForToxing:(txd_intermediate_t)userProfile name:(NSString *)profileName;
+- (void)makeApplicationReadyForToxing:(txd_intermediate_t)userProfile
+                                 name:(NSString *)profileName
+                             password:(NSString *)pass;
 @end

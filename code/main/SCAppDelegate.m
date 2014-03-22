@@ -20,6 +20,7 @@
 @interface SCAppDelegate ()
 @property (strong) DESToxConnection *toxConnection;
 @property (strong) NSString *profileName;
+@property (strong) NSString *profilePass;
 @property (weak) IBOutlet NSMenuItem *akiUserInfoMenuItemPlaceholder;
 @property (weak) IBOutlet NSView *userInfoMenuItem;
 #pragma mark - Tox menu
@@ -92,10 +93,20 @@
     _mainWindowController = mainWindowController;
 }
 
-- (void)makeApplicationReadyForToxing:(txd_intermediate_t)userProfile name:(NSString *)profileName {
+- (void)makeApplicationReadyForToxing:(txd_intermediate_t)userProfile name:(NSString *)profileName password:(NSString *)pass {
     self.profileName = profileName;
+    self.profilePass = pass;
     self.toxConnection = [[DESToxConnection alloc] init];
-    [self.toxConnection restoreDataFromTXDIntermediate:userProfile];
+    self.toxConnection.delegate = self;
+    if (userProfile) {
+        [self.toxConnection restoreDataFromTXDIntermediate:userProfile];
+    } else {
+        self.toxConnection.name = profileName;
+        self.toxConnection.statusMessage = SCLocalizedFormatString(@"Toxing on %@ %@", @"default status message",
+                                                                   SCApplicationInfoDictKey(@"CFBundleName"),
+                                                                   SCApplicationInfoDictKey(@"CFBundleShortVersionString"));
+        [self saveProfile];
+    }
     [self.toxConnection start];
     self.akiUserInfoMenuItemPlaceholder.view = self.userInfoMenuItem;
     if ([self.mainWindowController isKindOfClass:[SCNewUserWindowController class]])
@@ -169,7 +180,7 @@
     if (!self.toxConnection)
         return;
     txd_intermediate_t data = [self.toxConnection createTXDIntermediate];
-    [SCProfileManager saveProfile:data name:self.profileName password:@"nil"];
+    [SCProfileManager saveProfile:data name:self.profileName password:self.profilePass];
     txd_intermediate_free(data);
 }
 

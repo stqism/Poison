@@ -1,5 +1,5 @@
 #import "SCProfileManager.h"
-#import "data.h"
+#import "data_private.h"
 #import "txdplus.h"
 
 NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
@@ -8,13 +8,27 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
         userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Profile data is corrupt.", nil),
                      NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Your profile could not be loaded because the data was corrupt.", nil)};
     } else if (retv == TXD_ERR_DECRYPT_FAILED) {
-        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Password incorrect..", nil),
+        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Password incorrect.", nil),
                      NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Your profile could not be loaded because you entered the wrong password.", nil)};
     }
     return [NSError errorWithDomain:@"TXDErrorDomain" code:retv userInfo:userInfo];
 }
 
 @implementation SCProfileManager
+
++ (NSDictionary *)manifest {
+    static NSDictionary *manifest = nil;
+    static NSDate *modtime = nil;
+    NSURL *manifestURL = [self.profileDirectory URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attrs = [fileManager attributesOfItemAtPath:manifestURL.path error:nil];
+    if (!attrs || ![attrs.fileModificationDate isEqualToDate:modtime]) {
+        manifest = [NSDictionary dictionaryWithContentsOfURL:manifestURL];
+        modtime = attrs.fileModificationDate;
+        NSLog(@"note: had to re-read the manifest due to first access; or the modification time changed");
+    }
+    return manifest;
+}
 
 + (NSURL *)profileDirectory {
     NSURL *profiles = [SCApplicationSupportDirectory() URLByAppendingPathComponent:@"Profiles" isDirectory:YES];
@@ -29,11 +43,13 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
 + (BOOL)profileNameExists:(NSString *)aProfile {
     if (!aProfile)
         return NO;
-    NSDictionary *manifest = [NSDictionary dictionaryWithContentsOfURL:[[self profileDirectory] URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO]];
-    if (manifest[aProfile])
-        return YES;
-    else
-        return NO;
+    if (self.manifest[aProfile]) {
+        NSURL *pdirURL = [self.profileDirectory URLByAppendingPathComponent:self.manifest[aProfile]];
+        BOOL is_d = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[pdirURL URLByAppendingPathComponent:@"data.txd"].path isDirectory:&is_d] && !is_d)
+            return YES;
+    }
+    return NO;
 }
 
 + (BOOL)deleteProfileName:(NSString *)aProfile {
@@ -72,7 +88,8 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
                 *err = SCLocalizedErrorWithTXDReturnValue(errc);
             return NULL;
         }
-        errc = txd_intermediate_from_buf((uint8_t*)contents.bytes, contents.length, &r);
+        errc = txd_intermediate_from_buf(decrypted, size, &r);
+        _txd_kill_memory(decrypted, size);
         free(decrypted);
         if (errc != TXD_ERR_SUCCESS) {
             if (err)
@@ -96,6 +113,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
         manifest[name] = [(__bridge NSString*)uuidString copy];
         CFRelease(uuidString);
         CFRelease(uuid);
+        [manifest writeToFile:[profiles URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO].path atomically:YES];
         datadir = [profiles URLByAppendingPathComponent:manifest[name]];
     } else {
         datadir = [profiles URLByAppendingPathComponent:manifest[name]];
@@ -112,10 +130,10 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
                          SCApplicationInfoDictKey(@"CFBundleName"),
                          SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
     txd_encrypt_buf(pass, passlen, buf, size, &enc, &encsize, comment.UTF8String);
+    _txd_kill_memory(buf, size);
     free(buf);
     NSData *contents = [[NSData alloc] initWithBytesNoCopy:enc length:encsize freeWhenDone:YES];
     [contents writeToFile:[datadir.path stringByAppendingPathComponent:@"data.txd"] atomically:YES];
-    free(enc);
     return YES;
 }
 
