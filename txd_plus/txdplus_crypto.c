@@ -25,10 +25,11 @@ static uint64_t     SCRYPT_N = 13;
 static uint32_t     SCRYPT_r = 3;
 static uint32_t     SCRYPT_p = 0;
 
+#define TXD_NO_ENCRYPTED_PADDING
 #ifndef TXD_NO_ENCRYPTED_PADDING
 static inline uint64_t _txd_get_size_of_next_4(uint64_t i) {
     uint64_t ret = FOUR_MEGABYTES;
-    while (i < ret)
+    while (ret < i)
         ret += FOUR_MEGABYTES;
     return ret;
 }
