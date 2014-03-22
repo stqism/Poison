@@ -179,6 +179,10 @@ static NSArray *testing_names = NULL;
     self.showsUserList = self.showsUserList ? NO: YES;
 }
 
+- (IBAction)_testTogglingVideoList:(id)sender {
+    self.showsVideoPane = self.showsVideoPane ? NO: YES;
+}
+
 #pragma mark - splitview
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
