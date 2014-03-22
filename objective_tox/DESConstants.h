@@ -13,6 +13,13 @@ extern const uint32_t DESPrivateKeySize;
 extern const uint32_t DESFriendAddressSize;
 extern const uint32_t DESMaximumMessageLength;
 
+typedef NS_ENUM(uint8_t, DESFriendStatus) {
+    DESFriendStatusAvailable,
+    DESFriendStatusAway,
+    DESFriendStatusBusy,
+    DESFriendStatusOffline,
+};
+
 typedef NS_ENUM(uint8_t, DESMessageType) {
     DESMessageTypeText,
     DESMessageTypeAction,

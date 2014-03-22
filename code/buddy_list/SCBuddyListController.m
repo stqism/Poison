@@ -11,6 +11,10 @@
 @property (strong) IBOutlet NSMenu *friendMenu;
 @property (strong) IBOutlet NSMenu *selfMenu;
 @property (strong) IBOutlet NSSearchField *filterField;
+
+@property (strong) IBOutlet NSTextField *nameField;
+@property (strong) IBOutlet NSTextField *statusField;
+@property (strong) IBOutlet NSImageView *statusDot;
 @end
 
 @implementation SCBuddyListController

@@ -80,7 +80,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>m8</string>
+	<string>m9</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSMinimumSystemVersion</key>
@@ -95,8 +95,10 @@
 	<string>NSApplication</string>
 	<key>ProjectHomepage</key>
 	<string>https://github.com/stal888/Poison</string>
+	<key>SCDevelopmentName</key>
+	<string>Poison</string>
 	<key>SCGitRef</key>
-	<string>70d2594</string>
+	<string>6856c0a</string>
 	<key>SCReleaseGroupIdentity</key>
 	<string>You know Sakura Trick is the AOTS of Winter '14, and if you don't think it is, your opinion is invalid, right?</string>
 	<key>ToxHomepage</key>

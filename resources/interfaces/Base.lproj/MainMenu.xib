@@ -94,6 +94,9 @@
                             <menuItem isSeparatorItem="YES" id="omo-qg-B80"/>
                             <menuItem title="Log Out..." enabled="NO" id="x52-HS-lct">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="logOutFromUI:" target="494" id="VHD-nf-aID"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -378,12 +381,12 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <customView id="PKF-jZ-wih">
+        <customView id="PKF-jZ-wih" customClass="SCMenuStatusView">
             <rect key="frame" x="0.0" y="0.0" width="250" height="39"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="p6D-cR-d69">
-                    <rect key="frame" x="18" y="22" width="214" height="17"/>
+                    <rect key="frame" x="18" y="20" width="214" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mac OS X User" id="KdG-5B-GGr">
                         <font key="font" metaFont="systemBold" size="14"/>
@@ -401,6 +404,10 @@
                     </textFieldCell>
                 </textField>
             </subviews>
+            <connections>
+                <outlet property="nameDisplay" destination="p6D-cR-d69" id="Pva-qt-gck"/>
+                <outlet property="statusDisplay" destination="xLU-mx-v44" id="WYs-K0-n3F"/>
+            </connections>
         </customView>
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" frameAutosaveName="" id="P58-bk-Eul">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>

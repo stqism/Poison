@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "DESConstants.h"
 #import "DESProtocols.h"
 #import "tox.h"
 #import "data.h"
@@ -7,7 +8,10 @@
 
 @protocol DESToxConnectionDelegate <NSObject>
 @optional
-- (void)connectionDidInitialize:(DESToxConnection *)connection;
+/* Fired when calling -start or -stop on DESToxConnection. */
+- (void)connectionDidBecomeActive:(DESToxConnection *)connection;
+- (void)connectionDidBecomeInactive:(DESToxConnection *)connection;
+
 - (void)connectionDidBecomeEstablished:(DESToxConnection *)connection;
 - (void)connectionDidDisconnect:(DESToxConnection *)connection;
 
@@ -26,6 +30,7 @@
 @interface DESToxConnection : NSObject <DESFriend>
 @property (strong) NSString *name;
 @property (strong) NSString *statusMessage;
+@property DESFriendStatus status;
 /**
  * Actually, settable using -setPublicKey:privateKey:
  */

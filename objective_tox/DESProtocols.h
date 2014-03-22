@@ -35,6 +35,7 @@
 @protocol DESFriend <NSObject>
 @property (readonly) NSString *name;
 @property (readonly) NSString *statusMessage;
+@property (readonly) DESFriendStatus status;
 @property (readonly) NSString *publicKey;
 @property (readonly) DESConversation *conversation;
 @property (readonly) DESToxConnection *connection;

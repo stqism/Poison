@@ -10,13 +10,17 @@
 #import "SCProfileManager.h"
 #import "SCWidgetedWindow.h"
 #import "SCResourceBundle.h"
+#import "SCMenuStatusView.h"
+
+/* note: this is hard-coded to make tampering harder. */
+#define SCApplicationDownloadPage (@"http://download.tox.im/")
 
 @interface SCAppDelegate ()
 @property (strong) DESToxConnection *toxConnection;
 @property (strong) NSString *profileName;
 @property (strong) NSString *profilePass;
 @property (weak) IBOutlet NSMenuItem *akiUserInfoMenuItemPlaceholder;
-@property (weak) IBOutlet NSView *userInfoMenuItem;
+@property (weak) IBOutlet SCMenuStatusView *userInfoMenuItem;
 #pragma mark - Tox menu
 @property (weak) IBOutlet NSMenuItem *changeNameMenuItem;
 @property (weak) IBOutlet NSMenuItem *changeStatusMenuItem;
@@ -54,15 +58,21 @@
     if (SCCodeSigningStatus == SCCodeSigningStatusInvalid) {
         NSAlert *warning = [NSAlert alertWithMessageText:NSLocalizedString(@"Code Signature Invalid", nil)
                                            defaultButton:NSLocalizedString(@"Quit", nil)
-                                         alternateButton:NSLocalizedString(@"Ignore", nil)
-                                             otherButton:nil
-                               informativeTextWithFormat:NSLocalizedString(@"This copy of %1$@ DID NOT pass code signature verification!\n"
-                                                                           @"It probably has a botnet in it. Please download %1$@ again from %2$@.", @""),
-                                                                           SCApplicationInfoDictKey(@"CFBundleName"), SCApplicationInfoDictKey(@"ToxHomepage")];
+                                         alternateButton:SCLocalizedFormatString(@"Download %@", nil, SCApplicationInfoDictKey(@"CFBundleName"))
+                                             otherButton:NSLocalizedString(@"Ignore", nil)
+                               informativeTextWithFormat:@""];
+        warning.informativeText = SCLocalizedFormatString(@"This copy of %1$@ DID NOT pass code signature verification!\n"
+                                                          @"It probably has a botnet in it. Please download %1$@ again from %2$@.", @"",
+                                                          SCApplicationInfoDictKey(@"CFBundleName"),
+                                                          SCApplicationDownloadPage);
         warning.alertStyle = NSCriticalAlertStyle;
         NSInteger ret = [warning runModal];
-        if (ret == NSAlertDefaultReturn)
+        if (ret == NSAlertDefaultReturn) {
             [NSApp terminate:self];
+        } else if (ret == NSAlertAlternateReturn) {
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:SCApplicationDownloadPage]];
+            [NSApp terminate:self];
+        }
     }
 
     NSString *autologinUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"autologinUsername"];
@@ -75,15 +85,15 @@
     }
 }
 
-- (void)setMainWindowController:(NSWindowController *)mainWindowController {
-    if ([mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
-        self.changeNameMenuItem.enabled = YES;
-        self.changeStatusMenuItem.enabled = YES;
-        self.savePublicAddressMenuItem.enabled = YES;
-        self.genQRCodeMenuItem.enabled = YES;
-        self.addFriendMenuItem.enabled = YES;
-        self.logOutMenuItem.enabled = YES;
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+    if ([self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
+        return YES;
+    } else {
+        return NO;
     }
+}
+
+- (void)setMainWindowController:(NSWindowController *)mainWindowController {
     _mainWindowController = mainWindowController;
 }
 
@@ -92,17 +102,19 @@
     self.profilePass = pass;
     self.toxConnection = [[DESToxConnection alloc] init];
     self.toxConnection.delegate = self;
+    self.akiUserInfoMenuItemPlaceholder.view = self.userInfoMenuItem;
+    [self.toxConnection addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
+    [self.toxConnection addObserver:self forKeyPath:@"statusMessage" options:NSKeyValueObservingOptionNew context:NULL];
     if (userProfile) {
         [self.toxConnection restoreDataFromTXDIntermediate:userProfile];
     } else {
         self.toxConnection.name = profileName;
         self.toxConnection.statusMessage = SCLocalizedFormatString(@"Toxing on %@ %@", @"default status message",
-                                                                   SCApplicationInfoDictKey(@"CFBundleName"),
+                                                                   SCApplicationInfoDictKey(@"CFDevelopmentName"),
                                                                    SCApplicationInfoDictKey(@"CFBundleShortVersionString"));
         [self saveProfile];
     }
     [self.toxConnection start];
-    self.akiUserInfoMenuItemPlaceholder.view = self.userInfoMenuItem;
     if ([self.mainWindowController isKindOfClass:[SCNewUserWindowController class]])
         [self.mainWindowController close];
     Class preferredWindowClass = SCBoolPreference(@"forcedMultiWindowUI")?
@@ -156,7 +168,7 @@
     /* todo: close aux. windows */
     if (self.toxConnection) {
         self.userIsWaitingOnApplicationExit = YES;
-        [self.toxConnection stop];
+        [self logOut];
         return NSTerminateLater;
     } else {
         return NSTerminateNow;
@@ -170,6 +182,14 @@
 
 #pragma mark - des delegate
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"name"]) {
+        self.userInfoMenuItem.name = change[NSKeyValueChangeNewKey];
+    } else {
+        self.userInfoMenuItem.statusMessage = change[NSKeyValueChangeNewKey];
+    }
+}
+
 - (void)saveProfile {
     if (!self.toxConnection)
         return;
@@ -178,11 +198,30 @@
     txd_intermediate_free(data);
 }
 
-- (void)connectionDidDisconnect:(DESToxConnection *)connection {
+- (void)connectionDidBecomeInactive:(DESToxConnection *)connection {
     [self saveProfile];
+    self.akiUserInfoMenuItemPlaceholder.view = nil;
+    [connection removeObserver:self forKeyPath:@"name"];
+    [connection removeObserver:self forKeyPath:@"statusMessage"];
+    self.toxConnection = nil;
     if (self.userIsWaitingOnApplicationExit) {
         [NSApp replyToApplicationShouldTerminate:YES];
+    } else {
+        SCNewUserWindowController *login = [[SCNewUserWindowController alloc] initWithWindowNibName:@"NewUser"];
+        self.mainWindowController = login;
+        [login showWindow:self];
     }
+}
+
+- (void)logOut {
+    [self.toxConnection stop];
+}
+
+- (IBAction)logOutFromUI:(id)sender {
+    [self.mainWindowController.window performClose:self];
+    self.userIsWaitingOnApplicationExit = NO;
+    if (!self.mainWindowController.window.isVisible)
+        [self logOut];
 }
 
 #pragma mark - Auxiliary Windows
@@ -194,7 +233,7 @@
     self.aboutHeader.dragsWindow = YES;
     self.aboutFooter.backgroundColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.aboutFooter.shadowColor = [NSColor colorWithCalibratedWhite:0.5 alpha:1.0];
-    self.aboutWindowApplicationNameLabel.stringValue = SCApplicationInfoDictKey(@"CFBundleName");
+    self.aboutWindowApplicationNameLabel.stringValue = SCApplicationInfoDictKey(@"CFDevelopmentName");
     self.aboutWindowVersionLabel.stringValue = SCApplicationInfoDictKey(@"CFBundleShortVersionString");
     [self.aboutWindow makeKeyAndOrderFront:self];
 }

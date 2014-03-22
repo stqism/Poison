@@ -22,7 +22,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F504581418D811F6002976C7 /* SignObject.xib in Resources */ = {isa = PBXBuildFile; fileRef = F504581318D811F6002976C7 /* SignObject.xib */; };
 		F517FCA118B91BE90060D575 /* NewUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = F517FCA318B91BE90060D575 /* NewUser.xib */; };
 		F517FCA918B91CDA0060D575 /* SCProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F517FCA818B91CDA0060D575 /* SCProfileManager.m */; };
 		F52D013018B7CFB70033680F /* icon_group_ignore.png in Resources */ = {isa = PBXBuildFile; fileRef = F52D011518B7CFB70033680F /* icon_group_ignore.png */; };
@@ -89,6 +88,7 @@
 		F5CC709C18C2BA1600C41EBF /* friends.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5CC709B18C2BA1600C41EBF /* friends.rtf */; };
 		F5DAB46718C962E90046ED96 /* qr-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DAB46618C962E90046ED96 /* qr-placeholder.png */; };
 		F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */; };
+		F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */; };
 		F5FFF46118B81F4E00CD1E43 /* Poison.iconset in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46018B81F4E00CD1E43 /* Poison.iconset */; };
 		F5FFF46518B8283300CD1E43 /* oi.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46318B8283300CD1E43 /* oi.png */; };
 		F5FFF46618B8283300CD1E43 /* oi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46418B8283300CD1E43 /* oi@2x.png */; };
@@ -146,7 +146,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F504581318D811F6002976C7 /* SignObject.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignObject.xib; sourceTree = "<group>"; };
 		F50F9C0D18C3AB3600D06A0F /* ObjectiveTox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ObjectiveTox.xcodeproj; sourceTree = "<group>"; };
 		F517FCA218B91BE90060D575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NewUser.xib; sourceTree = "<group>"; };
 		F517FCA518B91BF00060D575 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NewUser.strings; sourceTree = "<group>"; };
@@ -247,6 +246,8 @@
 		F5DAB46618C962E90046ED96 /* qr-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qr-placeholder.png"; sourceTree = "<group>"; };
 		F5DAB46818C970A50046ED96 /* SCQRCodeSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCQRCodeSheetController.h; sourceTree = "<group>"; };
 		F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCQRCodeSheetController.m; sourceTree = "<group>"; };
+		F5E84CDD18DE2C8F00B93FE7 /* SCMenuStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMenuStatusView.h; sourceTree = "<group>"; };
+		F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMenuStatusView.m; sourceTree = "<group>"; };
 		F5F6A62A18DD3C5A006E5810 /* Copyright.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Copyright.h; path = code/misc/Copyright.h; sourceTree = SOURCE_ROOT; };
 		F5FFF46018B81F4E00CD1E43 /* Poison.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Poison.iconset; sourceTree = "<group>"; };
 		F5FFF46318B8283300CD1E43 /* oi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oi.png; sourceTree = "<group>"; };
@@ -475,6 +476,8 @@
 			children = (
 				F5B5423018B6D23C00226CA8 /* SCAppDelegate.h */,
 				F5B5423118B6D23C00226CA8 /* SCAppDelegate.m */,
+				F5E84CDD18DE2C8F00B93FE7 /* SCMenuStatusView.h */,
+				F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -499,7 +502,6 @@
 				F5A2979218D51F5500595FDF /* ChatPanel.xib */,
 				F5A2979718D51F6700595FDF /* QRSheet.xib */,
 				F5A2979C18D51F7400595FDF /* AddFriend.xib */,
-				F504581318D811F6002976C7 /* SignObject.xib */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -605,7 +607,6 @@
 				F52D013718B7CFB70033680F /* icon_minus@2x.png in Resources */,
 				F52D013A18B7CFB70033680F /* icon_smiley.png in Resources */,
 				F52D014A18B7CFB70033680F /* user-icon-default@2x.png in Resources */,
-				F504581418D811F6002976C7 /* SignObject.xib in Resources */,
 				F5FFF46618B8283300CD1E43 /* oi@2x.png in Resources */,
 				F538754F18C28B4000AED945 /* titlebar_incoming_files@2x.png in Resources */,
 				F5A2979518D51F6700595FDF /* QRSheet.xib in Resources */,
@@ -677,6 +678,7 @@
 				F53DB89D18B6DD37008D7ED5 /* SCSometimesEditableTextField.m in Sources */,
 				F5B5422B18B6D23C00226CA8 /* main.m in Sources */,
 				F53DB8A118B6DDDE008D7ED5 /* SCBuddyListController.m in Sources */,
+				F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */,
 				F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */,
 				F517FCA918B91CDA0060D575 /* SCProfileManager.m in Sources */,
 				F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */,

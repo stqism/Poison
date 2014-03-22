@@ -5,6 +5,7 @@ const uint32_t DESMaximumMessageLength = 1024;
 @implementation DESFriend
 - (NSString *)name { DESAbstractWarning; return nil; }
 - (NSString *)statusMessage { DESAbstractWarning; return nil; }
+- (DESFriendStatus)status { DESAbstractWarning; return 0; }
 - (NSString *)publicKey { DESAbstractWarning; return nil; }
 - (DESConversation *)conversation { DESAbstractWarning; return nil; }
 - (DESToxConnection *)connection { DESAbstractWarning; return nil; }
@@ -51,6 +52,10 @@ const uint32_t DESMaximumMessageLength = 1024;
     uint8_t *buf = malloc(sz);
     tox_get_status_message(_connection._core, _peerNumber, buf, sz);
     return [[NSString alloc] initWithBytesNoCopy:buf length:sz encoding:NSUTF8StringEncoding freeWhenDone:YES];
+}
+
+- (DESFriendStatus)status {
+    return DESToxToFriendStatus(tox_get_user_status(_connection._core, _peerNumber));
 }
 
 - (NSString *)publicKey {
