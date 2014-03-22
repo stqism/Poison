@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCWidgetedWindow.h"
 
 @implementation SCWidgetedWindow

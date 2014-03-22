@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCResourceBundle.h"
 
 NSString *const kaiHumanReadableName = @"aiHumanReadableName";

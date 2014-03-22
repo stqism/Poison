@@ -1,10 +1,4 @@
-//
-//  SCBuddyListController.m
-//  Atroquinine
-//
-//  Created by stal on 20/2/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import "SCBuddyListController.h"
 #import "SCGradientView.h"

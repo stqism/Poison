@@ -1,5 +1,7 @@
 #ifndef CGGeometryExtreme_h
 #define CGGeometryExtreme_h
+#include "Copyright.h"
+
 #import <CoreGraphics/CGGeometry.h>
 
 /**

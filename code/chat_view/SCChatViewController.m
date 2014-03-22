@@ -1,10 +1,4 @@
-//
-//  SCChatViewController.m
-//  Poison
-//
-//  Created by stal on 2/3/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import <objc/runtime.h> /* i have a good reason for this, swear to god */
 #import "SCChatViewController.h"

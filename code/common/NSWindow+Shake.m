@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "NSWindow+Shake.h"
 #import <QuartzCore/QuartzCore.h>
 

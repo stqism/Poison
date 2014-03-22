@@ -1,11 +1,3 @@
-//
-//  DESRequest.m
-//  Poison
-//
-//  Created by stal on 24/2/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
-
 #import "ObjectiveTox-Private.h"
 
 @implementation DESRequest

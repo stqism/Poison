@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCProfileManager.h"
 #import "data_private.h"
 #import "txdplus.h"

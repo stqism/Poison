@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCShadowedView.h"
 
 @implementation SCShadowedView

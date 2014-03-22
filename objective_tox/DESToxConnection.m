@@ -1,11 +1,3 @@
-//
-//  DESToxConnection.m
-//  Poison
-//
-//  Created by stal on 22/2/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
-
 #import "DESMacros.h"
 #import "ObjectiveTox-Private.h"
 #import "tox.h"

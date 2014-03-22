@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCChatView.h"
 
 @implementation SCChatView

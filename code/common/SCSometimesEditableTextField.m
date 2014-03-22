@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCSometimesEditableTextField.h"
 
 @implementation SCSometimesEditableTextField

@@ -1,10 +1,4 @@
-//
-//  SCQRCodeSheetController.m
-//  Poison
-//
-//  Created by stal on 6/3/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import "SCQRCodeSheetController.h"
 #import "ObjectiveTox.h"

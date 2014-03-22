@@ -1,11 +1,3 @@
-//
-//  DESMacros.h
-//  Poison
-//
-//  Created by stal on 26/2/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
-
 #ifndef DESMacros
 #define DESMacros
 

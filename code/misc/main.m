@@ -1,10 +1,4 @@
-//
-//  main.m
-//  Atroquinine
-//
-//  Created by stal on 20/2/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import <Cocoa/Cocoa.h>
 #import <Security/Security.h>
@@ -48,9 +42,6 @@ int main(int argc, const char * argv[]) {
     }
     CFRelease(sigi);
     CFRelease(sig);
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        randombytes_stir();
-    });
+
     return NSApplicationMain(argc, argv);
 }

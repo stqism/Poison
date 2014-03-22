@@ -1,4 +1,5 @@
 /* It just fills, yo. */
+#include "Copyright.h"
 
 #import "SCFillingView.h"
 

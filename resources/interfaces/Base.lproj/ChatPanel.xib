@@ -92,6 +92,9 @@
                                         <behavior key="behavior" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="_testTogglingVideoList:" target="-2" id="zro-Az-lkg"/>
+                                    </connections>
                                 </button>
                                 <progressIndicator maxValue="100" indeterminate="YES" controlSize="small" style="bar" id="2dT-lI-cnO">
                                     <rect key="frame" x="309" y="8" width="80" height="12"/>

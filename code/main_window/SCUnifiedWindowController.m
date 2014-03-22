@@ -1,10 +1,4 @@
-//
-//  SCUnifiedWindowController.m
-//  Poison
-//
-//  Created by stal on 2/3/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import <qrencode.h>
 #import "SCUnifiedWindowController.h"

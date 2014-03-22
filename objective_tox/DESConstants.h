@@ -1,11 +1,3 @@
-//
-//  DESConstants.h
-//  ObjectiveTox
-//
-//  Created by stal on 4/3/2014.
-//  Copyright (c) 2014 Tox. All rights reserved.
-//
-
 #ifndef DESConstants_h
 #define DESConstants_h
 

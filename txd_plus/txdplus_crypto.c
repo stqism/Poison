@@ -1,11 +1,3 @@
-//
-//  txd_crypto.c
-//  Poison
-//
-//  Created by stal on 1/3/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
-
 #include <string.h>
 #include <sodium.h>
 #include "scrypt-jane.h"

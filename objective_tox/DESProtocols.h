@@ -1,11 +1,3 @@
-//
-//  DESProtocols.h
-//  ObjectiveTox
-//
-//  Created by stal on 4/3/2014.
-//  Copyright (c) 2014 Tox. All rights reserved.
-//
-
 #ifndef DESProtocols_h
 #define DESProtocols_h
 #import "DESConstants.h"

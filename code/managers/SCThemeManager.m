@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCThemeManager.h"
 
 static SCThemeManager *sharedInstance = nil;

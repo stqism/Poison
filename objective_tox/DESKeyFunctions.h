@@ -1,11 +1,3 @@
-//
-//  DESKeyFunctions.h
-//  ObjectiveTox
-//
-//  Created by stal on 4/3/2014.
-//  Copyright (c) 2014 Tox. All rights reserved.
-//
-
 #ifndef DESKeyFunctions_h
 #define DESKeyFunctions_h
 

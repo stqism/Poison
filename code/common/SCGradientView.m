@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCGradientView.h"
 
 @implementation SCGradientView

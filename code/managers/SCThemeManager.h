@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import <Foundation/Foundation.h>
 
 NSString *const SCTranscriptThemeDidChangeNotification;

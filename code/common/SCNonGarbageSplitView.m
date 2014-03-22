@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import "SCNonGarbageSplitView.h"
 
 @implementation SCNonGarbageSplitView

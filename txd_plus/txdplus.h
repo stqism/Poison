@@ -1,11 +1,3 @@
-//
-//  txdplus.h
-//  ObjectiveTox
-//
-//  Created by stal on 16/3/2014.
-//  Copyright (c) 2014 Tox. All rights reserved.
-//
-
 #ifndef ObjectiveTox_txdplus_h
 #define ObjectiveTox_txdplus_h
 

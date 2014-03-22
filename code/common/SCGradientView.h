@@ -1,3 +1,5 @@
+#include "Copyright.h"
+
 #import <Cocoa/Cocoa.h>
 #import "SCDraggingView.h"
 

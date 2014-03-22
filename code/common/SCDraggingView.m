@@ -1,10 +1,4 @@
-//
-//  SCDraggingView.m
-//  Poison
-//
-//  Created by stal on 3/3/2014.
-//  Copyright (c) 2014 Project Tox. All rights reserved.
-//
+#include "Copyright.h"
 
 #import "SCDraggingView.h"
 
