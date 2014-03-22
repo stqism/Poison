@@ -126,6 +126,7 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
 - (NSString *)name {
     uint32_t name_size = tox_get_self_name_size(self.tox);
     uint8_t *buf = malloc(name_size);
+    tox_get_self_name(self.tox, buf);
     return [[NSString alloc] initWithBytesNoCopy:buf length:name_size encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
