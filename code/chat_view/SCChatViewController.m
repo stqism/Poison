@@ -153,6 +153,7 @@ static NSArray *testing_names = NULL;
     if (showsUserList && !self.showsUserList) {
         NSLog(@"Showing the userlist");
         [self.transcriptSplitView addSubview:self.userListContainer];
+        [self.transcriptSplitView adjustSubviews];
         [self.transcriptSplitView setPosition:self.transcriptSplitView.frame.size.width - self.userListRememberedSplitPosition ofDividerAtIndex:0];
     } else if (!showsUserList && self.showsUserList) {
         NSLog(@"Hiding the userlist");
@@ -165,7 +166,8 @@ static NSArray *testing_names = NULL;
 - (void)setShowsVideoPane:(BOOL)showsVideoPane {
     if (showsVideoPane && !self.showsVideoPane) {
         NSLog(@"Showing the userlist");
-        [self.splitView addSubview:self.videoBackground];
+        [self.splitView addSubview:self.videoBackground positioned:NSWindowBelow relativeTo:self.splitView.subviews[0]];
+        [self.splitView adjustSubviews];
         [self.splitView setPosition:self.videoPaneRememberedSplitPosition ofDividerAtIndex:0];
     } else if (!showsVideoPane && self.showsVideoPane) {
         NSLog(@"Hiding the userlist");
