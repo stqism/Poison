@@ -28,7 +28,8 @@ void *const SCAlertEndingShowPassword;
 }
 
 - (BOOL)isValidLoginName {
-    return ![self.strippedValue isEqualToString:@""];
+    NSString *check = self.strippedValue;
+    return !([check isEqualToString:@""] || [check lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > DESMaximumNameLength);
 }
 
 @end
@@ -62,7 +63,8 @@ void *const SCAlertEndingShowPassword;
     self.footer.backgroundColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.footer.shadowColor = [NSColor colorWithCalibratedWhite:0.5 alpha:1.0];
     self.nameField.delegate = self;
-    self.instructionLabel.stringValue = SCLocalizedFormatString(@"Welcome to %@. Enter a nickname to get started.", nil, SCApplicationInfoDictKey(@"CFBundleName"));
+    self.instructionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Welcome to %@. Enter a nickname to get started.", nil),
+                                         SCApplicationInfoDictKey(@"CFBundleName")];
 }
 
 - (void)windowDidLoad {
@@ -91,10 +93,9 @@ void *const SCAlertEndingShowPassword;
         NSLog(@"note: password couldn't be fetched from keychain, %d", err);
         return nil;
     } else {
-        return [[NSString alloc] initWithBytesNoCopy:password
-                                              length:length
-                                            encoding:NSUTF8StringEncoding
-                                        freeWhenDone:YES];
+        NSString *ret = [[NSString alloc] initWithBytes:password length:length encoding:NSUTF8StringEncoding];
+        SecKeychainItemFreeContent(NULL, password);
+        return ret;
     }
 }
 
@@ -102,11 +103,11 @@ void *const SCAlertEndingShowPassword;
     //[(SCAppDelegate*)[NSApp delegate] makeApplicationReadyForToxing:NULL name:@"Toxicle"];
     NSString *name = self.nameField.stringValue.strippedValue;
     if (!name.isValidLoginName) {
-        [self failed:NSLocalizedString(@"You can't leave the name blank.", @"")];
+        [self failed:NSLocalizedString(@"Your name was blank, or it was too long. Try another.", @"")];
         return;
     }
     if ([SCProfileManager profileNameExists:name]) {
-        self.unlockSheetTitle.stringValue = SCLocalizedFormatString(@"Enter the password to unlock the profile \"%@\".", nil, name);
+        self.unlockSheetTitle.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Enter the password to unlock the profile \"%@\".", nil), name];
         NSString *pass = [self passwordFromKeychainForName:name];
         if (pass) {
             NSError *error = nil;
@@ -212,9 +213,10 @@ void *const SCAlertEndingShowPassword;
 
 - (void)controlTextDidChange:(NSNotification *)obj {
     if (!self.nameField.stringValue.isValidLoginName)
-        self.instructionLabel.stringValue = NSLocalizedString(@"You can't leave the name blank.", @"");
+        self.instructionLabel.stringValue = NSLocalizedString(@"Your name was blank, or it was too long. Try another.", @"");
     else
-        self.instructionLabel.stringValue = SCLocalizedFormatString(@"Welcome to %@. Enter a nickname to get started.", nil, SCApplicationInfoDictKey(@"CFBundleName"));
+        self.instructionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Welcome to %@. Enter a nickname to get started.", nil),
+                                             SCApplicationInfoDictKey(@"CFBundleName")];
     if ([SCProfileManager profileNameExists:self.nameField.stringValue.strippedValue])
         self.nextButton.title = NSLocalizedString(@"Log in", nil);
     else
@@ -229,7 +231,8 @@ void *const SCAlertEndingShowPassword;
 
 - (IBAction)sheetCancel:(id)sender {
     [NSApp endSheet:((NSView *)sender).window];
-    [self failed:SCLocalizedFormatString(@"Welcome to %@. Enter a nickname to get started.", nil, SCApplicationInfoDictKey(@"CFBundleName"))];
+    [self failed:[NSString stringWithFormat:NSLocalizedString(@"Welcome to %@. Enter a nickname to get started.", nil),
+                  SCApplicationInfoDictKey(@"CFBundleName")]];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {

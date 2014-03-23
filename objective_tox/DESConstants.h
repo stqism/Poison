@@ -11,7 +11,10 @@ FOUNDATION_EXPORT NSString *const DESDefaultStatusMessage; /* Toxing on Tox */
 extern const uint32_t DESPublicKeySize;
 extern const uint32_t DESPrivateKeySize;
 extern const uint32_t DESFriendAddressSize;
+
 extern const uint32_t DESMaximumMessageLength;
+extern const uint32_t DESMaximumNameLength;
+extern const uint32_t DESMaximumStatusMessageLength;
 
 typedef NS_ENUM(uint8_t, DESFriendStatus) {
     DESFriendStatusAvailable,

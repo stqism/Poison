@@ -28,6 +28,7 @@
         self.window = window;
         self.tox = tox;
         self.friendsListCont = [[SCBuddyListController alloc] initWithNibName:@"FriendsPanel" bundle:[NSBundle mainBundle]];
+        [self.friendsListCont attachKVOHandlersToConnection:tox];
         [self.friendsListCont loadView];
         self.friendsListCont.view.frame = ((NSView*)window.contentView).frame;
         self.window.contentView = self.friendsListCont.view;

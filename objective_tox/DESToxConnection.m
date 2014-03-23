@@ -5,6 +5,8 @@
 
 NSString *const DESDefaultNickname = @"Toxicle";
 NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
+const uint32_t DESMaximumNameLength = TOX_MAX_NAME_LENGTH;
+const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 
 @interface DESToxConnection ()
 @property dispatch_queue_t messengerQueue;
@@ -22,12 +24,13 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.messengerQueue = dispatch_queue_create("ca.kirara.DES2RunLoop", DISPATCH_QUEUE_CONCURRENT);
+        self.messengerQueue = dispatch_queue_create("ca.kirara.DES2RunLoop", DISPATCH_QUEUE_SERIAL);
         self.tox = tox_new(1);
         _friendMapping = [[NSMutableDictionary alloc] init];
         _groupMapping = [[NSMutableDictionary alloc] init];
         self.name = DESDefaultNickname;
         self.statusMessage = DESDefaultStatusMessage;
+        self.isMessengerLoopStopping = YES;
         tox_callback_friend_request(self.tox, _DESCallbackFriendRequest, (__bridge void*)self);
     }
     return self;
@@ -48,6 +51,10 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
     tox_get_address(self.tox, kek);
     DESInfo(@"Our public key: %@", DESConvertPublicKeyToString(kek));
     free(kek);
+    if (!self.isMessengerLoopStopping) {
+        DESWarn(@"You are calling [DESToxConnection start] multiple times. They will be ignored.");
+        return;
+    }
     self.isMessengerLoopStopping = NO;
     dispatch_async(self.messengerQueue, ^{
         [self _desRunLoopRun];
@@ -58,11 +65,21 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
     });
 }
 
+#define DES_USE_NAIVE_TOX_LOOP
+#ifndef DES_USE_NAIVE_TOX_LOOP
 - (void)_desRunLoopRun {
     if (!self.toxWaitData)
         self.toxWaitData = malloc(tox_wait_data_size());
     tox_wait_prepare(self.tox, self.toxWaitData);
-    tox_wait_execute(self.toxWaitData, 1, 1);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        int ret = tox_wait_execute(self.toxWaitData, 1, 1);
+        dispatch_async(self.messengerQueue, ^{
+            [self _desRunLoopRunTail:ret];
+        });
+    });
+}
+
+- (void)_desRunLoopRunTail:(int)executeRet {
     tox_wait_cleanup(self.tox, self.toxWaitData);
     tox_do(self.tox);
 
@@ -74,7 +91,7 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
     else if (self.closeNodesCount == 0 && previousNodesCount > 0
              && [self.delegate respondsToSelector:@selector(connectionDidDisconnect:)])
         [self.delegate connectionDidDisconnect:self];
-    
+
     if (!self.isMessengerLoopStopping) {
         dispatch_async(self.messengerQueue, ^{
             [self _desRunLoopRun];
@@ -85,6 +102,37 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
                 [self.delegate connectionDidBecomeInactive:self];
         });
     }
+}
+#else
+- (void)_desRunLoopRun {
+    tox_do(self.tox);
+
+    NSInteger previousNodesCount = self.closeNodesCount;
+    self.closeNodesCount = DESCountCloseNodes(self.tox);
+    if (self.closeNodesCount > 0 && previousNodesCount == 0
+        && [self.delegate respondsToSelector:@selector(connectionDidBecomeEstablished:)])
+        [self.delegate connectionDidBecomeEstablished:self];
+    else if (self.closeNodesCount == 0 && previousNodesCount > 0
+             && [self.delegate respondsToSelector:@selector(connectionDidDisconnect:)])
+        [self.delegate connectionDidDisconnect:self];
+
+    if (!self.isMessengerLoopStopping) {
+        double delayInSeconds = 1.0 / 20.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, self.messengerQueue, ^(void){
+            [self _desRunLoopRun];
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self.delegate respondsToSelector:@selector(connectionDidBecomeInactive:)])
+                [self.delegate connectionDidBecomeInactive:self];
+        });
+    }
+}
+#endif
+
+- (BOOL)isActive {
+    return !self.isMessengerLoopStopping;
 }
 
 - (void)stop {
@@ -128,6 +176,8 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
 }
 
 - (void)setName:(NSString *)name {
+    if ([name lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > TOX_MAX_NAME_LENGTH)
+        return;
     [self willChangeValueForKey:@"name"];
     tox_set_name(self.tox, (uint8_t*)[name UTF8String],
                  (uint16_t)[name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
@@ -142,6 +192,8 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
 }
 
 - (void)setStatusMessage:(NSString *)statusMessage {
+    if ([statusMessage lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > TOX_MAX_STATUSMESSAGE_LENGTH)
+        return;
     [self willChangeValueForKey:@"statusMessage"];
     tox_set_status_message(self.tox, (uint8_t*)[statusMessage UTF8String],
                            (uint16_t)[statusMessage lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);

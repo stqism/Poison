@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Poison" id="0Mp-5y-PfB"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="uoM-Zt-eis">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="uoM-Zt-eis">
                         <rect key="frame" x="90" y="119" width="341" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Enter the password to unlock the profile &quot;xxx&quot;." id="FQs-GE-xWV">
@@ -111,7 +111,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="Cy1-jz-xey">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Cy1-jz-xey">
                         <rect key="frame" x="90" y="83" width="341" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="8Sa-1B-prQ">
@@ -196,7 +196,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Poison" id="f0q-fP-WMi"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="0kr-eM-WJk">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="0kr-eM-WJk">
                         <rect key="frame" x="90" y="149" width="341" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Protect your Tox profile with a password." id="01s-Az-eIL">
@@ -205,7 +205,7 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="NmA-Ty-fXY">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="NmA-Ty-fXY">
                         <rect key="frame" x="90" y="113" width="341" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The password you enter below will be used to encrypt your Tox data. If you forget it, there is no way to recover it." id="dt6-Sg-OQ6">

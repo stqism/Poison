@@ -1,6 +1,6 @@
 #import "ObjectiveTox-Private.h"
 
-const uint32_t DESMaximumMessageLength = 1024;
+const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 
 @implementation DESFriend
 - (NSString *)name { DESAbstractWarning; return nil; }

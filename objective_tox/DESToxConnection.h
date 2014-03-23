@@ -28,6 +28,7 @@
 @end
 
 @interface DESToxConnection : NSObject <DESFriend>
+@property (readonly, getter = isActive) BOOL active;
 @property (strong) NSString *name;
 @property (strong) NSString *statusMessage;
 @property DESFriendStatus status;

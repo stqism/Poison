@@ -1,9 +1,6 @@
-#include "Copyright.h"
-
 #ifdef __OBJC__
 #import <Cocoa/Cocoa.h>
 
-#define SCLocalizedFormatString(k, c, ...) ([NSString stringWithFormat:NSLocalizedString(k, c), ##__VA_ARGS__])
 #define SCApplicationInfoDictKey(k) ([NSBundle mainBundle].infoDictionary[k])
 #define SCStringPreference(k) ([[NSUserDefaults standardUserDefaults] stringForKey:k])
 #define SCBoolPreference(k) ([[NSUserDefaults standardUserDefaults] boolForKey:k])

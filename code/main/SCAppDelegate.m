@@ -34,6 +34,7 @@
 @property (unsafe_unretained) IBOutlet NSWindow *aboutWindow;
 @property (weak) IBOutlet NSTextField *aboutWindowApplicationNameLabel;
 @property (weak) IBOutlet NSTextField *aboutWindowVersionLabel;
+@property (weak) IBOutlet NSTextField *aboutWindowSigLabel;
 @property (unsafe_unretained) IBOutlet NSWindow *ackWindow;
 @property (unsafe_unretained) IBOutlet NSTextView *ackTextView;
 #pragma mark - Misc. state
@@ -55,21 +56,23 @@
     NSLog(@"Default settings loaded: %@", defaults);
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 
-    if (SCCodeSigningStatus == SCCodeSigningStatusInvalid) {
-        NSAlert *warning = [NSAlert alertWithMessageText:NSLocalizedString(@"Code Signature Invalid", nil)
-                                           defaultButton:NSLocalizedString(@"Quit", nil)
-                                         alternateButton:SCLocalizedFormatString(@"Download %@", nil, SCApplicationInfoDictKey(@"CFBundleName"))
-                                             otherButton:NSLocalizedString(@"Ignore", nil)
-                               informativeTextWithFormat:@""];
-        warning.informativeText = SCLocalizedFormatString(@"This copy of %1$@ DID NOT pass code signature verification!\n"
-                                                          @"It probably has a botnet in it. Please download %1$@ again from %2$@.", @"",
-                                                          SCApplicationInfoDictKey(@"CFBundleName"),
-                                                          SCApplicationDownloadPage);
+    if (SCCodeSigningStatus == SCCodeSigningStatusInvalid || 1) {
+        NSAlert *warning = [[NSAlert alloc] init];
+        warning.messageText = NSLocalizedString(@"Code Signature Invalid", nil);
+        [warning addButtonWithTitle:NSLocalizedString(@"Quit", nil)];
+        NSString *downloadText = [NSString stringWithFormat:NSLocalizedString(@"Download %@", nil),
+                                  SCApplicationInfoDictKey(@"CFBundleName")];
+        [warning addButtonWithTitle:NSLocalizedString(@"Ignore", nil)];
+        [warning addButtonWithTitle:downloadText];
+        NSString *infoText = NSLocalizedString(@"This copy of %1$@ DID NOT pass code signature verification!\n"
+                                               @"It probably has a botnet in it. Please download %1$@ again from %2$@.", nil);
+        warning.informativeText = [NSString stringWithFormat:infoText,
+                                   SCApplicationInfoDictKey(@"CFBundleName"), SCApplicationDownloadPage];
         warning.alertStyle = NSCriticalAlertStyle;
         NSInteger ret = [warning runModal];
-        if (ret == NSAlertDefaultReturn) {
+        if (ret == NSAlertFirstButtonReturn) {
             [NSApp terminate:self];
-        } else if (ret == NSAlertAlternateReturn) {
+        } else if (ret == NSAlertThirdButtonReturn) {
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:SCApplicationDownloadPage]];
             [NSApp terminate:self];
         }
@@ -89,7 +92,7 @@
     if ([self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
         return YES;
     } else {
-        return NO;
+        return YES;
     }
 }
 
@@ -109,9 +112,10 @@
         [self.toxConnection restoreDataFromTXDIntermediate:userProfile];
     } else {
         self.toxConnection.name = profileName;
-        self.toxConnection.statusMessage = SCLocalizedFormatString(@"Toxing on %@ %@", @"default status message",
-                                                                   SCApplicationInfoDictKey(@"CFDevelopmentName"),
-                                                                   SCApplicationInfoDictKey(@"CFBundleShortVersionString"));
+        NSString *defaultStatus = [NSString stringWithFormat:NSLocalizedString(@"Toxing on %@ %@", @"default status message"),
+                                   SCApplicationInfoDictKey(@"SCDevelopmentName"),
+                                   SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
+        self.toxConnection.statusMessage = defaultStatus;
         [self saveProfile];
     }
     [self.toxConnection start];
@@ -128,18 +132,8 @@
 #pragma mark - Opening stuff
 
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename {
-    BOOL isDir = NO, exists = [[NSFileManager defaultManager] fileExistsAtPath:filename isDirectory:&isDir];
-    if (!exists || !isDir)
-        return NO;
-    NSString *objectType = NSLocalizedString(@"Theme", nil);
-    SCResourceBundle *object = [[SCResourceBundle alloc] initWithBundleName:[filename substringToIndex:[filename length] - [[filename pathExtension] length]] ofType:SCResourceTheme];
-    NSAlert *alert = [NSAlert alertWithMessageText:SCLocalizedFormatString(@"%@ installed", @"%@: object type, theme or sound set", objectType)
-                                     defaultButton:@"Delete"
-                                   alternateButton:@"Keep"
-                                       otherButton:nil
-                         informativeTextWithFormat:NSLocalizedString(@"%@ has been installed. Do you want to delete the original file?", nil), object.name];
-    [alert runModal];
-    return YES;
+    NSLog(@"whoops, not implemented");
+    return NO;
 }
 
 - (void)handleURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
@@ -204,6 +198,8 @@
     [connection removeObserver:self forKeyPath:@"name"];
     [connection removeObserver:self forKeyPath:@"statusMessage"];
     self.toxConnection = nil;
+    self.profileName = nil;
+    self.profilePass = nil;
     if (self.userIsWaitingOnApplicationExit) {
         [NSApp replyToApplicationShouldTerminate:YES];
     } else {
@@ -233,8 +229,10 @@
     self.aboutHeader.dragsWindow = YES;
     self.aboutFooter.backgroundColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
     self.aboutFooter.shadowColor = [NSColor colorWithCalibratedWhite:0.5 alpha:1.0];
-    self.aboutWindowApplicationNameLabel.stringValue = SCApplicationInfoDictKey(@"CFDevelopmentName");
-    self.aboutWindowVersionLabel.stringValue = SCApplicationInfoDictKey(@"CFBundleShortVersionString");
+    self.aboutWindowApplicationNameLabel.stringValue = SCApplicationInfoDictKey(@"SCDevelopmentName");
+    self.aboutWindowVersionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil),
+                                                SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
+
     [self.aboutWindow makeKeyAndOrderFront:self];
 }
 

@@ -11,7 +11,11 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application">
+            <connections>
+                <outlet property="dockMenu" destination="mIP-HX-h3A" id="6Nw-tP-ReS"/>
+            </connections>
+        </customObject>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="Tox" id="56">
@@ -388,18 +392,18 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="p6D-cR-d69">
                     <rect key="frame" x="18" y="20" width="214" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mac OS X User" id="KdG-5B-GGr">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Mac OS X User" id="KdG-5B-GGr">
                         <font key="font" metaFont="systemBold" size="14"/>
-                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xLU-mx-v44">
                     <rect key="frame" x="18" y="2" width="214" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Toxing on Poison 2.0-pre" usesSingleLineMode="YES" id="12s-ot-pOl">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Toxing on Poison 2.0-pre" usesSingleLineMode="YES" id="12s-ot-pOl">
                         <font key="font" metaFont="menuBar"/>
-                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -409,33 +413,29 @@
                 <outlet property="statusDisplay" destination="xLU-mx-v44" id="WYs-K0-n3F"/>
             </connections>
         </customView>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" frameAutosaveName="" id="P58-bk-Eul">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" frameAutosaveName="" id="P58-bk-Eul">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <rect key="contentRect" x="283" y="305" width="284" height="492"/>
+            <rect key="contentRect" x="283" y="305" width="284" height="460"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
-            <value key="minSize" type="size" width="284" height="492"/>
+            <value key="minSize" type="size" width="284" height="460"/>
             <value key="maxSize" type="size" width="284" height="492"/>
             <view key="contentView" id="Pkx-5g-uZT">
-                <rect key="frame" x="0.0" y="0.0" width="284" height="492"/>
+                <rect key="frame" x="0.0" y="0.0" width="284" height="460"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView id="DUh-ER-BrA" customClass="SCGradientView">
-                        <rect key="frame" x="0.0" y="377" width="284" height="115"/>
+                        <rect key="frame" x="0.0" y="345" width="284" height="115"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </customView>
                     <customView id="YQn-Cf-Vdz" customClass="SCShadowedView">
-                        <rect key="frame" x="0.0" y="-1" width="284" height="381"/>
+                        <rect key="frame" x="0.0" y="-1" width="284" height="349"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="eN9-m5-cde">
-                                <rect key="frame" x="18" y="248" width="248" height="102"/>
+                                <rect key="frame" x="18" y="284" width="248" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="9d6-tx-cjA">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Brought to you by stal and the rest of the Tox development team." id="9d6-tx-cjA">
                                     <font key="font" metaFont="system"/>
-                                    <string key="title">A native OS X interface for Tox.
-Written by stal, et. al.
-
-This release of Poison (2.0) is dedicated to Thaddeus "Thad" McMichael (03/04/2014).</string>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -478,15 +478,24 @@ This release of Poison (2.0) is dedicated to Thaddeus "Thad" McMichael (03/04/20
                                     <action selector="aboutWindowDidOpenAcknowledgements:" target="494" id="7lQ-28-Ska"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="336-So-jfV">
+                                <rect key="frame" x="18" y="248" width="248" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="This release of Poison is dedicated to Thaddeus &quot;Thad&quot; McMichael (03/04/2014)." id="Rtw-2P-gN9">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" white="0.70172787408759119" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </customView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xV1-TH-wuZ">
-                        <rect key="frame" x="0.0" y="358" width="128" height="128"/>
+                        <rect key="frame" x="0.0" y="326" width="128" height="128"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="Poison" id="ZNj-Ig-L1Q"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="P6u-qN-bHR">
-                        <rect key="frame" x="123" y="408" width="143" height="29"/>
+                        <rect key="frame" x="123" y="376" width="143" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Poison" id="bQc-vE-cNy">
                             <font key="font" metaFont="system" size="24"/>
@@ -495,7 +504,7 @@ This release of Poison (2.0) is dedicated to Thaddeus "Thad" McMichael (03/04/20
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="3Oi-N1-sJL">
-                        <rect key="frame" x="123" y="394" width="143" height="17"/>
+                        <rect key="frame" x="123" y="362" width="143" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Version 2.0-pre" id="M3r-LN-fBW">
                             <font key="font" metaFont="system"/>

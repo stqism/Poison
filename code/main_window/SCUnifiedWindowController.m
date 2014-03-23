@@ -49,6 +49,7 @@
     
     self.friendsListCont = [[SCBuddyListController alloc] initWithNibName:@"FriendsPanel" bundle:[NSBundle mainBundle]];
     [self.friendsListCont loadView];
+    [self.friendsListCont attachKVOHandlersToConnection:self.tox];
     [root addSubview:self.friendsListCont.view];
     
     self.chatViewCont = [[SCChatViewController alloc] initWithNibName:@"ChatPanel" bundle:[NSBundle mainBundle]];
