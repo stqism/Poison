@@ -667,7 +667,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"$PROJECT_DIR/_support/.security\"";
+			shellScript = "rm -rf \"$PROJECT_DIR/_support/.security\"\n\necho \"Poison build: doing final compile of translations!\"\nbash \"$PROJECT_DIR/translation_helper.sh\" integrate\nbash \"$PROJECT_DIR/translation_helper.sh\" compile \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Contents/Resources\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

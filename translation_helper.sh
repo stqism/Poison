@@ -8,7 +8,7 @@ else
 fi
 
 if [ "x$1" == "x" ]
-    then echo "$0: need one of (create, integrate)"; exit 1;
+    then echo "$0: need one of (create, integrate, update, compile [destination])"; exit 1;
 fi
 
 init_dirstruct() {
@@ -71,6 +71,23 @@ case $1 in
             echo "done, updating the current set"
             cp "$xib" "resources/interfaces/TL/current_set/$xibasename.xib"
             rm -rf $tempdir
+        done
+        ;;
+    compile)
+        echo "compiling all -> $2"
+        for lang in resources/interfaces/TL/translated/*.lproj
+        do
+            lang_=$(basename $lang)
+            if [ ! -d "$2/$lang_" ]
+                then mkdir -p  "$2/$lang_"
+            fi
+            for xib in $lang/*.xib
+            do
+                xibasename=$(basename $xib | sed s/\.xib$//)
+                echo "... compiling $xibasename.xib for $lang_"
+                ibtool --flatten "YES" --compile "$2/$lang_/$xibasename.nib" \
+                       $xib
+            done
         done
         ;;
 esac
