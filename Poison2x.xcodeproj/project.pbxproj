@@ -30,6 +30,7 @@
 		F52714AC18DF823400B7E663 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52714A518DF823400B7E663 /* MainMenu.xib */; };
 		F52714AD18DF823400B7E663 /* NewUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52714A618DF823400B7E663 /* NewUser.xib */; };
 		F52714AE18DF823400B7E663 /* QRSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52714A718DF823400B7E663 /* QRSheet.xib */; };
+		F52714B218DF9DA400B7E663 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F52714B418DF9DA400B7E663 /* Localizable.strings */; };
 		F52D013018B7CFB70033680F /* icon_group_ignore.png in Resources */ = {isa = PBXBuildFile; fileRef = F52D011518B7CFB70033680F /* icon_group_ignore.png */; };
 		F52D013118B7CFB70033680F /* icon_group_ignore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F52D011618B7CFB70033680F /* icon_group_ignore@2x.png */; };
 		F52D013218B7CFB70033680F /* icon_group_join.png in Resources */ = {isa = PBXBuildFile; fileRef = F52D011718B7CFB70033680F /* icon_group_join.png */; };
@@ -160,6 +161,7 @@
 		F52714A518DF823400B7E663 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		F52714A618DF823400B7E663 /* NewUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUser.xib; sourceTree = "<group>"; };
 		F52714A718DF823400B7E663 /* QRSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRSheet.xib; sourceTree = "<group>"; };
+		F52714B318DF9DA400B7E663 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F52D011518B7CFB70033680F /* icon_group_ignore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_ignore.png; sourceTree = "<group>"; };
 		F52D011618B7CFB70033680F /* icon_group_ignore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_ignore@2x.png"; sourceTree = "<group>"; };
 		F52D011718B7CFB70033680F /* icon_group_join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_join.png; sourceTree = "<group>"; };
@@ -293,6 +295,14 @@
 				F517FCA818B91CDA0060D575 /* SCProfileManager.m */,
 			);
 			path = managers;
+			sourceTree = "<group>";
+		};
+		F52714AF18DF9D9E00B7E663 /* strings */ = {
+			isa = PBXGroup;
+			children = (
+				F52714B418DF9DA400B7E663 /* Localizable.strings */,
+			);
+			path = strings;
 			sourceTree = "<group>";
 		};
 		F52D010918B7CE4E0033680F /* login_window */ = {
@@ -470,6 +480,7 @@
 				F5B5422618B6D23C00226CA8 /* Poison-Info.plist */,
 				F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */,
 				F541811618C4138100AB220E /* Default.psnChatStyle */,
+				F52714AF18DF9D9E00B7E663 /* strings */,
 				F52D011418B7CF5A0033680F /* art */,
 				F5B5425D18B6D89B00226CA8 /* interfaces */,
 			);
@@ -633,6 +644,7 @@
 				F52D013818B7CFB70033680F /* icon_plus.png in Resources */,
 				F52D013518B7CFB70033680F /* icon_info@2x.png in Resources */,
 				F5F6D5F318DE5AB200A14557 /* status-light-missing@2x.png in Resources */,
+				F52714B218DF9DA400B7E663 /* Localizable.strings in Resources */,
 				F52D014018B7CFB70033680F /* status-light-offline@2x.png in Resources */,
 				F52D013118B7CFB70033680F /* icon_group_ignore@2x.png in Resources */,
 				F52714AA18DF823400B7E663 /* ChatPanel.xib in Resources */,
@@ -721,6 +733,17 @@
 			targetProxy = F5B82BA818CB8FEA007E31E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F52714B418DF9DA400B7E663 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F52714B318DF9DA400B7E663 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F531760C18CB8FCC00F802B9 /* Debug */ = {

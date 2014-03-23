@@ -90,6 +90,15 @@ case $1 in
             done
         done
         ;;
+    genstrings)
+        echo "updating .strings for code..."
+        for lang in resources/strings/*.lproj
+        do
+            lang_=$(basename $lang)
+            echo "... $lang_"
+            find . -name '*.m' | xargs genstrings -a -o "resources/strings/$lang_"
+        done
+        ;;
 esac
 
 
