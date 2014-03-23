@@ -28,6 +28,10 @@
 @property (weak) IBOutlet NSMenuItem *genQRCodeMenuItem;
 @property (weak) IBOutlet NSMenuItem *addFriendMenuItem;
 @property (weak) IBOutlet NSMenuItem *logOutMenuItem;
+#pragma mark - Dock menu
+@property (weak) IBOutlet NSMenu *dockMenu;
+@property (strong) NSMenuItem *dockNameMenuItem;
+@property (strong) NSMenuItem *dockStatusMenuItem;
 #pragma mark - AboutWindow
 @property (weak) IBOutlet SCGradientView *aboutHeader;
 @property (weak) IBOutlet SCShadowedView *aboutFooter;
@@ -89,11 +93,13 @@
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
-    if ([self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
-        return YES;
-    } else {
-        return YES;
+    if (![self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
+        if (menuItem.action == @selector(copyPublicID:)
+            || menuItem.action == @selector(showQRCode:)
+            || menuItem.action == @selector(logOutFromUI:))
+            return NO;
     }
+    return YES;
 }
 
 - (void)setMainWindowController:(NSWindowController *)mainWindowController {
@@ -106,6 +112,15 @@
     self.toxConnection = [[DESToxConnection alloc] init];
     self.toxConnection.delegate = self;
     self.akiUserInfoMenuItemPlaceholder.view = self.userInfoMenuItem;
+
+    [self.dockMenu removeItemAtIndex:0];
+    if (!self.dockStatusMenuItem)
+        self.dockStatusMenuItem = [[NSMenuItem alloc] init];
+    [self.dockMenu insertItem:self.dockStatusMenuItem atIndex:0];
+    if (!self.dockNameMenuItem)
+        self.dockNameMenuItem = [[NSMenuItem alloc] init];
+    [self.dockMenu insertItem:self.dockNameMenuItem atIndex:0];
+
     [self.toxConnection addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
     [self.toxConnection addObserver:self forKeyPath:@"statusMessage" options:NSKeyValueObservingOptionNew context:NULL];
     if (userProfile) {
@@ -179,8 +194,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"name"]) {
         self.userInfoMenuItem.name = change[NSKeyValueChangeNewKey];
+        self.dockNameMenuItem.title = change[NSKeyValueChangeNewKey];
     } else {
         self.userInfoMenuItem.statusMessage = change[NSKeyValueChangeNewKey];
+        self.dockStatusMenuItem.title = change[NSKeyValueChangeNewKey];
     }
 }
 
@@ -194,9 +211,19 @@
 
 - (void)connectionDidBecomeInactive:(DESToxConnection *)connection {
     [self saveProfile];
-    self.akiUserInfoMenuItemPlaceholder.view = nil;
     [connection removeObserver:self forKeyPath:@"name"];
     [connection removeObserver:self forKeyPath:@"statusMessage"];
+    
+    self.akiUserInfoMenuItemPlaceholder.view = nil;
+
+    [self.dockMenu removeItem:self.dockNameMenuItem];
+    [self.dockMenu removeItem:self.dockStatusMenuItem];
+    self.dockNameMenuItem = nil;
+    self.dockStatusMenuItem = nil;
+    NSMenuItem *placeholder = [[NSMenuItem alloc] init];
+    placeholder.title = self.akiUserInfoMenuItemPlaceholder.title;
+    [self.dockMenu insertItem:placeholder atIndex:0];
+
     self.toxConnection = nil;
     self.profileName = nil;
     self.profilePass = nil;
@@ -232,7 +259,6 @@
     self.aboutWindowApplicationNameLabel.stringValue = SCApplicationInfoDictKey(@"SCDevelopmentName");
     self.aboutWindowVersionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil),
                                                 SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
-
     [self.aboutWindow makeKeyAndOrderFront:self];
 }
 
