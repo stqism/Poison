@@ -1,5 +1,6 @@
 .DS_Store
 __Xcode
 _support
+*.xccheckout
 xcuserdata
 resources/interfaces/TL/translated
