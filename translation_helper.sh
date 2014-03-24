@@ -8,7 +8,7 @@ else
 fi
 
 if [ "x$1" == "x" ]
-    then echo "$0: need one of (create, integrate, update, compile [destination])"; exit 1;
+    then echo "$0: need one of (create, integrate, update, compile [destination], genstrings)"; exit 1;
 fi
 
 init_dirstruct() {
@@ -96,7 +96,10 @@ case $1 in
         do
             lang_=$(basename $lang)
             echo "... $lang_"
-            find . -name '*.m' | xargs genstrings -a -o "resources/strings/$lang_"
+            find . -name '*.m' | xargs genstrings --little-endian -a -o "resources/strings/$lang_"
+            iconv -f "UTF-16LE" -t "UTF-8" "resources/strings/$lang_/Localizable.strings" > \
+                  "resources/strings/$lang_/Localizable.strings_"
+            mv "resources/strings/$lang_/Localizable.strings_" "resources/strings/$lang_/Localizable.strings"
         done
         ;;
 esac
