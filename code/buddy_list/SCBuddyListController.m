@@ -55,12 +55,17 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
 @property (strong) IBOutlet NSMenu *friendMenu;
 @property (strong) IBOutlet NSMenu *selfMenu;
 @property (strong) IBOutlet NSSearchField *filterField;
-
+#pragma mark - self info
 @property (strong) IBOutlet NSTextField *nameField;
 @property (strong) IBOutlet NSTextField *statusField;
 @property (strong) IBOutlet NSImageView *statusDot;
 
 @property (strong) NSMutableSet *rowCache;
+#pragma mark - Change name and status
+@property (strong) IBOutlet NSPanel *identityEditorSheet;
+@property (strong) IBOutlet NSTextField *ieNameField;
+@property (strong) IBOutlet NSTextField *ieStatusField;
+@property (strong) IBOutlet NSPopUpButton *ieStatusChooser;
 @end
 
 @implementation SCBuddyListController {
@@ -120,6 +125,60 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
     } else if ([keyPath isEqualToString:@"status"]) {
         self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
     }
+}
+
+#pragma mark - ui crap
+
+- (IBAction)changeName:(id)sender {
+    [self presentChangeSheetHighlightingField:0];
+}
+
+- (IBAction)changeStatus:(id)sender {
+    [self presentChangeSheetHighlightingField:1];
+}
+
+- (void)presentChangeSheetHighlightingField:(NSInteger)field {
+    self.ieNameField.stringValue = _watchingConnection.name;
+    self.ieStatusField.stringValue = _watchingConnection.statusMessage;
+    [self.ieStatusChooser selectItemAtIndex:(NSInteger)_watchingConnection.status];
+
+    [NSApp beginSheet:self.identityEditorSheet
+       modalForWindow:self.view.window
+        modalDelegate:self
+       didEndSelector:@selector(commitIdentityChangesFromSheet:returnCode:userInfo:)
+          contextInfo:NULL];
+
+    switch (field) {
+        case 0:
+            [self.ieNameField selectText:self];
+            [self.ieNameField becomeFirstResponder];
+            break;
+        case 1:
+            [self.ieStatusField selectText:self];
+            [self.ieStatusField becomeFirstResponder];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)commitIdentityChangesFromSheet:(NSWindow *)sheet returnCode:(NSInteger)ret userInfo:(void *)ignored {
+    [sheet orderOut:self];
+    if (!ret)
+        return;
+    if (![self.ieNameField.stringValue isEqualToString:_watchingConnection.name]) {
+        _watchingConnection.name = self.ieNameField.stringValue;
+    }
+    if (![self.ieStatusField.stringValue isEqualToString:_watchingConnection.statusMessage]) {
+        _watchingConnection.statusMessage = self.ieStatusField.stringValue;
+    }
+    if (self.ieStatusChooser.selectedTag != _watchingConnection.status) {
+        _watchingConnection.status = self.ieStatusChooser.selectedTag;
+    }
+}
+
+- (IBAction)finishAndCommit:(NSButton *)sender {
+    [NSApp endSheet:self.identityEditorSheet returnCode:sender.tag];
 }
 
 #pragma mark - table

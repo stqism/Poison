@@ -11,6 +11,10 @@
                 <outlet property="filterField" destination="Z37-5k-Qte" id="duL-AP-tKx"/>
                 <outlet property="friendListView" destination="xCg-uz-hmG" id="lSY-Kq-FDn"/>
                 <outlet property="friendMenu" destination="ULl-4W-FKI" id="idi-55-qaZ"/>
+                <outlet property="identityEditorSheet" destination="66x-bn-gP6" id="UBJ-ce-FLZ"/>
+                <outlet property="ieNameField" destination="Thv-MK-5De" id="Kg1-6T-G3i"/>
+                <outlet property="ieStatusChooser" destination="Zif-id-aqA" id="Cm6-5D-8Oz"/>
+                <outlet property="ieStatusField" destination="Ibc-Ha-DBr" id="A6d-2u-CXV"/>
                 <outlet property="nameField" destination="w6w-ns-CQG" id="oqI-fS-6R8"/>
                 <outlet property="selfMenu" destination="AzD-RW-Vf3" id="jsf-S7-5BE"/>
                 <outlet property="statusDot" destination="q5m-9C-Wc7" id="zA0-4R-uxM"/>
@@ -125,14 +129,14 @@
                         </searchField>
                     </subviews>
                 </customView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="44" horizontalPageScroll="10" verticalLineScroll="44" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
                     <rect key="frame" x="0.0" y="24" width="250" height="293"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="vJm-Xq-AaQ">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="42" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -234,23 +238,122 @@
         </menu>
         <menu id="AzD-RW-Vf3">
             <items>
-                <menuItem title="Copy Public ID" keyEquivalent="c" id="L8w-4A-hwP">
+                <menuItem title="Copy Tox ID" keyEquivalent="c" id="L8w-4A-hwP">
                     <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Fz2-Hr-spe"/>
                 <menuItem title="Change Name..." id="Z8U-7L-OlH">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeName:" target="-2" id="Na4-GY-aLu"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Change Status..." id="wiW-4N-ZP3">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeStatus:" target="-2" id="Tav-2D-Fuf"/>
+                    </connections>
                 </menuItem>
             </items>
         </menu>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="66x-bn-gP6" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" documentModal="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="272" y="172" width="409" height="125"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <view key="contentView" id="O2k-In-uFW">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="125"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="b74-aJ-oYn">
+                        <rect key="frame" x="71" y="85" width="45" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Name:" id="f0r-XQ-fA9">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="LRa-W1-8iZ">
+                        <rect key="frame" x="18" y="55" width="98" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Current status:" id="ycS-Du-BlX">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="Thv-MK-5De">
+                        <rect key="frame" x="122" y="83" width="267" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Name" drawsBackground="YES" id="ELr-WU-uQl">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="Ibc-Ha-DBr">
+                        <rect key="frame" x="170" y="53" width="219" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Status" drawsBackground="YES" id="ZyP-cQ-B3W">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton verticalHuggingPriority="750" id="Zif-id-aqA">
+                        <rect key="frame" x="120" y="51" width="45" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <popUpButtonCell key="cell" type="push" title="Available" bezelStyle="rounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Rkn-hK-wdQ" id="GAu-7O-U6r">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="ka0-qo-VXj">
+                                <items>
+                                    <menuItem title="Available" state="on" image="status-light-online" id="Rkn-hK-wdQ"/>
+                                    <menuItem title="Away" image="status-light-away" tag="1" id="k6T-pv-q2v"/>
+                                    <menuItem title="Busy" image="status-light-offline" tag="2" id="tAL-rc-mEk"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <button verticalHuggingPriority="750" tag="1" id="DHG-Ia-vrD">
+                        <rect key="frame" x="307" y="13" width="88" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Change" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="asf-dV-bHM">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="finishAndCommit:" target="-2" id="nKr-77-pb0"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" id="pxN-fe-8a0">
+                        <rect key="frame" x="14" y="13" width="82" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vfk-z4-tU7">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="finishAndCommit:" target="-2" id="Rkb-je-5nN"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+        </window>
     </objects>
     <resources>
         <image name="icon-frequests" width="16" height="13"/>
         <image name="icon_minus" width="12" height="13"/>
         <image name="icon_plus" width="12" height="13"/>
+        <image name="status-light-away" width="11" height="11"/>
+        <image name="status-light-offline" width="11" height="11"/>
         <image name="status-light-online" width="11" height="11"/>
     </resources>
 </document>
