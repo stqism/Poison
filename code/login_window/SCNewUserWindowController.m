@@ -99,8 +99,16 @@ void *const SCAlertEndingShowPassword;
     }
 }
 
+- (void)tryAutomaticLogin:(NSString *)name {
+    self.nameField.stringValue = name.strippedValue;
+    [self submitPassword:self];
+}
+
+#pragma mark - UI handling
+
 - (IBAction)submitPassword:(id)sender {
     //[(SCAppDelegate*)[NSApp delegate] makeApplicationReadyForToxing:NULL name:@"Toxicle"];
+    [self clearPasswords];
     NSString *name = self.nameField.stringValue.strippedValue;
     if (!name.isValidLoginName) {
         [self failed:NSLocalizedString(@"Your name was blank, or it was too long. Try another.", @"")];
@@ -136,12 +144,6 @@ void *const SCAlertEndingShowPassword;
     }
 }
 
-- (void)tryAutomaticLogin:(NSString *)name {
-    self.nameField.stringValue = name.strippedValue;
-    [self submitPassword:self];
-}
-
-#pragma mark - UI handling
 
 - (IBAction)testPassword:(id)sender {
     if (self.shouldUseKeychain) {
@@ -223,6 +225,12 @@ void *const SCAlertEndingShowPassword;
         self.nextButton.title = NSLocalizedString(@"Next", nil);
 }
 
+- (void)clearPasswords {
+    self.ftPassword1.stringValue = @"";
+    self.ftPassword2.stringValue = @"";
+    self.rPassword.stringValue = @"";
+}
+
 - (BOOL)windowShouldClose:(id)sender {
     return YES;
 }
@@ -243,7 +251,8 @@ void *const SCAlertEndingShowPassword;
     if (contextInfo == SCAlertEndingShowPassword) {
         double delayInSeconds = 0.3;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            [self clearPasswords];
             [NSApp beginSheet:self.passwordSheetUnlock modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
         });
     }
