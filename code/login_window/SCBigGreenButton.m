@@ -1,5 +1,4 @@
-// You will not find the licensing jibber-jabber here.
-// Go read it elsewhere.
+#include "Copyright.h"
 
 #import "SCBigGreenButton.h"
 
