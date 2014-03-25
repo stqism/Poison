@@ -7,6 +7,8 @@
 #import "CGGeometryExtreme.h"
 #import "SCQRCodeSheetController.h"
 #import "ObjectiveTox.h"
+#import "NSURL+Parameters.h"
+#import "NSString+CanonicalID.h"
 
 #define SCUnifiedDefaultWindowFrame ((CGRect){{0, 0}, {800, 400}})
 #define SCUnifiedMinimumSize ((CGSize){800, 400})
@@ -20,10 +22,9 @@
 @end
 
 @implementation SCUnifiedWindowController
-@synthesize qrPanel;
 
 - (instancetype)initWithDESConnection:(DESToxConnection *)tox {
-    self = [self init];
+    self = [super initWithDESConnection:tox];
     if (self) {
         NSWindow *window = [[NSWindow alloc] initWithContentRect:CGRectCentreInRect(SCUnifiedDefaultWindowFrame, [NSScreen mainScreen].visibleFrame) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES];
         window.restorable = NO;
@@ -85,28 +86,6 @@
 
 - (NSColor *)dividerColourForSplitView:(SCNonGarbageSplitView *)splitView {
     return [NSColor controlDarkShadowColor];
-}
-
-#pragma mark - Sheets and stuff
-
-- (void)displayQRCode {
-    if (!self.qrPanel)
-        self.qrPanel = [[SCQRCodeSheetController alloc] initWithWindowNibName:@"QRSheet"];
-    self.qrPanel.friendAddress = self.tox.friendAddress;
-    self.qrPanel.name = self.tox.name;
-    [NSApp beginSheet:self.qrPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:NULL];
-}
-
-- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
-    [sheet orderOut:self];
-}
-
-- (void)displayAddFriend {
-    return;
-}
-
-- (void)displayAddFriendWithToxSchemeURL:(NSURL *)url {
-    return;
 }
 
 #pragma mark - Window delegate

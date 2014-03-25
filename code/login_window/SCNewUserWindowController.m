@@ -68,12 +68,15 @@ void *const SCAlertEndingShowPassword;
 #pragma mark - Keychain stuff
 
 - (void)savePasswordInKeychain:(NSString *)pass forName:(NSString *)name {
+    [self purgeNameFromKeychain:name];
     const char *account = [name UTF8String];
     NSUInteger alen = [name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     const char *password = [pass UTF8String];
     NSUInteger plen = [pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    SecKeychainAddGenericPassword(NULL, SERVICE_NAME_LENGTH, SERVICE_NAME,
-                                  (UInt32)alen, account, (UInt32)plen, password, NULL);
+    OSStatus ret = SecKeychainAddGenericPassword(NULL, SERVICE_NAME_LENGTH, SERVICE_NAME,
+                                                 (UInt32)alen, account, (UInt32)plen, password, NULL);
+    if (ret != errSecSuccess)
+        NSLog(@"whoops, keychain operation failed with error %d (save)", ret);
 }
 
 - (NSString *)passwordFromKeychainForName:(NSString *)name {
@@ -90,6 +93,23 @@ void *const SCAlertEndingShowPassword;
         NSString *ret = [[NSString alloc] initWithBytes:password length:length encoding:NSUTF8StringEncoding];
         SecKeychainItemFreeContent(NULL, password);
         return ret;
+    }
+}
+
+- (void)purgeNameFromKeychain:(NSString *)name {
+    const char *account = [name UTF8String];
+    NSUInteger alen = [name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    SecKeychainItemRef theItem;
+    OSStatus err = SecKeychainFindGenericPassword(NULL, SERVICE_NAME_LENGTH, SERVICE_NAME,
+                                                  (uint32_t)alen, account, NULL, NULL, &theItem);
+    if (err != errSecSuccess) {
+        NSLog(@"note: password couldn't be fetched from keychain, %d (purge)", err);
+        return;
+    }
+    err = SecKeychainItemDelete(theItem);
+    if (err != errSecSuccess) {
+        NSLog(@"note: password couldn't be purged from keychain, %d", err);
+        return;
     }
 }
 
@@ -115,12 +135,14 @@ void *const SCAlertEndingShowPassword;
             NSError *error = nil;
             txd_intermediate_t data = [SCProfileManager attemptDecryptionOfProfileName:name password:pass error:&error];
             if (!data) {
+                [self purgeNameFromKeychain:name];
                 NSAlert *alert = [NSAlert alertWithMessageText:error.localizedDescription
                                                  defaultButton:NSLocalizedString(@"Dismiss", nil)
                                                alternateButton:nil
                                                    otherButton:nil
                                      informativeTextWithFormat:@""];
                 alert.informativeText = error.localizedFailureReason;
+                [self showWindow:self];
                 [alert beginSheetModalForWindow:self.window
                                   modalDelegate:self
                                  didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
@@ -131,18 +153,17 @@ void *const SCAlertEndingShowPassword;
                                                                         password:pass];
             }
         } else {
+            [self showWindow:self];
             [NSApp beginSheet:self.passwordSheetUnlock modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
         }
     } else {
+        [self showWindow:self];
         [NSApp beginSheet:self.passwordSheetFirstTime modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
     }
 }
 
 
 - (IBAction)testPassword:(id)sender {
-    if (self.shouldUseKeychain) {
-        [self savePasswordInKeychain:self.rPassword.stringValue forName:self.nameField.stringValue.strippedValue];
-    }
     NSError *err = nil;
     txd_intermediate_t profile = [SCProfileManager attemptDecryptionOfProfileName:self.nameField.stringValue
                                                                          password:self.rPassword.stringValue
@@ -150,6 +171,9 @@ void *const SCAlertEndingShowPassword;
     [NSApp endSheet:((NSView *)sender).window];
     if (profile) {
         [NSApp endSheet:((NSView *)sender).window];
+        if (self.shouldUseKeychain) {
+            [self savePasswordInKeychain:self.rPassword.stringValue forName:self.nameField.stringValue.strippedValue];
+        }
         [(SCAppDelegate *)[NSApp delegate] makeApplicationReadyForToxing:profile
                                                                     name:self.nameField.stringValue
                                                                 password:self.rPassword.stringValue];

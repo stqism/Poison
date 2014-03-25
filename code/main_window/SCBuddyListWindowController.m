@@ -14,10 +14,9 @@
 @end
 
 @implementation SCBuddyListWindowController
-@synthesize qrPanel;
 
 - (instancetype)initWithDESConnection:(DESToxConnection *)tox {
-    self = [self init];
+    self = [super initWithDESConnection:tox];
     if (self) {
         NSWindow *window = [[NSWindow alloc] initWithContentRect:CGRectCentreInRect(SCBuddyListDefaultWindowFrame, [NSScreen mainScreen].visibleFrame) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES];
         window.restorable = NO;
@@ -34,28 +33,6 @@
         self.window.contentView = self.friendsListCont.view;
     }
     return self;
-}
-
-#pragma mark - sheets and stuff
-
-- (void)displayQRCode {
-    if (!self.qrPanel)
-        self.qrPanel = [[SCQRCodeSheetController alloc] initWithWindowNibName:@"QRSheet"];
-    self.qrPanel.friendAddress = self.tox.friendAddress;
-    self.qrPanel.name = self.tox.name;
-    [NSApp beginSheet:self.qrPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:NULL];
-}
-
-- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
-    [sheet orderOut:self];
-}
-
-- (void)displayAddFriend {
-    return;
-}
-
-- (void)displayAddFriendWithToxSchemeURL:(NSURL *)url {
-    return;
 }
 
 @end

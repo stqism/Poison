@@ -178,6 +178,9 @@ Gw
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="changeKeychainUsage:" target="-2" id="rtR-kr-LYy"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>

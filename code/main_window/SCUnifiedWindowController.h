@@ -3,7 +3,8 @@
 #import <Cocoa/Cocoa.h>
 #import "SCMainWindowing.h"
 #import "SCNonGarbageSplitView.h"
+#import "SCMainWindowController.h"
 
-@interface SCUnifiedWindowController : NSWindowController <SCMainWindowing, SCNonGarbageSplitViewDelegate, NSWindowDelegate>
+@interface SCUnifiedWindowController : SCMainWindowController <SCMainWindowing, SCNonGarbageSplitViewDelegate, NSWindowDelegate>
 
 @end

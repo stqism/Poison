@@ -2,7 +2,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SCMainWindowing.h"
+#import "SCMainWindowController.h"
 
-@interface SCBuddyListWindowController : NSWindowController <SCMainWindowing>
+@interface SCBuddyListWindowController : SCMainWindowController <SCMainWindowing>
 
 @end

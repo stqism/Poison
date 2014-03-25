@@ -75,6 +75,9 @@
 		F541811718C4138100AB220E /* Default.psnChatStyle in Resources */ = {isa = PBXBuildFile; fileRef = F541811618C4138100AB220E /* Default.psnChatStyle */; };
 		F541811918C413E700AB220E /* Default.psnChatStyle in CopyFiles */ = {isa = PBXBuildFile; fileRef = F541811618C4138100AB220E /* Default.psnChatStyle */; };
 		F541811E18C425B400AB220E /* SCFillingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F541811D18C425B400AB220E /* SCFillingView.m */; };
+		F543BE3018E116D3004C70D3 /* NSURL+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE2F18E116D3004C70D3 /* NSURL+Parameters.m */; };
+		F543BE3418E126CC004C70D3 /* NSString+CanonicalID.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE3318E126CC004C70D3 /* NSString+CanonicalID.m */; };
+		F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE3618E12994004C70D3 /* SCMainWindowController.m */; };
 		F55857A618D649820053DD52 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F55857A518D649820053DD52 /* libqrencode.a */; };
 		F561DF2218CAAE5E00612A00 /* AVAwayViewExperimental.xib in Resources */ = {isa = PBXBuildFile; fileRef = F561DF2118CAAE5E00612A00 /* AVAwayViewExperimental.xib */; };
 		F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F567A4DF18C5530300E04F3A /* SCDraggingView.m */; };
@@ -161,7 +164,7 @@
 		F52714A518DF823400B7E663 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		F52714A618DF823400B7E663 /* NewUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUser.xib; sourceTree = "<group>"; };
 		F52714A718DF823400B7E663 /* QRSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRSheet.xib; sourceTree = "<group>"; };
-		F52714B318DF9DA400B7E663 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F52714B318DF9DA400B7E663 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F52D011518B7CFB70033680F /* icon_group_ignore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_ignore.png; sourceTree = "<group>"; };
 		F52D011618B7CFB70033680F /* icon_group_ignore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_ignore@2x.png"; sourceTree = "<group>"; };
 		F52D011718B7CFB70033680F /* icon_group_join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_join.png; sourceTree = "<group>"; };
@@ -221,6 +224,12 @@
 		F541811618C4138100AB220E /* Default.psnChatStyle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Default.psnChatStyle; sourceTree = "<group>"; };
 		F541811C18C425B400AB220E /* SCFillingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFillingView.h; sourceTree = "<group>"; };
 		F541811D18C425B400AB220E /* SCFillingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFillingView.m; sourceTree = "<group>"; };
+		F543BE2E18E116D3004C70D3 /* NSURL+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Parameters.h"; sourceTree = "<group>"; };
+		F543BE2F18E116D3004C70D3 /* NSURL+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Parameters.m"; sourceTree = "<group>"; };
+		F543BE3218E126CC004C70D3 /* NSString+CanonicalID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CanonicalID.h"; sourceTree = "<group>"; };
+		F543BE3318E126CC004C70D3 /* NSString+CanonicalID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CanonicalID.m"; sourceTree = "<group>"; };
+		F543BE3518E12994004C70D3 /* SCMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMainWindowController.h; sourceTree = "<group>"; };
+		F543BE3618E12994004C70D3 /* SCMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMainWindowController.m; sourceTree = "<group>"; };
 		F55857A518D649820053DD52 /* libqrencode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libqrencode.a; path = _support/lib/libqrencode.a; sourceTree = "<group>"; };
 		F561DF2118CAAE5E00612A00 /* AVAwayViewExperimental.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AVAwayViewExperimental.xib; sourceTree = "<group>"; };
 		F567A4DE18C5530300E04F3A /* SCDraggingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDraggingView.h; sourceTree = "<group>"; };
@@ -391,6 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				F54180FE18C3C1C500AB220E /* SCMainWindowing.h */,
+				F543BE3518E12994004C70D3 /* SCMainWindowController.h */,
+				F543BE3618E12994004C70D3 /* SCMainWindowController.m */,
 				F54180FB18C3C0E000AB220E /* SCBuddyListWindowController.h */,
 				F54180FC18C3C0E000AB220E /* SCBuddyListWindowController.m */,
 				F541810518C3F4DE00AB220E /* SCUnifiedWindowController.h */,
@@ -501,6 +512,10 @@
 		F5B5425918B6D81F00226CA8 /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				F543BE3218E126CC004C70D3 /* NSString+CanonicalID.h */,
+				F543BE3318E126CC004C70D3 /* NSString+CanonicalID.m */,
+				F543BE2E18E116D3004C70D3 /* NSURL+Parameters.h */,
+				F543BE2F18E116D3004C70D3 /* NSURL+Parameters.m */,
 				F5B5422A18B6D23C00226CA8 /* main.m */,
 				F5F6A62A18DD3C5A006E5810 /* Copyright.h */,
 				F5B5422C18B6D23C00226CA8 /* Poison-Prefix.pch */,
@@ -666,7 +681,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "echo \"Poison build: checking your dependencies!\"\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\nmake_libvpx() {\n    echo \"Need to build libvpx. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libvpx\n    git clone \"https://chromium.googlesource.com/webm/libvpx\" libvpx && cd libvpx\n    git checkout \"v1.3.0\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nmake_libopus() {\n    echo \"Need to build libopus. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"opus-1.0.3\" \"libopus.tar.gz\"\n    curl -o \"libopus.tar.gz\" \"http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz\"\n    tar -xvzf \"libopus.tar.gz\" && cd \"opus-1.0.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nmake_libqrencode() {\n    echo \"Need to build libqrencode. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"qrencode-3.4.3\" \"libqrencode.tar.gz\"\n    curl -o \"libqrencode.tar.gz\" \"https://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.gz\"\n    tar -xvzf \"libqrencode.tar.gz\" && cd \"qrencode-3.4.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" --without-tools --enable-static\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\n\nupdate_build() {\n    if [ \"x$JENKINS_BUILD\" != \"x\" ]; then\n        echo \"This looks like a Jenkins build... I'll use Jenkins build numbers, then.\"\n        GIT_REF=$GIT_COMMIT\n        BUILD_NO=\"j$BUILD_NUMBER\"\n    elif [ -d \"$PROJECT_DIR/.git\" ]; then\n        echo \"Git information is available.\"\n        GIT_REF=$(git log -n 1 --pretty=format:%h)\n        BUILD_NO=\"m$(git rev-list HEAD --count)\"\n    else\n        echo \"No build information available.\"\n        GIT_REF=\"UNKNOWN\"\n        BUILD_NO=\"???\"\n    fi\n    echo \"Xcode is present. Writing to Info.plist: build $BUILD_NO; git commit $GIT_REF\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NO\" \"$INFOPLIST_FILE\"\n    /usr/libexec/PlistBuddy -c \"Add :SCGitRef string $GIT_REF\" \"$INFOPLIST_FILE\" || /usr/libexec/PlistBuddy -c \"Set :SCGitRef $GIT_REF\" \"$INFOPLIST_FILE\"\n}\n\nif [ ! -f \"$PROJECT_DIR/_support/lib/libvpx.a\" ]; then\n    make_libvpx\nfi\nif [ ! -f \"$PROJECT_DIR/_support/lib/libopus.a\" ]; then\n    make_libopus\nfi\nif [ ! -f \"$PROJECT_DIR/_support/lib/libqrencode.a\" ]; then\n    make_libqrencode\nfi\n\necho \"Poison build: stitching version into Info.plist!\"\nupdate_build\ncat \"$PROJECT_DIR/_support/flavour.txt\" > \"$PROJECT_DIR/_support/.security\" 2&> /dev/null || touch \"$PROJECT_DIR/_support/.security\"\n";
+			shellScript = "echo \"Poison build: checking your dependencies!\"\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\nmake_libvpx() {\n    echo \"Need to build libvpx. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libvpx\n    git clone \"https://chromium.googlesource.com/webm/libvpx\" libvpx && cd libvpx\n    git checkout \"v1.3.0\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nmake_libopus() {\n    echo \"Need to build libopus. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"opus-1.0.3\" \"libopus.tar.gz\"\n    curl -o \"libopus.tar.gz\" \"http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz\"\n    tar -xvzf \"libopus.tar.gz\" && cd \"opus-1.0.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nmake_libqrencode() {\n    echo \"Need to build libqrencode. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"qrencode-3.4.3\" \"libqrencode.tar.gz\"\n    curl -o \"libqrencode.tar.gz\" \"https://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.gz\"\n    tar -xvzf \"libqrencode.tar.gz\" && cd \"qrencode-3.4.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" --without-tools --enable-static\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\n\nupdate_build() {\n    if [ \"x$JENKINS_BUILD\" != \"x\" ]; then\n        echo \"This looks like a Jenkins build... I'll use Jenkins build numbers, then.\"\n        GIT_REF=$GIT_COMMIT\n        BUILD_NO=\"j$BUILD_NUMBER\"\n    elif [ -d \"$PROJECT_DIR/.git\" ]; then\n        echo \"Git information is available.\"\n        GIT_REF=$(git log -n 1 --pretty=format:%h)\n        BUILD_NO=\"m$(git rev-list HEAD --count)\"\n    else\n        echo \"No build information available.\"\n        GIT_REF=\"UNKNOWN\"\n        BUILD_NO=\"???\"\n    fi\n    echo \"Xcode is present. Writing to Info.plist: build $BUILD_NO; git commit $GIT_REF\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NO\" \"$INFOPLIST_FILE\"\n    /usr/libexec/PlistBuddy -c \"Add :SCGitRef string $GIT_REF\" \"$INFOPLIST_FILE\" || /usr/libexec/PlistBuddy -c \"Set :SCGitRef $GIT_REF\" \"$INFOPLIST_FILE\"\n}\n\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libvpx.a\" ]; then\n#    make_libvpx; cd $PROJECT_DIR;\n#fi\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libopus.a\" ]; then\n#    make_libopus; cd $PROJECT_DIR;\n#fi\nif [ ! -f \"$PROJECT_DIR/_support/lib/libqrencode.a\" ]; then\n    make_libqrencode; cd $PROJECT_DIR;\nfi\n\necho \"Poison build: stitching version into Info.plist!\"\nupdate_build\ncat \"$PROJECT_DIR/_support/flavour.txt\" > \"$PROJECT_DIR/_support/.security\" 2&> /dev/null || touch \"$PROJECT_DIR/_support/.security\"\n";
 		};
 		F553FAFB18DCF3AF00CBA532 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -688,8 +703,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */,
 				F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */,
 				F538754218C25DB500AED945 /* SCNewUserWindowController.m in Sources */,
+				F543BE3418E126CC004C70D3 /* NSString+CanonicalID.m in Sources */,
 				F53DB89918B6DD37008D7ED5 /* NSWindow+Shake.m in Sources */,
 				F541810A18C3FABD00AB220E /* SCNonGarbageSplitView.m in Sources */,
 				F59C0F4418D3E6F300BB437C /* SCResourceBundle.m in Sources */,
@@ -704,6 +721,7 @@
 				F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */,
 				F517FCA918B91CDA0060D575 /* SCProfileManager.m in Sources */,
 				F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */,
+				F543BE3018E116D3004C70D3 /* NSURL+Parameters.m in Sources */,
 				F541811E18C425B400AB220E /* SCFillingView.m in Sources */,
 				F52D014E18B7D44F0033680F /* SCBigGreenButton.m in Sources */,
 				F541810718C3F4DE00AB220E /* SCUnifiedWindowController.m in Sources */,

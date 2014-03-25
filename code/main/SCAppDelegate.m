@@ -38,7 +38,6 @@
 @property (unsafe_unretained) IBOutlet NSWindow *aboutWindow;
 @property (weak) IBOutlet NSTextField *aboutWindowApplicationNameLabel;
 @property (weak) IBOutlet NSTextField *aboutWindowVersionLabel;
-@property (weak) IBOutlet NSTextField *aboutWindowSigLabel;
 @property (unsafe_unretained) IBOutlet NSWindow *ackWindow;
 @property (unsafe_unretained) IBOutlet NSTextView *ackTextView;
 #pragma mark - Misc. state
@@ -60,7 +59,7 @@
     NSLog(@"Default settings loaded: %@", defaults);
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 
-    if (SCCodeSigningStatus == SCCodeSigningStatusInvalid || 1) {
+    if (SCCodeSigningStatus == SCCodeSigningStatusInvalid) {
         NSAlert *warning = [[NSAlert alloc] init];
         warning.messageText = NSLocalizedString(@"Code Signature Invalid", nil);
         [warning addButtonWithTitle:NSLocalizedString(@"Quit", nil)];
@@ -84,6 +83,7 @@
 
     NSString *autologinUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"autologinUsername"];
     SCNewUserWindowController *login = [[SCNewUserWindowController alloc] initWithWindowNibName:@"NewUser"];
+    [login loadWindow];
     self.mainWindowController = login;
     if ([SCProfileManager profileNameExists:autologinUsername]) {
         [login tryAutomaticLogin:autologinUsername];
@@ -140,8 +140,10 @@
         [SCBuddyListWindowController class] : [SCUnifiedWindowController class];
     self.mainWindowController = [[preferredWindowClass alloc] initWithDESConnection:self.toxConnection];
     [self.mainWindowController showWindow:self];
-    if (self.waitingToxURL && [self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)])
+    if (self.waitingToxURL && [self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
         [(id<SCMainWindowing>)self.mainWindowController displayAddFriendWithToxSchemeURL:self.waitingToxURL];
+        self.waitingToxURL = nil;
+    }
 }
 
 #pragma mark - Opening stuff

@@ -65,7 +65,6 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     });
 }
 
-#define DES_USE_NAIVE_TOX_LOOP
 #ifndef DES_USE_NAIVE_TOX_LOOP
 - (void)_desRunLoopRun {
     if (!self.toxWaitData)
@@ -93,7 +92,9 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         [self.delegate connectionDidDisconnect:self];
 
     if (!self.isMessengerLoopStopping) {
-        dispatch_async(self.messengerQueue, ^{
+        double delayInSeconds = 1.0 / 20.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, self.messengerQueue, ^(void){
             [self _desRunLoopRun];
         });
     } else {
