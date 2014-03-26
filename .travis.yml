@@ -1,0 +1,15 @@
+language: objective-c
+
+before_script:
+  - xcodebuild -version
+
+script:
+  - xctool -project Poison2x.xcodeproj -scheme Everything
+
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#tox-dev"
+    template: "%{repository} (%{commit}): %{message} Changes: %{compare_url}"
+    on_success: always
+    on_failure: always
