@@ -4,7 +4,7 @@ before_script:
   - xcodebuild -version
 
 script:
-  - xctool -project Poison2x.xcodeproj -scheme Everything
+  - xctool -project Poison2x.xcodeproj -scheme Everything CODE_SIGN_IDENTITY=""
 
 notifications:
   irc:
