@@ -48,10 +48,10 @@
                 <popUpButton verticalHuggingPriority="750" id="v71-Yn-HBz">
                     <rect key="frame" x="20" y="7" width="44" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" arrowPosition="noArrow" id="41K-UJ-g3r">
+                    <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" arrowPosition="noArrow" selectedItem="VDd-ix-Sij" id="41K-UJ-g3r">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="3Oj-tn-iBr">
+                        <menu key="menu" title="(do not translate)" id="3Oj-tn-iBr">
                             <items>
                                 <menuItem state="on" image="NSShareTemplate" hidden="YES" id="VDd-ix-Sij"/>
                                 <menuItem title="Call" id="dw4-4M-tU7">
@@ -88,7 +88,7 @@
                                 <button toolTip="Begin Video Call" id="VFf-l1-wZk">
                                     <rect key="frame" x="424" y="3" width="22" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="moH-5W-mtV">
+                                    <buttonCell key="cell" type="smallSquare" title="(don't translate this)" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="moH-5W-mtV">
                                         <behavior key="behavior" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -103,7 +103,7 @@
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="VYZ-Q9-G3v">
                                     <rect key="frame" x="8" y="6" width="295" height="17"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Richardo Stallmanu (Toxing on Poison 2.0)" id="ywB-oS-ibG">
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="(don't translate this)" id="ywB-oS-ibG">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -112,7 +112,7 @@
                                 <button toolTip="Begin Audio Call" id="0WA-bQ-gr4">
                                     <rect key="frame" x="451" y="3" width="22" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="tVI-Df-FGR">
+                                    <buttonCell key="cell" type="smallSquare" title="(don't translate this)" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="tVI-Df-FGR">
                                         <behavior key="behavior" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -123,7 +123,7 @@
                                 <button toolTip="File Transfers..." id="dYl-AH-7GC">
                                     <rect key="frame" x="397" y="3" width="22" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Sdm-ZN-fRl">
+                                    <buttonCell key="cell" type="smallSquare" title="(don't translate this)" bezelStyle="smallSquare" image="titlebar_incoming_files" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Sdm-ZN-fRl">
                                         <behavior key="behavior" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -167,7 +167,7 @@
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                         </tableHeaderCell>
-                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="plV-jn-Ofx">
+                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="(don't translate this)" id="plV-jn-Ofx">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -181,7 +181,7 @@
                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="1oS-CI-Cgt">
                                                                         <rect key="frame" x="0.0" y="0.0" width="146" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title=":^)" id="3ml-UH-X0J">
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="3ml-UH-X0J">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

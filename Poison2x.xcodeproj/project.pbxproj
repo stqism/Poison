@@ -79,7 +79,6 @@
 		F543BE3418E126CC004C70D3 /* NSString+CanonicalID.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE3318E126CC004C70D3 /* NSString+CanonicalID.m */; };
 		F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE3618E12994004C70D3 /* SCMainWindowController.m */; };
 		F55857A618D649820053DD52 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F55857A518D649820053DD52 /* libqrencode.a */; };
-		F561DF2218CAAE5E00612A00 /* AVAwayViewExperimental.xib in Resources */ = {isa = PBXBuildFile; fileRef = F561DF2118CAAE5E00612A00 /* AVAwayViewExperimental.xib */; };
 		F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F567A4DF18C5530300E04F3A /* SCDraggingView.m */; };
 		F567A4E318C5745C00E04F3A /* to-do in Resources */ = {isa = PBXBuildFile; fileRef = F567A4E218C5745C00E04F3A /* to-do */; };
 		F58EE9A918C57A760033F2D4 /* DefaultDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */; };
@@ -231,7 +230,6 @@
 		F543BE3518E12994004C70D3 /* SCMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMainWindowController.h; sourceTree = "<group>"; };
 		F543BE3618E12994004C70D3 /* SCMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMainWindowController.m; sourceTree = "<group>"; };
 		F55857A518D649820053DD52 /* libqrencode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libqrencode.a; path = _support/lib/libqrencode.a; sourceTree = "<group>"; };
-		F561DF2118CAAE5E00612A00 /* AVAwayViewExperimental.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AVAwayViewExperimental.xib; sourceTree = "<group>"; };
 		F567A4DE18C5530300E04F3A /* SCDraggingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDraggingView.h; sourceTree = "<group>"; };
 		F567A4DF18C5530300E04F3A /* SCDraggingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDraggingView.m; sourceTree = "<group>"; };
 		F567A4E218C5745C00E04F3A /* to-do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "to-do"; sourceTree = "<group>"; };
@@ -533,7 +531,6 @@
 				F52714A518DF823400B7E663 /* MainMenu.xib */,
 				F52714A618DF823400B7E663 /* NewUser.xib */,
 				F52714A718DF823400B7E663 /* QRSheet.xib */,
-				F561DF2118CAAE5E00612A00 /* AVAwayViewExperimental.xib */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -620,7 +617,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F52D013218B7CFB70033680F /* icon_group_join.png in Resources */,
-				F561DF2218CAAE5E00612A00 /* AVAwayViewExperimental.xib in Resources */,
 				F52D013918B7CFB70033680F /* icon_plus@2x.png in Resources */,
 				F541811718C4138100AB220E /* Default.psnChatStyle in Resources */,
 				F538754E18C28B4000AED945 /* titlebar_incoming_files.png in Resources */,

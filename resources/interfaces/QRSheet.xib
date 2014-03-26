@@ -15,7 +15,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="2oK-OW-d2K" customClass="NSPanel">
+        <window title="(do not translate)" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="2oK-OW-d2K" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" documentModal="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="272" y="172" width="288" height="386"/>
@@ -39,9 +39,9 @@
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="qr-placeholder" id="sIS-6y-sBr"/>
                                 </imageView>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Bx5-It-Bkx">
-                                    <rect key="frame" x="11" y="15" width="224" height="17"/>
+                                    <rect key="frame" x="11" y="15" width="224" height="20"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="haruka best lesbian XV" id="nXx-Fc-kNG">
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="(do not translate)" id="nXx-Fc-kNG">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" red="0.0" green="0.77426437039999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

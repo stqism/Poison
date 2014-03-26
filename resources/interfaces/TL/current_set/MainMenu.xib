@@ -75,28 +75,34 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="SPQ-mh-iCQ"/>
-                            <menuItem title="Change Name..." enabled="NO" id="dnK-Vl-RdM">
+                            <menuItem title="Change Name..." id="dnK-Vl-RdM">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeName:" target="494" id="DQJ-xe-P19"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Change Status..." enabled="NO" id="HSH-MV-sZE">
+                            <menuItem title="Change Status..." id="HSH-MV-sZE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="changeStatus:" target="494" id="A5F-Sp-Rj4"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Copy Tox ID" enabled="NO" keyEquivalent="c" id="tRJ-tr-UZd">
+                            <menuItem title="Copy Tox ID" keyEquivalent="c" id="tRJ-tr-UZd">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="copyPublicID:" target="494" id="cGv-pw-PHb"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Generate QR Code for my Tox ID..." enabled="NO" keyEquivalent="C" id="RRd-Bz-ihz">
+                            <menuItem title="Generate QR Code for my Tox ID..." keyEquivalent="C" id="RRd-Bz-ihz">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="showQRCode:" target="494" id="iK7-jZ-dbQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1sX-EB-lMv"/>
-                            <menuItem title="Add Friend..." enabled="NO" keyEquivalent="n" id="cov-0m-caU"/>
+                            <menuItem title="Add Friend..." keyEquivalent="n" id="cov-0m-caU"/>
                             <menuItem isSeparatorItem="YES" id="omo-qg-B80"/>
-                            <menuItem title="Log Out..." enabled="NO" id="x52-HS-lct">
+                            <menuItem title="Log Out..." id="x52-HS-lct">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="logOutFromUI:" target="494" id="VHD-nf-aID"/>
@@ -565,9 +571,15 @@
                 <menuItem isSeparatorItem="YES" id="NrY-LW-QT8"/>
                 <menuItem title="Change Name..." id="ilB-jb-iL0">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeName:" target="494" id="gcG-h7-Tdv"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Change Status..." id="M0o-C8-c5s">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changeStatus:" target="494" id="L1x-w4-lew"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Copy Tox ID" id="dKy-Kn-xRE">
                     <modifierMask key="keyEquivalentModifierMask"/>
