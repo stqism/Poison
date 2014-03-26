@@ -422,8 +422,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"DES build: checking your dependencies!\"\n\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\n\nmake_libsodium() {\n    echo \"Need to build libsodium. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libsodium\n    git clone \"https://github.com/jedisct1/libsodium\" libsodium && cd libsodium\n    ./autogen.sh\n    ./configure \"--prefix=$PROJECT_DIR/_support\"\n    make -j$NPROC && make install\n    echo \"OK.\"\n}\nif [ ! -f \"$PROJECT_DIR/_support/lib/libsodium.a\" ]; then\n    make_libsodium\nfi";
+			shellPath = /bin/bash;
+			shellScript = "echo \"DES build: checking your dependencies!\"\n\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\n\nmake_libsodium() {\n    echo \"Need to build libsodium. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libsodium\n    git clone \"https://github.com/jedisct1/libsodium\" libsodium && cd libsodium\n    ./autogen.sh > /dev/null 2>&1\n    ./configure \"--prefix=$PROJECT_DIR/_support\" \\\n    > \"$WORKSPACE/../libsodium.configure.log\" 2>&1\n    make -j$NPROC \\\n    > \"$WORKSPACE/../libsodium.make.log\" 2>&1 && make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libsodium.configure.log\" \"$WORKSPACE/../libsodium.make.log\"\n}\nif [ ! -f \"$PROJECT_DIR/_support/lib/libsodium.a\" ]; then\n    make_libsodium\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -661,6 +661,7 @@
 				F553FAF318DCE5D000CBA532 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "DESObserver" */ = {
 			isa = XCConfigurationList;
