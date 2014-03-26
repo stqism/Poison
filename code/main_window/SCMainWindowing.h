@@ -3,6 +3,7 @@
 #import <Foundation/Foundation.h>
 #import "SCQRCodeSheetController.h"
 #import "SCAddFriendSheetController.h"
+#import "SCBuddyListController.h"
 
 @class DESToxConnection;
 @protocol SCMainWindowing <NSObject>
@@ -10,4 +11,6 @@
 - (void)displayQRCode;
 - (void)displayAddFriend;
 - (void)displayAddFriendWithToxSchemeURL:(NSURL *)url;
+
+- (SCBuddyListController *)buddyListController;
 @end

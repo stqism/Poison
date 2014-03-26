@@ -96,7 +96,9 @@
     if (![self.mainWindowController conformsToProtocol:@protocol(SCMainWindowing)]) {
         if (menuItem.action == @selector(copyPublicID:)
             || menuItem.action == @selector(showQRCode:)
-            || menuItem.action == @selector(logOutFromUI:))
+            || menuItem.action == @selector(logOutFromUI:)
+            || menuItem.action == @selector(changeName:)
+            || menuItem.action == @selector(changeStatus:))
             return NO;
     }
     return YES;
@@ -303,6 +305,20 @@
     } else {
         NSBeep();
     }
+}
+
+- (IBAction)changeName:(id)sender {
+    if (![self.mainWindowController respondsToSelector:@selector(buddyListController)])
+        return;
+    SCBuddyListController *list = ((id<SCMainWindowing>)self.mainWindowController).buddyListController;
+    [list changeName:sender];
+}
+
+- (IBAction)changeStatus:(id)sender {
+    if (![self.mainWindowController respondsToSelector:@selector(buddyListController)])
+        return;
+    SCBuddyListController *list = ((id<SCMainWindowing>)self.mainWindowController).buddyListController;
+    [list changeName:sender];
 }
 
 @end

@@ -19,6 +19,10 @@
     return self;
 }
 
+- (SCBuddyListController *)buddyListController {
+    return nil;
+}
+
 #pragma mark - sheets
 
 - (void)displayQRCode {
@@ -64,7 +68,7 @@
         [error beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
         return;
     }
-    self.addPanel.toxID = ([url.path substringFromIndex:1] ?: url.host);
+    self.addPanel.toxID = (url.path.length != (DESFriendAddressSize * 2) + 1? url.host : [url.path substringFromIndex:1]);
     if (url.query) {
         NSDictionary *params = url.parameters;
         if ([params[@"message"] isKindOfClass:[NSString class]]) {

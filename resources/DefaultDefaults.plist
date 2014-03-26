@@ -5,7 +5,7 @@
 	<key>autologinUsername</key>
 	<string>y</string>
 	<key>forcedMultiWindowUI</key>
-	<false/>
+	<true/>
 	<key>nameCompletionDelimiter</key>
 	<string>,</string>
 </dict>

@@ -111,6 +111,7 @@ void *const SCAlertEndingShowPassword;
         NSLog(@"note: password couldn't be purged from keychain, %d", err);
         return;
     }
+    CFRelease(theItem);
 }
 
 - (void)tryAutomaticLogin:(NSString *)name {

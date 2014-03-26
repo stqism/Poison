@@ -5,4 +5,6 @@
 
 @interface SCBuddyListController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 - (void)attachKVOHandlersToConnection:(DESToxConnection *)tox;
+- (IBAction)changeName:(id)sender;
+- (IBAction)changeStatus:(id)sender;
 @end

@@ -129,21 +129,21 @@
                         </searchField>
                     </subviews>
                 </customView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="44" horizontalPageScroll="10" verticalLineScroll="44" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
                     <rect key="frame" x="0.0" y="24" width="250" height="293"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="vJm-Xq-AaQ">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="42" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
+                                <rect key="frame" x="0.0" y="0.0" width="253" height="293"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="247" minWidth="40" maxWidth="1000" id="F9f-ZK-4zq">
+                                    <tableColumn width="250" minWidth="40" maxWidth="90000001" id="F9f-ZK-4zq">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -157,11 +157,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="e2v-HG-6tI">
-                                                <rect key="frame" x="1" y="1" width="247" height="42"/>
+                                                <rect key="frame" x="1" y="1" width="250" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="c4j-IO-4XU">
-                                                        <rect key="frame" x="10" y="22" width="213" height="17"/>
+                                                        <rect key="frame" x="10" y="22" width="216" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" id="kE8-5W-8Rm">
                                                             <font key="font" metaFont="system"/>
@@ -170,7 +170,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="3Gk-UI-uKS">
-                                                        <rect key="frame" x="10" y="6" width="213" height="14"/>
+                                                        <rect key="frame" x="10" y="6" width="216" height="14"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" id="5h9-zs-cLg">
                                                             <font key="font" metaFont="smallSystem"/>
@@ -179,7 +179,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0nA-uh-mA7">
-                                                        <rect key="frame" x="224" y="16" width="11" height="11"/>
+                                                        <rect key="frame" x="227" y="16" width="11" height="11"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="status-light-online" id="P0G-sY-qcu"/>
                                                     </imageView>
@@ -192,8 +192,8 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="eOG-RR-2Hg">
-                        <rect key="frame" x="1" y="119" width="223" height="15"/>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="eOG-RR-2Hg">
+                        <rect key="frame" x="0.0" y="277" width="250" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Xqw-fU-dRR">

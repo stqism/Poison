@@ -164,7 +164,7 @@
 		F52714A518DF823400B7E663 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		F52714A618DF823400B7E663 /* NewUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUser.xib; sourceTree = "<group>"; };
 		F52714A718DF823400B7E663 /* QRSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRSheet.xib; sourceTree = "<group>"; };
-		F52714B318DF9DA400B7E663 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F52714B318DF9DA400B7E663 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F52D011518B7CFB70033680F /* icon_group_ignore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_ignore.png; sourceTree = "<group>"; };
 		F52D011618B7CFB70033680F /* icon_group_ignore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_ignore@2x.png"; sourceTree = "<group>"; };
 		F52D011718B7CFB70033680F /* icon_group_join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_group_join.png; sourceTree = "<group>"; };

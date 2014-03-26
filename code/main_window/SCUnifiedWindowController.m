@@ -66,6 +66,10 @@
     [root setAutosaveName:@"UnifiedSplitPane"];
 }
 
+- (SCBuddyListController *)buddyListController {
+    return self.friendsListCont;
+}
+
 #pragma mark - Split view delegate
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
