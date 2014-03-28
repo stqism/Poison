@@ -265,9 +265,9 @@
 							<string type="base64-UTF8" key="NSContents">QmVmb3JlIFBvaXNvbiBjYW4gY29ubmVjdCB0byB0aGUgVG94IG5ldHdvcmssIGl0IG5lZWRzIHRvIGNv
 bm5lY3QgdG8gYSBib290c3RyYXBwaW5nIHNlcnZlci4KClBvaXNvbiBjYW4gZG8gdGhpcyBmb3IgeW91
 IGF1dG9tYXRpY2FsbHkuIEhvd2V2ZXIsIHlvdSBjYW4gZW50ZXIgYSBzZXJ2ZXIgbWFudWFsbHkgaWYg
-eW91IGFyZSBjb25jZXJuZWQgYWJ1dCBwcml2YWN5LgoKSWYgeW91IGNsaWNrICJDYW5jZWwiIG5vdywg
-eW91IGNhbiBvcGVuIHRoaXMgc2hlZXQgYWdhaW4gYnkgY2xpY2tpbmcgdGhlIGluZGljYXRvciBhdCB0
-aGUgdG9wLXJpZ2h0IG9mIHRoZSB3aW5kb3cuA</string>
+eW91IGFyZSBjb25jZXJuZWQgYWJvdXQgcHJpdmFjeS4KCklmIHlvdSBjbGljayAiQ2FuY2VsIiBub3cs
+IHlvdSBjYW4gb3BlbiB0aGlzIHNoZWV0IGFnYWluIGJ5IGNsaWNraW5nIHRoZSBpbmRpY2F0b3IgYXQg
+dGhlIHRvcC1yaWdodCBvZiB0aGUgd2luZG93Lg</string>
 							<reference key="NSSupport" ref="775168900"/>
 							<reference key="NSControlView" ref="347147892"/>
 							<reference key="NSBackgroundColor" ref="382569520"/>
