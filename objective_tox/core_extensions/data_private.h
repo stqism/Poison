@@ -148,6 +148,7 @@ struct txd_friend {
     uint8_t *txd_data;
     /* note: Status isn't saved because we're going to show
      * friends offline anyway while the connection resyncs. */
+    uint64_t txd_lastseen;
 };
 
 struct txd_dhtlite {

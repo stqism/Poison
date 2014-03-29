@@ -131,7 +131,8 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
     NSString *comment = [NSString stringWithFormat:@"Name: %@\nExported by %@ %@", name,
                          SCApplicationInfoDictKey(@"CFBundleName"),
                          SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
-    txd_encrypt_buf(pass, passlen, buf, size, &enc, &encsize, comment.UTF8String);
+    /* write nico-files for muh security */
+    txd_encrypt_buf(pass, passlen, buf, size, &enc, &encsize, comment.UTF8String, TXD_BIT_PADDED_FILE);
     _txd_kill_memory(buf, size);
     free(buf);
     NSData *contents = [[NSData alloc] initWithBytesNoCopy:enc length:encsize freeWhenDone:YES];

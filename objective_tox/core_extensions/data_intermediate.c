@@ -47,7 +47,6 @@ txd_intermediate_t txd_intermediate_from_tox(Tox *tox)
     uint32_t numfriends = tox_count_friendlist(tox);
     struct txd_friend *friends = malloc(numfriends * sizeof(struct txd_friend));
     int32_t toxfl[numfriends];
-    uint32_t actual_number_of_friends = numfriends;
     tox_get_friendlist(tox, toxfl, numfriends);
     int i;
 
@@ -62,9 +61,11 @@ txd_intermediate_t txd_intermediate_from_tox(Tox *tox)
             memcpy(data, tox_ -> friendlist[f_n].info, info_len);
             friends[i].txd_data = data;
             friends[i].txd_data_length = info_len;
+            friends[i].txd_lastseen = 0;
         } else {
             friends[i].txd_data = NULL;
             friends[i].txd_data_length = 0;
+            friends[i].txd_lastseen = tox_get_last_online(tox, f_n);
         }
 
         if (tox_ -> friendlist[f_n].receives_read_receipts) {
@@ -128,7 +129,7 @@ txd_intermediate_t txd_intermediate_from_tox(Tox *tox)
     interm -> txd_dhtlite = dht_save;
     interm -> txd_dhtlite_length = num_dhtlite;
 
-    interm -> txd_friends_length = actual_number_of_friends;
+    interm -> txd_friends_length = numfriends;
     interm -> txd_friends = friends;
     return interm;
 }
@@ -163,9 +164,13 @@ int txd_restore_intermediate(txd_intermediate_t interm, Tox *tox)
         } else {
             new_friendnum = tox_add_friend_norequest(tox, friend -> txd_addr);
         }
+        if (new_friendnum < 0)
+            continue; /* failure */
 
         if (friend -> txd_flags & TXD_BIT_SENDS_RECEIPTS)
             tox_set_sends_receipts(tox, new_friendnum, 1);
+        setfriendname(tox_, new_friendnum, friend -> txd_name, friend -> txd_name_length);
+        tox_ -> friendlist[new_friendnum].ping_lastrecv = friend -> txd_lastseen;
     }
 
     struct txd_dhtlite *server = NULL; /* lu stqism :^) */

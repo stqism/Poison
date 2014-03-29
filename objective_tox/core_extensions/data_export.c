@@ -20,6 +20,8 @@ const txd_fourcc_t TXD_FORMAT_BINARY1 = 0xE6A19C00;
 #define TXD_BLOCK_FRIENDS ((txd_fourcc_t)'FRNd')
 #define TXD_BLOCK_DHT     ((txd_fourcc_t)'DHt*')
 
+#define TXD_FEX_LASTSEEN  ((txd_twocc_t)'Ls')
+
 const uint32_t TXD_ARC_SELF_BLOCK = 1;
 const uint32_t TXD_ARC_KEYS_BLOCK = 1 << 1;
 const uint32_t TXD_ARC_FRIEND_BLOCK = 1 << 2;
@@ -95,6 +97,9 @@ uint32_t _txd_load_friends_block(uint8_t *buf, uint32_t block_size, txd_intermed
     if (guaranteed_size > block_size - 4)
         return TXD_ERR_SIZE_MISMATCH;
 
+    struct timeval today;
+    gettimeofday(&today, NULL); /* FIXME: standardise to UTC */
+
     struct txd_friend *friends = calloc(sizeof(struct txd_friend), friend_count);
     int i, j;
 
@@ -141,15 +146,22 @@ uint32_t _txd_load_friends_block(uint8_t *buf, uint32_t block_size, txd_intermed
         int k;
 
         for (k = 0; k < fex_count; ++k) {
-            /* read a twocc from buffer
-             * this could be longer and clear but no */
-            /* txd_twocc_t fex_key = ntohs(*(txd_twocc_t*)pos);
+            txd_twocc_t fex_key = ntohs(*(txd_twocc_t*)pos);
             uint32_t fex_data_length = _txd_read_int_32(pos + 2);
-            pos += 6; */
-            /* this is where we would switch on fex values
-             * there aren't any, so continue */
-            uint32_t fex_data_length = _txd_read_int_32(pos + 2);
-            pos += 6 + fex_data_length;
+            pos += 6;
+            switch (fex_key) {
+                case TXD_FEX_LASTSEEN: {
+                    uint64_t ls = _txd_read_int_64(pos);
+                    /* bad time? */
+                    if (ls > today.tv_sec)
+                        ls = 0;
+                    f -> txd_lastseen = ls;
+                    break;
+                }
+                default:
+                    break;
+            }
+            pos += fex_data_length;
         }
 
         uint32_t read_so_far = (uint32_t)(pos - buf);
@@ -252,7 +264,7 @@ uint64_t txd_get_size_of_intermediate_ex(txd_intermediate_t im, uint32_t arc_blo
     if (arc_blocks & TXD_ARC_FRIEND_BLOCK) {
         running_total += 12; /* friend count */
         uint32_t friend_count = txd_get_number_of_friends(im);
-        running_total += (9 + TOX_FRIEND_ADDRESS_SIZE) * friend_count;
+        running_total += (9 + 14 + TOX_FRIEND_ADDRESS_SIZE) * friend_count;
         int i;
 
         for (i = 0; i < friend_count; ++i) {
@@ -384,8 +396,16 @@ uint32_t txd_export_to_buf_prealloc(txd_intermediate_t im, uint8_t *buf,
                 block_total += 4 + dl;
             }
 
-            _txd_write_int_32(0, pos);
+            _txd_write_int_32(1, pos);
             pos += 4;
+            uint16_t tag = htons(TXD_FEX_LASTSEEN);
+            memcpy(pos, &tag, 2);
+            _txd_write_int_32(8, pos + 2);
+            pos += 6;
+            _txd_write_int_64(im -> txd_friends[i].txd_lastseen, pos);
+            pos += 8;
+            block_total += 14;
+
             /* count of FrEx k/v pairs */
             block_total += 9 + TOX_FRIEND_ADDRESS_SIZE + nl;
         }

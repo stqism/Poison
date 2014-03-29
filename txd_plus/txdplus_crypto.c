@@ -12,24 +12,23 @@
 
 const uint32_t TXD_ERR_DECRYPT_FAILED = 2059;
 
-static txd_fourcc_t TXD_ENVELOPE_MAGIC = 'MAKi'; // Defines MAGIC as '0x4D414B69'.
+/* Defines MAGIC for a non-size-obfuscated TXD envelope. */
+static txd_fourcc_t TXD_ENVELOPE_MAGIC_N = 'MAKi';
+/* Defines MAGIC for a size-obfuscated (padded to nearest 4 MB) TXD envelope. */
+static txd_fourcc_t TXD_ENVELOPE_MAGIC_P = 'NICo';
+
 static uint64_t     SCRYPT_N = 13;
 static uint32_t     SCRYPT_r = 3;
 static uint32_t     SCRYPT_p = 0;
 
-#define TXD_NO_ENCRYPTED_PADDING
-#ifndef TXD_NO_ENCRYPTED_PADDING
+const uint32_t TXD_BIT_PADDED_FILE = 1;
+
 static inline uint64_t _txd_get_size_of_next_4(uint64_t i) {
     uint64_t ret = FOUR_MEGABYTES;
     while (ret < i)
         ret += FOUR_MEGABYTES;
     return ret;
 }
-#else
-static inline uint64_t _txd_get_size_of_next_4(uint64_t i){
-    return i;
-}
-#endif
 
 /* TXD envelope functions. This is supposedly better than the core
  * tox_save_encrypted. */
@@ -37,13 +36,20 @@ static inline uint64_t _txd_get_size_of_next_4(uint64_t i){
 int txd_encrypt_buf(const uint8_t *password, uint64_t passlen,
                     const uint8_t *clear_in, uint64_t clear_len,
                     uint8_t **out, uint64_t *out_size,
-                    const char *comment) {
+                    const char *comment, uint32_t flags) {
+    uint32_t magic = (flags & TXD_BIT_PADDED_FILE)? TXD_ENVELOPE_MAGIC_P : TXD_ENVELOPE_MAGIC_N;
+    /* decide whether the file is encrypted or not. */
     unsigned long comment_size = strlen(comment);
     if (comment_size > UINT32_MAX)
         return 1;
     uint32_t actual_comment_length = (uint32_t)comment_size;
     
-    uint64_t encrypted_length = crypto_secretbox_ZEROBYTES + _txd_get_size_of_next_4(clear_len);
+    uint64_t encrypted_length;
+    if (flags & TXD_BIT_PADDED_FILE)
+        encrypted_length = crypto_secretbox_ZEROBYTES + _txd_get_size_of_next_4(clear_len + 8);
+    else
+        encrypted_length = crypto_secretbox_ZEROBYTES + clear_len;
+
     uint64_t eblocklen = BASE_LEN + actual_comment_length + encrypted_length;
     if (out_size)
         *out_size = eblocklen;
@@ -55,11 +61,17 @@ int txd_encrypt_buf(const uint8_t *password, uint64_t passlen,
     randombytes_buf(salt, SALT_LEN);
     
     uint8_t *encrypt_buffer = calloc(encrypted_length, 1);
-    memcpy(encrypt_buffer + crypto_secretbox_ZEROBYTES, clear_in, clear_len);
+
+    if (flags & TXD_BIT_PADDED_FILE) {
+        _txd_write_int_64(clear_len, encrypt_buffer + crypto_secretbox_ZEROBYTES);
+        memcpy(encrypt_buffer + crypto_secretbox_ZEROBYTES + 8, clear_in, clear_len);
+    } else {
+        memcpy(encrypt_buffer + crypto_secretbox_ZEROBYTES, clear_in, clear_len);
+    }
     
     uint8_t *eblock = calloc(eblocklen, 1);
     uint8_t *eblock_pos = eblock;
-    _txd_write_int_32(TXD_ENVELOPE_MAGIC, eblock_pos);    eblock_pos += sizeof(TXD_ENVELOPE_MAGIC);
+    _txd_write_int_32(magic, eblock_pos);                 eblock_pos += sizeof(magic);
     
     _txd_write_int_32(actual_comment_length, eblock_pos); eblock_pos += sizeof(actual_comment_length);
     memcpy(eblock_pos, comment,
@@ -88,10 +100,16 @@ int txd_encrypt_buf(const uint8_t *password, uint64_t passlen,
 int txd_decrypt_buf(const uint8_t *password, uint64_t passlen,
                     const uint8_t *encr_in, uint64_t encr_len,
                     uint8_t **out, uint64_t *out_size) {
-    if (encr_len <= BASE_LEN || _txd_read_int_32(encr_in) != TXD_ENVELOPE_MAGIC)
+    if (encr_len <= BASE_LEN)
         return TXD_ERR_BAD_BLOCK;
+
+    uint32_t magic = _txd_read_int_32(encr_in);
+    if (magic != TXD_ENVELOPE_MAGIC_N && magic != TXD_ENVELOPE_MAGIC_P) {
+        printf("unsupported file: %4s", &magic);
+        return TXD_ERR_BAD_BLOCK;
+    }
     
-    uint8_t *encr_pos = (uint8_t *)encr_in + sizeof(TXD_ENVELOPE_MAGIC);
+    uint8_t *encr_pos = (uint8_t *)encr_in + sizeof(TXD_ENVELOPE_MAGIC_N);
     uint32_t comment_len = _txd_read_int_32(encr_pos);  encr_pos += sizeof(uint32_t);
     if (comment_len > encr_len - 8)
         return TXD_ERR_SIZE_MISMATCH;
@@ -119,12 +137,25 @@ int txd_decrypt_buf(const uint8_t *password, uint64_t passlen,
         free(out_buf);
         return TXD_ERR_DECRYPT_FAILED;
     }
+
+    uint64_t actual_bsize = 0;
+    uint8_t *data_ptr = NULL;
+    if (magic == TXD_ENVELOPE_MAGIC_P) {
+        uint64_t rlen = _txd_read_int_64(out_buf + crypto_secretbox_ZEROBYTES);
+        if (rlen > encr_len - 8)
+            return TXD_ERR_SIZE_MISMATCH;
+        actual_bsize = rlen;
+        data_ptr = out_buf + crypto_secretbox_ZEROBYTES + 8;
+    } else {
+        actual_bsize = encb_len - crypto_secretbox_ZEROBYTES;
+        data_ptr = out_buf + crypto_secretbox_ZEROBYTES;
+    }
     if (out) {
-        uint8_t *actual_out_buf = calloc(encb_len - crypto_secretbox_ZEROBYTES, 1);
-        memcpy(actual_out_buf, out_buf + crypto_secretbox_ZEROBYTES, encb_len - crypto_secretbox_ZEROBYTES);
+        uint8_t *actual_out_buf = calloc(actual_bsize, 1);
+        memcpy(actual_out_buf, data_ptr, actual_bsize);
         *out = actual_out_buf;
     }
     if (out_size)
-        *out_size = encb_len - crypto_secretbox_ZEROBYTES;
+        *out_size = actual_bsize;
     return TXD_ERR_SUCCESS;
 }
