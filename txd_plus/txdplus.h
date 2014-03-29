@@ -3,7 +3,7 @@
 
 /* Outer envelope functions. cc txd_crypto.c */
 
-extern const uint32_t TXD_ERR_DECRYPT_FAILED;
+extern const int32_t TXD_ERR_DECRYPT_FAILED;
 extern const uint32_t TXD_BIT_PADDED_FILE;
 
 int txd_encrypt_buf(const uint8_t *password, uint64_t passlen,

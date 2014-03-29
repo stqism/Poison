@@ -10,7 +10,7 @@
 #define BASE_LEN   (32 + SALT_LEN)
 #define FOUR_MEGABYTES (4194304)
 
-const uint32_t TXD_ERR_DECRYPT_FAILED = 2059;
+const int32_t TXD_ERR_DECRYPT_FAILED = -2059;
 
 /* Defines MAGIC for a non-size-obfuscated TXD envelope. */
 static txd_fourcc_t TXD_ENVELOPE_MAGIC_N = 'MAKi';
@@ -105,7 +105,6 @@ int txd_decrypt_buf(const uint8_t *password, uint64_t passlen,
 
     uint32_t magic = _txd_read_int_32(encr_in);
     if (magic != TXD_ENVELOPE_MAGIC_N && magic != TXD_ENVELOPE_MAGIC_P) {
-        printf("unsupported file: %4s", &magic);
         return TXD_ERR_BAD_BLOCK;
     }
     

@@ -9,10 +9,10 @@
 #include "data_private.h"
 #include "util.h"
 
-const uint32_t TXD_ERR_BAD_BLOCK        = -2049;
-const uint32_t TXD_ERR_SIZE_MISMATCH    = -2050;
-const uint32_t TXD_ERR_NOT_IMPLEMENTED  = -2052;
-const uint32_t TXD_ERR_SUCCESS          = 0;
+const int32_t TXD_ERR_BAD_BLOCK        = -2049;
+const int32_t TXD_ERR_SIZE_MISMATCH    = -2050;
+const int32_t TXD_ERR_NOT_IMPLEMENTED  = -2052;
+const int32_t TXD_ERR_SUCCESS          = 0;
 
 const uint8_t TXD_BIT_NEEDS_FRIEND_REQUEST = 1; /* bit 1 */
 const uint8_t TXD_BIT_SENDS_RECEIPTS = 1 << 1; /* bit 2 */

@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		F553FAF018DCE5D000CBA532 /* Everything */ = {
+		F553FAF018DCE5D000CBA532 /* Everything (oTox) */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything" */;
+			buildConfigurationList = F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything (oTox)" */;
 			buildPhases = (
 			);
 			dependencies = (
 				F553FAF518DCE5D900CBA532 /* PBXTargetDependency */,
 				F553FAF718DCE5D900CBA532 /* PBXTargetDependency */,
+				F5BA234918E74C8E00C85A49 /* PBXTargetDependency */,
 			);
-			name = Everything;
+			name = "Everything (oTox)";
 			productName = Everything;
 		};
 /* End PBXAggregateTarget section */
@@ -46,7 +47,6 @@
 		F553FAEF18DCE1B500CBA532 /* des_core_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = F553FAEE18DCE1B500CBA532 /* des_core_ext.c */; };
 		F554115418C80C2A00CBB9E3 /* DESConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = F554115318C80C2A00CBB9E3 /* DESConversation.m */; };
 		F554115C18C8187700CBB9E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F554115B18C8187700CBB9E3 /* Foundation.framework */; };
-		F554116918C818BC00CBB9E3 /* observer.m in Sources */ = {isa = PBXBuildFile; fileRef = F554116818C818BC00CBB9E3 /* observer.m */; };
 		F554116C18C818DD00CBB9E3 /* libObjectiveTox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */; };
 		F558579918D608AD0053DD52 /* data_intermediate.c in Sources */ = {isa = PBXBuildFile; fileRef = F558579718D608AD0053DD52 /* data_intermediate.c */; };
 		F558579A18D608AD0053DD52 /* data.h in Headers */ = {isa = PBXBuildFile; fileRef = F558579818D608AD0053DD52 /* data.h */; };
@@ -55,6 +55,9 @@
 		F55857A818D6633D0053DD52 /* txdplus_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F55857A718D6633D0053DD52 /* txdplus_private.h */; };
 		F5A57C5718C6A0AA00426BDC /* DESCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */; };
 		F5A57C5F18C6DB3E00426BDC /* DESFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5D18C6DB3E00426BDC /* DESFriend.m */; };
+		F5BA234618E74C7F00C85A49 /* observer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA234318E74C6600C85A49 /* observer.m */; };
+		F5BA234718E74C8900C85A49 /* mio.c in Sources */ = {isa = PBXBuildFile; fileRef = F5BA234518E74C6600C85A49 /* mio.c */; };
+		F5BA234A18E7684D00C85A49 /* libObjectiveTox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,10 +82,33 @@
 			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
 			remoteInfo = ObjectiveTox;
 		};
+		F5BA234818E74C8E00C85A49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5BA233818E74C1900C85A49;
+			remoteInfo = mio;
+		};
+		F5BA234B18E7685300C85A49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
+			remoteInfo = ObjectiveTox;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		F554115718C8187700CBB9E3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F5BA233718E74C1900C85A49 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -150,7 +176,6 @@
 		F554115318C80C2A00CBB9E3 /* DESConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESConversation.m; sourceTree = "<group>"; };
 		F554115918C8187700CBB9E3 /* DESObserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DESObserver; sourceTree = BUILT_PRODUCTS_DIR; };
 		F554115B18C8187700CBB9E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		F554116818C818BC00CBB9E3 /* observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = observer.m; sourceTree = "<group>"; };
 		F558579718D608AD0053DD52 /* data_intermediate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_intermediate.c; path = ../../core_extensions/data_intermediate.c; sourceTree = "<group>"; };
 		F558579818D608AD0053DD52 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data.h; path = ../../core_extensions/data.h; sourceTree = "<group>"; };
 		F558579B18D608E90053DD52 /* data_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data_private.h; path = ../../core_extensions/data_private.h; sourceTree = "<group>"; };
@@ -164,6 +189,9 @@
 		F5A57C5A18C6B81900426BDC /* DESKeyFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESKeyFunctions.h; sourceTree = "<group>"; };
 		F5A57C5B18C6C8C700426BDC /* DESAbstract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DESAbstract.h; sourceTree = "<group>"; };
 		F5A57C5D18C6DB3E00426BDC /* DESFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESFriend.m; sourceTree = "<group>"; };
+		F5BA233918E74C1900C85A49 /* mio */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mio; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5BA234318E74C6600C85A49 /* observer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = observer.m; sourceTree = "<group>"; };
+		F5BA234518E74C6600C85A49 /* mio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mio.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +209,14 @@
 			files = (
 				F554116C18C818DD00CBB9E3 /* libObjectiveTox.a in Frameworks */,
 				F554115C18C8187700CBB9E3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5BA233618E74C1900C85A49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5BA234A18E7684D00C85A49 /* libObjectiveTox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +241,7 @@
 			children = (
 				F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */,
 				F554115918C8187700CBB9E3 /* DESObserver */,
+				F5BA233918E74C1900C85A49 /* mio */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,10 +362,27 @@
 		F554116718C818BC00CBB9E3 /* testing */ = {
 			isa = PBXGroup;
 			children = (
-				F554116818C818BC00CBB9E3 /* observer.m */,
+				F5BA234218E74C6600C85A49 /* desobserver */,
+				F5BA234418E74C6600C85A49 /* mio */,
 			);
 			name = testing;
 			path = objective_tox/testing;
+			sourceTree = "<group>";
+		};
+		F5BA234218E74C6600C85A49 /* desobserver */ = {
+			isa = PBXGroup;
+			children = (
+				F5BA234318E74C6600C85A49 /* observer.m */,
+			);
+			path = desobserver;
+			sourceTree = "<group>";
+		};
+		F5BA234418E74C6600C85A49 /* mio */ = {
+			isa = PBXGroup;
+			children = (
+				F5BA234518E74C6600C85A49 /* mio.c */,
+			);
+			path = mio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +437,24 @@
 			productReference = F554115918C8187700CBB9E3 /* DESObserver */;
 			productType = "com.apple.product-type.tool";
 		};
+		F5BA233818E74C1900C85A49 /* mio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5BA234118E74C1900C85A49 /* Build configuration list for PBXNativeTarget "mio" */;
+			buildPhases = (
+				F5BA233518E74C1900C85A49 /* Sources */,
+				F5BA233618E74C1900C85A49 /* Frameworks */,
+				F5BA233718E74C1900C85A49 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5BA234C18E7685300C85A49 /* PBXTargetDependency */,
+			);
+			name = mio;
+			productName = mio;
+			productReference = F5BA233918E74C1900C85A49 /* mio */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -406,7 +478,8 @@
 			targets = (
 				F50F9C0518C3AAD800D06A0F /* ObjectiveTox */,
 				F554115818C8187700CBB9E3 /* DESObserver */,
-				F553FAF018DCE5D000CBA532 /* Everything */,
+				F5BA233818E74C1900C85A49 /* mio */,
+				F553FAF018DCE5D000CBA532 /* Everything (oTox) */,
 			);
 		};
 /* End PBXProject section */
@@ -465,7 +538,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F554116918C818BC00CBB9E3 /* observer.m in Sources */,
+				F5BA234618E74C7F00C85A49 /* observer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5BA233518E74C1900C85A49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5BA234718E74C8900C85A49 /* mio.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +568,16 @@
 			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
 			targetProxy = F554116A18C818D800CBB9E3 /* PBXContainerItemProxy */;
 		};
+		F5BA234918E74C8E00C85A49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5BA233818E74C1900C85A49 /* mio */;
+			targetProxy = F5BA234818E74C8E00C85A49 /* PBXContainerItemProxy */;
+		};
+		F5BA234C18E7685300C85A49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
+			targetProxy = F5BA234B18E7685300C85A49 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -503,6 +594,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -546,6 +638,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -574,6 +667,10 @@
 		F50F9C0B18C3AAD800D06A0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = NO;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = NO;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -587,6 +684,10 @@
 		F50F9C0C18C3AAD800D06A0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = NO;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_UNCHECKEDRETURN = NO;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,6 +734,30 @@
 			};
 			name = Release;
 		};
+		F5BA233F18E74C1900C85A49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F5BA234018E74C1900C85A49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -654,7 +779,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything" */ = {
+		F553FAF118DCE5D000CBA532 /* Build configuration list for PBXAggregateTarget "Everything (oTox)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F553FAF218DCE5D000CBA532 /* Debug */,
@@ -671,6 +796,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F5BA234118E74C1900C85A49 /* Build configuration list for PBXNativeTarget "mio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5BA233F18E74C1900C85A49 /* Debug */,
+				F5BA234018E74C1900C85A49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

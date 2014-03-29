@@ -41,20 +41,20 @@ extern const txd_fourcc_t TXD_FORMAT_BINARY1;
 /**
  * The envelope has a bad magic number, or it was shorter than the BASE_LEN.
  */
-extern const uint32_t TXD_ERR_BAD_BLOCK;
+extern const int32_t TXD_ERR_BAD_BLOCK;
 /**
  * One of the sizes in the block does not correspond with what we know.
  */
-extern const uint32_t TXD_ERR_SIZE_MISMATCH;
+extern const int32_t TXD_ERR_SIZE_MISMATCH;
 /**
  * The operation completed successfully (0).
  */
-extern const uint32_t TXD_ERR_SUCCESS;
+extern const int32_t TXD_ERR_SUCCESS;
 /**
  * This function is not implemented yet. Failure is guaranteed
  * for all future calls to this function for this version of the library.
  */
-extern const uint32_t TXD_ERR_NOT_IMPLEMENTED;
+extern const int32_t TXD_ERR_NOT_IMPLEMENTED;
 
 
 /* Selective archival constants.
