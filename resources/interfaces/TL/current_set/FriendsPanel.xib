@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <development version="5000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SCBuddyListController">
@@ -53,7 +54,7 @@
                         <popUpButton id="qxV-WJ-N6q">
                             <rect key="frame" x="4" y="2" width="20" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="right" alignment="center" lineBreakMode="truncatingTail" state="on" inset="2" pullsDown="YES" arrowPosition="noArrow" preferredEdge="maxY" altersStateOfSelectedItem="NO" selectedItem="KuG-Lj-Hq1" id="5TT-hz-lSz">
+                            <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="right" alignment="center" lineBreakMode="truncatingTail" state="on" inset="2" pullsDown="YES" arrowPosition="noArrow" preferredEdge="maxY" altersStateOfSelectedItem="NO" selectedItem="k6j-WV-dTL" id="5TT-hz-lSz">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" title="(none)" id="4pn-Dj-Z0M">
@@ -61,8 +62,15 @@
                                         <menuItem state="on" image="icon_plus" hidden="YES" id="KuG-Lj-Hq1">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="Add Friend..." keyEquivalent="n" id="k6j-WV-dTL"/>
-                                        <menuItem title="New Group Chat..." keyEquivalent="N" id="5Zl-iS-IdB"/>
+                                        <menuItem title="Add Friend..." id="k6j-WV-dTL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showAddFriend:" target="-2" id="sfy-uh-Gtf"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="New Group Chat..." id="5Zl-iS-IdB">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </popUpButtonCell>
@@ -129,14 +137,14 @@
                         </searchField>
                     </subviews>
                 </customView>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
+                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="44" horizontalPageScroll="10" verticalLineScroll="44" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" id="GhQ-c0-jhA">
                     <rect key="frame" x="0.0" y="24" width="250" height="293"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="vJm-Xq-AaQ">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="42" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
                                 <rect key="frame" x="0.0" y="0.0" width="253" height="293"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -156,7 +164,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView id="e2v-HG-6tI">
+                                            <tableCellView id="e2v-HG-6tI" customClass="SCFriendCellView">
                                                 <rect key="frame" x="1" y="1" width="250" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -184,6 +192,11 @@
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="proportionallyDown" image="status-light-online" id="P0G-sY-qcu"/>
                                                     </imageView>
                                                 </subviews>
+                                                <connections>
+                                                    <outlet property="auxLabel" destination="3Gk-UI-uKS" id="wL4-wm-PKq"/>
+                                                    <outlet property="light" destination="0nA-uh-mA7" id="6Sh-xE-r0o"/>
+                                                    <outlet property="mainLabel" destination="c4j-IO-4XU" id="phh-Uq-F5N"/>
+                                                </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>

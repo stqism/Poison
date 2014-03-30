@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <development version="5000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -75,20 +76,18 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="SPQ-mh-iCQ"/>
-                            <menuItem title="Change Name..." id="dnK-Vl-RdM">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Change Name..." keyEquivalent="e" id="dnK-Vl-RdM">
                                 <connections>
                                     <action selector="changeName:" target="494" id="DQJ-xe-P19"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Change Status..." id="HSH-MV-sZE">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Change Status..." keyEquivalent="e" id="HSH-MV-sZE">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="changeStatus:" target="494" id="A5F-Sp-Rj4"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy Tox ID" keyEquivalent="c" id="tRJ-tr-UZd">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Copy Tox ID" keyEquivalent="C" id="tRJ-tr-UZd">
                                 <connections>
                                     <action selector="copyPublicID:" target="494" id="cGv-pw-PHb"/>
                                 </connections>
@@ -100,7 +99,11 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1sX-EB-lMv"/>
-                            <menuItem title="Add Friend..." keyEquivalent="n" id="cov-0m-caU"/>
+                            <menuItem title="Add Friend..." keyEquivalent="n" id="RIM-eb-ifM">
+                                <connections>
+                                    <action selector="addFriend:" target="494" id="khv-uh-bNY"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="omo-qg-B80"/>
                             <menuItem title="Log Out..." id="x52-HS-lct">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -380,7 +383,6 @@
                 <outlet property="aboutWindowVersionLabel" destination="3Oi-N1-sJL" id="Rlk-mw-I8h"/>
                 <outlet property="ackTextView" destination="qcA-e7-nUJ" id="gG9-5D-Ixs"/>
                 <outlet property="ackWindow" destination="bmI-XX-y06" id="I4e-88-Pbt"/>
-                <outlet property="addFriendMenuItem" destination="cov-0m-caU" id="ej8-iI-bqG"/>
                 <outlet property="akiUserInfoMenuItemPlaceholder" destination="knR-3m-v1h" id="IQW-Ji-G9p"/>
                 <outlet property="changeNameMenuItem" destination="dnK-Vl-RdM" id="PIW-Uf-521"/>
                 <outlet property="changeStatusMenuItem" destination="HSH-MV-sZE" id="bN2-9x-M0Y"/>
@@ -420,7 +422,7 @@
                 <outlet property="statusDisplay" destination="xLU-mx-v44" id="WYs-K0-n3F"/>
             </connections>
         </customView>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" frameAutosaveName="" id="P58-bk-Eul">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" frameAutosaveName="" id="P58-bk-Eul">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="283" y="305" width="284" height="460"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
