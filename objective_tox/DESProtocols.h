@@ -36,11 +36,19 @@
 @property (readonly) NSString *name;
 @property (readonly) NSString *statusMessage;
 @property (readonly) DESFriendStatus status;
+/* Not Key-Value-Observable. */
 @property (readonly) NSString *publicKey;
 @property (readonly) DESConversation *conversation;
 @property (readonly) DESToxConnection *connection;
+/* Not Key-Value-Observable. */
 @property (readonly) int32_t peerNumber;
 @property (readonly) BOOL isTyping;
+/* Not Key-Value-Observable. */
+@property (readonly) NSDate *lastSeen;
+
+/* fragile? */
+@property (readonly) NSString *address;
+@property (readonly) uint16_t port;
 @end
 
 #endif

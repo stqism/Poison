@@ -804,6 +804,7 @@
 				F5BA234018E74C1900C85A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

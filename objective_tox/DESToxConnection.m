@@ -32,6 +32,14 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         self.statusMessage = DESDefaultStatusMessage;
         self.isMessengerLoopStopping = YES;
         tox_callback_friend_request(self.tox, _DESCallbackFriendRequest, (__bridge void*)self);
+        tox_callback_name_change(self.tox, _DESCallbackFriendNameDidChange, (__bridge void*)self);
+        tox_callback_status_message(self.tox, _DESCallbackFriendStatusMessageDidChange, (__bridge void*)self);
+        tox_callback_user_status(self.tox, _DESCallbackFriendUserStatus, (__bridge void*)self);
+        tox_callback_typing_change(self.tox, _DESCallbackFriendTypingStatus, (__bridge void*)self);
+        tox_callback_connection_status(self.tox, _DESCallbackFriendConnectionStatus, (__bridge void*)self);
+        tox_callback_friend_message(self.tox, _DESCallbackFriendMessage, (__bridge void*)self);
+        tox_callback_friend_action(self.tox, _DESCallbackFriendAction, (__bridge void*)self);
+
     }
     return self;
 }
@@ -49,7 +57,7 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 - (void)start {
     uint8_t *kek = malloc(TOX_FRIEND_ADDRESS_SIZE);
     tox_get_address(self.tox, kek);
-    DESInfo(@"Our public key: %@", DESConvertPublicKeyToString(kek));
+    DESInfo(@"Our public key: %@", DESConvertFriendAddressToString(kek));
     free(kek);
     if (!self.isMessengerLoopStopping) {
         DESWarn(@"You are calling [DESToxConnection start] multiple times. They will be ignored.");
@@ -277,6 +285,18 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     return NO;
 }
 
+- (NSDate *)lastSeen {
+    return [NSDate date];
+}
+
+- (NSString *)address {
+    return nil;
+}
+
+- (uint16_t)port {
+    return 0;
+}
+
 #pragma mark - Friends
 
 - (void)addFriendPublicKey:(NSString *)key message:(NSString *)message {
@@ -353,6 +373,24 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     }
 }
 
+- (void)syncFriendList {
+    NSSet *mutationF = [self friends];
+    NSSet *mutationG = [self groups];
+    [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:mutationF];
+    [_friendMapping removeAllObjects];
+    [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:mutationF];
+    [self willChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:mutationG];
+    [_groupMapping removeAllObjects];
+    [self didChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:mutationG];
+
+    uint32_t friend_count = tox_count_friendlist(self.tox);
+    int32_t numbers[friend_count];
+    tox_get_friendlist(self.tox, numbers, friend_count);
+    for (int i = 0; i < friend_count; ++i) {
+        [self addFriendTriggeringKVO:numbers[i]];
+    }
+}
+
 - (NSSet *)friends {
     return [NSSet setWithArray:[_friendMapping allValues]];
 }
@@ -377,6 +415,7 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         [self willChangeValueForKey:@"privateKey"];
         [self willChangeValueForKey:@"friendAddress"];
         txd_restore_intermediate(txd, self.tox);
+        [self syncFriendList];
         [self didChangeValueForKey:@"friendAddress"];
         [self didChangeValueForKey:@"privateKey"];
         [self didChangeValueForKey:@"publicKey"];

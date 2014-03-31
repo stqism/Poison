@@ -40,6 +40,14 @@ BOOL DESConvertPrivateKeyToData(NSString *theString, uint8_t *theOutput);
 BOOL DESConvertFriendAddressToData(NSString *theString, uint8_t *theOutput);
 
 /**
+ * Convert a string of bytes to hexadecimal representation.
+ * @param theData arbitrary data buffer.
+ * @param len length of theData.
+ * @return theData as a hexadecimal NSString.
+ */
+NSString *DESConvertBytesToHex(const uint8_t *theData, uint32_t len);
+
+/**
  * Convert a Tox public key from Core to its hex representation.
  * @param theData the buffer containing the public key.
  * @return theData as a hexadecimal NSString.

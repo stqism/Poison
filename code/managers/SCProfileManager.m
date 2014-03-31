@@ -1,5 +1,6 @@
 #include "Copyright.h"
 
+#import "SCAppDelegate.h"
 #import "SCProfileManager.h"
 #import "data_private.h"
 #import "txdplus.h"
@@ -15,6 +16,11 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
     }
     return [NSError errorWithDomain:@"TXDErrorDomain" code:retv userInfo:userInfo];
 }
+
+@interface SCAppDelegate ()
+- (NSString *)profileName;
+- (NSString *)profilePass;
+@end
 
 @implementation SCProfileManager
 
@@ -58,7 +64,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
     if (![self profileNameExists:aProfile])
         return YES;
     NSURL *manifestURL = [[self profileDirectory] URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO];
-    NSMutableDictionary *manifest = [NSMutableDictionary dictionaryWithContentsOfURL:manifestURL];
+    NSMutableDictionary *manifest = [[self manifest] mutableCopy];
     NSURL *profileDataURL = [[self profileDirectory] URLByAppendingPathComponent:manifest[aProfile] isDirectory:YES];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
@@ -73,7 +79,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
 
 + (txd_intermediate_t)attemptDecryptionOfProfileName:(NSString *)aProfile password:(NSString *)password error:(NSError **)err {
     NSURL *profiles = [self profileDirectory];
-    NSMutableDictionary *manifest = [NSMutableDictionary dictionaryWithContentsOfURL:[profiles URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO]];
+    NSMutableDictionary *manifest = [[self manifest] mutableCopy];
     if (!manifest[aProfile]) {
         return NULL;
     }
@@ -106,7 +112,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
 
 + (BOOL)saveProfile:(txd_intermediate_t)aProfile name:(NSString *)name password:(NSString *)password {
     NSURL *profiles = [self profileDirectory];
-    NSMutableDictionary *manifest = [NSMutableDictionary dictionaryWithContentsOfURL:[profiles URLByAppendingPathComponent:@"Manifest.plist" isDirectory:NO]];
+    NSMutableDictionary *manifest = [[self manifest] mutableCopy];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *datadir = NULL;
     if (!manifest[name]) {
@@ -138,6 +144,92 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
     NSData *contents = [[NSData alloc] initWithBytesNoCopy:enc length:encsize freeWhenDone:YES];
     [contents writeToFile:[datadir.path stringByAppendingPathComponent:@"data.txd"] atomically:YES];
     return YES;
+}
+
++ (NSString *)currentProfileIdentifier {
+    NSString *name = ((SCAppDelegate *)[NSApp delegate]).profileName;
+    if (!name)
+        return nil;
+    return (NSString *)self.manifest[name];
+}
+
++ (NSMutableDictionary *)_privateSettings {
+    if (![self currentProfileIdentifier])
+        return nil;
+    static NSMutableDictionary *ps = nil;
+    if (!ps) {
+        NSURL *profileHome = [self.profileDirectory URLByAppendingPathComponent:self.currentProfileIdentifier isDirectory:YES];
+        NSURL *psFile = [profileHome URLByAppendingPathComponent:@"private_store.txd" isDirectory:NO];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSDictionary *attrs = [fileManager attributesOfItemAtPath:psFile.path error:nil];
+        if (!attrs) {
+            ps = [NSMutableDictionary dictionary];
+            NSLog(@"note: private store missing");
+            return ps;
+        }
+        NSString *pass = ((SCAppDelegate *)[NSApp delegate]).profilePass;
+        uint64_t pl = [pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        NSData *encryptedBlob = [NSData dataWithContentsOfURL:psFile];
+        uint8_t *buf = NULL;
+        uint64_t size = 0;
+        int err = txd_decrypt_buf((uint8_t *)[pass UTF8String], pl, encryptedBlob.bytes,
+                                  encryptedBlob.length, &buf, &size);
+        if (err != TXD_ERR_SUCCESS) {
+            NSLog(@"yikes! txd_decrypt_buf failed with code %d", err);
+            ps = [NSMutableDictionary dictionary];
+            return ps;
+        }
+        NSData *hopefullyJSONData = [[NSData alloc] initWithBytesNoCopy:buf length:size freeWhenDone:YES];
+        ps = [NSJSONSerialization JSONObjectWithData:hopefullyJSONData options:NSJSONReadingMutableContainers error:nil];
+        if (![ps isKindOfClass:[NSMutableDictionary class]])
+            ps = [NSMutableDictionary dictionary];
+    }
+
+    return ps;
+}
+
++ (NSDictionary *)privateSettings {
+    return self._privateSettings;
+}
+
++ (void)commitPrivateSettings {
+    static NSRecursiveLock *lock = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        lock = [[NSRecursiveLock alloc] init];
+    });
+
+    [lock lock];
+
+    NSData *buf = [NSJSONSerialization dataWithJSONObject:self.privateSettings options:NSJSONWritingPrettyPrinted error:nil];
+    if (!buf) {
+        NSLog(@"eeeeeh");
+        return;
+    }
+    NSString *pass = ((SCAppDelegate *)[NSApp delegate]).profilePass;
+    uint64_t pl = [pass lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+
+    uint8_t *e;
+    uint64_t es;
+
+    NSString *comment = [NSString stringWithFormat:@"Poison Private Store %@",
+                         SCApplicationInfoDictKey(@"CFBundleShortVersionString")];
+    txd_encrypt_buf((uint8_t *)[pass UTF8String], pl, buf.bytes, buf.length,
+                    &e, &es, [comment UTF8String], 0);
+
+    NSURL *profileHome = [self.profileDirectory URLByAppendingPathComponent:self.currentProfileIdentifier isDirectory:YES];
+    [[NSFileManager defaultManager] createDirectoryAtURL:profileHome withIntermediateDirectories:YES attributes:nil error:nil];
+    [[NSData dataWithBytesNoCopy:e length:es freeWhenDone:YES] writeToURL:[profileHome URLByAppendingPathComponent:@"private_store.txd" isDirectory:NO] atomically:YES];
+
+    [lock unlock];
+}
+
++ (id)privateSettingForKey:(id<NSCopying>)k {
+    return self._privateSettings[k];
+}
+
++ (void)setPrivateSetting:(id)val forKey:(id<NSCopying>)k {
+    self._privateSettings[k] = val;
 }
 
 @end

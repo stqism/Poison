@@ -8,13 +8,15 @@ NS_INLINE int SCQuickValidateString(NSString *string) {
     const char *check = string.UTF8String;
     int i = 0;
     char a = 0;
-    for (a = *check; a != '0'; a = check[++i]) {
-        if (a > 90) /* if lowercase, convert it to uppercase */
-            a ^= 32;
-        if ((a <= 70 && a >= 65) || (a <= 57 && a >= 48))
+    /* clear bit 3 - same thing as the XOR 32 trick to make
+     * lowercase -> uppercase */
+    for (a = *check & (~(1 << 5)); a != 0; a = check[++i] & (~(1 << 5))) {
+        if ((a <= 70 && a >= 65) || (a <= 25 && a >= 16)) {
             continue; /* A-F, 0-9 */
-        else
+        } else {
+            // NSLog(@"fail: %d %c (%d -> %d) not valid tox char", i, check[i], check[i], a);
             return 0;
+        }
     }
     return 1;
 }
@@ -29,6 +31,7 @@ NS_INLINE int SCQuickValidateString(NSString *string) {
 @implementation SCAddFriendSheetController
 - (void)awakeFromNib {
     self.idField.delegate = self;
+    self.idField.font = [NSFont fontWithName:@"Menlo-Regular" size:12];
     [self resetFields];
 }
 

@@ -1,48 +1,31 @@
 #include "Copyright.h"
 
 #import "ObjectiveTox.h"
+#import "SCMainWindowing.h"
 #import "SCBuddyListController.h"
 #import "SCGradientView.h"
+#import "SCProfileManager.h"
+#import "SCBuddyListShared.h"
+#import "SCBuddyListCells.h"
+#import <sodium.h>
+#import <Quartz/Quartz.h>
 
 #define SC_MAX_CACHED_ROW_COUNT (50)
 
-NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
-    switch (s) {
-        case DESFriendStatusAvailable:
-            return [NSImage imageNamed:@"status-light-online"];
-        case DESFriendStatusAway:
-            return [NSImage imageNamed:@"status-light-away"];
-        case DESFriendStatusBusy:
-            return [NSImage imageNamed:@"status-light-offline"];
-        default:
-            return [NSImage imageNamed:@"status-light-missing"];
-    }
-}
-
-@interface SCFriendRowView : NSTableRowView
+@interface SCDoubleClickingImageView : NSImageView
 
 @end
 
-@implementation SCFriendRowView
+@implementation SCDoubleClickingImageView
 
-- (void)drawRect:(NSRect)dirtyRect {
-//    if (self.isSelected) {
-//        [[NSColor colorWithCalibratedWhite:0.04 alpha:1.0] set];
-//        [[NSBezierPath bezierPathWithRect:NSMakeRect(-2, 0, self.bounds.size.width + 2, self.bounds.size.height)] stroke];
-//        [[NSColor colorWithCalibratedWhite:1.0 alpha:0.35] set];
-//        [[NSBezierPath bezierPathWithRect:NSMakeRect(0, 1, self.bounds.size.width, 1)] fill];
-//        [[NSColor colorWithCalibratedWhite:1.0 alpha:0.20] set];
-//        [[NSBezierPath bezierPathWithRect:NSMakeRect(0, self.bounds.size.height - 2, self.bounds.size.width, 1)] fill];
-//        NSGradient *bodyGrad = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.10] endingColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.20]];
-//        [bodyGrad drawInBezierPath:[NSBezierPath bezierPathWithRect:NSMakeRect(-2, 2, self.bounds.size.width + 2, self.bounds.size.height - 4)] angle:-90.0];
-//    }
-    if (self.isSelected) {
-        NSGradient *shadowGrad = [[NSGradient alloc] initWithStartingColor:[NSColor clearColor] endingColor:[NSColor colorWithCalibratedWhite:0.071 alpha:0.3]];
-        [[NSColor colorWithCalibratedWhite:0.118 alpha:1.0] set];
-        [[NSBezierPath bezierPathWithRect:self.bounds] fill];
-        [shadowGrad drawInBezierPath:[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(0, -4, self.bounds.size.width, 8)] angle:-90.0];
-        [shadowGrad drawInBezierPath:[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(0, self.bounds.size.height - 4, self.bounds.size.width, 8)] angle:90.0];
-    }
+- (void)mouseDown:(NSEvent *)theEvent {
+    if (theEvent.clickCount == 2 && self.action)
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self.target performSelector:self.action withObject:self];
+        #pragma clang diagnostic pop
+    else
+        [super mouseDown:theEvent];
 }
 
 @end
@@ -59,6 +42,7 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
 @property (strong) IBOutlet NSTextField *nameField;
 @property (strong) IBOutlet NSTextField *statusField;
 @property (strong) IBOutlet NSImageView *statusDot;
+@property (strong) IBOutlet NSImageView *avatarView;
 
 @property (strong) NSMutableSet *rowCache;
 #pragma mark - Change name and status
@@ -66,16 +50,27 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
 @property (strong) IBOutlet NSTextField *ieNameField;
 @property (strong) IBOutlet NSTextField *ieStatusField;
 @property (strong) IBOutlet NSPopUpButton *ieStatusChooser;
+
+@property (strong) IBOutlet NSPanel *nicknameEditorSheet;
+@property (strong) IBOutlet NSTextField *origNameLabel;
+@property (strong) IBOutlet NSTextField *nicknameField;
 @end
 
 @implementation SCBuddyListController {
     DESToxConnection *_watchingConnection;
+    NSMutableArray *_orderingList;
+    NSDateFormatter *_formatter;
+    NSCache *_hashCache;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.rowCache = [[NSMutableSet alloc] initWithCapacity:10];
+        self.rowCache = [[NSMutableSet alloc] initWithCapacity:100];
+        _orderingList = [[NSMutableArray alloc] initWithCapacity:10];
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.doesRelativeDateFormatting = YES;
+        _formatter.timeStyle = NSDateFormatterShortStyle;
     }
     return self;
 }
@@ -96,12 +91,20 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
     self.auxiliaryView.dragsWindow = YES;
     self.friendListView.dataSource = self;
     self.friendListView.delegate = self;
+
+    self.avatarView.wantsLayer = YES;
+    NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
+    CALayer *maskLayer = [CALayer layer];
+    maskLayer.frame = (CGRect){CGPointZero, self.avatarView.frame.size};
+    maskLayer.contents = (id)mask;
+    self.avatarView.layer.mask = maskLayer;
 }
 
 - (void)detachHandlersFromConnection {
     [_watchingConnection removeObserver:self forKeyPath:@"name"];
     [_watchingConnection removeObserver:self forKeyPath:@"statusMessage"];
     [_watchingConnection removeObserver:self forKeyPath:@"status"];
+    [_watchingConnection removeObserver:self forKeyPath:@"friends"];
 }
 
 - (void)attachKVOHandlersToConnection:(DESToxConnection *)tox {
@@ -110,21 +113,39 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
     [tox addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
     [tox addObserver:self forKeyPath:@"statusMessage" options:NSKeyValueObservingOptionNew context:NULL];
     [tox addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+    [tox addObserver:self forKeyPath:@"friends" options:NSKeyValueObservingOptionNew context:NULL];
     if (tox.isActive) {
         self.nameField.stringValue = tox.name;
         self.statusField.stringValue = tox.statusMessage;
         self.statusDot.image = SCImageForFriendStatus(tox.status);
+        [self repopulateOrderingList];
+        [self.friendListView reloadData];
     }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"name"]) {
-        self.nameField.stringValue = change[NSKeyValueChangeNewKey];
-    } else if ([keyPath isEqualToString:@"statusMessage"]) {
-        self.statusField.stringValue = change[NSKeyValueChangeNewKey];
-    } else if ([keyPath isEqualToString:@"status"]) {
-        self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([keyPath isEqualToString:@"name"]) {
+            self.nameField.stringValue = change[NSKeyValueChangeNewKey];
+        } else if ([keyPath isEqualToString:@"statusMessage"]) {
+            self.statusField.stringValue = change[NSKeyValueChangeNewKey];
+        } else if ([keyPath isEqualToString:@"status"]) {
+            self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
+        } else if ([keyPath isEqualToString:@"friends"]) {
+            [self repopulateOrderingList];
+            NSSet *changed = change[NSKeyValueChangeNewKey];
+            NSMutableIndexSet *changeIndexes = [[NSMutableIndexSet alloc] init];
+            for (DESFriend *obj in changed) {
+                [changeIndexes addIndex:obj.peerNumber];
+            }
+            if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeInsertion) {
+                [self.friendListView insertRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideDown];
+            } else if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval) {
+                [self.friendListView removeRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideUp];
+            }
+            NSLog(@"%@", change);
+        }
+    });
 }
 
 #pragma mark - ui crap
@@ -178,13 +199,28 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
 }
 
 - (IBAction)finishAndCommit:(NSButton *)sender {
-    [NSApp endSheet:self.identityEditorSheet returnCode:sender.tag];
+    [NSApp endSheet:self.view.window.attachedSheet returnCode:sender.tag];
 }
 
 #pragma mark - table
 
+- (void)repopulateOrderingList {
+    NSSet *set = _watchingConnection.friends;
+    _orderingList = [[NSMutableArray alloc] initWithCapacity:set.count];
+    for (DESFriend *friend in set) {
+        [_orderingList addObject:@(friend.peerNumber)];
+    }
+    [_orderingList sortUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+        if ([obj1 isGreaterThan:obj2])
+            return NSOrderedDescending;
+        else if ([obj1 isLessThan:obj2])
+            return NSOrderedAscending;
+        return NSOrderedSame;
+    }];
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return 1000;
+    return _orderingList.count;
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
@@ -197,13 +233,128 @@ NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
     return rowView;
 }
 
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    SCFriendCellView *dequeued = [tableView makeViewWithIdentifier:@"FriendCell" owner:nil];
+    dequeued.manager = self;
+    [dequeued applyMaskIfRequired];
+    return dequeued;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    NSNumber *peerNum = _orderingList[row];
+    return [_watchingConnection friendWithID:[peerNum intValue]];
+}
+
 - (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
     if ([self.rowCache count] < SC_MAX_CACHED_ROW_COUNT)
         [self.rowCache addObject:rowView];
 }
 
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+    NSUInteger ci = self.friendListView.clickedRow;
+    DESFriend *f = [_watchingConnection friendWithID:[_orderingList[ci] intValue]];
+    [menu itemAtIndex:0].title = f.name;
+}
+
+#pragma mark - cell server
+
+- (NSString *)formatDate:(NSDate *)date {
+    if ([[NSDate date] timeIntervalSinceDate:date] > 86400)
+        _formatter.dateStyle = NSDateFormatterShortStyle;
+    else
+        _formatter.dateStyle = NSDateFormatterNoStyle;
+    return [NSString stringWithFormat:NSLocalizedString(@"Offline since: %@", nil), [_formatter stringFromDate:date]];
+}
+
+- (NSString *)lookupCustomNameForID:(NSString *)id_ {
+    /* We don't want to leak friend IDs in NSUserDefaults.
+     * Therefore, hash them first. */
+    NSDictionary *map = [SCProfileManager privateSettingForKey:@"nicknames"];
+    return map[id_];
+}
+
 - (void)dealloc {
     [self detachHandlersFromConnection];
+}
+
+#pragma mark - misc menus
+
+- (IBAction)showAddFriend:(id)sender {
+    /* kinda hacky... should have just redirected it to the appdelegate */
+    if ([self.view.window.windowController respondsToSelector:@selector(displayAddFriend)]) {
+        [(id<SCMainWindowing>)self.view.window.windowController displayAddFriend];
+    }
+}
+
+- (IBAction)presentNicknameEditor:(id)sender {
+    NSUInteger ci = self.friendListView.clickedRow;
+    DESFriend *f = [_watchingConnection friendWithID:[_orderingList[ci] intValue]];
+
+    NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *displayName = f.name;
+    if ([[displayName stringByTrimmingCharactersInSet:cs] isEqualToString:@""])
+        displayName = [NSString stringWithFormat:NSLocalizedString(@"Unknown (%@)", nil), [f.publicKey substringToIndex:8]];
+
+    CGFloat frameHeightNormal = (self.nicknameEditorSheet.frame.size.height
+                                 - self.origNameLabel.frame.size.height);
+    CGRect bb = [displayName boundingRectWithSize:(NSSize){self.origNameLabel.frame.size.width}
+                             options:NSStringDrawingUsesLineFragmentOrigin
+                             attributes:@{NSFontAttributeName: self.origNameLabel.font}];
+    [self.nicknameEditorSheet setFrame:(CGRect){CGPointZero, {self.nicknameEditorSheet.frame.size.width, frameHeightNormal + bb.size.height}} display:NO];
+
+    self.origNameLabel.stringValue = displayName;
+    ((NSTextFieldCell *)self.nicknameField.cell).placeholderString = displayName;
+    [NSApp beginSheet:self.nicknameEditorSheet modalForWindow:self.view.window modalDelegate:self didEndSelector:@selector(commitNicknameFromSheet:returnCode:userInfo:) contextInfo:(__bridge void *)(f)];
+}
+
+- (void)commitNicknameFromSheet:(NSWindow *)sheet returnCode:(NSInteger)ret userInfo:(void *)friend {
+    NSLog(@"commit %@ for %@", self.nicknameField.stringValue, (__bridge id)friend);
+    DESFriend *f = (__bridge DESFriend *)friend;
+    NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *dn = [self.nicknameField.stringValue stringByTrimmingCharactersInSet:cs];
+
+    if (ret == 0) {
+        [sheet orderOut:self];
+        self.nicknameField.stringValue = @"";
+        return;
+    }
+    
+    if (ret == 2 || [dn isEqualToString:@""]) {
+        NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy] ?: [NSMutableDictionary dictionary];
+        [map removeObjectForKey:f.publicKey];
+        [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [SCProfileManager commitPrivateSettings];
+        });
+    } else if (ret == 1) {
+        NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy] ?: [NSMutableDictionary dictionary];
+        map[f.publicKey] = dn;
+        [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [SCProfileManager commitPrivateSettings];
+        });
+    }
+    self.nicknameField.stringValue = @"";
+    [sheet orderOut:self];
+
+    [self.friendListView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:[_orderingList indexOfObject:@(f.peerNumber)]] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+}
+
+#pragma mark - avatars
+
+- (IBAction)clickAvatarImage:(id)sender {
+    IKPictureTaker *taker = [IKPictureTaker pictureTaker];
+    taker.inputImage = self.avatarView.image;
+    [taker beginPictureTakerSheetForWindow:self.view.window withDelegate:self
+                            didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
+                               contextInfo:NULL];
+}
+
+- (void)pictureTakerDidEnd:(IKPictureTaker *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSOKButton) {
+        self.avatarView.image = sheet.outputImage;
+        // commit avatar change...
+    }
 }
 
 @end

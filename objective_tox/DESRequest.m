@@ -39,7 +39,7 @@
 }
 
 - (void)accept {
-    tox_add_friend_norequest(_connection._core, self.senderPublicKey);
+    [_connection addFriendPublicKeyWithoutRequest:DESConvertPublicKeyToString(self.senderPublicKey)];
 }
 
 - (void)decline {

@@ -2,7 +2,10 @@
 
 #import "SCGradientView.h"
 
-@implementation SCGradientView
+@implementation SCGradientView {
+    NSGradient *_chrome;
+    NSGradient *_shine;
+}
 
 - (void)awakeFromNib {
     if (!self.topColor)
@@ -11,20 +14,45 @@
         self.bottomColor = [NSColor blackColor];
     if (!self.shadowColor)
         self.shadowColor = [NSColor blackColor];
+    [self regenChrome];
+    [self regenShine];
+}
+
+- (void)setTopColor:(NSColor *)topColor {
+    _topColor = topColor;
+    [self regenChrome];
+    [self regenShine];
+}
+
+- (void)setBottomColor:(NSColor *)bottomColor {
+    _bottomColor = bottomColor;
+    [self regenChrome];
+}
+
+- (void)setShadowColor:(NSColor *)shadowColor {
+    _shadowColor = shadowColor;
+    [self regenShine];
+}
+
+- (void)regenChrome {
+    _chrome = [[NSGradient alloc] initWithStartingColor:self.bottomColor endingColor:self.topColor];
+}
+
+- (void)regenShine {
+    NSColor *farPoint = nil;
+    [_chrome getColor:&farPoint location:NULL atIndex:1];
+    if (!farPoint || !self.shadowColor)
+        _shine = nil;
+    else
+        _shine = [[NSGradient alloc] initWithColors:@[farPoint, self.shadowColor, farPoint]];
 }
 
 #pragma mark - Drawing
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSGradient *chrome = [[NSGradient alloc] initWithStartingColor:self.bottomColor endingColor:self.topColor];
-    NSBezierPath *bgPath = [NSBezierPath bezierPathWithRect:self.bounds];
-    [chrome drawInBezierPath:bgPath angle:90];
+    [_chrome drawInRect:(CGRect){{dirtyRect.origin.x, 0}, {dirtyRect.size.width, self.bounds.size.height}} angle:90];
     if (self.shadowColor) {
-        NSBezierPath *topShadow = [NSBezierPath bezierPathWithRect:NSMakeRect(0, self.frame.size.height - 1, self.frame.size.width, 1)];
-        NSColor *farPoint = nil;
-        [chrome getColor:&farPoint location:NULL atIndex:1];
-        NSGradient *highlightGrad = [[NSGradient alloc] initWithColors:@[farPoint, self.shadowColor, farPoint]];
-        [highlightGrad drawInBezierPath:topShadow angle:0];
+        [_shine drawInRect:NSMakeRect(0, self.frame.size.height - 1, self.frame.size.width, 1) angle:0];
     }
     if (self.borderColor) {
         [self.borderColor set];

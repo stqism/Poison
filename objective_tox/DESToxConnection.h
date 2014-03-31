@@ -22,9 +22,9 @@
 - (void)didJoinGroupChat:(DESConversation *)chat onConnection:(DESToxConnection *)connection;
 
 - (void)friend:(DESFriend *)friend connectionStatusDidChange:(BOOL)newStatus onConnection:(DESToxConnection *)connection;
-- (void)friend:(DESFriend *)friend userStatusDidChange:(BOOL)newStatus onConnection:(DESToxConnection *)connection;
-- (void)friend:(DESFriend *)friend statusMessageDidChange:(BOOL)newStatus onConnection:(DESToxConnection *)connection;
-- (void)friend:(DESFriend *)friend nameDidChange:(BOOL)newStatus onConnection:(DESToxConnection *)connection;
+- (void)friend:(DESFriend *)friend userStatusDidChange:(DESFriendStatus)newStatus onConnection:(DESToxConnection *)connection;
+- (void)friend:(DESFriend *)friend statusMessageDidChange:(NSString *)newStatusMessage onConnection:(DESToxConnection *)connection;
+- (void)friend:(DESFriend *)friend nameDidChange:(NSString *)newName onConnection:(DESToxConnection *)connection;
 @end
 
 @interface DESToxConnection : NSObject <DESFriend>

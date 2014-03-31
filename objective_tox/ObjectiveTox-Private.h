@@ -11,7 +11,27 @@
 
 #pragma mark - Callbacks
 
-void _DESCallbackFriendRequest(Tox *tox, uint8_t *from, uint8_t *payload, uint16_t payloadLength, void *dtcInstance);
+void _DESCallbackFriendRequest(Tox *tox, uint8_t *from, uint8_t *payload,
+                               uint16_t payloadLength, void *dtcInstance);
+void _DESCallbackFriendNameDidChange(Tox *tox, int32_t from, uint8_t *payload,
+                                     uint16_t payloadLength, void *dtcInstance);
+void _DESCallbackFriendStatusMessageDidChange(Tox *tox, int32_t from,
+                                              uint8_t *payload,
+                                              uint16_t payloadLength,
+                                              void *dtcInstance);
+void _DESCallbackFriendUserStatus(Tox *tox, int32_t from, uint8_t on_off,
+                                  void *dtcInstance);
+void _DESCallbackFriendTypingStatus(Tox *tox, int32_t from, uint8_t on_off,
+                                    void *dtcInstance);
+void _DESCallbackFriendConnectionStatus(Tox *tox, int32_t from, uint8_t on_off,
+                                        void *dtcInstance);
+void _DESCallbackFriendMessage(Tox *tox, int32_t from, uint8_t *payload,
+                               uint16_t payloadLength, void *dtcInstance);
+void _DESCallbackFriendAction(Tox *tox, int32_t from, uint8_t *payload,
+                              uint16_t payloadLength, void *dtcInstance);
+void _DESCallbackFMGeneric(DESToxConnection *conn, int32_t from,
+                           uint8_t *payload, uint16_t payloadLength,
+                           DESMessageType mtyp);
 
 #pragma mark - DESRequest concrete subclasses
 
@@ -68,6 +88,7 @@ NS_INLINE TOX_USERSTATUS DESFriendStatusToTox(DESFriendStatus status) {
 
 - (instancetype)initWithNumber:(int32_t)friendNum
                   onConnection:(DESToxConnection *)connection;
+- (void)updateAddress:(NSString *)newAddr port:(uint16_t)newPort;
 
 @end
 
@@ -86,4 +107,10 @@ NS_INLINE TOX_USERSTATUS DESFriendStatusToTox(DESFriendStatus status) {
 
 #pragma mark - Extensions to Core
 
+/* Counts the connected DHT nodes. Maximum 32 due to core limit */
 int DESCountCloseNodes(Tox *tox);
+/* Gets a friend's IP address and port into ip_out and port_out.
+ * (you can enable the UI by
+ *  $ defaults write ca.kirara.poison.next airiUIEnabled <key>
+ *  in Poison.app.) */
+int DESCopyNetAddress(Tox *tox, int32_t peernum, char **ip_out, uint16_t *port_out);

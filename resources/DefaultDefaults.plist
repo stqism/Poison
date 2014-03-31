@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>autologinUsername</key>
-	<string>y</string>
+	<string></string>
 	<key>forcedMultiWindowUI</key>
-	<true/>
+	<false/>
 	<key>nameCompletionDelimiter</key>
 	<string>,</string>
 </dict>

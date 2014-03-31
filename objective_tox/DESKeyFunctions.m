@@ -96,28 +96,24 @@ BOOL DESConvertFriendAddressToData(NSString *theString, uint8_t *theOutput) {
     return YES;
 }
 
-NSString *DESConvertPublicKeyToString(const uint8_t *theData) {
-    NSMutableString *theString = [NSMutableString stringWithCapacity:DESPublicKeySize * 2];
-    for (NSInteger idx = 0; idx < DESPublicKeySize; ++idx) {
+NSString *DESConvertBytesToHex(const uint8_t *theData, uint32_t len) {
+    NSMutableString *theString = [NSMutableString stringWithCapacity:len * 2];
+    for (NSInteger idx = 0; idx < len; ++idx) {
         [theString appendFormat:@"%02X", theData[idx]];
     }
     return (NSString*)theString;
+}
+
+NSString *DESConvertPublicKeyToString(const uint8_t *theData) {
+    return DESConvertBytesToHex(theData, DESPublicKeySize);
 }
 
 NSString *DESConvertPrivateKeyToString(const uint8_t *theData) {
-    NSMutableString *theString = [NSMutableString stringWithCapacity:DESPrivateKeySize * 2];
-    for (NSInteger idx = 0; idx < DESPrivateKeySize; ++idx) {
-        [theString appendFormat:@"%02X", theData[idx]];
-    }
-    return (NSString*)theString;
+    return DESConvertBytesToHex(theData, DESPrivateKeySize);
 }
 
 NSString *DESConvertFriendAddressToString(const uint8_t *theData) {
-    NSMutableString *theString = [NSMutableString stringWithCapacity:DESFriendAddressSize * 2];
-    for (NSInteger idx = 0; idx < DESFriendAddressSize; ++idx) {
-        [theString appendFormat:@"%02X", theData[idx]];
-    }
-    return (NSString*)theString;
+    return DESConvertBytesToHex(theData, DESFriendAddressSize);
 }
 
 BOOL DESKeyPairIsValid(const uint8_t *privateKey, const uint8_t *publicKey) {

@@ -41,6 +41,7 @@
 @property (unsafe_unretained) IBOutlet NSWindow *ackWindow;
 @property (unsafe_unretained) IBOutlet NSTextView *ackTextView;
 #pragma mark - Misc. state
+@property (strong) id activityToken;
 @property BOOL userIsWaitingOnApplicationExit;
 @property (strong) NSURL *waitingToxURL;
 @end
@@ -208,12 +209,22 @@
 - (void)saveProfile {
     if (!self.toxConnection)
         return;
+    [[NSProcessInfo processInfo] disableSuddenTermination];
     txd_intermediate_t data = [self.toxConnection createTXDIntermediate];
     [SCProfileManager saveProfile:data name:self.profileName password:self.profilePass];
     txd_intermediate_free(data);
+    [[NSProcessInfo processInfo] enableSuddenTermination];
+}
+
+- (void)connectionDidBecomeActive:(DESToxConnection *)connection {
+    [[NSProcessInfo processInfo] disableAutomaticTermination:@"DESConnection"];
+    self.activityToken = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiatedAllowingIdleSystemSleep reason:@"DESConnection"];
 }
 
 - (void)connectionDidBecomeInactive:(DESToxConnection *)connection {
+    [[NSProcessInfo processInfo] enableAutomaticTermination:@"DESConnection"];
+    [[NSProcessInfo processInfo] endActivity:self.activityToken];
+    self.activityToken = nil;
     [self saveProfile];
     [connection removeObserver:self forKeyPath:@"name"];
     [connection removeObserver:self forKeyPath:@"statusMessage"];
@@ -319,6 +330,14 @@
         return;
     SCBuddyListController *list = ((id<SCMainWindowing>)self.mainWindowController).buddyListController;
     [list changeName:sender];
+}
+
+- (IBAction)addFriend:(id)sender {
+    if ([self.mainWindowController respondsToSelector:@selector(displayAddFriend)]) {
+        [(id<SCMainWindowing>)self.mainWindowController displayAddFriend];
+    } else {
+        NSBeep();
+    }
 }
 
 @end

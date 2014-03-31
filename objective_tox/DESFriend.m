@@ -11,6 +11,9 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 - (DESToxConnection *)connection { DESAbstractWarning; return nil; }
 - (int32_t)peerNumber { DESAbstractWarning; return -1; }
 - (BOOL)isTyping { DESAbstractWarning; return -1; }
+- (NSDate *)lastSeen { DESAbstractWarning; return nil; }
+- (NSString *)address { DESAbstractWarning; return nil; }
+- (uint16_t)port { DESAbstractWarning; return 0; }
 
 - (NSString *)presentableTitle { DESAbstractWarning; return nil; }
 - (NSString *)presentableSubtitle { DESAbstractWarning; return nil; }
@@ -24,9 +27,12 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 
 @implementation DESConcreteFriend {
     uint32_t _cMessageID;
+    NSString *_addr;
+    uint16_t _port;
 }
 @synthesize connection = _connection;
 @synthesize peerNumber = _peerNumber;
+@synthesize delegate = _delegate;
 
 - (instancetype)initWithNumber:(int32_t)friendNum
                   onConnection:(DESToxConnection *)connection {
@@ -35,16 +41,16 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
         _connection = connection;
         _peerNumber = friendNum;
         _cMessageID = 1;
+        _addr = @"";
     }
     return self;
 }
 
 - (NSString *)name {
-    /* uint16_t sz = tox_get_name_size(_connection._core, _peerNumber); */
-    uint16_t sz = TOX_MAX_NAME_LENGTH;
-    uint8_t *buf = calloc(sz, 1);
+    uint16_t sz = tox_get_name_size(_connection._core, _peerNumber);
+    uint8_t *buf = malloc(sz);
     tox_get_name(_connection._core, _peerNumber, buf);
-    return [[NSString alloc] initWithBytesNoCopy:buf length:strlen((char*)buf) encoding:NSUTF8StringEncoding freeWhenDone:YES];
+    return [[NSString alloc] initWithBytesNoCopy:buf length:sz encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
 - (NSString *)statusMessage {
@@ -55,7 +61,13 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 }
 
 - (DESFriendStatus)status {
-    return DESToxToFriendStatus(tox_get_user_status(_connection._core, _peerNumber));
+    //DESInfo(@"%d", tox_get_friend_connection_status(_connection._core, _peerNumber));
+    if (tox_get_friend_connection_status(_connection._core, _peerNumber)) {
+        //DESInfo(@"friend is online, all right");
+        return DESToxToFriendStatus(tox_get_user_status(_connection._core, _peerNumber));
+    } else {
+        return DESFriendStatusOffline;
+    }
 }
 
 - (NSString *)publicKey {
@@ -70,6 +82,19 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 
 - (BOOL)isTyping {
     return tox_get_is_typing(_connection._core, _peerNumber)? YES : NO;
+}
+
+- (NSDate *)lastSeen {
+    uint64_t lastPing = tox_get_last_online(_connection._core, _peerNumber);
+    return [NSDate dateWithTimeIntervalSince1970:lastPing];
+}
+
+- (NSString *)address {
+    return _addr;
+}
+
+- (uint16_t)port {
+    return _port;
 }
 
 #pragma mark - DESConversation
@@ -87,7 +112,10 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 }
 
 - (uint32_t)sendMessage:(NSString *)message {
-    uint32_t mid = ++_cMessageID;
+    uint32_t mid;
+    @synchronized(self) {
+        mid = ++_cMessageID;
+    }
     dispatch_async(_connection._messengerQueue, ^{
         NSUInteger mlen = [message lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         uint32_t ret = 0;
@@ -109,7 +137,10 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 }
 
 - (uint32_t)sendAction:(NSString *)action {
-    uint32_t mid = ++_cMessageID;
+    uint32_t mid;
+    @synchronized(self) {
+        mid = ++_cMessageID;
+    }
     dispatch_async(_connection._messengerQueue, ^{
         NSUInteger mlen = [action lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         uint32_t ret = 0;
@@ -128,6 +159,19 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
         });
     });
     return mid;
+}
+
+#pragma mark - private
+
+- (void)updateAddress:(NSString *)newAddr port:(uint16_t)newPort {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self willChangeValueForKey:@"address"];
+        _addr = newAddr;
+        [self didChangeValueForKey:@"address"];
+        [self willChangeValueForKey:@"port"];
+        _port = newPort;
+        [self didChangeValueForKey:@"port"];
+    });
 }
 
 @end

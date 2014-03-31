@@ -81,6 +81,10 @@
 		F55857A618D649820053DD52 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F55857A518D649820053DD52 /* libqrencode.a */; };
 		F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F567A4DF18C5530300E04F3A /* SCDraggingView.m */; };
 		F567A4E318C5745C00E04F3A /* to-do in Resources */ = {isa = PBXBuildFile; fileRef = F567A4E218C5745C00E04F3A /* to-do */; };
+		F56956CC18E884AE00E1EB0D /* avatar_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F56956CA18E884AE00E1EB0D /* avatar_mask@2x.png */; };
+		F56956CD18E884AE00E1EB0D /* avatar_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = F56956CB18E884AE00E1EB0D /* avatar_mask.png */; };
+		F56956D618E88C4700E1EB0D /* SCBuddyListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */; };
+		F56956D918E88EE700E1EB0D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56956D818E88EE700E1EB0D /* Quartz.framework */; };
 		F58EE9A918C57A760033F2D4 /* DefaultDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */; };
 		F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F58EE9AC18C595530033F2D4 /* SCChatView.m */; };
 		F59C0F4418D3E6F300BB437C /* SCResourceBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = F59C0F4318D3E6F300BB437C /* SCResourceBundle.m */; };
@@ -115,6 +119,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F553FAF018DCE5D000CBA532;
 			remoteInfo = Everything;
+		};
+		F56956D018E884AE00E1EB0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9C0D18C3AB3600D06A0F /* ObjectiveTox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F5BA233918E74C1900C85A49;
+			remoteInfo = mio;
 		};
 		F5A2977F18D4CB2A00595FDF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -233,6 +244,12 @@
 		F567A4DE18C5530300E04F3A /* SCDraggingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDraggingView.h; sourceTree = "<group>"; };
 		F567A4DF18C5530300E04F3A /* SCDraggingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDraggingView.m; sourceTree = "<group>"; };
 		F567A4E218C5745C00E04F3A /* to-do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "to-do"; sourceTree = "<group>"; };
+		F56956CA18E884AE00E1EB0D /* avatar_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_mask@2x.png"; sourceTree = "<group>"; };
+		F56956CB18E884AE00E1EB0D /* avatar_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_mask.png; sourceTree = "<group>"; };
+		F56956D418E88C4700E1EB0D /* SCBuddyListCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBuddyListCells.h; sourceTree = "<group>"; };
+		F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBuddyListCells.m; sourceTree = "<group>"; };
+		F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCBuddyListShared.h; sourceTree = "<group>"; };
+		F56956D818E88EE700E1EB0D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultDefaults.plist; sourceTree = "<group>"; };
 		F58EE9AB18C595530033F2D4 /* SCChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCChatView.h; sourceTree = "<group>"; };
 		F58EE9AC18C595530033F2D4 /* SCChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCChatView.m; sourceTree = "<group>"; };
@@ -270,10 +287,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F541810018C3D4E600AB220E /* libObjectiveTox.a in Frameworks */,
 				F55857A618D649820053DD52 /* libqrencode.a in Frameworks */,
+				F56956D918E88EE700E1EB0D /* Quartz.framework in Frameworks */,
 				F5A2978218D4CB3600595FDF /* Security.framework in Frameworks */,
 				F541810418C3E5F300AB220E /* WebKit.framework in Frameworks */,
-				F541810018C3D4E600AB220E /* libObjectiveTox.a in Frameworks */,
 				F53DB8A318B6DE74008D7ED5 /* QuartzCore.framework in Frameworks */,
 				F5B5421F18B6D23C00226CA8 /* Cocoa.framework in Frameworks */,
 			);
@@ -287,6 +305,7 @@
 			children = (
 				F50F9C1218C3AB3600D06A0F /* libObjectiveTox.a */,
 				F5DAB46118C95A280046ED96 /* DESObserver */,
+				F56956D118E884AE00E1EB0D /* mio */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -356,6 +375,8 @@
 				F5DAB46618C962E90046ED96 /* qr-placeholder.png */,
 				F5FFF46318B8283300CD1E43 /* oi.png */,
 				F5FFF46418B8283300CD1E43 /* oi@2x.png */,
+				F56956CA18E884AE00E1EB0D /* avatar_mask@2x.png */,
+				F56956CB18E884AE00E1EB0D /* avatar_mask.png */,
 				F5FFF46018B81F4E00CD1E43 /* Poison.iconset */,
 			);
 			name = art;
@@ -388,8 +409,11 @@
 		F53DB89E18B6DDB8008D7ED5 /* buddy_list */ = {
 			isa = PBXGroup;
 			children = (
+				F56956D418E88C4700E1EB0D /* SCBuddyListCells.h */,
+				F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */,
 				F53DB89F18B6DDDE008D7ED5 /* SCBuddyListController.h */,
 				F53DB8A018B6DDDE008D7ED5 /* SCBuddyListController.m */,
+				F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */,
 			);
 			path = buddy_list;
 			sourceTree = "<group>";
@@ -447,6 +471,7 @@
 		F5B5421D18B6D23C00226CA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F56956D818E88EE700E1EB0D /* Quartz.framework */,
 				F55857A518D649820053DD52 /* libqrencode.a */,
 				F5A2978118D4CB3600595FDF /* Security.framework */,
 				F541810318C3E5F300AB220E /* WebKit.framework */,
@@ -602,6 +627,13 @@
 			remoteRef = F50F9C1118C3AB3600D06A0F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F56956D118E884AE00E1EB0D /* mio */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = mio;
+			remoteRef = F56956D018E884AE00E1EB0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F5DAB46118C95A280046ED96 /* DESObserver */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -620,6 +652,7 @@
 				F52D013918B7CFB70033680F /* icon_plus@2x.png in Resources */,
 				F541811718C4138100AB220E /* Default.psnChatStyle in Resources */,
 				F538754E18C28B4000AED945 /* titlebar_incoming_files.png in Resources */,
+				F56956CD18E884AE00E1EB0D /* avatar_mask.png in Resources */,
 				F52714AC18DF823400B7E663 /* MainMenu.xib in Resources */,
 				F52D013D18B7CFB70033680F /* status-light-away.png in Resources */,
 				F5DAB46718C962E90046ED96 /* qr-placeholder.png in Resources */,
@@ -651,6 +684,7 @@
 				F52D013C18B7CFB70033680F /* icon-frequests@2x.png in Resources */,
 				F58EE9A918C57A760033F2D4 /* DefaultDefaults.plist in Resources */,
 				F52714AB18DF823400B7E663 /* FriendsPanel.xib in Resources */,
+				F56956CC18E884AE00E1EB0D /* avatar_mask@2x.png in Resources */,
 				F5CC709C18C2BA1600C41EBF /* friends.rtf in Resources */,
 				F52D013818B7CFB70033680F /* icon_plus.png in Resources */,
 				F52D013518B7CFB70033680F /* icon_info@2x.png in Resources */,
@@ -677,7 +711,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "echo \"Poison build: checking your dependencies!\"\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\nmake_libvpx() {\n    echo \"Need to build libvpx. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libvpx\n    git clone \"https://chromium.googlesource.com/webm/libvpx\" libvpx && cd libvpx\n    git checkout \"v1.3.0\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" \\\n    > \"$WORKSPACE/../libvpx.configure.log\" 2>&1\n    make -j$NPROC && make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libvpx.configure.log\"\n}\nmake_libopus() {\n    echo \"Need to build libopus. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"opus-1.0.3\" \"libopus.tar.gz\"\n    curl -o \"libopus.tar.gz\" \"http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz\"\n    tar -xzf \"libopus.tar.gz\" && cd \"opus-1.0.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" \\\n    > \"$WORKSPACE/../libopus.configure.log\" 2>&1\n    make -j$NPROC && make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libopus.configure.log\"\n}\nmake_libqrencode() {\n    echo \"Need to build libqrencode. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"qrencode-3.4.3\" \"libqrencode.tar.gz\"\n    curl -o \"libqrencode.tar.gz\" \"https://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.gz\"\n    tar -xzf \"libqrencode.tar.gz\" && cd \"qrencode-3.4.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" --without-tools --enable-static \\\n    > \"$WORKSPACE/../libqrencode.configure.log\" 2>&1\n    make -j$NPROC\n    make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libqrencode.configure.log\"\n}\n\nupdate_build() {\n    if [ \"x$JENKINS_BUILD\" != \"x\" ]; then\n        echo \"This looks like a Jenkins build... I'll use Jenkins build numbers, then.\"\n        GIT_REF=$GIT_COMMIT\n        BUILD_NO=\"j$BUILD_NUMBER\"\n    elif [ -d \"$PROJECT_DIR/.git\" ]; then\n        echo \"Git information is available.\"\n        GIT_REF=$(git log -n 1 --pretty=format:%h)\n        BUILD_NO=\"m$(git rev-list HEAD --count)\"\n    else\n        echo \"No build information available.\"\n        GIT_REF=\"UNKNOWN\"\n        BUILD_NO=\"???\"\n    fi\n    echo \"Xcode is present. Writing to Info.plist: build $BUILD_NO; git commit $GIT_REF\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NO\" \"$INFOPLIST_FILE\"\n    /usr/libexec/PlistBuddy -c \"Add :SCGitRef string $GIT_REF\" \"$INFOPLIST_FILE\" || /usr/libexec/PlistBuddy -c \"Set :SCGitRef $GIT_REF\" \"$INFOPLIST_FILE\"\n}\n\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libvpx.a\" ]; then\n#    make_libvpx; cd $PROJECT_DIR;\n#fi\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libopus.a\" ]; then\n#    make_libopus; cd $PROJECT_DIR;\n#fi\nif [ ! -f \"$PROJECT_DIR/_support/lib/libqrencode.a\" ]; then\n    make_libqrencode; cd $PROJECT_DIR;\nfi\n\necho \"Poison build: stitching version into Info.plist!\"\nupdate_build\ncat \"$PROJECT_DIR/_support/flavour.txt\" > \"$PROJECT_DIR/_support/.security\" 2&> /dev/null || touch \"$PROJECT_DIR/_support/.security\"\n";
+			shellScript = "echo \"Poison build: checking your dependencies!\"\nif [ -z ${XCODE_VERSION_ACTUAL+x} ]; then\n    echo \"error: Xcode not present\"\n    exit 1\nfi\nPATH=/usr/local/bin:$PATH\nNPROC=\"$(sysctl -n hw.ncpu)\"\nWORKSPACE=\"$PROJECT_DIR/_support/_work\"\nmake_libvpx() {\n    echo \"Need to build libvpx. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf libvpx\n    git clone \"https://chromium.googlesource.com/webm/libvpx\" libvpx && cd libvpx\n    git checkout \"v1.3.0\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" \\\n    > \"$WORKSPACE/../libvpx.configure.log\" 2>&1\n    make -j$NPROC && make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libvpx.configure.log\"\n}\nmake_libopus() {\n    echo \"Need to build libopus. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"opus-1.0.3\" \"libopus.tar.gz\"\n    curl -o \"libopus.tar.gz\" \"http://downloads.xiph.org/releases/opus/opus-1.0.3.tar.gz\"\n    tar -xzf \"libopus.tar.gz\" && cd \"opus-1.0.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" \\\n    > \"$WORKSPACE/../libopus.configure.log\" 2>&1\n    make -j$NPROC && make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libopus.configure.log\"\n}\nmake_libqrencode() {\n    echo \"Need to build libqrencode. This will take a while.\"\n    mkdir -p \"$WORKSPACE\" && cd \"$WORKSPACE\"\n    rm -rf \"qrencode-3.4.3\" \"libqrencode.tar.gz\"\n    curl -o \"libqrencode.tar.gz\" \"https://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.gz\"\n    tar -xzf \"libqrencode.tar.gz\" && cd \"qrencode-3.4.3\"\n    ./configure \"--prefix=$PROJECT_DIR/_support\" --without-tools --enable-static \\\n    > \"$WORKSPACE/../libqrencode.configure.log\" 2>&1\n    make -j$NPROC\n    make install\n    echo \"OK.\"\n    rm -f \"$WORKSPACE/../libqrencode.configure.log\"\n}\n\nupdate_build() {\n    if [ \"x$JENKINS_BUILD\" != \"x\" ]; then\n        echo \"This looks like a Jenkins build... I'll use Jenkins build numbers, then.\"\n        GIT_REF=$GIT_COMMIT\n        BUILD_NO=\"j$BUILD_NUMBER\"\n    elif [ -d \"$PROJECT_DIR/.git\" ]; then\n        echo \"Git information is available.\"\n        GIT_REF=$(git log -n 1 --pretty=format:%h)\n        BUILD_NO=\"m$(git rev-list HEAD --count)\"\n    else\n        echo \"No build information available.\"\n        GIT_REF=\"UNKNOWN\"\n        BUILD_NO=\"???\"\n    fi\n    echo \"Xcode is present. Writing to Info.plist: build $BUILD_NO; git commit $GIT_REF\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NO\" \"$INFOPLIST_FILE\"\n    /usr/libexec/PlistBuddy -c \"Add :SCGitRef string $GIT_REF\" \"$INFOPLIST_FILE\" || /usr/libexec/PlistBuddy -c \"Set :SCGitRef $GIT_REF\" \"$INFOPLIST_FILE\"\n}\n\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libvpx.a\" ]; then\n#    make_libvpx; cd $PROJECT_DIR;\n#fi\n#if [ ! -f \"$PROJECT_DIR/_support/lib/libopus.a\" ]; then\n#    make_libopus; cd $PROJECT_DIR;\n#fi\nif [ ! -f \"$PROJECT_DIR/_support/lib/libqrencode.a\" ]; then\n    make_libqrencode; cd $PROJECT_DIR;\nfi\n\necho \"Poison build: stitching version into Info.plist!\"\nupdate_build\ncat \"$PROJECT_DIR/_support/flavour.txt\" > \"$PROJECT_DIR/_support/.security\" 2> /dev/null || touch \"$PROJECT_DIR/_support/.security\"\n";
 		};
 		F553FAFB18DCF3AF00CBA532 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -709,6 +743,7 @@
 				F53DB89C18B6DD37008D7ED5 /* SCShadowedView.m in Sources */,
 				F541811518C412EC00AB220E /* SCThemeManager.m in Sources */,
 				F5B5423218B6D23C00226CA8 /* SCAppDelegate.m in Sources */,
+				F56956D618E88C4700E1EB0D /* SCBuddyListCells.m in Sources */,
 				F53DB89A18B6DD37008D7ED5 /* SCGradientView.m in Sources */,
 				F53DB89D18B6DD37008D7ED5 /* SCSometimesEditableTextField.m in Sources */,
 				F5B5422B18B6D23C00226CA8 /* main.m in Sources */,
@@ -881,6 +916,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}/_support/lib",
+					"$(PROJECT_DIR)/_support/lib",
 				);
 				OTHER_CFLAGS = "-DSC_ENFORCE_SIGNING_RESTRICTIONS_HARD";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -917,6 +953,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"${PROJECT_DIR}/_support/lib",
+					"$(PROJECT_DIR)/_support/lib",
 				);
 				OTHER_CFLAGS = "-DSC_ENFORCE_SIGNING_RESTRICTIONS_HARD";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
