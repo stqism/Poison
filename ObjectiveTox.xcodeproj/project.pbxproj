@@ -16,6 +16,7 @@
 				F553FAF518DCE5D900CBA532 /* PBXTargetDependency */,
 				F553FAF718DCE5D900CBA532 /* PBXTargetDependency */,
 				F5BA234918E74C8E00C85A49 /* PBXTargetDependency */,
+				F5688A8618EA40F5001F45E6 /* PBXTargetDependency */,
 			);
 			name = "Everything (oTox)";
 			productName = Everything;
@@ -38,6 +39,8 @@
 		F50F9C5A18C3AB7D00D06A0F /* ping.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C3F18C3AB5000D06A0F /* ping.c */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
 		F50F9C5B18C3AB7D00D06A0F /* tox.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4118C3AB5000D06A0F /* tox.c */; };
 		F50F9C5C18C3AB7D00D06A0F /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4318C3AB5000D06A0F /* util.c */; settings = {COMPILER_FLAGS = "-Wno-format"; }; };
+		F52113DE18EA37FE00EB1B99 /* toxlookup.m in Sources */ = {isa = PBXBuildFile; fileRef = F52113DD18EA37FE00EB1B99 /* toxlookup.m */; };
+		F52113E518EA398A00EB1B99 /* DESUserDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = F52113E418EA398900EB1B99 /* DESUserDiscovery.m */; };
 		F54180E918C3ACAB00AB220E /* DESRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1518C3AB4300D06A0F /* DESRequest.m */; };
 		F54180EB18C3ACAB00AB220E /* DESToxConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1718C3AB4300D06A0F /* DESToxConnection.m */; };
 		F54180EC18C3ACAB00AB220E /* DESKeyFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */; };
@@ -53,6 +56,7 @@
 		F558579C18D608E90053DD52 /* data_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F558579B18D608E90053DD52 /* data_private.h */; };
 		F558579E18D6179C0053DD52 /* data_export.c in Sources */ = {isa = PBXBuildFile; fileRef = F558579D18D6179C0053DD52 /* data_export.c */; };
 		F55857A818D6633D0053DD52 /* txdplus_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F55857A718D6633D0053DD52 /* txdplus_private.h */; };
+		F5688A8918EA40FB001F45E6 /* libObjectiveTox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */; };
 		F5A57C5718C6A0AA00426BDC /* DESCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */; };
 		F5A57C5F18C6DB3E00426BDC /* DESFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A57C5D18C6DB3E00426BDC /* DESFriend.m */; };
 		F5BA234618E74C7F00C85A49 /* observer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA234318E74C6600C85A49 /* observer.m */; };
@@ -82,6 +86,20 @@
 			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
 			remoteInfo = ObjectiveTox;
 		};
+		F5688A8518EA40F5001F45E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F52113DA18EA37FE00EB1B99;
+			remoteInfo = toxlookup;
+		};
+		F5688A8718EA40F8001F45E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F50F9C0518C3AAD800D06A0F;
+			remoteInfo = ObjectiveTox;
+		};
 		F5BA234818E74C8E00C85A49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F50F9BFE18C3AAD800D06A0F /* Project object */;
@@ -99,6 +117,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F52113D918EA37FE00EB1B99 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		F554115718C8187700CBB9E3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +198,10 @@
 		F50F9C4918C3AB5B00D06A0F /* txdplus_crypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = txdplus_crypto.c; sourceTree = "<group>"; };
 		F50F9C4B18C3AB5B00D06A0F /* scrypt-jane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scrypt-jane.h"; path = "scrypt-jane/scrypt-jane.h"; sourceTree = "<group>"; };
 		F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "scrypt-jane.c"; path = "scrypt-jane/scrypt-jane.c"; sourceTree = "<group>"; };
+		F52113DB18EA37FE00EB1B99 /* toxlookup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = toxlookup; sourceTree = BUILT_PRODUCTS_DIR; };
+		F52113DD18EA37FE00EB1B99 /* toxlookup.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = toxlookup.m; sourceTree = "<group>"; };
+		F52113E418EA398900EB1B99 /* DESUserDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DESUserDiscovery.m; path = objective_tox/core_extensions/DESUserDiscovery.m; sourceTree = SOURCE_ROOT; };
+		F52113E618EA3E9A00EB1B99 /* DESUserDiscovery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DESUserDiscovery.h; path = core_extensions/DESUserDiscovery.h; sourceTree = "<group>"; };
 		F54180F418C3ADE600AB220E /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = _support/lib/libsodium.a; sourceTree = "<group>"; };
 		F553FAEE18DCE1B500CBA532 /* des_core_ext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des_core_ext.c; path = core_extensions/des_core_ext.c; sourceTree = "<group>"; };
 		F554115318C80C2A00CBB9E3 /* DESConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESConversation.m; sourceTree = "<group>"; };
@@ -200,6 +231,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F54180F518C3ADE600AB220E /* libsodium.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F52113D818EA37FE00EB1B99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5688A8918EA40FB001F45E6 /* libObjectiveTox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +281,7 @@
 				F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */,
 				F554115918C8187700CBB9E3 /* DESObserver */,
 				F5BA233918E74C1900C85A49 /* mio */,
+				F52113DB18EA37FE00EB1B99 /* toxlookup */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,6 +304,8 @@
 				F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */,
 				F5A57C5618C6A0AA00426BDC /* DESCallbacks.m */,
 				F553FAEE18DCE1B500CBA532 /* des_core_ext.c */,
+				F52113E618EA3E9A00EB1B99 /* DESUserDiscovery.h */,
+				F52113E418EA398900EB1B99 /* DESUserDiscovery.m */,
 			);
 			name = des2;
 			path = objective_tox;
@@ -351,6 +393,14 @@
 			path = txd_plus;
 			sourceTree = "<group>";
 		};
+		F52113DC18EA37FE00EB1B99 /* toxlookup */ = {
+			isa = PBXGroup;
+			children = (
+				F52113DD18EA37FE00EB1B99 /* toxlookup.m */,
+			);
+			path = toxlookup;
+			sourceTree = "<group>";
+		};
 		F554115A18C8187700CBB9E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +412,7 @@
 		F554116718C818BC00CBB9E3 /* testing */ = {
 			isa = PBXGroup;
 			children = (
+				F52113DC18EA37FE00EB1B99 /* toxlookup */,
 				F5BA234218E74C6600C85A49 /* desobserver */,
 				F5BA234418E74C6600C85A49 /* mio */,
 			);
@@ -418,6 +469,24 @@
 			productName = ObjectiveTox;
 			productReference = F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		F52113DA18EA37FE00EB1B99 /* toxlookup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F52113E318EA37FE00EB1B99 /* Build configuration list for PBXNativeTarget "toxlookup" */;
+			buildPhases = (
+				F52113D718EA37FE00EB1B99 /* Sources */,
+				F52113D818EA37FE00EB1B99 /* Frameworks */,
+				F52113D918EA37FE00EB1B99 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5688A8818EA40F8001F45E6 /* PBXTargetDependency */,
+			);
+			name = toxlookup;
+			productName = toxlookup;
+			productReference = F52113DB18EA37FE00EB1B99 /* toxlookup */;
+			productType = "com.apple.product-type.tool";
 		};
 		F554115818C8187700CBB9E3 /* DESObserver */ = {
 			isa = PBXNativeTarget;
@@ -479,6 +548,7 @@
 				F50F9C0518C3AAD800D06A0F /* ObjectiveTox */,
 				F554115818C8187700CBB9E3 /* DESObserver */,
 				F5BA233818E74C1900C85A49 /* mio */,
+				F52113DA18EA37FE00EB1B99 /* toxlookup */,
 				F553FAF018DCE5D000CBA532 /* Everything (oTox) */,
 			);
 		};
@@ -514,6 +584,7 @@
 				F54180EC18C3ACAB00AB220E /* DESKeyFunctions.m in Sources */,
 				F50F9C4E18C3AB7D00D06A0F /* DHT.c in Sources */,
 				F50F9C4F18C3AB7D00D06A0F /* LAN_discovery.c in Sources */,
+				F52113E518EA398A00EB1B99 /* DESUserDiscovery.m in Sources */,
 				F50F9C5018C3AB7D00D06A0F /* Lossless_UDP.c in Sources */,
 				F5A57C5F18C6DB3E00426BDC /* DESFriend.m in Sources */,
 				F50F9C5118C3AB7D00D06A0F /* Messenger.c in Sources */,
@@ -531,6 +602,14 @@
 				F50F9C5A18C3AB7D00D06A0F /* ping.c in Sources */,
 				F50F9C5B18C3AB7D00D06A0F /* tox.c in Sources */,
 				F50F9C5C18C3AB7D00D06A0F /* util.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F52113D718EA37FE00EB1B99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F52113DE18EA37FE00EB1B99 /* toxlookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +646,16 @@
 			isa = PBXTargetDependency;
 			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
 			targetProxy = F554116A18C818D800CBB9E3 /* PBXContainerItemProxy */;
+		};
+		F5688A8618EA40F5001F45E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F52113DA18EA37FE00EB1B99 /* toxlookup */;
+			targetProxy = F5688A8518EA40F5001F45E6 /* PBXContainerItemProxy */;
+		};
+		F5688A8818EA40F8001F45E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F50F9C0518C3AAD800D06A0F /* ObjectiveTox */;
+			targetProxy = F5688A8718EA40F8001F45E6 /* PBXContainerItemProxy */;
 		};
 		F5BA234918E74C8E00C85A49 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -698,6 +787,30 @@
 			};
 			name = Release;
 		};
+		F52113E118EA37FE00EB1B99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F52113E218EA37FE00EB1B99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F553FAF218DCE5D000CBA532 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -775,6 +888,15 @@
 			buildConfigurations = (
 				F50F9C0B18C3AAD800D06A0F /* Debug */,
 				F50F9C0C18C3AAD800D06A0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F52113E318EA37FE00EB1B99 /* Build configuration list for PBXNativeTarget "toxlookup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F52113E118EA37FE00EB1B99 /* Debug */,
+				F52113E218EA37FE00EB1B99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

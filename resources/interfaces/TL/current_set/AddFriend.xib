@@ -20,14 +20,14 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="ZJd-eY-Si5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" documentModal="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="272" y="172" width="276" height="360"/>
+            <rect key="contentRect" x="272" y="172" width="276" height="364"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="fxX-2l-LcU">
-                <rect key="frame" x="0.0" y="0.0" width="276" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="276" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" id="3L2-sJ-Ja1">
-                        <rect key="frame" x="20" y="253" width="236" height="64"/>
+                        <rect key="frame" x="20" y="257" width="236" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="bEU-cg-lKQ">
                             <font key="font" metaFont="system"/>
@@ -39,7 +39,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xKE-Ke-vF4">
-                        <rect key="frame" x="20" y="323" width="97" height="17"/>
+                        <rect key="frame" x="20" y="327" width="97" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Enter a Tox ID:" id="5X7-cV-ELa">
                             <font key="font" metaFont="system"/>
@@ -48,7 +48,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="7c4-Hx-A66">
-                        <rect key="frame" x="20" y="49" width="236" height="150"/>
+                        <rect key="frame" x="20" y="53" width="236" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Tox me on Tox." drawsBackground="YES" id="6Dx-LJ-s4q">
                             <font key="font" metaFont="system"/>
@@ -57,7 +57,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="kj1-t6-6ja">
-                        <rect key="frame" x="18" y="207" width="219" height="17"/>
+                        <rect key="frame" x="18" y="211" width="219" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="And a friendly message (optional):" id="FVQ-dg-e50">
                             <font key="font" metaFont="system"/>
@@ -66,7 +66,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" id="Tb5-Ve-42m">
-                        <rect key="frame" x="153" y="9" width="109" height="32"/>
+                        <rect key="frame" x="153" y="13" width="109" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Add Friend" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LAv-uq-bDH">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -77,7 +77,7 @@ DQ
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" id="EIv-Gt-F0q">
-                        <rect key="frame" x="14" y="9" width="82" height="32"/>
+                        <rect key="frame" x="14" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9C7-pW-WRk">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -91,7 +91,7 @@ Gw
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="xef-tw-k8C">
-                        <rect key="frame" x="18" y="235" width="240" height="14"/>
+                        <rect key="frame" x="18" y="239" width="240" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tox IDs are usually 76 characters long." id="2r5-K1-7Hn">
                             <font key="font" metaFont="smallSystem"/>

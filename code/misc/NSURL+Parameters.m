@@ -7,7 +7,7 @@
     NSScanner *scanner = [[NSScanner alloc] initWithString:self.query];
     NSMutableDictionary *ret = [[NSMutableDictionary alloc] init];
     NSString *pair = nil;
-    while (![scanner isAtEnd]) {
+    while (!scanner.isAtEnd) {
         pair = nil;
         [scanner scanUpToString:@"&" intoString:&pair];
         if (pair) {
@@ -16,6 +16,9 @@
             if (key && value)
                 ret[key] = value;
         }
+        if (scanner.scanLocation >= self.query.length)
+            break;
+        ++scanner.scanLocation;
     }
     return ret;
 }
