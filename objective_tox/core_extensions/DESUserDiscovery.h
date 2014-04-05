@@ -3,11 +3,19 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const DESUserDiscoveryCallbackDomain;
-extern NSString *const DNSSDErrorDomain;
-#define DESUserDiscoveryErrorBadInput (-1)
-#define DESUserDiscoveryErrorBadReply (-2)
+#define DESUserDiscoveryErrorBadInput  (-1)
+#define DESUserDiscoveryErrorBadReply  (-2)
+#define DESUserDiscoveryErrorNoAddress (-3)
 
-typedef void(^DESUserDiscoveryCallback)(NSString *result, NSError *error);
+extern NSString *const DESUserDiscoveryIDKey;
+extern NSString *const DESUserDiscoveryPublicKey;
+extern NSString *const DESUserDiscoveryChecksumKey;
+extern NSString *const DESUserDiscoveryVersionKey;
+
+extern NSString *const DESUserDiscoveryRecVersion1;
+extern NSString *const DESUserDiscoveryRecVersion2;
+
+typedef void(^DESUserDiscoveryCallback)(NSDictionary *result, NSError *error);
 
 /**
  * Find a user's Tox ID using DNS service discovery.

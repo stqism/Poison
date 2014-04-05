@@ -9,6 +9,8 @@ BOOL DESPublicKeyIsValid(NSString *theKey);
 BOOL DESPrivateKeyIsValid(NSString *theKey);
 BOOL DESFriendAddressIsValid(NSString *theAddr);
 
+void DESConvertHexToBytes(NSString *theString, uint8_t *theOutput);
+
 /**
  * Convert a Tox public key to byte form suitable for passing to tox_*
  * functions.

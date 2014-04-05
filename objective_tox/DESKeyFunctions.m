@@ -45,12 +45,10 @@ BOOL DESFriendAddressIsValid(NSString *theAddr) {
     return YES;
 }
 
-BOOL DESConvertPublicKeyToData(NSString *theString, uint8_t *theOutput) {
+void DESConvertHexToBytes(NSString *theString, uint8_t *theOutput) {
     const char *chars = [theString UTF8String];
     int i = 0, j = 0;
-    NSUInteger len = [theString length];
-    if (!DESPublicKeyIsValid(theString))
-        return NO;
+    NSUInteger len = [theString lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     char byteChars[3] = {'\0','\0','\0'};
     unsigned long wholeByte = 0;
     while (i < len) {
@@ -59,40 +57,26 @@ BOOL DESConvertPublicKeyToData(NSString *theString, uint8_t *theOutput) {
         wholeByte = strtoul(byteChars, NULL, 16);
         theOutput[j++] = wholeByte;
     }
+}
+
+BOOL DESConvertPublicKeyToData(NSString *theString, uint8_t *theOutput) {
+    if (!DESPublicKeyIsValid(theString))
+        return NO;
+    DESConvertHexToBytes(theString, theOutput);
     return YES;
 }
 
 BOOL DESConvertPrivateKeyToData(NSString *theString, uint8_t *theOutput) {
-    const char *chars = [theString UTF8String];
-    int i = 0, j = 0;
-    NSUInteger len = [theString length];
     if (!DESPrivateKeyIsValid(theString))
         return NO;
-    char byteChars[3] = {'\0','\0','\0'};
-    unsigned long wholeByte = 0;
-    while (i < len) {
-        byteChars[0] = chars[i++];
-        byteChars[1] = chars[i++];
-        wholeByte = strtoul(byteChars, NULL, 16);
-        theOutput[j++] = wholeByte;
-    }
+    DESConvertHexToBytes(theString, theOutput);
     return YES;
 }
 
 BOOL DESConvertFriendAddressToData(NSString *theString, uint8_t *theOutput) {
-    const char *chars = [theString UTF8String];
-    int i = 0, j = 0;
-    NSUInteger len = [theString length];
     if (!DESHexStringIsValid(theString) || [theString length] != DESFriendAddressSize * 2)
         return NO;
-    char byteChars[3] = {'\0','\0','\0'};
-    unsigned long wholeByte = 0;
-    while (i < len) {
-        byteChars[0] = chars[i++];
-        byteChars[1] = chars[i++];
-        wholeByte = strtoul(byteChars, NULL, 16);
-        theOutput[j++] = wholeByte;
-    }
+    DESConvertHexToBytes(theString, theOutput);
     return YES;
 }
 

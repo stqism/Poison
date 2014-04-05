@@ -1,25 +1,18 @@
-#include <dns_sd.h>
 #import <Foundation/Foundation.h>
-#import <dispatch/dispatch.h>
 #import "DESUserDiscovery.h"
+#import "DESConstants.h"
+#include <dns.h>
 
-NSString *const DESUserDiscoveryCallbackDomain = @"<-- well, isn't it obvious?";
+NSString *const DESUserDiscoveryCallbackDomain = @"DESUserDiscoveryErrorDomain";
 NSString *const DNSSDErrorDomain = @"DNSSDErrorDomain";
 
-/* due to ARC restrictions, we have to use an objective-c object to 
- * hold the callback */
-@interface _DESDiscoveryContext : NSObject {
-    @public
-    DESUserDiscoveryCallback cb;
-    int stopProcessing;
-}
-@end
+NSString *const DESUserDiscoveryIDKey = @"id";
+NSString *const DESUserDiscoveryPublicKey = @"pub";
+NSString *const DESUserDiscoveryChecksumKey = @"check";
+NSString *const DESUserDiscoveryVersionKey = @"v";
 
-@implementation _DESDiscoveryContext
-- (void)dealloc {
-
-}
-@end
+NSString *const DESUserDiscoveryRecVersion1 = @"tox1";
+NSString *const DESUserDiscoveryRecVersion2 = @"tox2";
 
 void _DESDecodeKeyValuePair(NSString *kv, NSString **kout, id *vout) {
     NSRange equals = [kv rangeOfString:@"="];
@@ -28,8 +21,8 @@ void _DESDecodeKeyValuePair(NSString *kv, NSString **kout, id *vout) {
         *vout = @"";
         return;
     } else {
-        *kout = [[kv substringToIndex:equals.location] stringByRemovingPercentEncoding];
-        *vout = [[kv substringFromIndex:equals.location + 1] stringByRemovingPercentEncoding];
+        *kout = [kv substringToIndex:equals.location];
+        *vout = [kv substringFromIndex:equals.location + 1];
     }
 }
 
@@ -53,72 +46,14 @@ NSDictionary *_DESParametersForTXT(NSString *rec) {
     return ret;
 }
 
-void _DESDiscoverUserCallback(DNSServiceRef query, DNSServiceFlags flags,
-                              uint32_t interface, DNSServiceErrorType errorCode,
-                              const char *fullname, uint16_t rrtype,
-                              uint16_t rrclass, uint16_t rdlen,
-                              const void *rdata, uint32_t ttl, void *ucall) {
-    _DESDiscoveryContext *ctx = (__bridge _DESDiscoveryContext *)(ucall);
-    if (ctx -> stopProcessing)
-        return;
-
-    if (errorCode != kDNSServiceErr_NoError) {
-        NSError *e = [NSError errorWithDomain:DNSSDErrorDomain
-                                         code:errorCode
-                                     userInfo:nil];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            ctx -> cb(nil, e);
-        });
-        return;
-    }
-
-    uint64_t realLen = 0;
-    uint8_t *posPtr = (uint8_t *)rdata;
-    NSMutableString *s = [NSMutableString stringWithCapacity:rdlen];
-    while (1) {
-        int blkSize = *posPtr;
-        realLen += blkSize + 1;
-        if (realLen > rdlen) { /* this was invalid */
-            if (!(flags & kDNSServiceFlagsMoreComing)) {
-                /* no more chances, so error out now */
-                NSError *e = [NSError errorWithDomain:DESUserDiscoveryCallbackDomain
-                                                 code:DESUserDiscoveryErrorBadReply
-                                             userInfo:nil];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    ctx -> cb(nil, e);
-                });
-            }
-            return;
-        }
-        NSString *frag = [[NSString alloc] initWithBytesNoCopy:posPtr + 1
-                                                        length:blkSize
-                                                      encoding:NSUTF8StringEncoding
-                                                  freeWhenDone:NO];
-        [s appendString:frag];
-        posPtr += blkSize + 1;
-        if (realLen >= rdlen)
-            break;
-    }
-
-    NSDictionary *params = _DESParametersForTXT(s);
-    if (![params[@"v"] isEqualToString:@"tox1"]
-        && ((NSString *)params[@"id"]).length == 76) {
-        if (!(flags & kDNSServiceFlagsMoreComing)) {
-            /* no more chances, so error out now */
-            NSError *e = [NSError errorWithDomain:DESUserDiscoveryCallbackDomain
-                                             code:DESUserDiscoveryErrorBadReply
-                                         userInfo:nil];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                ctx -> cb(nil, e);
-            });
-        }
-        return;
-    }
-
+void _DESDiscoverUser_ErrorOut(NSString *domain, NSInteger code,
+                               DESUserDiscoveryCallback callback) {
+    NSError *e = [NSError errorWithDomain:domain
+                                     code:code
+                                 userInfo:nil];
     dispatch_sync(dispatch_get_main_queue(), ^{
-        ctx -> cb(params[@"id"], nil);
+        callback(nil, e);
     });
-    ctx -> stopProcessing = 1;
 }
 
 void DESDiscoverUser(NSString *shouldBeAnEmailAddress,
@@ -131,13 +66,14 @@ void DESDiscoverUser(NSString *shouldBeAnEmailAddress,
             ++at_count;
     }
     /*  */
-    if (at_count != 1 || *buf == '@' || buf[len - 1] == '@')
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSError *e = [NSError errorWithDomain:DESUserDiscoveryCallbackDomain
-                                             code:DESUserDiscoveryErrorBadInput
-                                         userInfo:nil];
+    if (at_count != 1 || *buf == '@' || buf[len - 1] == '@' || len > UINT32_MAX) {
+        NSError *e = [NSError errorWithDomain:DESUserDiscoveryCallbackDomain
+                                         code:DESUserDiscoveryErrorBadInput
+                                     userInfo:nil];
+        dispatch_sync(dispatch_get_main_queue(), ^{
             callback(nil, e);
         });
+    }
 
     NSRange position = [shouldBeAnEmailAddress rangeOfString:@"@"];
     /* alloc memory for transforming @ to ._tox. */
@@ -146,44 +82,62 @@ void DESDiscoverUser(NSString *shouldBeAnEmailAddress,
      [shouldBeAnEmailAddress substringToIndex:position.location],
      [shouldBeAnEmailAddress substringFromIndex:position.location + 1]];
 
-    _DESDiscoveryContext *context = [[_DESDiscoveryContext alloc] init];
-    /* We need to keep this around until the resolution completes.
-     * Use CFBridgingRetain to ensure ARC doesn't kill our context object. */
-    CFTypeRef retainedContext = CFBridgingRetain(context);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        stralloc fqdn = {0};
+        uint32_t dl = (uint32_t)[DNSName lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        fqdn.s = calloc(dl + 1, 1);
+        fqdn.len = dl;
+        memcpy(fqdn.s, DNSName.UTF8String, dl);
 
-    context -> cb = callback;
-    context -> stopProcessing = 0;
+        stralloc finis = {0};
+        errno = 0;
+        int result = dns_txt(&finis, &fqdn);
+        free(fqdn.s);
+        if (result == -1) {
+            perror("lookup fail");
+            _DESDiscoverUser_ErrorOut(NSPOSIXErrorDomain, errno,
+                                      callback);
+        } else {
+            //__builtin_trap();
+            if (finis.len == 0) {
+                _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain, DESUserDiscoveryErrorNoAddress,
+                                          callback);
+                return;
+            }
+            NSString *rec = [[NSString alloc] initWithBytes:finis.s
+                                                     length:finis.len
+                                                   encoding:NSUTF8StringEncoding];
+            NSDictionary *params = _DESParametersForTXT(rec);
+            if (!params[@"v"]) {
+                _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain,
+                                          DESUserDiscoveryErrorBadReply,
+                                          callback);
+                return;
+            }
 
-    DNSServiceRef query;
-    DNSServiceErrorType error = 0;
-    error = DNSServiceQueryRecord(&query, kDNSServiceFlagsTimeout, 0,
-                                  [DNSName UTF8String], kDNSServiceType_TXT,
-                                  kDNSServiceClass_IN, _DESDiscoverUserCallback,
-                                  (void *)retainedContext);
-    if (error)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSError *e = [NSError errorWithDomain:DNSSDErrorDomain
-                                             code:error
-                                         userInfo:nil];
-            callback(nil, e);
-        });
-    /* if (sync)
-           DNSServiceProcessResult(query);
-     */
-    int fd = DNSServiceRefSockFD(query);
+            if ([params[@"v"] isEqualToString:DESUserDiscoveryRecVersion1]) {
+                if (((NSString *)params[@"id"]).length != DESFriendAddressSize * 2) {
+                    _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain,
+                                              DESUserDiscoveryErrorBadReply,
+                                              callback);
+                    return;
+                }
+            }
 
-    /* send it off to GCD so our callback gets called later */
-    __block dispatch_source_t src;
-    src = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fd, 0,
-                                 //dispatch_get_main_queue());
-                                 dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
-    dispatch_source_set_event_handler(src, ^{
-        DNSServiceProcessResult(query);
-        DNSServiceRefDeallocate(query);
-        CFBridgingRelease(retainedContext);
-        dispatch_source_cancel(src);
-        src = nil;
-        //dispatch_release(src);
+            if ([params[@"v"] isEqualToString:DESUserDiscoveryRecVersion2]) {
+                if (((NSString *)params[@"pub"]).length != DESPublicKeySize * 2
+                    || ((NSString *)params[@"check"]).length != 4) {
+                    _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain,
+                                              DESUserDiscoveryErrorBadReply,
+                                              callback);
+                    return;
+                }
+            }
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                callback(params, nil);
+            });
+        }
     });
-    dispatch_resume(src);
+
 }
