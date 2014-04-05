@@ -8,13 +8,6 @@
  * pile standalone, and the txdplus files,
  * which depend on scrypt. It *should* work
  * on non-Mac boxes.
- * 
- * cc -I../../core/toxcore -I../../core_extensions -I../../../txd_plus \
- *    -I../../../txd_plus/scrypt-jane -I/usr/local/include \
- *    -DSCRYPT_CHACHA -DSCRYPT_KECCAK512 -march=native --std=gnu99 \
- *    ../../core/toxcore/*.c ../../core_extensions/*.c ../../../txd_plus/*.c \
- *    ../../../txd_plus/scrypt-jane/scrypt-jane.c mio.c \
- *    -o mio -L/usr/local/lib -lsodium
  *
  * Copyright (c) 2014 Zodiac Labs.
  * You are free to do whatever you want with
@@ -24,6 +17,7 @@
 
 #include "data.h"
 #include "txdplus.h"
+#include "txdplus_private.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -137,6 +131,82 @@ int passwd(const char *file) {
     txd_intermediate_free(loaded);
     return 0;
 }
+
+int survey(char *file) {
+    FILE *f = fopen(file, "r");
+    if (!f) {
+        perror("mio/survey");
+        return -1;
+    }
+    uint8_t buf[5] = { 0 };
+    fread(&buf, 4, 1, f);
+    uint32_t magic_const = ntohl(*(uint32_t *)buf);
+
+    fread(&buf, 4, 1, f);
+    uint32_t clen = _txd_read_int_32(buf);
+    char *comment = calloc(clen + 1, 1);
+    fread(comment, clen, 1, f);
+
+    if (magic_const == 'MAKi') {
+        puts(" Format: encrypted maki-file (no padding)");
+    } else if (magic_const == 'NICo') {
+        puts(" Format: encrypted nico-file (padded)");
+    } else if (magic_const == 0xE6A19C00) {
+        puts(" Format: unencrypted cherry-file");
+    } else {
+        free(comment);
+        puts("unknown format");
+        return -1;
+    }
+
+    printf("Comment: -----\n%s\n--------------\n", comment);
+    free(comment);
+
+    fseek(f, 0, SEEK_END);
+    long plc = ftell(f);
+    rewind(f);
+
+    uint8_t *bytes = malloc(plc);
+    fread(bytes, plc, 1, f);
+    fclose(f);
+
+    txd_intermediate_t loaded;
+    //__builtin_trap();
+    if (magic_const == 0xE6A19C00) {
+        int err = txd_intermediate_from_buf(bytes, plc, &loaded);
+        if (err != TXD_ERR_SUCCESS) {
+            free(bytes);
+            printf("mio/survey: error: txd_intermediate_from_buf failed with "
+                   "code %d\n", err);
+            return -1;
+        }
+    } else {
+        char *passwd = getpass("Password: ");
+        uint8_t *dec = NULL;
+        uint64_t sze = 0;
+        int derr = txd_decrypt_buf((uint8_t *)passwd, strlen(passwd), bytes,
+                                   plc, &dec, &sze);
+        if (derr != TXD_ERR_SUCCESS) {
+            free(bytes);
+            printf("mio/survey: error: txd_decrypt_buf failed with "
+                   "code %d, did you type the correct password?\n", derr);
+            return -1;
+        }
+        free(bytes);
+        int err = txd_intermediate_from_buf(dec, sze, &loaded);
+        if (err != TXD_ERR_SUCCESS) {
+            printf("mio/survey: error: txd_intermediate_from_buf failed with "
+                   "code %d\n", err);
+            return -1;
+        }
+        free(dec);
+    }
+
+    puts("****** CONTENTS OF FILE");
+
+    return 0;
+}
+
 
 int convert(int format, char *file, char *fileout) {
     FILE *f = fopen(file, "r");
@@ -276,6 +346,8 @@ int main(int argc, char *argv[]) {
             return -1;
         }
         return convert(fmt, argv[3], argv[4]);
+    } else if (!strcmp(cmd, "survey") && argc == 3) {
+        return survey(argv[2]);
     }
     return 0;
 }
