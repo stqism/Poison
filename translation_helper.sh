@@ -96,7 +96,7 @@ case $1 in
         do
             lang_=$(basename $lang)
             echo "... $lang_"
-            find . -name '*.m' | xargs genstrings --little-endian -a -o "resources/strings/$lang_"
+            find . -name '*.m' | xargs genstrings --little-endian -o "resources/strings/$lang_"
             #iconv -f "UTF-16LE" -t "UTF-8" "resources/strings/$lang_/Localizable.strings" > \
             #      "resources/strings/$lang_/Localizable.strings_"
             #mv "resources/strings/$lang_/Localizable.strings_" "resources/strings/$lang_/Localizable.strings"
