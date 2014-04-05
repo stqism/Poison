@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>defaultRegistrationDomain</key>
-	<string>akiko.zodiaclabs.org</string>
+	<string>id.kirara.ca</string>
 	<key>autologinUsername</key>
 	<string></string>
 	<key>forcedMultiWindowUI</key>
