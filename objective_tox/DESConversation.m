@@ -57,6 +57,10 @@
     return _groupNum;
 }
 
+- (DESConversationType)type {
+    return DESConversationTypeGroup;
+}
+
 /*- (void)addPeer:(int32_t)peernum {
     tox_callback_group_namelist_change(<#Tox *tox#>, <#void (*function)(Tox *, int, int, uint8_t, void *)#>, <#void *userdata#>)
 }*/

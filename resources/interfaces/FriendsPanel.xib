@@ -12,6 +12,7 @@
                 <outlet property="avatarView" destination="uhf-xe-Kuw" id="tzF-jD-P91"/>
                 <outlet property="filterField" destination="Z37-5k-Qte" id="duL-AP-tKx"/>
                 <outlet property="friendListView" destination="xCg-uz-hmG" id="lSY-Kq-FDn"/>
+                <outlet property="friendMenu" destination="ULl-4W-FKI" id="0bt-qC-U7M"/>
                 <outlet property="identityEditorSheet" destination="66x-bn-gP6" id="UBJ-ce-FLZ"/>
                 <outlet property="ieNameField" destination="Thv-MK-5De" id="Kg1-6T-G3i"/>
                 <outlet property="ieStatusChooser" destination="Zif-id-aqA" id="Cm6-5D-8Oz"/>
@@ -155,7 +156,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="xCg-uz-hmG" customClass="SCSelectiveMenuTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="253" height="293"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -215,12 +216,37 @@
                                                     <outlet property="mainLabel" destination="c4j-IO-4XU" id="phh-Uq-F5N"/>
                                                 </connections>
                                             </tableCellView>
+                                            <tableCellView identifier="GroupMarker" id="7rS-O9-JNr" customClass="SCGroupCellView">
+                                                <rect key="frame" x="1" y="43" width="250" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="VNk-8i-mAH">
+                                                        <rect key="frame" x="12" y="2" width="121" height="13"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="OQt-G0-68a">
+                                                            <font key="font" metaFont="systemBold" size="10"/>
+                                                            <color key="textColor" white="0.69999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="J0J-Np-BOp">
+                                                        <rect key="frame" x="145" y="2" width="93" height="13"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="(1/10)" id="t38-kX-gwB">
+                                                            <font key="font" metaFont="system" size="10"/>
+                                                            <color key="textColor" red="0.4647042410714286" green="0.4647042410714286" blue="0.4647042410714286" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <connections>
+                                                    <outlet property="auxLabel" destination="J0J-Np-BOp" id="PVC-hZ-oZ9"/>
+                                                    <outlet property="textField" destination="VNk-8i-mAH" id="iNN-6q-m68"/>
+                                                </connections>
+                                            </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
-                                <connections>
-                                    <outlet property="menu" destination="ULl-4W-FKI" id="1EI-cR-ZKF"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -276,13 +302,16 @@
                 </menuItem>
             </items>
             <connections>
-                <outlet property="delegate" destination="-2" id="Kzt-OT-HfP"/>
+                <outlet property="delegate" destination="-2" id="Dj3-Qe-U7g"/>
             </connections>
         </menu>
         <menu id="AzD-RW-Vf3">
             <items>
                 <menuItem title="Copy Tox ID" keyEquivalent="c" id="L8w-4A-hwP">
                     <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                    <connections>
+                        <action selector="proxyCopyToxID:" target="-2" id="TDs-RR-C4o"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Fz2-Hr-spe"/>
                 <menuItem title="Change Name..." id="Z8U-7L-OlH">
@@ -448,7 +477,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="M99-C7-nIJ">
-                        <rect key="frame" x="116.99999837500596" y="54" width="272" height="22"/>
+                        <rect key="frame" x="116.99999918991108" y="54" width="272" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="(placeholder)" drawsBackground="YES" id="eQL-FZ-ZCt">
                             <font key="font" metaFont="system"/>
@@ -466,7 +495,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="6q8-27-lsa">
-                        <rect key="frame" x="115" y="84" width="275.99999837500593" height="17"/>
+                        <rect key="frame" x="115" y="84" width="275.99999918991108" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="(placeholder)" id="ZZQ-zI-Xtn">
                             <font key="font" metaFont="systemBold"/>

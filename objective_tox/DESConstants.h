@@ -25,6 +25,11 @@ typedef NS_ENUM(uint8_t, DESFriendStatus) {
     DESFriendStatusOffline,
 };
 
+typedef NS_ENUM(uint8_t, DESConversationType) {
+    DESConversationTypeFriend,
+    DESConversationTypeGroup,
+};
+
 typedef NS_ENUM(uint8_t, DESMessageType) {
     DESMessageTypeText,
     DESMessageTypeAction,

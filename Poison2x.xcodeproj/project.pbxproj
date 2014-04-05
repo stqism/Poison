@@ -95,6 +95,7 @@
 		F5B5422B18B6D23C00226CA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5422A18B6D23C00226CA8 /* main.m */; };
 		F5B5423218B6D23C00226CA8 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5423118B6D23C00226CA8 /* SCAppDelegate.m */; };
 		F5CC709C18C2BA1600C41EBF /* friends.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5CC709B18C2BA1600C41EBF /* friends.rtf */; };
+		F5D1223518F076910075BD10 /* SCSelectiveMenuTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */; };
 		F5DAB46718C962E90046ED96 /* qr-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DAB46618C962E90046ED96 /* qr-placeholder.png */; };
 		F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */; };
 		F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */; };
@@ -279,6 +280,8 @@
 		F5B5423018B6D23C00226CA8 /* SCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCAppDelegate.h; sourceTree = "<group>"; };
 		F5B5423118B6D23C00226CA8 /* SCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCAppDelegate.m; sourceTree = "<group>"; };
 		F5CC709B18C2BA1600C41EBF /* friends.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = friends.rtf; sourceTree = "<group>"; };
+		F5D1223318F076910075BD10 /* SCSelectiveMenuTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSelectiveMenuTableView.h; sourceTree = "<group>"; };
+		F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSelectiveMenuTableView.m; sourceTree = "<group>"; };
 		F5DAB46618C962E90046ED96 /* qr-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qr-placeholder.png"; sourceTree = "<group>"; };
 		F5DAB46818C970A50046ED96 /* SCQRCodeSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCQRCodeSheetController.h; sourceTree = "<group>"; };
 		F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCQRCodeSheetController.m; sourceTree = "<group>"; };
@@ -425,6 +428,8 @@
 				F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */,
 				F53DB89F18B6DDDE008D7ED5 /* SCBuddyListController.h */,
 				F53DB8A018B6DDDE008D7ED5 /* SCBuddyListController.m */,
+				F5D1223318F076910075BD10 /* SCSelectiveMenuTableView.h */,
+				F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */,
 				F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */,
 			);
 			path = buddy_list;
@@ -779,6 +784,7 @@
 				F541811E18C425B400AB220E /* SCFillingView.m in Sources */,
 				F52D014E18B7D44F0033680F /* SCBigGreenButton.m in Sources */,
 				F541810718C3F4DE00AB220E /* SCUnifiedWindowController.m in Sources */,
+				F5D1223518F076910075BD10 /* SCSelectiveMenuTableView.m in Sources */,
 				F5A2978A18D51CAA00595FDF /* SCAddFriendSheetController.m in Sources */,
 				F54180FD18C3C0E000AB220E /* SCBuddyListWindowController.m in Sources */,
 				F541810E18C3FEF500AB220E /* SCChatViewController.m in Sources */,

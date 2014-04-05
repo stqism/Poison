@@ -43,10 +43,12 @@ void _DESCallbackFriendNameDidChange(Tox *tox, int32_t from, uint8_t *payload, u
         return;
     NSString *name = [[NSString alloc] initWithBytes:payload length:payloadLength encoding:NSUTF8StringEncoding];
     [f willChangeValueForKey:@"name"];
+    [f willChangeValueForKey:@"presentableTitle"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
         [f didChangeValueForKey:@"name"];
+        [f didChangeValueForKey:@"presentableTitle"];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
                 [connection.delegate friend:f nameDidChange:name onConnection:connection];
@@ -64,10 +66,12 @@ void _DESCallbackFriendStatusMessageDidChange(Tox *tox, int32_t from, uint8_t *p
         return;
     NSString *smg = [[NSString alloc] initWithBytes:payload length:payloadLength encoding:NSUTF8StringEncoding];
     [f willChangeValueForKey:@"statusMessage"];
+    [f willChangeValueForKey:@"presentableSubtitle"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
         [f didChangeValueForKey:@"statusMessage"];
+        [f didChangeValueForKey:@"presentableSubtitle"];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
                 [connection.delegate friend:f statusMessageDidChange:smg onConnection:connection];

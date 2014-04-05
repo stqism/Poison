@@ -2,8 +2,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ObjectiveTox.h"
+#import "SCSelectiveMenuTableView.h"
 
-@interface SCBuddyListController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate>
+@interface SCBuddyListController : NSViewController <NSTableViewDataSource,
+                                                     SCSelectiveMenuTableViewing,
+                                                     NSMenuDelegate>
 - (void)attachKVOHandlersToConnection:(DESToxConnection *)tox;
 - (IBAction)changeName:(id)sender;
 - (IBAction)changeStatus:(id)sender;

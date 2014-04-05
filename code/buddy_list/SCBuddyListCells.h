@@ -2,8 +2,16 @@
 
 @class SCBuddyListController;
 
+@interface SCGroupRowView : NSTableRowView
+
+@end
+
 @interface SCFriendRowView : NSTableRowView
 
+@end
+
+@interface SCGroupCellView : NSTableCellView
+@property (strong) IBOutlet NSTextField *auxLabel;
 @end
 
 @interface SCFriendCellView : NSTableCellView

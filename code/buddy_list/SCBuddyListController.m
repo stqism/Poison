@@ -7,10 +7,47 @@
 #import "SCProfileManager.h"
 #import "SCBuddyListShared.h"
 #import "SCBuddyListCells.h"
+#import "SCAppDelegate.h"
 #import <sodium.h>
 #import <Quartz/Quartz.h>
 
 #define SC_MAX_CACHED_ROW_COUNT (50)
+
+@implementation SCGroupMarker
+- (instancetype)initWithName:(NSString *)name other:(NSString *)other {
+    self = [super init];
+    if (self) {
+        _name = name;
+        _other = other;
+    }
+    return self;
+}
+@end
+
+@interface SCObjectMarker : NSObject
+@property (strong) NSString *pk;
+@property DESConversationType type;
+@property int32_t sortKey;
+@end
+
+@implementation SCObjectMarker
+- (instancetype)initWithConversation:(DESConversation *)c {
+    self = [super init];
+    if (self) {
+        self.pk = c.publicKey;
+        self.sortKey = c.peerNumber;
+        self.type = c.type;
+    }
+    return self;
+}
+- (NSUInteger)hash {
+    return [self.pk hash] ^ (self.type == DESConversationTypeFriend) ?
+           0xAFFABFFBCFFCDFFDULL : 0xDFFDCFFCBFFBAFFA;
+}
+- (BOOL)isEqual:(id)object {
+    return [self hash] == [object hash];
+}
+@end
 
 @interface SCDoubleClickingImageView : NSImageView
 
@@ -98,6 +135,9 @@
     maskLayer.frame = (CGRect){CGPointZero, self.avatarView.frame.size};
     maskLayer.contents = (id)mask;
     self.avatarView.layer.mask = maskLayer;
+
+    self.friendListView.target = self;
+    self.friendListView.doubleAction = @selector(openAuxiliaryWindowForSelectedRow:);
 }
 
 - (void)detachHandlersFromConnection {
@@ -208,22 +248,39 @@
 #pragma mark - table
 
 - (void)repopulateOrderingList {
-    NSSet *set = _watchingConnection.friends;
-    _orderingList = [[NSMutableArray alloc] initWithCapacity:set.count];
-    for (DESFriend *friend in set) {
-        [_orderingList addObject:@(friend.peerNumber)];
+    NSSet *fset = _watchingConnection.friends;
+    NSSet *gset = _watchingConnection.groups;
+    _orderingList = [[NSMutableArray alloc] initWithCapacity:fset.count + gset.count + 2];
+    [_orderingList addObject:[[SCGroupMarker alloc] initWithName:NSLocalizedString(@"Friends", nil)
+                                                           other:[NSString stringWithFormat:@"(%lu)", fset.count]]];
+
+    NSMutableArray *scratch = [[NSMutableArray alloc] initWithCapacity:MAX(fset.count, gset.count)];
+    for (DESConversation *f in fset) {
+        [scratch addObject:[[SCObjectMarker alloc] initWithConversation:f]];
     }
-    [_orderingList sortUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
-        if ([obj1 isGreaterThan:obj2])
+    [scratch sortUsingComparator:^NSComparisonResult(SCObjectMarker *obj1, SCObjectMarker *obj2) {
+        if (obj1.sortKey > obj2.sortKey)
             return NSOrderedDescending;
-        else if ([obj1 isLessThan:obj2])
+        else if (obj1.sortKey < obj2.sortKey)
             return NSOrderedAscending;
         return NSOrderedSame;
     }];
-    NSUInteger c = [_orderingList count];
-    for (int i = 0; i < c; ++i) {
-        [_orderingList replaceObjectAtIndex:i withObject:[_watchingConnection friendWithID:[_orderingList[i] intValue]].publicKey];
+    [_orderingList addObjectsFromArray:scratch];
+    [scratch removeAllObjects];
+
+    [_orderingList addObject:[[SCGroupMarker alloc] initWithName:NSLocalizedString(@"Group Chats", nil)
+                                                           other:[NSString stringWithFormat:@"(%lu)", gset.count]]];
+    for (DESConversation *g in gset) {
+        [scratch addObject:[[SCObjectMarker alloc] initWithConversation:g]];
     }
+    [scratch sortUsingComparator:^NSComparisonResult(SCObjectMarker *obj1, SCObjectMarker *obj2) {
+        if (obj1.sortKey > obj2.sortKey)
+            return NSOrderedDescending;
+        else if (obj1.sortKey < obj2.sortKey)
+            return NSOrderedAscending;
+        return NSOrderedSame;
+    }];
+    [_orderingList addObjectsFromArray:scratch];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -231,25 +288,40 @@
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
-    id rowView = [self.rowCache anyObject];
-    if (!rowView) {
-        rowView = [[SCFriendRowView alloc] initWithFrame:CGRectZero];
+    NSTableRowView *rowView;
+    if ([self tableView:tableView isGroupRow:row]) {
+        rowView = [tableView makeViewWithIdentifier:@"GroupMarkRow" owner:self];
+        if (!rowView) {
+            rowView = [[SCGroupRowView alloc] initWithFrame:CGRectZero];
+            rowView.identifier = @"GroupMarkRow";
+        }
     } else {
-        [self.rowCache removeObject:rowView];
+        rowView = [tableView makeViewWithIdentifier:@"FriendRow" owner:self];
+        if (!rowView) {
+            rowView = [[SCFriendRowView alloc] initWithFrame:CGRectZero];
+            rowView.identifier = @"FriendRow";
+        }
     }
     return rowView;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    SCFriendCellView *dequeued = [tableView makeViewWithIdentifier:@"FriendCell" owner:nil];
-    dequeued.manager = self;
-    [dequeued applyMaskIfRequired];
-    return dequeued;
+    if ([self tableView:tableView isGroupRow:row]) {
+        return [tableView makeViewWithIdentifier:@"GroupMarker" owner:nil];
+    } else {
+        SCFriendCellView *dequeued = [tableView makeViewWithIdentifier:@"FriendCell" owner:nil];
+        dequeued.manager = self;
+        [dequeued applyMaskIfRequired];
+        return dequeued;
+    }
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSString *peer = _orderingList[row];
-    return [_watchingConnection friendWithKey:peer];
+    id peer = _orderingList[row];
+    if ([peer isKindOfClass:[SCObjectMarker class]])
+        return [_watchingConnection friendWithKey:((SCObjectMarker *)peer).pk];
+    else
+        return ((SCGroupMarker *)peer);
 }
 
 - (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
@@ -257,10 +329,40 @@
         [self.rowCache addObject:rowView];
 }
 
+- (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
+    if ([_orderingList[row] isKindOfClass:[SCGroupMarker class]])
+        return YES;
+    else
+        return NO;
+}
+
+- (NSMenu *)tableView:(NSTableView *)tableView menuForRow:(NSInteger)row {
+    if ([self tableView:tableView isGroupRow:row])
+        return nil;
+
+    SCObjectMarker *obj = _orderingList[row];
+    if (obj.type == DESConversationTypeFriend)
+        return self.friendMenu;
+    else
+        return nil; /* FIXME: implement */
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    if ([self tableView:tableView isGroupRow:row])
+        return 17;
+    else
+        return 40;
+}
+
+- (void)openAuxiliaryWindowForSelectedRow:(NSTableView *)sender {
+    
+}
+
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     NSUInteger ci = self.friendListView.clickedRow;
-    DESFriend *f = [_watchingConnection friendWithKey:_orderingList[ci]];
-    [menu itemAtIndex:0].title = f.name;
+    SCObjectMarker *obj = _orderingList[ci];
+    DESFriend *f = [_watchingConnection friendWithKey:obj.pk];
+    [menu itemAtIndex:0].title = f.presentableTitle;
 }
 
 #pragma mark - cell server
@@ -287,15 +389,12 @@
 #pragma mark - misc menus
 
 - (IBAction)showAddFriend:(id)sender {
-    /* kinda hacky... should have just redirected it to the appdelegate */
-    if ([self.view.window.windowController respondsToSelector:@selector(displayAddFriend)]) {
-        [(id<SCMainWindowing>)self.view.window.windowController displayAddFriend];
-    }
+    [(SCAppDelegate *)[NSApp delegate] addFriend:self];
 }
 
 - (IBAction)presentNicknameEditor:(id)sender {
     NSUInteger ci = self.friendListView.clickedRow;
-    DESFriend *f = [_watchingConnection friendWithID:[_orderingList[ci] intValue]];
+    DESFriend *f = [_watchingConnection friendWithKey:((SCObjectMarker *)_orderingList[ci]).pk];
 
     NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSString *displayName = f.name;
@@ -344,7 +443,12 @@
     self.nicknameField.stringValue = @"";
     [sheet orderOut:self];
 
-    [self.friendListView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:[_orderingList indexOfObject:@(f.peerNumber)]] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+    SCObjectMarker *om = [[SCObjectMarker alloc] initWithConversation:(DESConversation *)f];
+    [self.friendListView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:[_orderingList indexOfObject:om]] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+}
+
+- (IBAction)proxyCopyToxID:(id)sender {
+    [(SCAppDelegate *)[NSApp delegate] copyPublicID:self];
 }
 
 #pragma mark - avatars

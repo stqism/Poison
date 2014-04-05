@@ -26,6 +26,7 @@
 @property (readonly) NSSet *participants;
 @property (readonly) NSString *publicKey;
 @property (readonly) int32_t peerNumber;
+@property (readonly) DESConversationType type;
 @property (weak) id<DESConversationDelegate> delegate;
 
 - (uint32_t)sendMessage:(NSString *)message;

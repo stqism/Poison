@@ -5,6 +5,26 @@
 #import "SCBuddyListShared.h"
 #import "SCBuddyListController.h"
 
+@class SCGroupMarker;
+@implementation SCGroupRowView {
+    NSGradient *_grad;
+}
+
+- (id)initWithFrame:(NSRect)frameRect {
+    self = [super initWithFrame:frameRect];
+    if (self) {
+        _grad = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1.0]
+                                              endingColor:[NSColor colorWithCalibratedWhite:0.2 alpha:0.5]];
+    }
+    return self;
+}
+
+- (void)drawRect:(NSRect)dirtyRect {
+    [_grad drawInRect:(CGRect){{dirtyRect.origin.x, 0}, {dirtyRect.size.width, self.frame.size.height}} angle:90.0];
+}
+
+@end
+
 @implementation SCFriendRowView {
     NSGradient *_shadow;
 }
@@ -32,28 +52,40 @@
 
 @end
 
+@implementation SCGroupCellView
+
+- (void)setObjectValue:(SCGroupMarker *)objectValue {
+    self.textField.stringValue = [objectValue.name uppercaseString] ?: @"";
+    self.auxLabel.stringValue = [objectValue.other uppercaseString] ?: @"";
+}
+
+@end
+
 @implementation SCFriendCellView {
-    DESFriend *_watchingFriend;
+    DESConversation *_watchingFriend;
 }
 
 - (void)removeKVOHandlers {
-    [_watchingFriend removeObserver:self forKeyPath:@"name"];
-    [_watchingFriend removeObserver:self forKeyPath:@"statusMessage"];
-    [_watchingFriend removeObserver:self forKeyPath:@"status"];
+    [_watchingFriend removeObserver:self forKeyPath:@"presentableTitle"];
+    [_watchingFriend removeObserver:self forKeyPath:@"presentableSubtitle"];
+    if ([_watchingFriend conformsToProtocol:@protocol(DESFriend)])
+        [_watchingFriend removeObserver:self forKeyPath:@"status"];
 }
 
 - (void)attachKVOHandlers {
-    [_watchingFriend addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
-    [_watchingFriend addObserver:self forKeyPath:@"statusMessage" options:NSKeyValueObservingOptionNew context:NULL];
-    [_watchingFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+    [_watchingFriend addObserver:self forKeyPath:@"presentableTitle" options:NSKeyValueObservingOptionNew context:NULL];
+    [_watchingFriend addObserver:self forKeyPath:@"presentableSubtitle" options:NSKeyValueObservingOptionNew context:NULL];
+    if ([_watchingFriend conformsToProtocol:@protocol(DESFriend)])
+        [_watchingFriend addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([keyPath isEqualToString:@"name"]) {
-            [self displayStringForName:((DESFriend *)object).name];
-        } else if ([keyPath isEqualToString:@"statusMessage"]) {
-            [self displayStringForStatusMessage:((DESFriend *)object).statusMessage];
+        id<DESConversation> obj = object;
+        if ([keyPath isEqualToString:@"presentableTitle"]) {
+            [self displayStringForName:obj.presentableTitle];
+        } else if ([keyPath isEqualToString:@"presentableSubtitle"]) {
+            [self displayStringForStatusMessage:obj.presentableSubtitle];
         } else if ([keyPath isEqualToString:@"status"]) {
             [self updateTooltipAgainstFriend:((DESFriend *)object)];
             self.light.image = SCImageForFriendStatus(((DESFriend *)object).status);
@@ -78,6 +110,11 @@
 }
 
 - (void)displayStringForName:(NSString *)def {
+    if (![_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
+        self.mainLabel.stringValue = def;
+        return;
+    }
+
     NSString *custom = [self.manager lookupCustomNameForID:_watchingFriend.publicKey];
     NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     def = [def stringByTrimmingCharactersInSet:cs];
@@ -105,12 +142,19 @@
 }
 
 - (void)displayStringForStatusMessage:(NSString *)def {
-    if (_watchingFriend.status == DESFriendStatusOffline) {
-        self.auxLabel.stringValue = [self.manager formatDate:_watchingFriend.lastSeen];
+    if (![_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
+        self.auxLabel.stringValue = def;
+        return;
+    }
+
+    /* convert it for type-checking purposes */
+    DESFriend *wf = (DESFriend *)_watchingFriend;
+    if (wf.status == DESFriendStatusOffline) {
+        self.auxLabel.stringValue = [self.manager formatDate:wf.lastSeen];
     } else {
         NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
         if ([[def stringByTrimmingCharactersInSet:cs] isEqualToString:@""]) {
-            self.auxLabel.stringValue = SCStringForFriendStatus(_watchingFriend.status);
+            self.auxLabel.stringValue = SCStringForFriendStatus(wf.status);
         } else {
             self.auxLabel.stringValue = def;
         }
@@ -132,10 +176,17 @@
     [self removeKVOHandlers];
     _watchingFriend = objectValue;
     if (_watchingFriend) {
-        [self displayStringForName:_watchingFriend.name];
-        [self displayStringForStatusMessage:_watchingFriend.statusMessage];
-        self.light.image = SCImageForFriendStatus(_watchingFriend.status);
-        [self updateTooltipAgainstFriend:_watchingFriend];
+        [self displayStringForName:_watchingFriend.presentableTitle];
+        [self displayStringForStatusMessage:_watchingFriend.presentableSubtitle];
+        if ([_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
+            DESFriend *f = (DESFriend *)_watchingFriend;
+            self.light.hidden = NO;
+            self.light.image = SCImageForFriendStatus(f.status);
+            [self updateTooltipAgainstFriend:f];
+        } else {
+            self.light.hidden = YES;
+            self.toolTip = nil;
+        }
         [self attachKVOHandlers];
     }
 }

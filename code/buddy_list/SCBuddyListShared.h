@@ -29,4 +29,9 @@ NS_INLINE NSString *SCStringForFriendStatus(DESFriendStatus sb) {
     }
 }
 
+@interface SCGroupMarker : NSObject
+@property (strong) NSString *name;
+@property (strong) NSString *other;
+@end
+
 #endif
