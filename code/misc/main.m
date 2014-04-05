@@ -2,22 +2,24 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Security/Security.h>
-#import <sodium.h>
 
 uint8_t SCCodeSigningStatus = SCCodeSigningStatusNoSign;
 NSString *SCCodeSigningSigner = nil;
 
 int main(int argc, const char * argv[]) {
+    /* Get the signature for verification purposes. */
     SecCodeRef sig = NULL;
-    SecCodeCopySelf(kSecCSDefaultFlags, &sig);
     SecStaticCodeRef sigi = NULL;
+    SecCodeCopySelf(kSecCSDefaultFlags, &sig);
     SecCodeCopyStaticCode(sig, kSecCSDefaultFlags, &sigi);
+
     OSStatus rv = SecCodeCheckValidity(sig, kSecCSEnforceRevocationChecks, NULL);
     OSStatus rvs = SecStaticCodeCheckValidity(sigi, kSecCSEnforceRevocationChecks, NULL);
     if (rv == errSecSuccess && rvs == errSecSuccess) {
         CFDictionaryRef csInfo = NULL;
-        SecCodeCopySigningInformation(sigi, kSecCSSigningInformation | kSecCSRequirementInformation, &csInfo);
-        NSLog(@"Code signing information: %@", (__bridge NSDictionary*)csInfo);
+        SecCodeCopySigningInformation(sigi, kSecCSSigningInformation, &csInfo);
+
+        /* Copy the first signer certificate. */
         CFArrayRef certs = (CFArrayRef)CFDictionaryGetValue(csInfo, kSecCodeInfoCertificates);
         SecCertificateRef cert = (SecCertificateRef)CFArrayGetValueAtIndex(certs, 0);
         CFStringRef certDesc = SecCertificateCopyLongDescription(kCFAllocatorDefault, cert, NULL);

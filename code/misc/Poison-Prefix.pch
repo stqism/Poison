@@ -1,6 +1,5 @@
 #ifdef __OBJC__
 #import <Cocoa/Cocoa.h>
-#import <sodium.h>
 
 #define SCApplicationInfoDictKey(k) ([NSBundle mainBundle].infoDictionary[k])
 #define SCStringPreference(k) ([[NSUserDefaults standardUserDefaults] stringForKey:k])
