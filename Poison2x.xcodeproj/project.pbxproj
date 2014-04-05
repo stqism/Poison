@@ -85,6 +85,7 @@
 		F56956CD18E884AE00E1EB0D /* avatar_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = F56956CB18E884AE00E1EB0D /* avatar_mask.png */; };
 		F56956D618E88C4700E1EB0D /* SCBuddyListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */; };
 		F56956D918E88EE700E1EB0D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56956D818E88EE700E1EB0D /* Quartz.framework */; };
+		F56B873818EE42E1008B5829 /* SCBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F56B873718EE42E1008B5829 /* SCBase64.m */; };
 		F58EE9A918C57A760033F2D4 /* DefaultDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */; };
 		F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F58EE9AC18C595530033F2D4 /* SCChatView.m */; };
 		F59C0F4418D3E6F300BB437C /* SCResourceBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = F59C0F4318D3E6F300BB437C /* SCResourceBundle.m */; };
@@ -126,6 +127,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = F5BA233918E74C1900C85A49;
 			remoteInfo = mio;
+		};
+		F56B873C18EE42E2008B5829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F50F9C0D18C3AB3600D06A0F /* ObjectiveTox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F52113DB18EA37FE00EB1B99;
+			remoteInfo = toxlookup;
 		};
 		F5A2977F18D4CB2A00595FDF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -250,6 +258,9 @@
 		F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBuddyListCells.m; sourceTree = "<group>"; };
 		F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCBuddyListShared.h; sourceTree = "<group>"; };
 		F56956D818E88EE700E1EB0D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		F56B873618EE42E1008B5829 /* SCBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBase64.h; sourceTree = "<group>"; };
+		F56B873718EE42E1008B5829 /* SCBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBase64.m; sourceTree = "<group>"; };
+		F56B873E18EE692A008B5829 /* SCValidationHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCValidationHelpers.h; sourceTree = "<group>"; };
 		F58EE9A818C57A760033F2D4 /* DefaultDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultDefaults.plist; sourceTree = "<group>"; };
 		F58EE9AB18C595530033F2D4 /* SCChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCChatView.h; sourceTree = "<group>"; };
 		F58EE9AC18C595530033F2D4 /* SCChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCChatView.m; sourceTree = "<group>"; };
@@ -306,6 +317,7 @@
 				F50F9C1218C3AB3600D06A0F /* libObjectiveTox.a */,
 				F5DAB46118C95A280046ED96 /* DESObserver */,
 				F56956D118E884AE00E1EB0D /* mio */,
+				F56B873D18EE42E2008B5829 /* toxlookup */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -535,6 +547,9 @@
 		F5B5425918B6D81F00226CA8 /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				F56B873E18EE692A008B5829 /* SCValidationHelpers.h */,
+				F56B873618EE42E1008B5829 /* SCBase64.h */,
+				F56B873718EE42E1008B5829 /* SCBase64.m */,
 				F543BE3218E126CC004C70D3 /* NSString+CanonicalID.h */,
 				F543BE3318E126CC004C70D3 /* NSString+CanonicalID.m */,
 				F543BE2E18E116D3004C70D3 /* NSURL+Parameters.h */,
@@ -632,6 +647,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = mio;
 			remoteRef = F56956D018E884AE00E1EB0D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F56B873D18EE42E2008B5829 /* toxlookup */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = toxlookup;
+			remoteRef = F56B873C18EE42E2008B5829 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F5DAB46118C95A280046ED96 /* DESObserver */ = {
@@ -749,6 +771,7 @@
 				F5B5422B18B6D23C00226CA8 /* main.m in Sources */,
 				F53DB8A118B6DDDE008D7ED5 /* SCBuddyListController.m in Sources */,
 				F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */,
+				F56B873818EE42E1008B5829 /* SCBase64.m in Sources */,
 				F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */,
 				F517FCA918B91CDA0060D575 /* SCProfileManager.m in Sources */,
 				F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */,
@@ -918,7 +941,6 @@
 					"${PROJECT_DIR}/_support/lib",
 					"$(PROJECT_DIR)/_support/lib",
 				);
-				OTHER_CFLAGS = "-DSC_ENFORCE_SIGNING_RESTRICTIONS_HARD";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -955,7 +977,6 @@
 					"${PROJECT_DIR}/_support/lib",
 					"$(PROJECT_DIR)/_support/lib",
 				);
-				OTHER_CFLAGS = "-DSC_ENFORCE_SIGNING_RESTRICTIONS_HARD";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = (
 					"-sectcreate",

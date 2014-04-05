@@ -32,8 +32,12 @@
         *vout = @(YES);
         return;
     } else {
-        *kout = [[kv substringToIndex:equals.location] stringByRemovingPercentEncoding];
-        *vout = [[kv substringFromIndex:equals.location + 1] stringByRemovingPercentEncoding];
+        *kout = [[[kv substringToIndex:equals.location]
+                  stringByReplacingOccurrencesOfString:@"+" withString:@"%20"]
+                 stringByRemovingPercentEncoding];
+        *vout = [[[kv substringFromIndex:equals.location + 1]
+                  stringByReplacingOccurrencesOfString:@"+" withString:@"%20"]
+                 stringByRemovingPercentEncoding];
     }
 }
 @end

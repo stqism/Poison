@@ -4,6 +4,7 @@
 #import "NSString+CanonicalID.h"
 #import "NSURL+Parameters.h"
 #import "ObjectiveTox.h"
+#import "SCValidationHelpers.h"
 
 @interface SCMainWindowController ()
 @property (weak) DESToxConnection *tox;
@@ -36,8 +37,8 @@
 - (void)displayAddFriend {
     if (!self.addPanel)
         self.addPanel = [[SCAddFriendSheetController alloc] initWithWindowNibName:@"AddFriend"];
-    [self.addPanel resetFields];
     [self.addPanel loadWindow];
+    [self.addPanel resetFields:YES];
     NSArray *objects = [[NSPasteboard generalPasteboard] readObjectsForClasses:@[[NSString class]] options:nil];
     for (NSString *item in objects) {
         NSString *canonical = item.canonicalToxID;
@@ -56,10 +57,13 @@
 - (void)displayAddFriendWithToxSchemeURL:(NSURL *)url {
     if (!self.addPanel)
         self.addPanel = [[SCAddFriendSheetController alloc] initWithWindowNibName:@"AddFriend"];
-    [self.addPanel resetFields];
     [self.addPanel loadWindow];
-    /* +1 accounts for the third slash. */
-    if (url.path.length != (DESFriendAddressSize * 2) + 1 && url.host.length != DESFriendAddressSize * 2) {
+    [self.addPanel resetFields:YES];
+
+    NSString *cmp = url.host;
+    if (url.user)
+        cmp = [url.user stringByAppendingString:[NSString stringWithFormat:@"@%@", url.host]];
+    if (!(SCQuickValidateID(cmp) || SCQuickValidateDNSDiscoveryID(cmp))) {
         NSAlert *error = [[NSAlert alloc] init];
         error.alertStyle = NSInformationalAlertStyle;
         error.messageText = NSLocalizedString(@"Invalid Tox ID.", nil);
@@ -68,13 +72,7 @@
         [error beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
         return;
     }
-    self.addPanel.toxID = (url.path.length != (DESFriendAddressSize * 2) + 1? url.host : [url.path substringFromIndex:1]);
-    if (url.query) {
-        NSDictionary *params = url.parameters;
-        if ([params[@"message"] isKindOfClass:[NSString class]]) {
-            [self.addPanel setMessage:params[@"message"]];
-        }
-    }
+    [self.addPanel fillWithURL:url];
     [NSApp beginSheet:self.addPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:NULL];
 }
 
