@@ -261,6 +261,32 @@
     }
 }
 
+- (void)didFailToAddFriendWithError:(NSError *)error onConnection:(DESToxConnection *)connection {
+    if (!([self.mainWindowController.window isVisible] && [self.mainWindowController.window isKeyWindow]))
+        [self.mainWindowController.window makeKeyAndOrderFront:self];
+    NSAlert *a = [[NSAlert alloc] init];
+    a.alertStyle = NSCriticalAlertStyle;
+    a.messageText = NSLocalizedString(@"Failed To Add Friend", nil);
+    NSString *f;
+    switch (error.code) {
+        case DESFriendAddOwnKey:
+            f = NSLocalizedString(@"Failed to add the friend because the Tox ID belonged to you.", nil);
+            break;
+        case DESFriendAddInvalidID:
+            f = NSLocalizedString(@"Failed to add the friend because the Tox ID was invalid.", nil);
+            break;
+        case DESFriendAddAlreadySent:
+            f = NSLocalizedString(@"Failed to add the friend because the Tox ID is already in your friends list.", nil);
+            break;
+        default:
+            f = NSLocalizedString(@"Failed to add the friend because an error occurred.", nil);
+            break;
+    }
+    a.informativeText = [NSString stringWithFormat:@"%@ (%@ %d)",
+                         f, error.domain, (int)error.code];
+    [a beginSheetModalForWindow:self.mainWindowController.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+}
+
 - (void)logOut {
     [self.toxConnection stop];
 }

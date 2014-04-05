@@ -8,10 +8,10 @@
 NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
     NSDictionary *userInfo = nil;
     if (retv == TXD_ERR_BAD_BLOCK || retv == TXD_ERR_SIZE_MISMATCH) {
-        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Profile data is corrupt.", nil),
+        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Profile Data Is Corrupt", nil),
                      NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Your profile could not be loaded because the data was corrupt.", nil)};
     } else if (retv == TXD_ERR_DECRYPT_FAILED) {
-        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Password incorrect.", nil),
+        userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Password Incorrect", nil),
                      NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Your profile could not be loaded because you entered the wrong password.", nil)};
     }
     return [NSError errorWithDomain:@"TXDErrorDomain" code:retv userInfo:userInfo];

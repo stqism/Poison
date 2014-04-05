@@ -53,7 +53,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="Tb5-Ve-42m">
+                    <button verticalHuggingPriority="750" tag="1" id="Tb5-Ve-42m">
                         <rect key="frame" x="197" y="13" width="109" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="push" title="Add Friend" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LAv-uq-bDH">
@@ -63,6 +63,9 @@
 DQ
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="exitSheet:" target="-2" id="mls-Lu-CRI"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="EIv-Gt-F0q">
                         <rect key="frame" x="14" y="13" width="82" height="32"/>

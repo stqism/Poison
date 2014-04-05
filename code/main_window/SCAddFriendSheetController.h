@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, SCFriendFindMethod) {
 - (void)setToxID:(NSString *)theID;
 - (void)setMessage:(NSString *)theMessage;
 
+- (NSString *)proposedName;
+
 - (void)setMethod:(SCFriendFindMethod)method;
 - (void)fillWithURL:(NSURL *)toxURL;
 

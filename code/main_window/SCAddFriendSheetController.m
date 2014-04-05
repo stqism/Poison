@@ -71,7 +71,16 @@
 }
 
 - (NSString *)toxID {
-    return self.idField.stringValue;
+    if (self.method == SCFriendFindMethodPlain) {
+        return self.idField.stringValue;
+    } else if (self.method == SCFriendFindMethodDNSDiscovery) {
+        NSData *bytes = [[self.pinField.stringValue stringByAppendingString:@"=="] substringToIndex:8].dataByDecodingBase64;
+        return [NSString stringWithFormat:@"%@%@%@",
+                _rec[DESUserDiscoveryPublicKey],
+                DESConvertBytesToHex(bytes.bytes, (uint32_t)bytes.length),
+                _rec[DESUserDiscoveryChecksumKey]];
+    }
+    return nil;
 }
 
 - (void)setToxID:(NSString *)theID {
@@ -381,7 +390,7 @@
     }
 }
 
-- (IBAction)exitSheet:(id)sender {
-    [NSApp endSheet:self.window];
+- (IBAction)exitSheet:(NSButton *)sender {
+    [NSApp endSheet:self.window returnCode:sender.tag];
 }
 @end

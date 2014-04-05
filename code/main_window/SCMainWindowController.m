@@ -5,6 +5,7 @@
 #import "NSURL+Parameters.h"
 #import "ObjectiveTox.h"
 #import "SCValidationHelpers.h"
+#import "SCProfileManager.h"
 
 @interface SCMainWindowController ()
 @property (weak) DESToxConnection *tox;
@@ -51,7 +52,7 @@
             return;
         }
     }
-    [NSApp beginSheet:self.addPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:NULL];
+    [NSApp beginSheet:self.addPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:(int *)'ADDf'];
 }
 
 - (void)displayAddFriendWithToxSchemeURL:(NSURL *)url {
@@ -66,7 +67,7 @@
     if (!(SCQuickValidateID(cmp) || SCQuickValidateDNSDiscoveryID(cmp))) {
         NSAlert *error = [[NSAlert alloc] init];
         error.alertStyle = NSInformationalAlertStyle;
-        error.messageText = NSLocalizedString(@"Invalid Tox ID.", nil);
+        error.messageText = NSLocalizedString(@"Invalid Tox ID", nil);
         error.informativeText = NSLocalizedString(@"That Tox URL doesn't look right. Are you sure that it's correct?", nil);
         [error addButtonWithTitle:NSLocalizedString(@"Dismiss", nil)];
         [error beginSheetModalForWindow:self.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
@@ -78,6 +79,22 @@
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
+    if (returnCode && contextInfo == (int *)'ADDf') {
+        NSString *id_ = self.addPanel.toxID;
+        NSString *proposedName = self.addPanel.proposedName;
+
+        if (proposedName) {
+            NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy]?
+                                        : [NSMutableDictionary dictionary];
+            map[[id_ substringToIndex:DESPublicKeySize * 2]] = proposedName;
+            [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [SCProfileManager commitPrivateSettings];
+            });
+        }
+
+        [self.tox addFriendPublicKey:id_ message:self.addPanel.message];
+    }
 }
 
 @end
