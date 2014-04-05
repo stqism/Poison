@@ -7,6 +7,8 @@
 #import "SCValidationHelpers.h"
 #import "SCProfileManager.h"
 
+static void *const SCAddFriendSheetContext;
+
 @interface SCMainWindowController ()
 @property (weak) DESToxConnection *tox;
 @end
@@ -52,7 +54,7 @@
             return;
         }
     }
-    [NSApp beginSheet:self.addPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:(int *)'ADDf'];
+    [NSApp beginSheet:self.addPanel.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:SCAddFriendSheetContext];
 }
 
 - (void)displayAddFriendWithToxSchemeURL:(NSURL *)url {
@@ -79,7 +81,7 @@
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
     [sheet orderOut:self];
-    if (returnCode && contextInfo == (int *)'ADDf') {
+    if (returnCode && contextInfo == SCAddFriendSheetContext) {
         NSString *id_ = self.addPanel.toxID;
         NSString *proposedName = self.addPanel.proposedName;
 
