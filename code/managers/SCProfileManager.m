@@ -5,7 +5,7 @@
 #import "data_private.h"
 #import "txdplus.h"
 
-NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
+NSError *SCLocalizedErrorWithTXDReturnValue(int32_t retv) {
     NSDictionary *userInfo = nil;
     if (retv == TXD_ERR_BAD_BLOCK || retv == TXD_ERR_SIZE_MISMATCH) {
         userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(@"Profile Data Is Corrupt", nil),
@@ -90,7 +90,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(uint32_t retv) {
         uint8_t *decrypted = NULL;
         uint64_t size = 0;
         NSUInteger passLen = [password lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        uint32_t errc = txd_decrypt_buf((uint8_t*)password.UTF8String, passLen, contents.bytes, contents.length, &decrypted, &size);
+        int32_t errc = txd_decrypt_buf((uint8_t*)password.UTF8String, passLen, contents.bytes, contents.length, &decrypted, &size);
         if (errc != TXD_ERR_SUCCESS) {
             if (err)
                 *err = SCLocalizedErrorWithTXDReturnValue(errc);
