@@ -42,14 +42,12 @@ void _DESCallbackFriendNameDidChange(Tox *tox, int32_t from, uint8_t *payload, u
     if (payloadLength == 0)
         return;
     NSString *name = [[NSString alloc] initWithBytes:payload length:payloadLength encoding:NSUTF8StringEncoding];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [f willChangeValueForKey:@"name"];
-    });
+    [f willChangeValueForKey:@"name"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
+        [f didChangeValueForKey:@"name"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [f didChangeValueForKey:@"name"];
             if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
                 [connection.delegate friend:f nameDidChange:name onConnection:connection];
         });
@@ -65,14 +63,12 @@ void _DESCallbackFriendStatusMessageDidChange(Tox *tox, int32_t from, uint8_t *p
     if (payloadLength == 0)
         return;
     NSString *smg = [[NSString alloc] initWithBytes:payload length:payloadLength encoding:NSUTF8StringEncoding];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [f willChangeValueForKey:@"statusMessage"];
-    });
+    [f willChangeValueForKey:@"statusMessage"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
+        [f didChangeValueForKey:@"statusMessage"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [f didChangeValueForKey:@"statusMessage"];
             if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
                 [connection.delegate friend:f statusMessageDidChange:smg onConnection:connection];
         });
@@ -86,14 +82,12 @@ void _DESCallbackFriendUserStatus(Tox *tox, int32_t from, uint8_t status, void *
         return;
     /* status doesn't get set in core context until the callback returns
      * so we have to do this hacky thing */
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [f willChangeValueForKey:@"status"];
-    });
+    [f willChangeValueForKey:@"status"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
+        [f didChangeValueForKey:@"status"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [f didChangeValueForKey:@"status"];
             if ([connection.delegate respondsToSelector:@selector(friend:userStatusDidChange:onConnection:)])
                 [connection.delegate friend:f userStatusDidChange:DESToxToFriendStatus(status) onConnection:connection];
         });
@@ -109,9 +103,7 @@ void _DESCallbackFriendConnectionStatus(Tox *tox, int32_t from, uint8_t on_off, 
     DESConcreteFriend *f = (DESConcreteFriend *)[connection friendWithID:from];
     /* status doesn't get set in core context until the callback returns
      * so we have to do this hacky thing */
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [f willChangeValueForKey:@"status"];
-    });
+    [f willChangeValueForKey:@"status"];
     dispatch_async(connection._messengerQueue, ^{
         if (!f)
             return;
@@ -126,8 +118,8 @@ void _DESCallbackFriendConnectionStatus(Tox *tox, int32_t from, uint8_t on_off, 
         } else {
             [f updateAddress:@"" port:0];
         }
+        [f didChangeValueForKey:@"status"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [f didChangeValueForKey:@"status"];
             if ([connection.delegate respondsToSelector:@selector(friend:connectionStatusDidChange:onConnection:)])
                 [connection.delegate friend:f connectionStatusDidChange:on_off? YES : NO onConnection:connection];
         });
@@ -154,8 +146,10 @@ void _DESCallbackFMGeneric(DESToxConnection *conn, int32_t from, uint8_t *payloa
     DESConcreteFriend *f = (DESConcreteFriend *)[conn friendWithID:from];
     NSString *messageBody = [[NSString alloc] initWithBytes:payload length:payloadLength encoding:NSUTF8StringEncoding];
     DESInfo(@"<%@> %@", f.name, messageBody);
-    if ([f.delegate respondsToSelector:@selector(conversation:didReceiveMessage:ofType:fromSender:)])
-        [f.delegate conversation:(DESConversation *)f didReceiveMessage:messageBody ofType:mtyp fromSender:f];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([f.delegate respondsToSelector:@selector(conversation:didReceiveMessage:ofType:fromSender:)])
+            [f.delegate conversation:(DESConversation *)f didReceiveMessage:messageBody ofType:mtyp fromSender:f];
+    });
 }
 
 /* GROUP CHATS */

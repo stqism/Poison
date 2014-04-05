@@ -49,14 +49,17 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"name"]) {
-        [self displayStringForName:((DESFriend *)object).name];
-    } else if ([keyPath isEqualToString:@"statusMessage"]) {
-        [self displayStringForStatusMessage:((DESFriend *)object).statusMessage];
-    } else if ([keyPath isEqualToString:@"status"]) {
-        [self updateTooltipAgainstFriend:((DESFriend *)object)];
-        self.light.image = SCImageForFriendStatus(((DESFriend *)object).status);
-    }
+    change = [change copy];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([keyPath isEqualToString:@"name"]) {
+            [self displayStringForName:((DESFriend *)object).name];
+        } else if ([keyPath isEqualToString:@"statusMessage"]) {
+            [self displayStringForStatusMessage:((DESFriend *)object).statusMessage];
+        } else if ([keyPath isEqualToString:@"status"]) {
+            [self updateTooltipAgainstFriend:((DESFriend *)object)];
+            self.light.image = SCImageForFriendStatus(((DESFriend *)object).status);
+        }
+    });
 }
 
 - (void)updateTooltipAgainstFriend:(DESFriend *)f {

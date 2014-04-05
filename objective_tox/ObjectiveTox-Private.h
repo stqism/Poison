@@ -107,6 +107,7 @@ NS_INLINE TOX_USERSTATUS DESFriendStatusToTox(DESFriendStatus status) {
 
 #pragma mark - Extensions to Core
 
+void DESSetKeys(Tox *tox, uint8_t *pk, uint8_t *sk);
 /* Counts the connected DHT nodes. Maximum 32 due to core limit */
 int DESCountCloseNodes(Tox *tox);
 /* Gets a friend's IP address and port into ip_out and port_out.

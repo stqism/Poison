@@ -197,19 +197,23 @@
 #pragma mark - des delegate
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"name"]) {
-        NSString *displayStr;
-        if ([change[NSKeyValueChangeNewKey] isEqualToString:self.profileName])
-            displayStr = self.profileName;
-        else
-            displayStr = [NSString stringWithFormat:@"%@ (%@)",
-                          self.profileName, change[NSKeyValueChangeNewKey]];
-        self.userInfoMenuItem.name = displayStr;
-        self.dockNameMenuItem.title = displayStr;
-    } else {
-        self.userInfoMenuItem.statusMessage = change[NSKeyValueChangeNewKey];
-        self.dockStatusMenuItem.title = change[NSKeyValueChangeNewKey];
-    }
+    change = [change copy];
+    /* safeguard against segfaults due to KVO from foreign thread */
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([keyPath isEqualToString:@"name"]) {
+            NSString *displayStr;
+            if ([change[NSKeyValueChangeNewKey] isEqualToString:self.profileName])
+                displayStr = self.profileName;
+            else
+                displayStr = [NSString stringWithFormat:@"%@ (%@)",
+                              self.profileName, change[NSKeyValueChangeNewKey]];
+            self.userInfoMenuItem.name = displayStr;
+            self.dockNameMenuItem.title = displayStr;
+        } else {
+            self.userInfoMenuItem.statusMessage = change[NSKeyValueChangeNewKey];
+            self.dockStatusMenuItem.title = change[NSKeyValueChangeNewKey];
+        }
+    });
 }
 
 - (void)saveProfile {

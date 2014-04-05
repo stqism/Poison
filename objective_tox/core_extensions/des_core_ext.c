@@ -1,6 +1,12 @@
 #include "tox.h"
 #include "Messenger.h"
 #include "util.h"
+void DESSetKeys(Tox *tox, uint8_t *pk, uint8_t *sk) {
+    Messenger *m = (Messenger *)tox;
+    memcpy(m -> net_crypto -> self_public_key, pk, crypto_box_PUBLICKEYBYTES);
+    memcpy(m -> net_crypto -> self_secret_key, sk, crypto_box_SECRETKEYBYTES);
+}
+
 int DESCountCloseNodes(Tox *tox) {
     Messenger *m = (Messenger *)tox;
     uint32_t i, ret = 0;

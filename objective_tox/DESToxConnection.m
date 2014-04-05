@@ -184,13 +184,16 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     return [[NSString alloc] initWithBytesNoCopy:buf length:name_size encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
+/* WARNING: BLOCKING METHOD */
 - (void)setName:(NSString *)name {
     if ([name lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > TOX_MAX_NAME_LENGTH)
         return;
-    [self willChangeValueForKey:@"name"];
-    tox_set_name(self.tox, (uint8_t*)[name UTF8String],
-                 (uint16_t)[name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
-    [self didChangeValueForKey:@"name"];
+    dispatch_sync(self.messengerQueue, ^{
+        [self willChangeValueForKey:@"name"];
+        tox_set_name(self.tox, (uint8_t*)[name UTF8String],
+                     (uint16_t)[name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+        [self didChangeValueForKey:@"name"];
+    });
 }
 
 - (NSString *)statusMessage {
@@ -200,26 +203,32 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     return [[NSString alloc] initWithBytesNoCopy:buf length:smsg_size encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
+/* WARNING: BLOCKING METHOD */
 - (void)setStatusMessage:(NSString *)statusMessage {
     if ([statusMessage lengthOfBytesUsingEncoding:NSUTF8StringEncoding] > TOX_MAX_STATUSMESSAGE_LENGTH)
         return;
-    [self willChangeValueForKey:@"statusMessage"];
-    tox_set_status_message(self.tox, (uint8_t*)[statusMessage UTF8String],
-                           (uint16_t)[statusMessage lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
-    [self didChangeValueForKey:@"statusMessage"];
+    dispatch_sync(self.messengerQueue, ^{
+        [self willChangeValueForKey:@"statusMessage"];
+        tox_set_status_message(self.tox, (uint8_t*)[statusMessage UTF8String],
+                               (uint16_t)[statusMessage lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+        [self didChangeValueForKey:@"statusMessage"];
+    });
 }
 
 - (DESFriendStatus)status {
     return DESToxToFriendStatus(tox_get_self_user_status(self.tox));
 }
 
+/* WARNING: BLOCKING METHOD */
 - (void)setStatus:(DESFriendStatus)status {
     TOX_USERSTATUS bit = DESFriendStatusToTox(status);
     if (bit == TOX_USERSTATUS_INVALID)
         return;
-    [self willChangeValueForKey:@"status"];
-    tox_set_user_status(self.tox, bit);
-    [self didChangeValueForKey:@"status"];
+    dispatch_sync(self.messengerQueue, ^{
+        [self willChangeValueForKey:@"status"];
+        tox_set_user_status(self.tox, bit);
+        [self didChangeValueForKey:@"status"];
+    });
 }
 
 - (NSString *)publicKey {
@@ -251,18 +260,21 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     return ret;
 }
 
+/* WARNING: BLOCKING METHOD */
 - (void)setPublicKey:(NSString *)publicKey privateKey:(NSString *)privateKey {
     uint8_t *keys = malloc(DESPublicKeySize + DESPrivateKeySize);
     DESConvertPublicKeyToData(publicKey, keys);
     DESConvertPrivateKeyToData(privateKey, keys + DESPublicKeySize);
     if (DESKeyPairIsValid(keys, keys + DESPublicKeySize)) {
-        [self willChangeValueForKey:@"publicKey"];
-        [self willChangeValueForKey:@"privateKey"];
-        [self willChangeValueForKey:@"friendAddress"];
-        //tox_set_self_keys(self.tox, keys, keys + DESPublicKeySize);
-        [self didChangeValueForKey:@"friendAddress"];
-        [self didChangeValueForKey:@"privateKey"];
-        [self didChangeValueForKey:@"publicKey"];
+        dispatch_sync(self.messengerQueue, ^{
+            [self willChangeValueForKey:@"publicKey"];
+            [self willChangeValueForKey:@"privateKey"];
+            [self willChangeValueForKey:@"friendAddress"];
+            DESSetKeys(self.tox, keys, keys + DESPublicKeySize);
+            [self didChangeValueForKey:@"friendAddress"];
+            [self didChangeValueForKey:@"privateKey"];
+            [self didChangeValueForKey:@"publicKey"];
+        });
     } else {
         DESWarn(@"You tried to set keys that were not valid. Public: %@ Private %@", publicKey, privateKey);
     }
@@ -306,9 +318,7 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         int32_t friendnum = tox_add_friend(self.tox, keyBytes, (uint8_t*)[message UTF8String],
                        [message lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         free(keyBytes);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addFriendTriggeringKVO:friendnum];
-        });
+        [self addFriendTriggeringKVO:friendnum];
     });
 }
 
@@ -318,9 +328,7 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         DESConvertPublicKeyToData(key, keyBytes);
         int32_t friendnum = tox_add_friend_norequest(self.tox, keyBytes);
         free(keyBytes);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addFriendTriggeringKVO:friendnum];
-        });
+        [self addFriendTriggeringKVO:friendnum];
     });
 }
 
@@ -330,7 +338,9 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     _groupMapping[@(conversation.peerNumber)] = conversation;
     [self didChangeValueForKey:@"groups" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changeSet];
     if ([self.delegate respondsToSelector:@selector(didJoinGroupChat:onConnection:)])
-        [self.delegate didJoinGroupChat:conversation onConnection:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate didJoinGroupChat:conversation onConnection:self];
+        });
 }
 
 - (void)addFriendTriggeringKVO:(int32_t)friendnum {
@@ -340,7 +350,9 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     _friendMapping[@(friendnum)] = friend;
     [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changeSet];
     if ([self.delegate respondsToSelector:@selector(didAddFriend:onConnection:)])
-        [self.delegate didAddFriend:friend onConnection:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate didAddFriend:friend onConnection:self];
+        });
 }
 
 - (id<DESConversation>)groupChatWithID:(int32_t)num {
@@ -352,25 +364,29 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 }
 
 - (void)leaveGroup:(id<DESConversation>)group {
-    if (!tox_del_groupchat(self.tox, group.peerNumber)) {
-        NSSet *changeSet = [NSSet setWithObject:group];
-        [self willChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
-        [_groupMapping removeObjectForKey:@(group.peerNumber)];
-        [self didChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
-    } else {
-        DESWarn(@"group chat %d is not valid", group.peerNumber);
-    }
+    dispatch_async(self.messengerQueue, ^{
+        if (!tox_del_groupchat(self.tox, group.peerNumber)) {
+            NSSet *changeSet = [NSSet setWithObject:group];
+            [self willChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
+            [_groupMapping removeObjectForKey:@(group.peerNumber)];
+            [self didChangeValueForKey:@"groups" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
+        } else {
+            DESWarn(@"group chat %d is not valid", group.peerNumber);
+        }
+    });
 }
 
 - (void)deleteFriend:(id<DESFriend>)friend {
-    if (!tox_del_friend(self.tox, friend.peerNumber)) {
-        NSSet *changeSet = [NSSet setWithObject:friend];
-        [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
-        [_friendMapping removeObjectForKey:@(friend.peerNumber)];
-        [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
-    } else {
-        DESWarn(@"friend %d is not valid", friend.peerNumber);
-    }
+    dispatch_async(self.messengerQueue, ^{
+        if (!tox_del_friend(self.tox, friend.peerNumber)) {
+            NSSet *changeSet = [NSSet setWithObject:friend];
+            [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
+            [_friendMapping removeObjectForKey:@(friend.peerNumber)];
+            [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
+        } else {
+            DESWarn(@"friend %d is not valid", friend.peerNumber);
+        }
+    });
 }
 
 - (void)syncFriendList {
@@ -408,20 +424,22 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 
 - (void)restoreDataFromTXDIntermediate:(txd_intermediate_t)txd {
     if (txd) {
-        [self willChangeValueForKey:@"name"];
-        [self willChangeValueForKey:@"statusMessage"];
-        [self willChangeValueForKey:@"status"];
-        [self willChangeValueForKey:@"publicKey"];
-        [self willChangeValueForKey:@"privateKey"];
-        [self willChangeValueForKey:@"friendAddress"];
-        txd_restore_intermediate(txd, self.tox);
-        [self syncFriendList];
-        [self didChangeValueForKey:@"friendAddress"];
-        [self didChangeValueForKey:@"privateKey"];
-        [self didChangeValueForKey:@"publicKey"];
-        [self didChangeValueForKey:@"status"];
-        [self didChangeValueForKey:@"statusMessage"];
-        [self didChangeValueForKey:@"name"];
+        dispatch_sync(self.messengerQueue, ^{
+            [self willChangeValueForKey:@"name"];
+            [self willChangeValueForKey:@"statusMessage"];
+            [self willChangeValueForKey:@"status"];
+            [self willChangeValueForKey:@"publicKey"];
+            [self willChangeValueForKey:@"privateKey"];
+            [self willChangeValueForKey:@"friendAddress"];
+            txd_restore_intermediate(txd, self.tox);
+            [self syncFriendList];
+            [self didChangeValueForKey:@"friendAddress"];
+            [self didChangeValueForKey:@"privateKey"];
+            [self didChangeValueForKey:@"publicKey"];
+            [self didChangeValueForKey:@"status"];
+            [self didChangeValueForKey:@"statusMessage"];
+            [self didChangeValueForKey:@"name"];
+        });
     }
 }
 

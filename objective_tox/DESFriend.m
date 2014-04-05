@@ -29,6 +29,7 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
     uint32_t _cMessageID;
     NSString *_addr;
     uint16_t _port;
+    NSString *_pk;
 }
 @synthesize connection = _connection;
 @synthesize peerNumber = _peerNumber;
@@ -42,6 +43,7 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
         _peerNumber = friendNum;
         _cMessageID = 1;
         _addr = @"";
+        _pk = self.publicKey; /* note: this is safe */
     }
     return self;
 }
@@ -50,6 +52,11 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
     uint16_t sz = tox_get_name_size(_connection._core, _peerNumber);
     uint8_t *buf = malloc(sz);
     tox_get_name(_connection._core, _peerNumber, buf);
+    while (sz > 0 && buf[sz - 1] == 0) {
+        --sz;
+    }
+    if (sz == 0)
+        return @"";
     return [[NSString alloc] initWithBytesNoCopy:buf length:sz encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
@@ -57,6 +64,11 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
     uint16_t sz = tox_get_status_message_size(_connection._core, _peerNumber);
     uint8_t *buf = malloc(sz);
     tox_get_status_message(_connection._core, _peerNumber, buf, sz);
+    while (sz > 0 && buf[sz - 1] == 0) {
+        --sz;
+    }
+    if (sz == 0)
+        return @"";
     return [[NSString alloc] initWithBytesNoCopy:buf length:sz encoding:NSUTF8StringEncoding freeWhenDone:YES];
 }
 
@@ -162,6 +174,10 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 }
 
 #pragma mark - private
+
+- (void)updatePeernum:(int32_t)newpeernum {
+    _peerNumber = newpeernum;
+}
 
 - (void)updateAddress:(NSString *)newAddr port:(uint16_t)newPort {
     dispatch_async(dispatch_get_main_queue(), ^{
