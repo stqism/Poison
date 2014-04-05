@@ -8,6 +8,8 @@ NSString *const DESDefaultStatusMessage = @"Toxing on Tox";
 const uint32_t DESMaximumNameLength = TOX_MAX_NAME_LENGTH;
 const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 
+NSString *const DESFriendAddingErrorDomain = @"DESFriendAddingErrorDomain";
+
 @interface DESToxConnection ()
 @property dispatch_queue_t messengerQueue;
 @property BOOL isMessengerLoopStopping;
@@ -313,12 +315,20 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 
 - (void)addFriendPublicKey:(NSString *)key message:(NSString *)message {
     dispatch_async(self.messengerQueue, ^{
-        uint8_t *keyBytes = malloc(DESPublicKeySize);
-        DESConvertPublicKeyToData(key, keyBytes);
+        uint8_t *keyBytes = malloc(DESFriendAddressSize);
+        DESConvertFriendAddressToData(key, keyBytes);
         int32_t friendnum = tox_add_friend(self.tox, keyBytes, (uint8_t*)[message UTF8String],
-                       [message lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+                                           [message lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         free(keyBytes);
-        [self addFriendTriggeringKVO:friendnum];
+
+        if (friendnum >= 0)
+            [self addFriendTriggeringKVO:friendnum];
+        else
+            if ([self.delegate respondsToSelector:@selector(didFailToAddFriendWithError:onConnection:)])
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSError *e = [NSError errorWithDomain:DESFriendAddingErrorDomain code:friendnum userInfo:nil];
+                    [self.delegate didFailToAddFriendWithError:e onConnection:self];
+                });
     });
 }
 
@@ -328,7 +338,15 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
         DESConvertPublicKeyToData(key, keyBytes);
         int32_t friendnum = tox_add_friend_norequest(self.tox, keyBytes);
         free(keyBytes);
-        [self addFriendTriggeringKVO:friendnum];
+
+        if (friendnum >= 0)
+            [self addFriendTriggeringKVO:friendnum];
+        else
+            if ([self.delegate respondsToSelector:@selector(didFailToAddFriendWithError:onConnection:)])
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSError *e = [NSError errorWithDomain:DESFriendAddingErrorDomain code:friendnum userInfo:nil];
+                    [self.delegate didFailToAddFriendWithError:e onConnection:self];
+                });
     });
 }
 
@@ -347,7 +365,7 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     DESFriend *friend = [[DESConcreteFriend alloc] initWithNumber:friendnum onConnection:self];
     NSSet *changeSet = [NSSet setWithObject:friend];
     [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changeSet];
-    _friendMapping[@(friendnum)] = friend;
+    _friendMapping[friend.publicKey] = friend;
     [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changeSet];
     if ([self.delegate respondsToSelector:@selector(didAddFriend:onConnection:)])
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -360,7 +378,20 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 }
 
 - (id<DESFriend>)friendWithID:(int32_t)num {
-    return _friendMapping[@(num)];
+    uint8_t *pk = malloc(DESPublicKeySize);
+    int ret = tox_get_client_id(self.tox, num, pk);
+    if (ret == -1) {
+        free(pk);
+        return nil;
+    } else {
+        NSString *key = DESConvertPublicKeyToString(pk);
+        free(pk);
+        return _friendMapping[key];
+    }
+}
+
+- (id<DESFriend>)friendWithKey:(NSString *)pk {
+    return _friendMapping[pk];
 }
 
 - (void)leaveGroup:(id<DESConversation>)group {
@@ -378,10 +409,11 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
 
 - (void)deleteFriend:(id<DESFriend>)friend {
     dispatch_async(self.messengerQueue, ^{
+        NSString *pk = friend.publicKey;
         if (!tox_del_friend(self.tox, friend.peerNumber)) {
             NSSet *changeSet = [NSSet setWithObject:friend];
             [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
-            [_friendMapping removeObjectForKey:@(friend.peerNumber)];
+            [_friendMapping removeObjectForKey:pk];
             [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
         } else {
             DESWarn(@"friend %d is not valid", friend.peerNumber);
@@ -405,6 +437,19 @@ const uint32_t DESMaximumStatusMessageLength = TOX_MAX_STATUSMESSAGE_LENGTH;
     for (int i = 0; i < friend_count; ++i) {
         [self addFriendTriggeringKVO:numbers[i]];
     }
+}
+
+- (void)syncPeerNumbers_Friends {
+    NSMutableDictionary *work = [_friendMapping mutableCopy];
+    NSArray *friendsValid = [_friendMapping allValues];
+    for (DESFriend *f in friendsValid) {
+        int32_t n = tox_get_friend_number(self.tox, (uint8_t *)f.publicKey.UTF8String);
+        if (n >= 0) {
+            work[@(n)] = f;
+            [(DESConcreteFriend *)f updatePeernum:n];
+        }
+    }
+    _friendMapping = work;
 }
 
 - (NSSet *)friends {

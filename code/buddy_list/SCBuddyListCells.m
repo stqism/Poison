@@ -49,7 +49,6 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    change = [change copy];
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([keyPath isEqualToString:@"name"]) {
             [self displayStringForName:((DESFriend *)object).name];

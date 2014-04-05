@@ -16,6 +16,8 @@ extern const uint32_t DESMaximumMessageLength;
 extern const uint32_t DESMaximumNameLength;
 extern const uint32_t DESMaximumStatusMessageLength;
 
+extern NSString *const DESFriendAddingErrorDomain;
+
 typedef NS_ENUM(uint8_t, DESFriendStatus) {
     DESFriendStatusAvailable,
     DESFriendStatusAway,
@@ -37,6 +39,17 @@ typedef NS_ENUM(uint8_t, DESEventType) {
     DESEventTypeFriendUserStatusChanged,
     DESEventTypeFriendConnectionStatusChanged,
     DESEventTypeFriendControlMessage
+};
+
+typedef NS_ENUM(NSInteger, DESFriendAddErrorCode) {
+    DESFriendAddMessageTooLong = -1,
+    DESFriendAddNoMessage = -2,
+    DESFriendAddOwnKey = -3,
+    DESFriendAddAlreadySent = -4,
+    DESFriendAddUnknownError = -5,
+    DESFriendAddInvalidID = -6,
+    DESFriendAddNospamChanged = -7,
+    DESFriendAddMemoryFailure = -8
 };
 
 #endif

@@ -88,6 +88,7 @@ NS_INLINE TOX_USERSTATUS DESFriendStatusToTox(DESFriendStatus status) {
 
 - (instancetype)initWithNumber:(int32_t)friendNum
                   onConnection:(DESToxConnection *)connection;
+- (void)updatePeernum:(int32_t)newpeernum;
 - (void)updateAddress:(NSString *)newAddr port:(uint16_t)newPort;
 
 @end

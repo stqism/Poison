@@ -43,7 +43,10 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
         _peerNumber = friendNum;
         _cMessageID = 1;
         _addr = @"";
-        _pk = self.publicKey; /* note: this is safe */
+        uint8_t *buf = malloc(DESPublicKeySize);
+        tox_get_client_id(_connection._core, _peerNumber, buf);
+        _pk =  DESConvertPublicKeyToString(buf);
+        free(buf);
     }
     return self;
 }
@@ -83,9 +86,7 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 }
 
 - (NSString *)publicKey {
-    uint8_t *buf = malloc(DESPublicKeySize);
-    tox_get_client_id(_connection._core, _peerNumber, buf);
-    return DESConvertPublicKeyToString(buf);
+    return _pk;
 }
 
 - (DESConversation *)conversation {
@@ -176,18 +177,18 @@ const uint32_t DESMaximumMessageLength = TOX_MAX_MESSAGE_LENGTH;
 #pragma mark - private
 
 - (void)updatePeernum:(int32_t)newpeernum {
+    [self willChangeValueForKey:@"peerNumber"];
     _peerNumber = newpeernum;
+    [self didChangeValueForKey:@"peerNumber"];
 }
 
 - (void)updateAddress:(NSString *)newAddr port:(uint16_t)newPort {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self willChangeValueForKey:@"address"];
-        _addr = newAddr;
-        [self didChangeValueForKey:@"address"];
-        [self willChangeValueForKey:@"port"];
-        _port = newPort;
-        [self didChangeValueForKey:@"port"];
-    });
+    [self willChangeValueForKey:@"address"];
+    _addr = newAddr;
+    [self didChangeValueForKey:@"address"];
+    [self willChangeValueForKey:@"port"];
+    _port = newPort;
+    [self didChangeValueForKey:@"port"];
 }
 
 @end

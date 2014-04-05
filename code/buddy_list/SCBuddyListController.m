@@ -133,18 +133,20 @@
         } else if ([keyPath isEqualToString:@"status"]) {
             self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
         } else if ([keyPath isEqualToString:@"friends"]) {
+            /* NSArray *oldList = [_orderingList copy];
             [self repopulateOrderingList];
             NSSet *changed = change[NSKeyValueChangeNewKey];
             NSMutableIndexSet *changeIndexes = [[NSMutableIndexSet alloc] init];
             for (DESFriend *obj in changed) {
-                [changeIndexes addIndex:obj.peerNumber];
+                [changeIndexes addIndex:[oldList indexOfObject:obj.publicKey]];
             }
             if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeInsertion) {
                 [self.friendListView insertRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideDown];
             } else if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval) {
                 [self.friendListView removeRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideUp];
-            }
-            NSLog(@"%@", change);
+            } */
+            [self repopulateOrderingList];
+            [self.friendListView reloadData];
         }
     });
 }
@@ -218,6 +220,10 @@
             return NSOrderedAscending;
         return NSOrderedSame;
     }];
+    NSUInteger c = [_orderingList count];
+    for (int i = 0; i < c; ++i) {
+        [_orderingList replaceObjectAtIndex:i withObject:[_watchingConnection friendWithID:[_orderingList[i] intValue]].publicKey];
+    }
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -242,8 +248,8 @@
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    NSNumber *peerNum = _orderingList[row];
-    return [_watchingConnection friendWithID:[peerNum intValue]];
+    NSString *peer = _orderingList[row];
+    return [_watchingConnection friendWithKey:peer];
 }
 
 - (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
@@ -253,7 +259,7 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     NSUInteger ci = self.friendListView.clickedRow;
-    DESFriend *f = [_watchingConnection friendWithID:[_orderingList[ci] intValue]];
+    DESFriend *f = [_watchingConnection friendWithKey:_orderingList[ci]];
     [menu itemAtIndex:0].title = f.name;
 }
 

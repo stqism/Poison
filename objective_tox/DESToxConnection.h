@@ -15,8 +15,9 @@
 - (void)connectionDidBecomeEstablished:(DESToxConnection *)connection;
 - (void)connectionDidDisconnect:(DESToxConnection *)connection;
 
-- (void)didAddFriend:(DESFriend *)request onConnection:(DESToxConnection *)connection;
-- (void)didRemoveFriend:(DESFriend *)request onConnection:(DESToxConnection *)connection;
+- (void)didAddFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection;
+- (void)didRemoveFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection;
+- (void)didFailToAddFriendWithError:(NSError *)error onConnection:(DESToxConnection *)connection;
 - (void)didReceiveFriendRequest:(DESRequest *)request onConnection:(DESToxConnection *)connection;
 - (void)didReceiveGroupChatInvite:(DESRequest *)request onConnection:(DESToxConnection *)connection;
 - (void)didJoinGroupChat:(DESConversation *)chat onConnection:(DESToxConnection *)connection;
@@ -72,6 +73,7 @@
 - (void)deleteFriend:(DESFriend *)friend;
 - (DESConversation *)groupChatWithID:(int32_t)num;
 - (DESFriend *)friendWithID:(int32_t)num;
+- (DESFriend *)friendWithKey:(NSString *)pk;
 - (void)leaveGroup:(DESConversation *)group;
 
 - (txd_intermediate_t)createTXDIntermediate;
