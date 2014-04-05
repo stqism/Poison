@@ -100,7 +100,8 @@ void DESDiscoverUser(NSString *shouldBeAnEmailAddress,
         } else {
             //__builtin_trap();
             if (finis.len == 0) {
-                _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain, DESUserDiscoveryErrorNoAddress,
+                _DESDiscoverUser_ErrorOut(DESUserDiscoveryCallbackDomain,
+                                          DESUserDiscoveryErrorNoAddress,
                                           callback);
                 return;
             }

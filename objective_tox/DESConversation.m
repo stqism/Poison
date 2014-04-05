@@ -9,6 +9,7 @@
 - (int32_t)peerNumber { DESAbstractWarning; return 0; }
 - (id<DESConversationDelegate>)delegate { DESAbstractWarning; return nil; }
 - (void)setDelegate:(id<DESConversationDelegate>)delegate { DESAbstractWarning; }
+- (DESConversationType)type { DESAbstractWarning; return 255; }
 
 - (uint32_t)sendAction:(NSString *)action { DESAbstractWarning; return 0; }
 - (uint32_t)sendMessage:(NSString *)message { DESAbstractWarning; return 0; }
