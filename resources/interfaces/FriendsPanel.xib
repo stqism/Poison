@@ -448,7 +448,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" id="M99-C7-nIJ">
-                        <rect key="frame" x="116.99999922145005" y="54" width="272" height="22"/>
+                        <rect key="frame" x="116.99999837500596" y="54" width="272" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="(placeholder)" drawsBackground="YES" id="eQL-FZ-ZCt">
                             <font key="font" metaFont="system"/>
@@ -466,7 +466,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="6q8-27-lsa">
-                        <rect key="frame" x="115" y="84" width="275.99999922145003" height="17"/>
+                        <rect key="frame" x="115" y="84" width="275.99999837500593" height="17"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="(placeholder)" id="ZZQ-zI-Xtn">
                             <font key="font" metaFont="systemBold"/>
