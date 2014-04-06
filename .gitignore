@@ -4,3 +4,7 @@ _support
 *.xccheckout
 xcuserdata
 resources/interfaces/TL/translated
+New poison sounds/
+diskimage_template
+diskimage_helper.sh
+apidoc_ideas

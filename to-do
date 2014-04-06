@@ -18,3 +18,8 @@
 * Support for working Tox A/V
 * File transfers
 * Cleaner internals (with modern API usage)
+
+## Other
+
+* From polling: single-click on name/status/avatar to initiate change;
+                possibly hover effect to show capability <-- DONE

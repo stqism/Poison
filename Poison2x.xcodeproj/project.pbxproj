@@ -80,7 +80,6 @@
 		F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F543BE3618E12994004C70D3 /* SCMainWindowController.m */; };
 		F55857A618D649820053DD52 /* libqrencode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F55857A518D649820053DD52 /* libqrencode.a */; };
 		F567A4E018C5530300E04F3A /* SCDraggingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F567A4DF18C5530300E04F3A /* SCDraggingView.m */; };
-		F567A4E318C5745C00E04F3A /* to-do in Resources */ = {isa = PBXBuildFile; fileRef = F567A4E218C5745C00E04F3A /* to-do */; };
 		F56956CC18E884AE00E1EB0D /* avatar_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F56956CA18E884AE00E1EB0D /* avatar_mask@2x.png */; };
 		F56956CD18E884AE00E1EB0D /* avatar_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = F56956CB18E884AE00E1EB0D /* avatar_mask.png */; };
 		F56956D618E88C4700E1EB0D /* SCBuddyListCells.m in Sources */ = {isa = PBXBuildFile; fileRef = F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */; };
@@ -99,7 +98,7 @@
 		F5DAB46718C962E90046ED96 /* qr-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DAB46618C962E90046ED96 /* qr-placeholder.png */; };
 		F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */; };
 		F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */; };
-		F5F6D5EE18DE4A0200A14557 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F5F6D5ED18DE4A0200A14557 /* README.md */; };
+		F5F41C7718F1BC61009CD9D6 /* SCEditingField.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F41C7618F1BC61009CD9D6 /* SCEditingField.m */; };
 		F5F6D5F218DE5AB200A14557 /* status-light-missing.png in Resources */ = {isa = PBXBuildFile; fileRef = F5F6D5F018DE5AB200A14557 /* status-light-missing.png */; };
 		F5F6D5F318DE5AB200A14557 /* status-light-missing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5F6D5F118DE5AB200A14557 /* status-light-missing@2x.png */; };
 		F5FFF46118B81F4E00CD1E43 /* Poison.iconset in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46018B81F4E00CD1E43 /* Poison.iconset */; };
@@ -287,6 +286,9 @@
 		F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCQRCodeSheetController.m; sourceTree = "<group>"; };
 		F5E84CDD18DE2C8F00B93FE7 /* SCMenuStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMenuStatusView.h; sourceTree = "<group>"; };
 		F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMenuStatusView.m; sourceTree = "<group>"; };
+		F5F41C7518F1BC61009CD9D6 /* SCEditingField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEditingField.h; sourceTree = "<group>"; };
+		F5F41C7618F1BC61009CD9D6 /* SCEditingField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEditingField.m; sourceTree = "<group>"; };
+		F5F41C7B18F1BD1C009CD9D6 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
 		F5F6A62A18DD3C5A006E5810 /* Copyright.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Copyright.h; path = code/misc/Copyright.h; sourceTree = SOURCE_ROOT; };
 		F5F6D5ED18DE4A0200A14557 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F5F6D5F018DE5AB200A14557 /* status-light-missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-light-missing.png"; sourceTree = "<group>"; };
@@ -431,6 +433,8 @@
 				F5D1223318F076910075BD10 /* SCSelectiveMenuTableView.h */,
 				F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */,
 				F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */,
+				F5F41C7518F1BC61009CD9D6 /* SCEditingField.h */,
+				F5F41C7618F1BC61009CD9D6 /* SCEditingField.m */,
 			);
 			path = buddy_list;
 			sourceTree = "<group>";
@@ -469,6 +473,7 @@
 			children = (
 				F567A4E218C5745C00E04F3A /* to-do */,
 				F5F6D5ED18DE4A0200A14557 /* README.md */,
+				F5F41C7B18F1BD1C009CD9D6 /* LICENSE.md */,
 				F50F9C0D18C3AB3600D06A0F /* ObjectiveTox.xcodeproj */,
 				F5B5422418B6D23C00226CA8 /* code */,
 				F5B5425418B6D77400226CA8 /* resources */,
@@ -688,7 +693,6 @@
 				F52D013318B7CFB70033680F /* icon_group_join@2x.png in Resources */,
 				F52D013018B7CFB70033680F /* icon_group_ignore.png in Resources */,
 				F52D014418B7CFB70033680F /* tox_logo@2x.png in Resources */,
-				F567A4E318C5745C00E04F3A /* to-do in Resources */,
 				F52714A818DF823400B7E663 /* AddFriend.xib in Resources */,
 				F52714AD18DF823400B7E663 /* NewUser.xib in Resources */,
 				F52D014118B7CFB70033680F /* status-light-online.png in Resources */,
@@ -720,7 +724,6 @@
 				F52D014018B7CFB70033680F /* status-light-offline@2x.png in Resources */,
 				F52D013118B7CFB70033680F /* icon_group_ignore@2x.png in Resources */,
 				F52714AA18DF823400B7E663 /* ChatPanel.xib in Resources */,
-				F5F6D5EE18DE4A0200A14557 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +764,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */,
+				F5F41C7718F1BC61009CD9D6 /* SCEditingField.m in Sources */,
 				F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */,
 				F538754218C25DB500AED945 /* SCNewUserWindowController.m in Sources */,
 				F543BE3418E126CC004C70D3 /* NSString+CanonicalID.m in Sources */,

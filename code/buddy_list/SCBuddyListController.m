@@ -55,8 +55,8 @@
 
 @implementation SCDoubleClickingImageView
 
-- (void)mouseDown:(NSEvent *)theEvent {
-    if (theEvent.clickCount == 2 && self.action)
+- (void)mouseUp:(NSEvent *)theEvent {
+    if (self.action)
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.target performSelector:self.action withObject:self];
@@ -392,6 +392,13 @@
     [(SCAppDelegate *)[NSApp delegate] addFriend:self];
 }
 
+- (IBAction)proxyCopyToxID:(id)sender {
+    [(SCAppDelegate *)[NSApp delegate] copyPublicID:self];
+}
+
+- (IBAction)removeFriendConfirm:(id)sender {
+}
+
 - (IBAction)presentNicknameEditor:(id)sender {
     NSUInteger ci = self.friendListView.clickedRow;
     DESFriend *f = [_watchingConnection friendWithKey:((SCObjectMarker *)_orderingList[ci]).pk];
@@ -445,10 +452,6 @@
 
     SCObjectMarker *om = [[SCObjectMarker alloc] initWithConversation:(DESConversation *)f];
     [self.friendListView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:[_orderingList indexOfObject:om]] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-}
-
-- (IBAction)proxyCopyToxID:(id)sender {
-    [(SCAppDelegate *)[NSApp delegate] copyPublicID:self];
 }
 
 #pragma mark - avatars
