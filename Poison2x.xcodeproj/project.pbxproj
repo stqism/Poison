@@ -62,7 +62,6 @@
 		F53DB89918B6DD37008D7ED5 /* NSWindow+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89018B6DD37008D7ED5 /* NSWindow+Shake.m */; };
 		F53DB89A18B6DD37008D7ED5 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89218B6DD37008D7ED5 /* SCGradientView.m */; };
 		F53DB89C18B6DD37008D7ED5 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89618B6DD37008D7ED5 /* SCShadowedView.m */; };
-		F53DB89D18B6DD37008D7ED5 /* SCSometimesEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89818B6DD37008D7ED5 /* SCSometimesEditableTextField.m */; };
 		F53DB8A118B6DDDE008D7ED5 /* SCBuddyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB8A018B6DDDE008D7ED5 /* SCBuddyListController.m */; };
 		F53DB8A318B6DE74008D7ED5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53DB8A218B6DE74008D7ED5 /* QuartzCore.framework */; };
 		F54180FD18C3C0E000AB220E /* SCBuddyListWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54180FC18C3C0E000AB220E /* SCBuddyListWindowController.m */; };
@@ -221,8 +220,6 @@
 		F53DB89218B6DD37008D7ED5 /* SCGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGradientView.m; sourceTree = "<group>"; };
 		F53DB89518B6DD37008D7ED5 /* SCShadowedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCShadowedView.h; sourceTree = "<group>"; };
 		F53DB89618B6DD37008D7ED5 /* SCShadowedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCShadowedView.m; sourceTree = "<group>"; };
-		F53DB89718B6DD37008D7ED5 /* SCSometimesEditableTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSometimesEditableTextField.h; sourceTree = "<group>"; };
-		F53DB89818B6DD37008D7ED5 /* SCSometimesEditableTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSometimesEditableTextField.m; sourceTree = "<group>"; };
 		F53DB89F18B6DDDE008D7ED5 /* SCBuddyListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBuddyListController.h; sourceTree = "<group>"; };
 		F53DB8A018B6DDDE008D7ED5 /* SCBuddyListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBuddyListController.m; sourceTree = "<group>"; };
 		F53DB8A218B6DE74008D7ED5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -414,8 +411,6 @@
 				F541810918C3FABD00AB220E /* SCNonGarbageSplitView.m */,
 				F53DB88F18B6DD37008D7ED5 /* NSWindow+Shake.h */,
 				F53DB89018B6DD37008D7ED5 /* NSWindow+Shake.m */,
-				F53DB89718B6DD37008D7ED5 /* SCSometimesEditableTextField.h */,
-				F53DB89818B6DD37008D7ED5 /* SCSometimesEditableTextField.m */,
 				F538754318C2656000AED945 /* SCWidgetedWindow.h */,
 				F538754418C2656000AED945 /* SCWidgetedWindow.m */,
 				F54180FF18C3CF3300AB220E /* CGGeometryExtreme.h */,
@@ -776,7 +771,6 @@
 				F5B5423218B6D23C00226CA8 /* SCAppDelegate.m in Sources */,
 				F56956D618E88C4700E1EB0D /* SCBuddyListCells.m in Sources */,
 				F53DB89A18B6DD37008D7ED5 /* SCGradientView.m in Sources */,
-				F53DB89D18B6DD37008D7ED5 /* SCSometimesEditableTextField.m in Sources */,
 				F5B5422B18B6D23C00226CA8 /* main.m in Sources */,
 				F53DB8A118B6DDDE008D7ED5 /* SCBuddyListController.m in Sources */,
 				F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */,
