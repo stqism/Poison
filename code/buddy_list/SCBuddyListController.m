@@ -8,46 +8,11 @@
 #import "SCBuddyListShared.h"
 #import "SCBuddyListCells.h"
 #import "SCAppDelegate.h"
-#import <sodium.h>
+#import "SCBuddyListManager.h"
+#import "DESConversation+Poison_CustomName.h"
 #import <Quartz/Quartz.h>
 
 #define SC_MAX_CACHED_ROW_COUNT (50)
-
-@implementation SCGroupMarker
-- (instancetype)initWithName:(NSString *)name other:(NSString *)other {
-    self = [super init];
-    if (self) {
-        _name = name;
-        _other = other;
-    }
-    return self;
-}
-@end
-
-@interface SCObjectMarker : NSObject
-@property (strong) NSString *pk;
-@property DESConversationType type;
-@property int32_t sortKey;
-@end
-
-@implementation SCObjectMarker
-- (instancetype)initWithConversation:(DESConversation *)c {
-    self = [super init];
-    if (self) {
-        self.pk = c.publicKey;
-        self.sortKey = c.peerNumber;
-        self.type = c.type;
-    }
-    return self;
-}
-- (NSUInteger)hash {
-    return [self.pk hash] ^ (self.type == DESConversationTypeFriend) ?
-           0xAFFABFFBCFFCDFFDULL : 0xDFFDCFFCBFFBAFFA;
-}
-- (BOOL)isEqual:(id)object {
-    return [self hash] == [object hash];
-}
-@end
 
 @interface SCDoubleClickingImageView : NSImageView
 
@@ -80,8 +45,6 @@
 @property (strong) IBOutlet NSTextField *statusField;
 @property (strong) IBOutlet NSImageView *statusDot;
 @property (strong) IBOutlet NSImageView *avatarView;
-
-@property (strong) NSMutableSet *rowCache;
 #pragma mark - Change name and status
 @property (strong) IBOutlet NSPanel *identityEditorSheet;
 @property (strong) IBOutlet NSTextField *ieNameField;
@@ -95,16 +58,13 @@
 
 @implementation SCBuddyListController {
     DESToxConnection *_watchingConnection;
-    NSMutableArray *_orderingList;
     NSDateFormatter *_formatter;
-    NSCache *_hashCache;
+    SCBuddyListManager *_dataSource;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.rowCache = [[NSMutableSet alloc] initWithCapacity:100];
-        _orderingList = [[NSMutableArray alloc] initWithCapacity:10];
         _formatter = [[NSDateFormatter alloc] init];
         _formatter.doesRelativeDateFormatting = YES;
         _formatter.timeStyle = NSDateFormatterShortStyle;
@@ -126,8 +86,8 @@
     self.auxiliaryView.borderColor = [NSColor colorWithCalibratedWhite:0.3 alpha:1.0];
     self.auxiliaryView.shadowColor = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
     self.auxiliaryView.dragsWindow = YES;
-    self.friendListView.dataSource = self;
     self.friendListView.delegate = self;
+    self.filterField.delegate = self;
 
     self.avatarView.wantsLayer = YES;
     NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
@@ -144,7 +104,9 @@
     [_watchingConnection removeObserver:self forKeyPath:@"name"];
     [_watchingConnection removeObserver:self forKeyPath:@"statusMessage"];
     [_watchingConnection removeObserver:self forKeyPath:@"status"];
-    [_watchingConnection removeObserver:self forKeyPath:@"friends"];
+    [_dataSource removeObserver:self forKeyPath:@"orderingList"];
+    _dataSource = nil;
+    self.friendListView.dataSource = nil;
 }
 
 - (void)attachKVOHandlersToConnection:(DESToxConnection *)tox {
@@ -153,17 +115,23 @@
     [tox addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew context:NULL];
     [tox addObserver:self forKeyPath:@"statusMessage" options:NSKeyValueObservingOptionNew context:NULL];
     [tox addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
-    [tox addObserver:self forKeyPath:@"friends" options:NSKeyValueObservingOptionNew context:NULL];
+    _dataSource = [[SCBuddyListManager alloc] initWithConnection:tox];
+    [_dataSource addObserver:self forKeyPath:@"orderingList" options:NSKeyValueObservingOptionNew context:NULL];
+    self.friendListView.dataSource = _dataSource;
+
     if (tox.isActive) {
         self.nameField.stringValue = tox.name;
         self.statusField.stringValue = tox.statusMessage;
         self.statusDot.image = SCImageForFriendStatus(tox.status);
-        [self repopulateOrderingList];
-        [self.friendListView reloadData];
     }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == _dataSource) {
+        [self.friendListView reloadData];
+        return;
+    }
+
     change = [change copy];
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([keyPath isEqualToString:@"name"]) {
@@ -172,21 +140,6 @@
             self.statusField.stringValue = change[NSKeyValueChangeNewKey];
         } else if ([keyPath isEqualToString:@"status"]) {
             self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
-        } else if ([keyPath isEqualToString:@"friends"]) {
-            /* NSArray *oldList = [_orderingList copy];
-            [self repopulateOrderingList];
-            NSSet *changed = change[NSKeyValueChangeNewKey];
-            NSMutableIndexSet *changeIndexes = [[NSMutableIndexSet alloc] init];
-            for (DESFriend *obj in changed) {
-                [changeIndexes addIndex:[oldList indexOfObject:obj.publicKey]];
-            }
-            if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeInsertion) {
-                [self.friendListView insertRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideDown];
-            } else if ([change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeRemoval) {
-                [self.friendListView removeRowsAtIndexes:changeIndexes withAnimation:NSTableViewAnimationSlideUp];
-            } */
-            [self repopulateOrderingList];
-            [self.friendListView reloadData];
         }
     });
 }
@@ -230,11 +183,17 @@
     [sheet orderOut:self];
     if (!ret)
         return;
-    if (![self.ieNameField.stringValue isEqualToString:_watchingConnection.name]) {
-        _watchingConnection.name = self.ieNameField.stringValue;
+    if ((![self.ieNameField.stringValue isEqualToString:_watchingConnection.name])
+        || [self.ieNameField.stringValue isEqualToString:@""]) {
+        _watchingConnection.name = [self.ieNameField.stringValue isEqualToString:@""]?
+                                    ((SCAppDelegate *)[NSApp delegate]).profileName
+                                    : self.ieNameField.stringValue;
     }
-    if (![self.ieStatusField.stringValue isEqualToString:_watchingConnection.statusMessage]) {
-        _watchingConnection.statusMessage = self.ieStatusField.stringValue;
+    if ((![self.ieStatusField.stringValue isEqualToString:_watchingConnection.statusMessage])
+        || [self.ieStatusField.stringValue isEqualToString:@""]) {
+        _watchingConnection.statusMessage = [self.ieStatusField.stringValue isEqualToString:@""]?
+                                             SCStringForFriendStatus(self.ieStatusChooser.selectedTag)
+                                             : self.ieStatusField.stringValue;
     }
     if (self.ieStatusChooser.selectedTag != _watchingConnection.status) {
         _watchingConnection.status = self.ieStatusChooser.selectedTag;
@@ -246,46 +205,6 @@
 }
 
 #pragma mark - table
-
-- (void)repopulateOrderingList {
-    NSSet *fset = _watchingConnection.friends;
-    NSSet *gset = _watchingConnection.groups;
-    _orderingList = [[NSMutableArray alloc] initWithCapacity:fset.count + gset.count + 2];
-    [_orderingList addObject:[[SCGroupMarker alloc] initWithName:NSLocalizedString(@"Friends", nil)
-                                                           other:[NSString stringWithFormat:@"(%lu)", fset.count]]];
-
-    NSMutableArray *scratch = [[NSMutableArray alloc] initWithCapacity:MAX(fset.count, gset.count)];
-    for (DESConversation *f in fset) {
-        [scratch addObject:[[SCObjectMarker alloc] initWithConversation:f]];
-    }
-    [scratch sortUsingComparator:^NSComparisonResult(SCObjectMarker *obj1, SCObjectMarker *obj2) {
-        if (obj1.sortKey > obj2.sortKey)
-            return NSOrderedDescending;
-        else if (obj1.sortKey < obj2.sortKey)
-            return NSOrderedAscending;
-        return NSOrderedSame;
-    }];
-    [_orderingList addObjectsFromArray:scratch];
-    [scratch removeAllObjects];
-
-    [_orderingList addObject:[[SCGroupMarker alloc] initWithName:NSLocalizedString(@"Group Chats", nil)
-                                                           other:[NSString stringWithFormat:@"(%lu)", gset.count]]];
-    for (DESConversation *g in gset) {
-        [scratch addObject:[[SCObjectMarker alloc] initWithConversation:g]];
-    }
-    [scratch sortUsingComparator:^NSComparisonResult(SCObjectMarker *obj1, SCObjectMarker *obj2) {
-        if (obj1.sortKey > obj2.sortKey)
-            return NSOrderedDescending;
-        else if (obj1.sortKey < obj2.sortKey)
-            return NSOrderedAscending;
-        return NSOrderedSame;
-    }];
-    [_orderingList addObjectsFromArray:scratch];
-}
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return _orderingList.count;
-}
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
     NSTableRowView *rowView;
@@ -316,32 +235,16 @@
     }
 }
 
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    id peer = _orderingList[row];
-    if ([peer isKindOfClass:[SCObjectMarker class]])
-        return [_watchingConnection friendWithKey:((SCObjectMarker *)peer).pk];
-    else
-        return ((SCGroupMarker *)peer);
-}
-
-- (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
-    if ([self.rowCache count] < SC_MAX_CACHED_ROW_COUNT)
-        [self.rowCache addObject:rowView];
-}
-
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
-    if ([_orderingList[row] isKindOfClass:[SCGroupMarker class]])
-        return YES;
-    else
-        return NO;
+    return (BOOL)([_dataSource conversationAtRowIndex:row] == nil);
 }
 
 - (NSMenu *)tableView:(NSTableView *)tableView menuForRow:(NSInteger)row {
     if ([self tableView:tableView isGroupRow:row])
         return nil;
 
-    SCObjectMarker *obj = _orderingList[row];
-    if (obj.type == DESConversationTypeFriend)
+    id<DESConversation> conv = [_dataSource conversationAtRowIndex:row];
+    if (conv.type == DESConversationTypeFriend)
         return self.friendMenu;
     else
         return nil; /* FIXME: implement */
@@ -360,9 +263,8 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     NSUInteger ci = self.friendListView.clickedRow;
-    SCObjectMarker *obj = _orderingList[ci];
-    DESFriend *f = [_watchingConnection friendWithKey:obj.pk];
-    [menu itemAtIndex:0].title = f.presentableTitle;
+    DESConversation *conv = [_dataSource conversationAtRowIndex:ci];
+    [menu itemAtIndex:0].title = conv.preferredUIName;
 }
 
 #pragma mark - cell server
@@ -372,14 +274,7 @@
         _formatter.dateStyle = NSDateFormatterShortStyle;
     else
         _formatter.dateStyle = NSDateFormatterNoStyle;
-    return [NSString stringWithFormat:NSLocalizedString(@"Offline since: %@", nil), [_formatter stringFromDate:date]];
-}
-
-- (NSString *)lookupCustomNameForID:(NSString *)id_ {
-    /* We don't want to leak friend IDs in NSUserDefaults.
-     * Therefore, hash them first. */
-    NSDictionary *map = [SCProfileManager privateSettingForKey:@"nicknames"];
-    return map[id_];
+    return [_formatter stringFromDate:date];
 }
 
 - (void)dealloc {
@@ -397,11 +292,28 @@
 }
 
 - (IBAction)removeFriendConfirm:(id)sender {
+    DESFriend *f = (DESFriend *)[_dataSource conversationAtRowIndex:self.friendListView.clickedRow];
+    if (!f)
+        return;
+    NSAlert *confirmation = [[NSAlert alloc] init];
+    confirmation.messageText = NSLocalizedString(@"Remove Friend", nil);
+    NSString *template = NSLocalizedString(@"Do you really want to remove %@ from your friends list?", nil);
+    confirmation.informativeText = [NSString stringWithFormat:template, f.preferredUIName];
+    NSButton *checkbox = [[NSButton alloc] initWithFrame:CGRectZero];
+    checkbox.buttonType = NSSwitchButton;
+    checkbox.title = NSLocalizedString(@"Don't ask me whether to remove friends again", nil);
+    [checkbox sizeToFit];
+    confirmation.accessoryView = checkbox;
+    [confirmation addButtonWithTitle:NSLocalizedString(@"Yes", nil)];
+    [confirmation addButtonWithTitle:NSLocalizedString(@"No", nil)];
+    [confirmation beginSheetModalForWindow:self.view.window
+                             modalDelegate:self
+                            didEndSelector:@selector(commitDeletingFriendFromSheet:returnCode:userInfo:)
+                               contextInfo:(__bridge void *)f];
 }
 
 - (IBAction)presentNicknameEditor:(id)sender {
-    NSUInteger ci = self.friendListView.clickedRow;
-    DESFriend *f = [_watchingConnection friendWithKey:((SCObjectMarker *)_orderingList[ci]).pk];
+    DESFriend *f = (DESFriend *)[_dataSource conversationAtRowIndex:self.friendListView.clickedRow];
 
     NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSString *displayName = f.name;
@@ -416,12 +328,21 @@
     [self.nicknameEditorSheet setFrame:(CGRect){CGPointZero, {self.nicknameEditorSheet.frame.size.width, frameHeightNormal + bb.size.height}} display:NO];
 
     self.origNameLabel.stringValue = displayName;
+    self.nicknameField.stringValue = f.customName;
     ((NSTextFieldCell *)self.nicknameField.cell).placeholderString = displayName;
     [NSApp beginSheet:self.nicknameEditorSheet modalForWindow:self.view.window modalDelegate:self didEndSelector:@selector(commitNicknameFromSheet:returnCode:userInfo:) contextInfo:(__bridge void *)(f)];
+    [self.nicknameField becomeFirstResponder];
+    [self.nicknameField selectText:self];
+}
+
+- (void)commitDeletingFriendFromSheet:(NSAlert *)sheet returnCode:(NSInteger)ret userInfo:(void *)friend {
+    if (ret == NSAlertFirstButtonReturn) {
+        [_watchingConnection deleteFriend:(__bridge DESFriend *)friend];
+    }
 }
 
 - (void)commitNicknameFromSheet:(NSWindow *)sheet returnCode:(NSInteger)ret userInfo:(void *)friend {
-    NSLog(@"commit %@ for %@", self.nicknameField.stringValue, (__bridge id)friend);
+    //NSLog(@"commit %@ for %@", self.nicknameField.stringValue, (__bridge id)friend);
     DESFriend *f = (__bridge DESFriend *)friend;
     NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSString *dn = [self.nicknameField.stringValue stringByTrimmingCharactersInSet:cs];
@@ -431,27 +352,28 @@
         self.nicknameField.stringValue = @"";
         return;
     }
-    
+
+    NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy] ?: [NSMutableDictionary dictionary];
     if (ret == 2 || [dn isEqualToString:@""]) {
-        NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy] ?: [NSMutableDictionary dictionary];
         [map removeObjectForKey:f.publicKey];
-        [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [SCProfileManager commitPrivateSettings];
-        });
     } else if (ret == 1) {
-        NSMutableDictionary *map = [[SCProfileManager privateSettingForKey:@"nicknames"] mutableCopy] ?: [NSMutableDictionary dictionary];
         map[f.publicKey] = dn;
-        [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [SCProfileManager commitPrivateSettings];
-        });
     }
+
+    [SCProfileManager setPrivateSetting:map forKey:@"nicknames"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [SCProfileManager commitPrivateSettings];
+    });
+
     self.nicknameField.stringValue = @"";
     [sheet orderOut:self];
+    [self.friendListView reloadData];
+}
 
-    SCObjectMarker *om = [[SCObjectMarker alloc] initWithConversation:(DESConversation *)f];
-    [self.friendListView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:[_orderingList indexOfObject:om]] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+#pragma mark - searching
+
+- (void)controlTextDidChange:(NSNotification *)obj {
+    _dataSource.filterString = self.filterField.stringValue;
 }
 
 #pragma mark - avatars

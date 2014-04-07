@@ -100,12 +100,6 @@ NS_INLINE TOX_USERSTATUS DESFriendStatusToTox(DESFriendStatus status) {
 
 @end
 
-@interface DESSelf : DESFriend
-
-- (instancetype)initWithConnection:(DESToxConnection *)connection;
-
-@end
-
 #pragma mark - Extensions to Core
 
 void DESSetKeys(Tox *tox, uint8_t *pk, uint8_t *sk);

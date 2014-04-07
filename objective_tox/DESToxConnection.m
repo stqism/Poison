@@ -415,6 +415,10 @@ NSString *const DESFriendAddingErrorDomain = @"DESFriendAddingErrorDomain";
             [self willChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
             [_friendMapping removeObjectForKey:pk];
             [self didChangeValueForKey:@"friends" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changeSet];
+            if ([self.delegate respondsToSelector:@selector(didRemoveFriend:onConnection:)])
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate didRemoveFriend:(DESFriend *)friend onConnection:self];
+                });
         } else {
             DESWarn(@"friend %d is not valid", friend.peerNumber);
         }

@@ -4,7 +4,7 @@
 #import "ObjectiveTox.h"
 #import "SCSelectiveMenuTableView.h"
 
-@interface SCBuddyListController : NSViewController <NSTableViewDataSource,
+@interface SCBuddyListController : NSViewController <NSTextFieldDelegate,
                                                      SCSelectiveMenuTableViewing,
                                                      NSMenuDelegate>
 - (void)attachKVOHandlersToConnection:(DESToxConnection *)tox;
@@ -12,5 +12,4 @@
 - (IBAction)changeStatus:(id)sender;
 
 - (NSString *)formatDate:(NSDate *)date;
-- (NSString *)lookupCustomNameForID:(NSString *)id_;
 @end

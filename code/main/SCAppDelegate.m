@@ -261,6 +261,15 @@
     }
 }
 
+- (void)didAddFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection {
+    [self saveProfile];
+}
+
+- (void)didRemoveFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection {
+    NSLog(@"rip ;_;");
+    [self saveProfile];
+}
+
 - (void)didFailToAddFriendWithError:(NSError *)error onConnection:(DESToxConnection *)connection {
     if (!([self.mainWindowController.window isVisible] && [self.mainWindowController.window isKeyWindow]))
         [self.mainWindowController.window makeKeyAndOrderFront:self];

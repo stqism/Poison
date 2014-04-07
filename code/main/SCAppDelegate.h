@@ -13,4 +13,7 @@
 - (IBAction)copyPublicID:(id)sender;
 - (IBAction)showQRCode:(id)sender;
 - (IBAction)addFriend:(id)sender;
+
+/* by popular demand */
+- (NSString *)profileName;
 @end

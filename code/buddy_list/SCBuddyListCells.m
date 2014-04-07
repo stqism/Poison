@@ -4,6 +4,7 @@
 #import "ObjectiveTox.h"
 #import "SCBuddyListShared.h"
 #import "SCBuddyListController.h"
+#import "DESConversation+Poison_CustomName.h"
 
 @class SCGroupMarker;
 @implementation SCGroupRowView {
@@ -81,9 +82,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     dispatch_async(dispatch_get_main_queue(), ^{
-        id<DESConversation> obj = object;
+        DESConversation *obj = object;
         if ([keyPath isEqualToString:@"presentableTitle"]) {
-            [self displayStringForName:obj.presentableTitle];
+            self.mainLabel.attributedStringValue = [obj preferredUIAttributedNameWithColour:[NSColor whiteColor]
+                                                                           backgroundColour:[NSColor disabledControlTextColor]];
         } else if ([keyPath isEqualToString:@"presentableSubtitle"]) {
             [self displayStringForStatusMessage:obj.presentableSubtitle];
         } else if ([keyPath isEqualToString:@"status"]) {
@@ -109,38 +111,6 @@
     }
 }
 
-- (void)displayStringForName:(NSString *)def {
-    if (![_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
-        self.mainLabel.stringValue = def;
-        return;
-    }
-
-    NSString *custom = [self.manager lookupCustomNameForID:_watchingFriend.publicKey];
-    NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    def = [def stringByTrimmingCharactersInSet:cs];
-    if (custom && ![custom isEqualToString:def]) {
-        NSMutableAttributedString *names = [[NSMutableAttributedString alloc] initWithString:custom
-                                            attributes:@{NSForegroundColorAttributeName: [NSColor whiteColor]}];
-        if (![def isEqualToString:@""])
-            [names appendAttributedString:[[NSAttributedString alloc]
-                                           initWithString:[NSString stringWithFormat:@" (%@)", def]
-                                           attributes:@{NSForegroundColorAttributeName: [NSColor disabledControlTextColor]}]];
-        self.mainLabel.attributedStringValue = names;
-    } else {
-        if ([def isEqualToString:@""]) {
-            NSMutableAttributedString *names = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Unknown", nil)
-                                                attributes:@{NSForegroundColorAttributeName: [NSColor whiteColor]}];
-            [names appendAttributedString:[[NSAttributedString alloc]
-                                           initWithString:[NSString stringWithFormat:@" (%@)",
-                                                           [_watchingFriend.publicKey substringToIndex:8]]
-                                           attributes:@{NSForegroundColorAttributeName: [NSColor disabledControlTextColor]}]];
-            self.mainLabel.attributedStringValue = names;
-        } else {
-            self.mainLabel.stringValue = def;
-        }
-    }
-}
-
 - (void)displayStringForStatusMessage:(NSString *)def {
     if (![_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
         self.auxLabel.stringValue = def;
@@ -150,7 +120,8 @@
     /* convert it for type-checking purposes */
     DESFriend *wf = (DESFriend *)_watchingFriend;
     if (wf.status == DESFriendStatusOffline) {
-        self.auxLabel.stringValue = [self.manager formatDate:wf.lastSeen];
+        self.auxLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Offline since: %@", nil),
+                                     [self.manager formatDate:wf.lastSeen]];
     } else {
         NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
         if ([[def stringByTrimmingCharactersInSet:cs] isEqualToString:@""]) {
@@ -176,7 +147,8 @@
     [self removeKVOHandlers];
     _watchingFriend = objectValue;
     if (_watchingFriend) {
-        [self displayStringForName:_watchingFriend.presentableTitle];
+        self.mainLabel.attributedStringValue = [_watchingFriend preferredUIAttributedNameWithColour:[NSColor whiteColor]
+                                                                                   backgroundColour:[NSColor disabledControlTextColor]];
         [self displayStringForStatusMessage:_watchingFriend.presentableSubtitle];
         if ([_watchingFriend conformsToProtocol:@protocol(DESFriend)]) {
             DESFriend *f = (DESFriend *)_watchingFriend;

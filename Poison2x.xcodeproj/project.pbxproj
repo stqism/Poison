@@ -100,6 +100,8 @@
 		F5F41C7718F1BC61009CD9D6 /* SCEditingField.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F41C7618F1BC61009CD9D6 /* SCEditingField.m */; };
 		F5F6D5F218DE5AB200A14557 /* status-light-missing.png in Resources */ = {isa = PBXBuildFile; fileRef = F5F6D5F018DE5AB200A14557 /* status-light-missing.png */; };
 		F5F6D5F318DE5AB200A14557 /* status-light-missing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5F6D5F118DE5AB200A14557 /* status-light-missing@2x.png */; };
+		F5F8AA0718F21887000C57EB /* SCBuddyListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8AA0618F21887000C57EB /* SCBuddyListManager.m */; };
+		F5F8AA0D18F21F49000C57EB /* DESConversation+Poison_CustomName.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F8AA0C18F21F49000C57EB /* DESConversation+Poison_CustomName.m */; };
 		F5FFF46118B81F4E00CD1E43 /* Poison.iconset in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46018B81F4E00CD1E43 /* Poison.iconset */; };
 		F5FFF46518B8283300CD1E43 /* oi.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46318B8283300CD1E43 /* oi.png */; };
 		F5FFF46618B8283300CD1E43 /* oi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FFF46418B8283300CD1E43 /* oi@2x.png */; };
@@ -290,6 +292,10 @@
 		F5F6D5ED18DE4A0200A14557 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F5F6D5F018DE5AB200A14557 /* status-light-missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-light-missing.png"; sourceTree = "<group>"; };
 		F5F6D5F118DE5AB200A14557 /* status-light-missing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-light-missing@2x.png"; sourceTree = "<group>"; };
+		F5F8AA0518F21887000C57EB /* SCBuddyListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBuddyListManager.h; sourceTree = "<group>"; };
+		F5F8AA0618F21887000C57EB /* SCBuddyListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBuddyListManager.m; sourceTree = "<group>"; };
+		F5F8AA0B18F21F49000C57EB /* DESConversation+Poison_CustomName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DESConversation+Poison_CustomName.h"; sourceTree = "<group>"; };
+		F5F8AA0C18F21F49000C57EB /* DESConversation+Poison_CustomName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DESConversation+Poison_CustomName.m"; sourceTree = "<group>"; };
 		F5FFF46018B81F4E00CD1E43 /* Poison.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = Poison.iconset; sourceTree = "<group>"; };
 		F5FFF46318B8283300CD1E43 /* oi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oi.png; sourceTree = "<group>"; };
 		F5FFF46418B8283300CD1E43 /* oi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oi@2x.png"; sourceTree = "<group>"; };
@@ -425,6 +431,8 @@
 				F56956D518E88C4700E1EB0D /* SCBuddyListCells.m */,
 				F53DB89F18B6DDDE008D7ED5 /* SCBuddyListController.h */,
 				F53DB8A018B6DDDE008D7ED5 /* SCBuddyListController.m */,
+				F5F8AA0518F21887000C57EB /* SCBuddyListManager.h */,
+				F5F8AA0618F21887000C57EB /* SCBuddyListManager.m */,
 				F5D1223318F076910075BD10 /* SCSelectiveMenuTableView.h */,
 				F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */,
 				F56956D718E88CBB00E1EB0D /* SCBuddyListShared.h */,
@@ -552,6 +560,8 @@
 		F5B5425918B6D81F00226CA8 /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				F5F8AA0B18F21F49000C57EB /* DESConversation+Poison_CustomName.h */,
+				F5F8AA0C18F21F49000C57EB /* DESConversation+Poison_CustomName.m */,
 				F56B873E18EE692A008B5829 /* SCValidationHelpers.h */,
 				F56B873618EE42E1008B5829 /* SCBase64.h */,
 				F56B873718EE42E1008B5829 /* SCBase64.m */,
@@ -758,6 +768,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F8AA0718F21887000C57EB /* SCBuddyListManager.m in Sources */,
 				F543BE3718E12994004C70D3 /* SCMainWindowController.m in Sources */,
 				F5F41C7718F1BC61009CD9D6 /* SCEditingField.m in Sources */,
 				F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */,
@@ -787,6 +798,7 @@
 				F54180FD18C3C0E000AB220E /* SCBuddyListWindowController.m in Sources */,
 				F541810E18C3FEF500AB220E /* SCChatViewController.m in Sources */,
 				F538754518C2656000AED945 /* SCWidgetedWindow.m in Sources */,
+				F5F8AA0D18F21F49000C57EB /* DESConversation+Poison_CustomName.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

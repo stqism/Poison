@@ -2,6 +2,7 @@
 #define Poison2x_SCBuddyListShared_h
 
 #include "Copyright.h"
+#import "ObjectiveTox.h"
 
 NS_INLINE NSImage *SCImageForFriendStatus(DESFriendStatus s) {
     switch (s) {
@@ -32,6 +33,12 @@ NS_INLINE NSString *SCStringForFriendStatus(DESFriendStatus sb) {
 @interface SCGroupMarker : NSObject
 @property (strong) NSString *name;
 @property (strong) NSString *other;
+@end
+
+@interface SCObjectMarker : NSObject
+@property (strong) NSString *pk;
+@property DESConversationType type;
+@property int32_t sortKey;
 @end
 
 #endif

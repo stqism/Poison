@@ -5,9 +5,13 @@
 @implementation SCEditingField {
     NSAttributedString *_shadowedStringValue;
     NSTrackingArea *_trackingArea;
+    BOOL _trackingAreaUpdateDisabled;
 }
 
 - (void)updateTrackingAreas {
+    if (_trackingAreaUpdateDisabled)
+        return;
+
     if (_trackingArea) {
         [self removeTrackingArea:_trackingArea];
     }
@@ -16,6 +20,15 @@
                                                 options:NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways
                                                    owner:self userInfo:nil];
     [self addTrackingArea:_trackingArea];
+}
+
+- (void)viewWillStartLiveResize {
+    _trackingAreaUpdateDisabled = YES;
+}
+
+- (void)viewDidEndLiveResize {
+    _trackingAreaUpdateDisabled = NO;
+    [self updateTrackingAreas];
 }
 
 - (void)setStringValue:(NSString *)aString {

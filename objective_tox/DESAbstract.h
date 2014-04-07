@@ -13,7 +13,7 @@
  * DESFriend is an abstract class that implements the
  * DESFriend and DESConversation protocols.
  */
-@interface DESFriend : NSObject <DESConversation, DESFriend>
+@interface DESFriend : DESConversation <DESFriend>
 @end
 
 /**
