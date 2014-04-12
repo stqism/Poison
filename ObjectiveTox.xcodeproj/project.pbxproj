@@ -45,7 +45,7 @@
 		F54180EB18C3ACAB00AB220E /* DESToxConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1718C3AB4300D06A0F /* DESToxConnection.m */; };
 		F54180EC18C3ACAB00AB220E /* DESKeyFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C1818C3AB4300D06A0F /* DESKeyFunctions.m */; };
 		F54180F018C3ACD500AB220E /* txdplus_crypto.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4918C3AB5B00D06A0F /* txdplus_crypto.c */; };
-		F54180F318C3ACD500AB220E /* scrypt-jane.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */; settings = {COMPILER_FLAGS = "-DSCRYPT_KECCAK512 -DSCRYPT_CHACHA -no-integrated-as -march=native -Ofast -w"; }; };
+		F54180F318C3ACD500AB220E /* scrypt-jane.c in Sources */ = {isa = PBXBuildFile; fileRef = F50F9C4C18C3AB5B00D06A0F /* scrypt-jane.c */; settings = {COMPILER_FLAGS = "-DSCRYPT_KECCAK512 -DSCRYPT_CHACHA -no-integrated-as -march=x86-64 -Ofast -w"; }; };
 		F54180F518C3ADE600AB220E /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F54180F418C3ADE600AB220E /* libsodium.a */; };
 		F553FAEF18DCE1B500CBA532 /* des_core_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = F553FAEE18DCE1B500CBA532 /* des_core_ext.c */; };
 		F554115418C80C2A00CBB9E3 /* DESConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = F554115318C80C2A00CBB9E3 /* DESConversation.m */; };
