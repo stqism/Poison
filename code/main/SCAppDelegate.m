@@ -21,6 +21,7 @@
 @property (strong) NSString *profilePass;
 @property (weak) IBOutlet NSMenuItem *akiUserInfoMenuItemPlaceholder;
 @property (weak) IBOutlet SCMenuStatusView *userInfoMenuItem;
+@property (strong) NSArray *activeRequests;
 #pragma mark - Tox menu
 @property (weak) IBOutlet NSMenuItem *changeNameMenuItem;
 @property (weak) IBOutlet NSMenuItem *changeStatusMenuItem;
@@ -149,6 +150,10 @@
     }
 }
 
+- (void)removeFriend:(DESFriend *)f {
+    [self.toxConnection deleteFriend:f];
+}
+
 #pragma mark - Opening stuff
 
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename {
@@ -200,6 +205,7 @@
     change = [change copy];
     /* safeguard against segfaults due to KVO from foreign thread */
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self saveProfile];
         if ([keyPath isEqualToString:@"name"]) {
             NSString *displayStr;
             if ([change[NSKeyValueChangeNewKey] isEqualToString:self.profileName])
@@ -224,6 +230,14 @@
     [SCProfileManager saveProfile:data name:self.profileName password:self.profilePass];
     txd_intermediate_free(data);
     [[NSProcessInfo processInfo] enableSuddenTermination];
+}
+
+- (void)didReceiveFriendRequest:(DESRequest *)request onConnection:(DESToxConnection *)connection {
+
+}
+
+- (void)didReceiveGroupChatInvite:(DESRequest *)request fromFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection {
+
 }
 
 - (void)connectionDidBecomeActive:(DESToxConnection *)connection {

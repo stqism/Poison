@@ -59,6 +59,8 @@
 		F538754518C2656000AED945 /* SCWidgetedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F538754418C2656000AED945 /* SCWidgetedWindow.m */; };
 		F538754E18C28B4000AED945 /* titlebar_incoming_files.png in Resources */ = {isa = PBXBuildFile; fileRef = F538754A18C28B4000AED945 /* titlebar_incoming_files.png */; };
 		F538754F18C28B4000AED945 /* titlebar_incoming_files@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F538754B18C28B4000AED945 /* titlebar_incoming_files@2x.png */; };
+		F53D4DBB18FA243D0051E2E7 /* ellipsis-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = F53D4DB918FA243D0051E2E7 /* ellipsis-overlay.png */; };
+		F53D4DBC18FA243D0051E2E7 /* ellipsis-overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F53D4DBA18FA243D0051E2E7 /* ellipsis-overlay@2x.png */; };
 		F53DB89918B6DD37008D7ED5 /* NSWindow+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89018B6DD37008D7ED5 /* NSWindow+Shake.m */; };
 		F53DB89A18B6DD37008D7ED5 /* SCGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89218B6DD37008D7ED5 /* SCGradientView.m */; };
 		F53DB89C18B6DD37008D7ED5 /* SCShadowedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F53DB89618B6DD37008D7ED5 /* SCShadowedView.m */; };
@@ -94,6 +96,7 @@
 		F5B5423218B6D23C00226CA8 /* SCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5423118B6D23C00226CA8 /* SCAppDelegate.m */; };
 		F5CC709C18C2BA1600C41EBF /* friends.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5CC709B18C2BA1600C41EBF /* friends.rtf */; };
 		F5D1223518F076910075BD10 /* SCSelectiveMenuTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */; };
+		F5D5B9AD18F4CEEE00707491 /* FriendRequests.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D5B9AC18F4CEEE00707491 /* FriendRequests.xib */; };
 		F5DAB46718C962E90046ED96 /* qr-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DAB46618C962E90046ED96 /* qr-placeholder.png */; };
 		F5DAB46A18C970A50046ED96 /* SCQRCodeSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */; };
 		F5E84CDF18DE2C8F00B93FE7 /* SCMenuStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E84CDE18DE2C8F00B93FE7 /* SCMenuStatusView.m */; };
@@ -216,6 +219,8 @@
 		F538754418C2656000AED945 /* SCWidgetedWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWidgetedWindow.m; sourceTree = "<group>"; };
 		F538754A18C28B4000AED945 /* titlebar_incoming_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = titlebar_incoming_files.png; sourceTree = "<group>"; };
 		F538754B18C28B4000AED945 /* titlebar_incoming_files@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar_incoming_files@2x.png"; sourceTree = "<group>"; };
+		F53D4DB918FA243D0051E2E7 /* ellipsis-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ellipsis-overlay.png"; sourceTree = "<group>"; };
+		F53D4DBA18FA243D0051E2E7 /* ellipsis-overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ellipsis-overlay@2x.png"; sourceTree = "<group>"; };
 		F53DB88F18B6DD37008D7ED5 /* NSWindow+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Shake.h"; sourceTree = "<group>"; };
 		F53DB89018B6DD37008D7ED5 /* NSWindow+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Shake.m"; sourceTree = "<group>"; };
 		F53DB89118B6DD37008D7ED5 /* SCGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGradientView.h; sourceTree = "<group>"; };
@@ -280,6 +285,7 @@
 		F5CC709B18C2BA1600C41EBF /* friends.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = friends.rtf; sourceTree = "<group>"; };
 		F5D1223318F076910075BD10 /* SCSelectiveMenuTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSelectiveMenuTableView.h; sourceTree = "<group>"; };
 		F5D1223418F076910075BD10 /* SCSelectiveMenuTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSelectiveMenuTableView.m; sourceTree = "<group>"; };
+		F5D5B9AC18F4CEEE00707491 /* FriendRequests.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendRequests.xib; sourceTree = "<group>"; };
 		F5DAB46618C962E90046ED96 /* qr-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qr-placeholder.png"; sourceTree = "<group>"; };
 		F5DAB46818C970A50046ED96 /* SCQRCodeSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCQRCodeSheetController.h; sourceTree = "<group>"; };
 		F5DAB46918C970A50046ED96 /* SCQRCodeSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCQRCodeSheetController.m; sourceTree = "<group>"; };
@@ -397,6 +403,8 @@
 				F5FFF46418B8283300CD1E43 /* oi@2x.png */,
 				F56956CA18E884AE00E1EB0D /* avatar_mask@2x.png */,
 				F56956CB18E884AE00E1EB0D /* avatar_mask.png */,
+				F53D4DBA18FA243D0051E2E7 /* ellipsis-overlay@2x.png */,
+				F53D4DB918FA243D0051E2E7 /* ellipsis-overlay.png */,
 				F5FFF46018B81F4E00CD1E43 /* Poison.iconset */,
 			);
 			name = art;
@@ -583,6 +591,7 @@
 				F52714A218DF823400B7E663 /* AVAwayViewExperimental.xib */,
 				F52714A318DF823400B7E663 /* ChatPanel.xib */,
 				F52714A418DF823400B7E663 /* FriendsPanel.xib */,
+				F5D5B9AC18F4CEEE00707491 /* FriendRequests.xib */,
 				F52714A518DF823400B7E663 /* MainMenu.xib */,
 				F52714A618DF823400B7E663 /* NewUser.xib */,
 				F52714A718DF823400B7E663 /* QRSheet.xib */,
@@ -704,6 +713,7 @@
 				F52714A918DF823400B7E663 /* AVAwayViewExperimental.xib in Resources */,
 				F52D013B18B7CFB70033680F /* icon-frequests.png in Resources */,
 				F52D013718B7CFB70033680F /* icon_minus@2x.png in Resources */,
+				F53D4DBB18FA243D0051E2E7 /* ellipsis-overlay.png in Resources */,
 				F52D013A18B7CFB70033680F /* icon_smiley.png in Resources */,
 				F5F6D5F218DE5AB200A14557 /* status-light-missing.png in Resources */,
 				F52D014A18B7CFB70033680F /* user-icon-default@2x.png in Resources */,
@@ -717,6 +727,7 @@
 				F5FFF46118B81F4E00CD1E43 /* Poison.iconset in Resources */,
 				F52D014918B7CFB70033680F /* user-icon-default.png in Resources */,
 				F52D013E18B7CFB70033680F /* status-light-away@2x.png in Resources */,
+				F53D4DBC18FA243D0051E2E7 /* ellipsis-overlay@2x.png in Resources */,
 				F52D013C18B7CFB70033680F /* icon-frequests@2x.png in Resources */,
 				F58EE9A918C57A760033F2D4 /* DefaultDefaults.plist in Resources */,
 				F52714AB18DF823400B7E663 /* FriendsPanel.xib in Resources */,
@@ -724,6 +735,7 @@
 				F5CC709C18C2BA1600C41EBF /* friends.rtf in Resources */,
 				F52D013818B7CFB70033680F /* icon_plus.png in Resources */,
 				F52D013518B7CFB70033680F /* icon_info@2x.png in Resources */,
+				F5D5B9AD18F4CEEE00707491 /* FriendRequests.xib in Resources */,
 				F5F6D5F318DE5AB200A14557 /* status-light-missing@2x.png in Resources */,
 				F52714B218DF9DA400B7E663 /* Localizable.strings in Resources */,
 				F52D014018B7CFB70033680F /* status-light-offline@2x.png in Resources */,

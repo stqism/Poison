@@ -18,9 +18,47 @@
 
 @end
 
-@implementation SCDoubleClickingImageView
+@implementation SCDoubleClickingImageView {
+    NSTrackingArea *_trackingArea;
+    CALayer *_overlayer;
+}
 
-- (void)mouseUp:(NSEvent *)theEvent {
+- (void)awakeFromNib {
+    [self updateTrackingAreas];
+    self.wantsLayer = YES;
+    NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
+    CALayer *maskLayer = [CALayer layer];
+    maskLayer.frame = (CGRect){CGPointZero, self.frame.size};
+    maskLayer.contents = (id)mask;
+    self.layer.mask = maskLayer;
+}
+
+- (void)updateTrackingAreas {
+    if (_trackingArea) {
+        [self removeTrackingArea:_trackingArea];
+    }
+    _trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds
+                                                 options:NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways
+                                                   owner:self userInfo:nil];
+    [self addTrackingArea:_trackingArea];
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent {
+    if (!_overlayer) {
+        _overlayer = [CALayer layer];
+        _overlayer.frame = (CGRect){CGPointZero, self.frame.size};
+        _overlayer.contents = [NSImage imageNamed:@"ellipsis-overlay"];
+    }
+    if ([self.layer.sublayers containsObject:_overlayer])
+        return;
+    [self.layer addSublayer:_overlayer];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent {
+    [_overlayer removeFromSuperlayer];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent {
     if (self.action)
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -88,13 +126,6 @@
     self.auxiliaryView.dragsWindow = YES;
     self.friendListView.delegate = self;
     self.filterField.delegate = self;
-
-    self.avatarView.wantsLayer = YES;
-    NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
-    CALayer *maskLayer = [CALayer layer];
-    maskLayer.frame = (CGRect){CGPointZero, self.avatarView.frame.size};
-    maskLayer.contents = (id)mask;
-    self.avatarView.layer.mask = maskLayer;
 
     self.friendListView.target = self;
     self.friendListView.doubleAction = @selector(openAuxiliaryWindowForSelectedRow:);
@@ -261,6 +292,17 @@
     
 }
 
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
+    return ![self tableView:tableView isGroupRow:row];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    if ([self.view.window.windowController respondsToSelector:@selector(conversationDidBecomeFocused:)]) {
+        DESConversation *cv = [_dataSource conversationAtRowIndex:self.friendListView.selectedRow];
+        [self.view.window.windowController conversationDidBecomeFocused:cv];
+    }
+}
+
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     NSUInteger ci = self.friendListView.clickedRow;
     DESConversation *conv = [_dataSource conversationAtRowIndex:ci];
@@ -295,6 +337,11 @@
     DESFriend *f = (DESFriend *)[_dataSource conversationAtRowIndex:self.friendListView.clickedRow];
     if (!f)
         return;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"deleteFriendsImmediately"]) {
+        [(SCAppDelegate *)[NSApp delegate] removeFriend:f];
+        return;
+    }
+
     NSAlert *confirmation = [[NSAlert alloc] init];
     confirmation.messageText = NSLocalizedString(@"Remove Friend", nil);
     NSString *template = NSLocalizedString(@"Do you really want to remove %@ from your friends list?", nil);
@@ -336,8 +383,10 @@
 }
 
 - (void)commitDeletingFriendFromSheet:(NSAlert *)sheet returnCode:(NSInteger)ret userInfo:(void *)friend {
+    if (((NSButton *)sheet.accessoryView).state == NSOnState)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"deleteFriendsImmediately"];
     if (ret == NSAlertFirstButtonReturn) {
-        [_watchingConnection deleteFriend:(__bridge DESFriend *)friend];
+        [(SCAppDelegate *)[NSApp delegate] removeFriend:(__bridge DESFriend *)friend];
     }
 }
 
@@ -379,6 +428,13 @@
 #pragma mark - avatars
 
 - (IBAction)clickAvatarImage:(id)sender {
+    NSEvent *orig = [NSApp currentEvent];
+    [self.selfMenu popUpMenuPositioningItem:nil
+                                 atLocation:orig.locationInWindow
+                                     inView:self.view.window.contentView];
+}
+
+- (IBAction)changeAvatar:(id)sender {
     IKPictureTaker *taker = [IKPictureTaker pictureTaker];
     taker.inputImage = self.avatarView.image;
     [taker beginPictureTakerSheetForWindow:self.view.window withDelegate:self

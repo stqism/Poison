@@ -22,6 +22,8 @@ NSError *SCLocalizedErrorWithTXDReturnValue(int32_t retv) {
 - (NSString *)profilePass;
 @end
 
+static BOOL SCPrivateSettingsNeedCommit = NO;
+
 @implementation SCProfileManager
 
 + (NSDictionary *)manifest {
@@ -193,6 +195,8 @@ NSError *SCLocalizedErrorWithTXDReturnValue(int32_t retv) {
 }
 
 + (void)commitPrivateSettings {
+    if (!SCPrivateSettingsNeedCommit)
+        return;
     static NSRecursiveLock *lock = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -220,7 +224,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(int32_t retv) {
     NSURL *profileHome = [self.profileDirectory URLByAppendingPathComponent:self.currentProfileIdentifier isDirectory:YES];
     [[NSFileManager defaultManager] createDirectoryAtURL:profileHome withIntermediateDirectories:YES attributes:nil error:nil];
     [[NSData dataWithBytesNoCopy:e length:es freeWhenDone:YES] writeToURL:[profileHome URLByAppendingPathComponent:@"private_store.txd" isDirectory:NO] atomically:YES];
-
+    SCPrivateSettingsNeedCommit = YES;
     [lock unlock];
 }
 
@@ -230,6 +234,7 @@ NSError *SCLocalizedErrorWithTXDReturnValue(int32_t retv) {
 
 + (void)setPrivateSetting:(id)val forKey:(id<NSCopying>)k {
     self._privateSettings[k] = val;
+    SCPrivateSettingsNeedCommit = YES;
 }
 
 @end

@@ -10,8 +10,8 @@
 #import "NSURL+Parameters.h"
 #import "NSString+CanonicalID.h"
 
-#define SCUnifiedDefaultWindowFrame ((CGRect){{0, 0}, {800, 400}})
-#define SCUnifiedMinimumSize ((CGSize){800, 400})
+#define SCUnifiedDefaultWindowFrame ((CGRect){{0, 0}, {700, 400}})
+#define SCUnifiedMinimumSize ((CGSize){700, 400})
 
 @interface SCUnifiedWindowController ()
 @property (weak) SCNonGarbageSplitView *rootView;

@@ -30,15 +30,4 @@ NS_INLINE NSString *SCStringForFriendStatus(DESFriendStatus sb) {
     }
 }
 
-@interface SCGroupMarker : NSObject
-@property (strong) NSString *name;
-@property (strong) NSString *other;
-@end
-
-@interface SCObjectMarker : NSObject
-@property (strong) NSString *pk;
-@property DESConversationType type;
-@property int32_t sortKey;
-@end
-
 #endif

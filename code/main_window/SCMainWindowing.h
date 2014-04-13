@@ -13,4 +13,7 @@
 - (void)displayAddFriendWithToxSchemeURL:(NSURL *)url;
 
 - (SCBuddyListController *)buddyListController;
+
+@optional
+- (void)conversationDidBecomeFocused:(DESConversation *)conversation;
 @end

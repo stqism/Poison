@@ -19,7 +19,7 @@
 - (void)didRemoveFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection;
 - (void)didFailToAddFriendWithError:(NSError *)error onConnection:(DESToxConnection *)connection;
 - (void)didReceiveFriendRequest:(DESRequest *)request onConnection:(DESToxConnection *)connection;
-- (void)didReceiveGroupChatInvite:(DESRequest *)request onConnection:(DESToxConnection *)connection;
+- (void)didReceiveGroupChatInvite:(DESRequest *)request fromFriend:(DESFriend *)friend onConnection:(DESToxConnection *)connection;
 - (void)didJoinGroupChat:(DESConversation *)chat onConnection:(DESToxConnection *)connection;
 
 - (void)friend:(DESFriend *)friend connectionStatusDidChange:(BOOL)newStatus onConnection:(DESToxConnection *)connection;

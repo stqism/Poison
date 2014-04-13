@@ -4,6 +4,7 @@
 #import "ObjectiveTox.h"
 #import "SCBuddyListShared.h"
 #import "SCBuddyListController.h"
+#import "SCBuddyListManager.h"
 #import "DESConversation+Poison_CustomName.h"
 
 @class SCGroupMarker;
