@@ -284,6 +284,10 @@
     [self saveProfile];
 }
 
+- (void)friend:(DESFriend *)friend nameDidChange:(NSString *)newName onConnection:(DESToxConnection *)connection {
+    [self saveProfile];
+}
+
 - (void)didFailToAddFriendWithError:(NSError *)error onConnection:(DESToxConnection *)connection {
     if (!([self.mainWindowController.window isVisible] && [self.mainWindowController.window isKeyWindow]))
         [self.mainWindowController.window makeKeyAndOrderFront:self];

@@ -73,7 +73,7 @@ void _DESCallbackFriendStatusMessageDidChange(Tox *tox, int32_t from, uint8_t *p
         [f didChangeValueForKey:@"statusMessage"];
         [f didChangeValueForKey:@"presentableSubtitle"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
+            if ([connection.delegate respondsToSelector:@selector(friend:statusMessageDidChange:onConnection:)])
                 [connection.delegate friend:f statusMessageDidChange:smg onConnection:connection];
         });
     });

@@ -74,11 +74,15 @@
     if (self.method == SCFriendFindMethodPlain) {
         return self.idField.stringValue;
     } else if (self.method == SCFriendFindMethodDNSDiscovery) {
-        NSData *bytes = [[self.pinField.stringValue stringByAppendingString:@"=="] substringToIndex:8].dataByDecodingBase64;
-        return [NSString stringWithFormat:@"%@%@%@",
-                _rec[DESUserDiscoveryPublicKey],
-                DESConvertBytesToHex(bytes.bytes, (uint32_t)bytes.length),
-                _rec[DESUserDiscoveryChecksumKey]];
+        if (_dnsDiscoveryVersion == 1) {
+            return _rec[DESUserDiscoveryIDKey];
+        } else {
+            NSData *bytes = [[self.pinField.stringValue stringByAppendingString:@"=="] substringToIndex:8].dataByDecodingBase64;
+            return [NSString stringWithFormat:@"%@%@%@",
+                    _rec[DESUserDiscoveryPublicKey],
+                    DESConvertBytesToHex(bytes.bytes, (uint32_t)bytes.length),
+                    _rec[DESUserDiscoveryChecksumKey]];
+        }
     }
     return nil;
 }
@@ -211,7 +215,7 @@
             return;
         case SCFriendFindMethodDNSDiscovery:
             [self validateFieldsID_DNSDiscovery];
-            if (_dnsDiscoveryVersion)
+            if (_dnsDiscoveryVersion != 1)
                 [self validateFieldsPIN_DNSDiscovery];
             return;
         default:

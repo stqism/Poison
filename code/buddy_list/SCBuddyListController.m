@@ -28,9 +28,11 @@
     self.wantsLayer = YES;
     NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
     CALayer *maskLayer = [CALayer layer];
+    [CATransaction begin];
     maskLayer.frame = (CGRect){CGPointZero, self.frame.size};
     maskLayer.contents = (id)mask;
     self.layer.mask = maskLayer;
+    [CATransaction commit];
 }
 
 - (void)updateTrackingAreas {
@@ -46,8 +48,10 @@
 - (void)mouseEntered:(NSEvent *)theEvent {
     if (!_overlayer) {
         _overlayer = [CALayer layer];
+        [CATransaction begin];
         _overlayer.frame = (CGRect){CGPointZero, self.frame.size};
         _overlayer.contents = [NSImage imageNamed:@"ellipsis-overlay"];
+        [CATransaction commit];
     }
     if ([self.layer.sublayers containsObject:_overlayer])
         return;
@@ -159,7 +163,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == _dataSource) {
-        [self.friendListView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.friendListView reloadData];
+        });
         return;
     }
 
@@ -173,6 +179,12 @@
             self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
         }
     });
+}
+
+- (DESConversation *)conversationSelectedInView {
+    if (self.friendListView.selectedRow == -1)
+        return nil;
+    return [_dataSource conversationAtRowIndex:self.friendListView.selectedRow];
 }
 
 #pragma mark - ui crap
@@ -312,10 +324,15 @@
 #pragma mark - cell server
 
 - (NSString *)formatDate:(NSDate *)date {
-    if ([[NSDate date] timeIntervalSinceDate:date] > 86400)
-        _formatter.dateStyle = NSDateFormatterShortStyle;
-    else
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *now = [cal components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                   fromDate:[NSDate date]];
+    NSDateComponents *then = [cal components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                    fromDate:date];
+    if (now.day == then.day && now.month == then.month && now.year == then.year)
         _formatter.dateStyle = NSDateFormatterNoStyle;
+    else
+        _formatter.dateStyle = NSDateFormatterShortStyle;
     return [_formatter stringFromDate:date];
 }
 

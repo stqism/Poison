@@ -13,17 +13,25 @@
 @property (weak) DESToxConnection *tox;
 @end
 
-@implementation SCBuddyListWindowController
+@implementation SCBuddyListWindowController {
+    NSTextField *_dhtCount;
+}
 
 - (instancetype)initWithDESConnection:(DESToxConnection *)tox {
     self = [super initWithDESConnection:tox];
     if (self) {
-        NSWindow *window = [[NSWindow alloc] initWithContentRect:CGRectCentreInRect(SCBuddyListDefaultWindowFrame, [NSScreen mainScreen].visibleFrame) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES];
+        SCWidgetedWindow *window = [[SCWidgetedWindow alloc] initWithContentRect:CGRectCentreInRect(SCBuddyListDefaultWindowFrame, [NSScreen mainScreen].visibleFrame) styleMask:NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask backing:NSBackingStoreBuffered defer:YES];
         window.restorable = NO;
         window.minSize = SCBuddyListMinimumSize;
         [window setFrameUsingName:@"MainWindow"];
         window.frameAutosaveName = @"MainWindow";
         window.title = [NSString stringWithFormat:NSLocalizedString(@"%@ \u2014 Friends", @"friends list window title"), SCApplicationInfoDictKey(@"CFBundleName")];
+        _dhtCount = [self newStyledTextField];
+        _dhtCount.attributedStringValue = [self styledIndicatorText];
+        _dhtCount.toolTip = [self toolTipTextForNodeCount:self.tox.closeNodesCount];
+        [_dhtCount sizeToFit];
+        [tox addObserver:self forKeyPath:@"closeNodesCount" options:NSKeyValueObservingOptionNew context:NULL];
+        window.widgetView = _dhtCount;
         self.window = window;
         self.tox = tox;
         self.friendsListCont = [[SCBuddyListController alloc] initWithNibName:@"FriendsPanel" bundle:[NSBundle mainBundle]];
@@ -35,8 +43,41 @@
     return self;
 }
 
+- (NSAttributedString *)styledIndicatorText {
+    NSMutableAttributedString *base;
+    base = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"DHT:", nil)
+            attributes:@{NSFontAttributeName: [NSFont systemFontOfSize:[NSFont smallSystemFontSize]]}];
+    NSString *nodes = [NSString stringWithFormat:@" %lu", (unsigned long)self.tox.closeNodesCount];
+    [base appendAttributedString:[[NSAttributedString alloc] initWithString:nodes]];
+    return base;
+}
+
+- (NSString *)toolTipTextForNodeCount:(NSUInteger)cnodes {
+    NSString *fmt;
+    if (cnodes > 4) {
+        fmt = NSLocalizedString(@"%@ has good connectivity to the network.", nil);
+    } else if (cnodes > 0) {
+        fmt = NSLocalizedString(@"%@ has okay connectivity to the network.", nil);
+    } else {
+        fmt = NSLocalizedString(@"%@ has no connectivity to the network.", nil);
+    }
+    return [NSString stringWithFormat:fmt, SCApplicationInfoDictKey(@"CFBundleName")];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _dhtCount.attributedStringValue = [self styledIndicatorText];
+        _dhtCount.toolTip = [self toolTipTextForNodeCount:[change[NSKeyValueChangeNewKey] unsignedIntegerValue]];
+        [_dhtCount sizeToFit];
+    });
+}
+
 - (SCBuddyListController *)buddyListController {
     return self.friendsListCont;
+}
+
+- (void)dealloc {
+    [self.tox removeObserver:self forKeyPath:@"closeNodesCount"];
 }
 
 @end

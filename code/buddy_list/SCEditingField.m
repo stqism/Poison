@@ -6,6 +6,7 @@
     NSAttributedString *_shadowedStringValue;
     NSTrackingArea *_trackingArea;
     BOOL _trackingAreaUpdateDisabled;
+    BOOL _wasDragging;
 }
 
 - (void)updateTrackingAreas {
@@ -54,12 +55,18 @@
     [super setAttributedStringValue:_shadowedStringValue];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent {
+    _wasDragging = YES;
+    [super mouseDragged:theEvent];
+}
+
 - (void)mouseUp:(NSEvent *)theEvent {
-    if (self.action)
+    if (self.action && !_wasDragging)
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.target performSelector:self.action withObject:self];
         #pragma clang diagnostic pop
+    _wasDragging = NO;
 }
 
 @end

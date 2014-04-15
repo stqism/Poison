@@ -6,6 +6,7 @@
 #import "SCBuddyListController.h"
 #import "SCBuddyListManager.h"
 #import "DESConversation+Poison_CustomName.h"
+#import <QuartzCore/QuartzCore.h>
 
 @class SCGroupMarker;
 @implementation SCGroupRowView {
@@ -64,7 +65,7 @@
 @end
 
 @implementation SCFriendCellView {
-    DESConversation *_watchingFriend;
+    DESConversation *__weak _watchingFriend;
 }
 
 - (void)removeKVOHandlers {
@@ -121,8 +122,11 @@
     /* convert it for type-checking purposes */
     DESFriend *wf = (DESFriend *)_watchingFriend;
     if (wf.status == DESFriendStatusOffline) {
-        self.auxLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Offline since: %@", nil),
-                                     [self.manager formatDate:wf.lastSeen]];
+        if (wf.lastSeen.timeIntervalSince1970 == 0)
+            self.auxLabel.stringValue = NSLocalizedString(@"Request sent...", nil);
+        else
+            self.auxLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Offline since: %@", nil),
+                                         [self.manager formatDate:wf.lastSeen]];
     } else {
         NSCharacterSet *cs = [NSCharacterSet whitespaceAndNewlineCharacterSet];
         if ([[def stringByTrimmingCharactersInSet:cs] isEqualToString:@""]) {
@@ -139,9 +143,11 @@
     self.avatarView.wantsLayer = YES;
     NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
     CALayer *maskLayer = [CALayer layer];
+    [CATransaction begin];
     maskLayer.frame = (CGRect){CGPointZero, self.avatarView.frame.size};
     maskLayer.contents = (id)mask;
     self.avatarView.layer.mask = maskLayer;
+    [CATransaction commit];
 }
 
 - (void)setObjectValue:(id)objectValue {
