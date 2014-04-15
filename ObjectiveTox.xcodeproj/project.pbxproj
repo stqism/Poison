@@ -214,7 +214,7 @@
 		F54180F418C3ADE600AB220E /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = _support/lib/libsodium.a; sourceTree = "<group>"; };
 		F553FAEE18DCE1B500CBA532 /* des_core_ext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des_core_ext.c; path = core_extensions/des_core_ext.c; sourceTree = "<group>"; };
 		F554115318C80C2A00CBB9E3 /* DESConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESConversation.m; sourceTree = "<group>"; };
-		F554115918C8187700CBB9E3 /* DESObserver */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DESObserver; sourceTree = BUILT_PRODUCTS_DIR; };
+		F554115918C8187700CBB9E3 /* ImoutoBot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImoutoBot; sourceTree = BUILT_PRODUCTS_DIR; };
 		F554115B18C8187700CBB9E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F558579718D608AD0053DD52 /* data_intermediate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_intermediate.c; path = ../../core_extensions/data_intermediate.c; sourceTree = "<group>"; };
 		F558579818D608AD0053DD52 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = data.h; path = ../../core_extensions/data.h; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				F50F9C0618C3AAD800D06A0F /* libObjectiveTox.a */,
-				F554115918C8187700CBB9E3 /* DESObserver */,
+				F554115918C8187700CBB9E3 /* ImoutoBot */,
 				F5BA233918E74C1900C85A49 /* mio */,
 				F52113DB18EA37FE00EB1B99 /* toxlookup */,
 			);
@@ -524,9 +524,9 @@
 			productReference = F52113DB18EA37FE00EB1B99 /* toxlookup */;
 			productType = "com.apple.product-type.tool";
 		};
-		F554115818C8187700CBB9E3 /* DESObserver */ = {
+		F554115818C8187700CBB9E3 /* ImoutoBot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "DESObserver" */;
+			buildConfigurationList = F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "ImoutoBot" */;
 			buildPhases = (
 				F554115518C8187700CBB9E3 /* Sources */,
 				F554115618C8187700CBB9E3 /* Frameworks */,
@@ -537,9 +537,9 @@
 			dependencies = (
 				F554116B18C818D800CBB9E3 /* PBXTargetDependency */,
 			);
-			name = DESObserver;
+			name = ImoutoBot;
 			productName = DESObserver;
-			productReference = F554115918C8187700CBB9E3 /* DESObserver */;
+			productReference = F554115918C8187700CBB9E3 /* ImoutoBot */;
 			productType = "com.apple.product-type.tool";
 		};
 		F5BA233818E74C1900C85A49 /* mio */ = {
@@ -582,7 +582,7 @@
 			projectRoot = "";
 			targets = (
 				F50F9C0518C3AAD800D06A0F /* ObjectiveTox */,
-				F554115818C8187700CBB9E3 /* DESObserver */,
+				F554115818C8187700CBB9E3 /* ImoutoBot */,
 				F5BA233818E74C1900C85A49 /* mio */,
 				F52113DA18EA37FE00EB1B99 /* toxlookup */,
 				F553FAF018DCE5D000CBA532 /* Everything (oTox) */,
@@ -675,7 +675,7 @@
 		};
 		F553FAF718DCE5D900CBA532 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F554115818C8187700CBB9E3 /* DESObserver */;
+			target = F554115818C8187700CBB9E3 /* ImoutoBot */;
 			targetProxy = F553FAF618DCE5D900CBA532 /* PBXContainerItemProxy */;
 		};
 		F554116B18C818D800CBB9E3 /* PBXTargetDependency */ = {
@@ -950,7 +950,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "DESObserver" */ = {
+		F554116418C8187700CBB9E3 /* Build configuration list for PBXNativeTarget "ImoutoBot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F554116518C8187700CBB9E3 /* Debug */,

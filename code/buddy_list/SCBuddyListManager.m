@@ -35,6 +35,36 @@
 }
 @end
 
+@implementation SCRequestMarker {
+    NSDate *_sendTime;
+}
+- (instancetype)initWithRequest:(DESRequest *)c sendTime:(NSDate *)d {
+    self = [super init];
+    if (self) {
+        _underlyingRequest = c;
+        _sendTime = d;
+    }
+    return self;
+}
+
+- (NSString *)sender {
+    return _underlyingRequest.senderName;
+}
+
+- (DESConversationType)supposedType {
+    return DESConversationTypeFriend; /* FIXME: identify which one it is */
+}
+
+- (NSString *)invitationMessage {
+    return _underlyingRequest.message;
+}
+
+- (NSDate *)whence {
+    return _sendTime;
+}
+
+@end
+
 @implementation SCBuddyListManager {
     DESToxConnection *_watchingConnection;
     NSMutableArray *_orderingList;

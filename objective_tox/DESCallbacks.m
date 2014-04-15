@@ -73,7 +73,7 @@ void _DESCallbackFriendStatusMessageDidChange(Tox *tox, int32_t from, uint8_t *p
         [f didChangeValueForKey:@"statusMessage"];
         [f didChangeValueForKey:@"presentableSubtitle"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([connection.delegate respondsToSelector:@selector(friend:nameDidChange:onConnection:)])
+            if ([connection.delegate respondsToSelector:@selector(friend:statusMessageDidChange:onConnection:)])
                 [connection.delegate friend:f statusMessageDidChange:smg onConnection:connection];
         });
     });
@@ -100,6 +100,18 @@ void _DESCallbackFriendUserStatus(Tox *tox, int32_t from, uint8_t status, void *
 
 void _DESCallbackFriendTypingStatus(Tox *tox, int32_t from, uint8_t on_off, void *dtcInstance) {
     DESInfo(@"(%d) typing: %d", from, on_off);
+    DESToxConnection *connection = (__bridge DESToxConnection*)dtcInstance;
+    DESConcreteFriend *f = (DESConcreteFriend *)[connection friendWithID:from];
+    if (!tox_get_friend_connection_status(tox, from))
+        return;
+    /* status doesn't get set in core context until the callback returns
+     * so we have to do this hacky thing */
+    [f willChangeValueForKey:@"isTyping"];
+    dispatch_async(connection._messengerQueue, ^{
+        if (!f)
+            return;
+        [f didChangeValueForKey:@"isTyping"];
+    });
 }
 
 void _DESCallbackFriendConnectionStatus(Tox *tox, int32_t from, uint8_t on_off, void *dtcInstance) {

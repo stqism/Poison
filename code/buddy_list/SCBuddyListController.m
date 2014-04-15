@@ -18,9 +18,51 @@
 
 @end
 
-@implementation SCDoubleClickingImageView
+@implementation SCDoubleClickingImageView {
+    NSTrackingArea *_trackingArea;
+    CALayer *_overlayer;
+}
 
-- (void)mouseUp:(NSEvent *)theEvent {
+- (void)awakeFromNib {
+    [self updateTrackingAreas];
+    self.wantsLayer = YES;
+    NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
+    CALayer *maskLayer = [CALayer layer];
+    [CATransaction begin];
+    maskLayer.frame = (CGRect){CGPointZero, self.frame.size};
+    maskLayer.contents = (id)mask;
+    self.layer.mask = maskLayer;
+    [CATransaction commit];
+}
+
+- (void)updateTrackingAreas {
+    if (_trackingArea) {
+        [self removeTrackingArea:_trackingArea];
+    }
+    _trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds
+                                                 options:NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways
+                                                   owner:self userInfo:nil];
+    [self addTrackingArea:_trackingArea];
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent {
+    if (!_overlayer) {
+        _overlayer = [CALayer layer];
+        [CATransaction begin];
+        _overlayer.frame = (CGRect){CGPointZero, self.frame.size};
+        _overlayer.contents = [NSImage imageNamed:@"ellipsis-overlay"];
+        [CATransaction commit];
+    }
+    if ([self.layer.sublayers containsObject:_overlayer])
+        return;
+    [self.layer addSublayer:_overlayer];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent {
+    [_overlayer removeFromSuperlayer];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent {
     if (self.action)
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -89,13 +131,6 @@
     self.friendListView.delegate = self;
     self.filterField.delegate = self;
 
-    self.avatarView.wantsLayer = YES;
-    NSImage *mask = [NSImage imageNamed:@"avatar_mask"];
-    CALayer *maskLayer = [CALayer layer];
-    maskLayer.frame = (CGRect){CGPointZero, self.avatarView.frame.size};
-    maskLayer.contents = (id)mask;
-    self.avatarView.layer.mask = maskLayer;
-
     self.friendListView.target = self;
     self.friendListView.doubleAction = @selector(openAuxiliaryWindowForSelectedRow:);
 }
@@ -128,7 +163,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == _dataSource) {
-        [self.friendListView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.friendListView reloadData];
+        });
         return;
     }
 
@@ -142,6 +179,12 @@
             self.statusDot.image = SCImageForFriendStatus((DESFriendStatus)((NSNumber *)change[NSKeyValueChangeNewKey]).intValue);
         }
     });
+}
+
+- (DESConversation *)conversationSelectedInView {
+    if (self.friendListView.selectedRow == -1)
+        return nil;
+    return [_dataSource conversationAtRowIndex:self.friendListView.selectedRow];
 }
 
 #pragma mark - ui crap
@@ -261,6 +304,17 @@
     
 }
 
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
+    return ![self tableView:tableView isGroupRow:row];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    if ([self.view.window.windowController respondsToSelector:@selector(conversationDidBecomeFocused:)]) {
+        DESConversation *cv = [_dataSource conversationAtRowIndex:self.friendListView.selectedRow];
+        [self.view.window.windowController conversationDidBecomeFocused:cv];
+    }
+}
+
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     NSUInteger ci = self.friendListView.clickedRow;
     DESConversation *conv = [_dataSource conversationAtRowIndex:ci];
@@ -270,10 +324,15 @@
 #pragma mark - cell server
 
 - (NSString *)formatDate:(NSDate *)date {
-    if ([[NSDate date] timeIntervalSinceDate:date] > 86400)
-        _formatter.dateStyle = NSDateFormatterShortStyle;
-    else
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *now = [cal components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                   fromDate:[NSDate date]];
+    NSDateComponents *then = [cal components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                    fromDate:date];
+    if (now.day == then.day && now.month == then.month && now.year == then.year)
         _formatter.dateStyle = NSDateFormatterNoStyle;
+    else
+        _formatter.dateStyle = NSDateFormatterShortStyle;
     return [_formatter stringFromDate:date];
 }
 
@@ -295,6 +354,11 @@
     DESFriend *f = (DESFriend *)[_dataSource conversationAtRowIndex:self.friendListView.clickedRow];
     if (!f)
         return;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"deleteFriendsImmediately"]) {
+        [(SCAppDelegate *)[NSApp delegate] removeFriend:f];
+        return;
+    }
+
     NSAlert *confirmation = [[NSAlert alloc] init];
     confirmation.messageText = NSLocalizedString(@"Remove Friend", nil);
     NSString *template = NSLocalizedString(@"Do you really want to remove %@ from your friends list?", nil);
@@ -336,8 +400,10 @@
 }
 
 - (void)commitDeletingFriendFromSheet:(NSAlert *)sheet returnCode:(NSInteger)ret userInfo:(void *)friend {
+    if (((NSButton *)sheet.accessoryView).state == NSOnState)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"deleteFriendsImmediately"];
     if (ret == NSAlertFirstButtonReturn) {
-        [_watchingConnection deleteFriend:(__bridge DESFriend *)friend];
+        [(SCAppDelegate *)[NSApp delegate] removeFriend:(__bridge DESFriend *)friend];
     }
 }
 
@@ -379,6 +445,13 @@
 #pragma mark - avatars
 
 - (IBAction)clickAvatarImage:(id)sender {
+    NSEvent *orig = [NSApp currentEvent];
+    [self.selfMenu popUpMenuPositioningItem:nil
+                                 atLocation:orig.locationInWindow
+                                     inView:self.view.window.contentView];
+}
+
+- (IBAction)changeAvatar:(id)sender {
     IKPictureTaker *taker = [IKPictureTaker pictureTaker];
     taker.inputImage = self.avatarView.image;
     [taker beginPictureTakerSheetForWindow:self.view.window withDelegate:self

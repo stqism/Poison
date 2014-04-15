@@ -27,6 +27,25 @@ static void *const SCAddFriendSheetContext;
     return nil;
 }
 
+- (NSTextField *)newStyledTextField {
+    NSTextField *ret = [[NSTextField alloc] initWithFrame:CGRectZero];
+    ret.bezeled = NO;
+    ret.drawsBackground = NO;
+    ret.editable = NO;
+    ret.textColor = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
+    ret.font = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]];
+    ret.wantsLayer = YES;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGColorRef color = CGColorCreate(cs, (CGFloat[]){1.0, 1.0});
+    ret.layer.shadowColor = color;
+    CGColorRelease(color);
+    CGColorSpaceRelease(cs);
+    ret.layer.shadowOffset = (CGSize){0, 0.7};
+    ret.layer.shadowOpacity = 0.7;
+    ret.layer.shadowRadius = 0.3;
+    return ret;
+}
+
 #pragma mark - sheets
 
 - (void)displayQRCode {

@@ -270,4 +270,32 @@ static NSArray *testing_names = NULL;
     return NO;
 }
 
+- (void)controlTextDidChange:(NSNotification *)obj {
+    [self adjustEntryBounds];
+}
+
+- (void)containingWindowDidResize:(NSNotification *)obj {
+    [self adjustEntryBounds];
+}
+
+- (void)adjustEntryBounds {
+    static NSMutableParagraphStyle *cached = nil;
+    if (!cached) {
+        cached = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        cached.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    static CGFloat fourLines = 0.0;
+    if (!fourLines) {
+        fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: self.textField.font, NSParagraphStyleAttributeName: cached}].height;
+    }
+    CGRect requiredSize = [self.textField.stringValue boundingRectWithSize:(CGSize){self.textField.frame.size.width - 5, 9001} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: self.textField.font}];
+    CGFloat actualHeight = fmin(requiredSize.size.height, fourLines);
+    CGFloat baseHeight = self.chatEntryView.frame.size.height - self.textField.frame.size.height;
+    /*        h without text field + size of text + textfield padding */
+    CGFloat newHeight = baseHeight + actualHeight + 6;
+    [self.chatEntryView setFrameSize:(CGSize){self.chatEntryView.frame.size.width, newHeight}];
+    [self.splitView setFrame:(CGRect){{0, newHeight}, {self.splitView.frame.size.width, self.view.frame.size.height - newHeight}}];
+    [self.textField setFrameSize:(CGSize){self.textField.frame.size.width, actualHeight + 6}];
+}
+
 @end

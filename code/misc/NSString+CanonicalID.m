@@ -13,7 +13,7 @@
         if ([cs characterIsMember:[self characterAtIndex:i]])
             continue;
         [string appendString:[self substringWithRange:NSMakeRange(i, 1)]];
-        if (string.length > DESFriendAddressSize)
+        if (string.length > DESFriendAddressSize * 2)
             return nil;
     }
     if (string.length == DESFriendAddressSize * 2 || string.length == DESPublicKeySize * 2)

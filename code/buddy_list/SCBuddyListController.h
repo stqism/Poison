@@ -12,4 +12,5 @@
 - (IBAction)changeStatus:(id)sender;
 
 - (NSString *)formatDate:(NSDate *)date;
+- (DESConversation *)conversationSelectedInView;
 @end

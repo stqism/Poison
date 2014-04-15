@@ -1,6 +1,17 @@
 #import <Foundation/Foundation.h>
 #import "ObjectiveTox.h"
 
+@interface ImoutoBot : NSObject <DESToxConnectionDelegate, DESConversationDelegate>
+@end
+
+@implementation ImoutoBot
+
+- (void)connectionDidBecomeEstablished:(DESToxConnection *)connection {
+    puts("Connected!");
+}
+
+@end
+
 int main(int argc, const char * argv[]) {
     printf("DESImouto 0.0.1, (c) 2014 Zodiac Labs.\n");
     @autoreleasepool {

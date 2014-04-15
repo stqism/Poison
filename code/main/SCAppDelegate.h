@@ -13,6 +13,7 @@
 - (IBAction)copyPublicID:(id)sender;
 - (IBAction)showQRCode:(id)sender;
 - (IBAction)addFriend:(id)sender;
+- (void)removeFriend:(DESFriend *)f;
 
 /* by popular demand */
 - (NSString *)profileName;
