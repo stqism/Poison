@@ -23,7 +23,6 @@
 
 /* Begin PBXBuildFile section */
 		F517FCA918B91CDA0060D575 /* SCProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F517FCA818B91CDA0060D575 /* SCProfileManager.m */; };
-		F525113D18FCB45B00BD9EAA /* SCMessageTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F525113C18FCB45B00BD9EAA /* SCMessageTextFieldCell.m */; };
 		F525114618FCC3BF00BD9EAA /* SCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F525114518FCC3BF00BD9EAA /* SCTextField.m */; };
 		F52714A818DF823400B7E663 /* AddFriend.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52714A118DF823400B7E663 /* AddFriend.xib */; };
 		F52714A918DF823400B7E663 /* AVAwayViewExperimental.xib in Resources */ = {isa = PBXBuildFile; fileRef = F52714A218DF823400B7E663 /* AVAwayViewExperimental.xib */; };
@@ -181,8 +180,6 @@
 		F50F9C0D18C3AB3600D06A0F /* ObjectiveTox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ObjectiveTox.xcodeproj; sourceTree = "<group>"; };
 		F517FCA718B91CDA0060D575 /* SCProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCProfileManager.h; sourceTree = "<group>"; };
 		F517FCA818B91CDA0060D575 /* SCProfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCProfileManager.m; sourceTree = "<group>"; };
-		F525113B18FCB45B00BD9EAA /* SCMessageTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMessageTextFieldCell.h; sourceTree = "<group>"; };
-		F525113C18FCB45B00BD9EAA /* SCMessageTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMessageTextFieldCell.m; sourceTree = "<group>"; };
 		F525114418FCC3BF00BD9EAA /* SCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTextField.h; sourceTree = "<group>"; };
 		F525114518FCC3BF00BD9EAA /* SCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTextField.m; sourceTree = "<group>"; };
 		F52714A118DF823400B7E663 /* AddFriend.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriend.xib; sourceTree = "<group>"; };
@@ -481,8 +478,6 @@
 				F541810D18C3FEF500AB220E /* SCChatViewController.m */,
 				F58EE9AB18C595530033F2D4 /* SCChatView.h */,
 				F58EE9AC18C595530033F2D4 /* SCChatView.m */,
-				F525113B18FCB45B00BD9EAA /* SCMessageTextFieldCell.h */,
-				F525113C18FCB45B00BD9EAA /* SCMessageTextFieldCell.m */,
 				F525114418FCC3BF00BD9EAA /* SCTextField.h */,
 				F525114518FCC3BF00BD9EAA /* SCTextField.m */,
 			);
@@ -814,7 +809,6 @@
 				F58EE9AD18C595530033F2D4 /* SCChatView.m in Sources */,
 				F543BE3018E116D3004C70D3 /* NSURL+Parameters.m in Sources */,
 				F541811E18C425B400AB220E /* SCFillingView.m in Sources */,
-				F525113D18FCB45B00BD9EAA /* SCMessageTextFieldCell.m in Sources */,
 				F52D014E18B7D44F0033680F /* SCBigGreenButton.m in Sources */,
 				F541810718C3F4DE00AB220E /* SCUnifiedWindowController.m in Sources */,
 				F5D1223518F076910075BD10 /* SCSelectiveMenuTableView.m in Sources */,
