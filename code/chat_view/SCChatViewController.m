@@ -55,10 +55,14 @@ static NSArray *testing_names = NULL;
 
 @end
 
-@implementation SCChatViewController
+@implementation SCChatViewController {
+    NSArray *_completeCycle;
+    NSUInteger _completeIndex;
+    NSRange _completeClobber;
+}
 
 + (void)load {
-    testing_names = @[@"Alice", @"Bob", @"James", @"[420]xXxKuShG@m3R9001xXx"];
+    testing_names = @[@"Alice", @"Bob", @"Adam", @"Alex", @"James", @"[420]xXxKuShG@m3R9001xXx"];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -117,30 +121,6 @@ static NSArray *testing_names = NULL;
     self.videoBackground.dragsWindow = YES;
     
     [self.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[tm baseTemplateURLOfCurrentTheme]]];
-}
-
-- (NSString *)completeNameWithFragment:(NSString *)fragment {
-    fragment = [fragment lowercaseString];
-    const char *frag = [fragment UTF8String];
-    NSUInteger len = [fragment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    for (NSString *possibleName in testing_names) {
-        NSString *actualComparator = [possibleName lowercaseString];
-        if ([actualComparator lengthOfBytesUsingEncoding:NSUTF8StringEncoding] >= len &&
-            memcmp(frag, [actualComparator UTF8String], len) == 0)
-            return possibleName;
-        /* Try it with a string that has symbols stripped
-         * that way, you can tabcomp "[420]xXxKuShG@m3R9001xXx"
-         * by just typing "420" */
-        NSString *strippedComp = [self.nameCompletionCache objectForKey:actualComparator];
-        if (!strippedComp) {
-            strippedComp = SCMakeStringCompletionAlias(actualComparator);
-            [self.nameCompletionCache setObject:strippedComp forKey:actualComparator];
-        }
-        if ([strippedComp lengthOfBytesUsingEncoding:NSUTF8StringEncoding] >= len &&
-            memcmp(frag, [strippedComp UTF8String], len) == 0)
-            return possibleName;
-    }
-    return nil;
 }
 
 - (void)layoutSubviews_ {
@@ -244,6 +224,49 @@ static NSArray *testing_names = NULL;
 
 #pragma mark - textfield delegate
 
+- (NSArray *)candidatesForTabCompletion:(NSString *)s {
+    NSString *fragment = [s lowercaseString];
+    const char *frag = [fragment UTF8String];
+    NSUInteger len = [fragment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *completes = [NSMutableArray arrayWithCapacity:10];
+    for (NSString *possibleName in testing_names) {
+        NSString *actualComparator = [possibleName lowercaseString];
+        if ([actualComparator lengthOfBytesUsingEncoding:NSUTF8StringEncoding] >= len
+            && memcmp(frag, [actualComparator UTF8String], len) == 0) {
+            [completes addObject:possibleName];
+            continue;
+        }
+        /* Try it with a string that has symbols stripped
+         * that way, you can tabcomp "[420]xXxKuShG@m3R9001xXx"
+         * by just typing "420" */
+        NSString *strippedComp = [self.nameCompletionCache objectForKey:actualComparator];
+        if (!strippedComp) {
+            strippedComp = SCMakeStringCompletionAlias(actualComparator);
+            [self.nameCompletionCache setObject:strippedComp forKey:actualComparator];
+        }
+        if ([strippedComp lengthOfBytesUsingEncoding:NSUTF8StringEncoding] >= len
+            && memcmp(frag, [strippedComp UTF8String], len) == 0) {
+            [completes addObject:possibleName];
+            continue;
+        }
+    }
+    return completes.count? completes : nil;
+}
+
+- (NSString *)nextTabCompletionCandidate:(NSString *)s {
+    if (!_completeCycle) {
+        _completeCycle = [self candidatesForTabCompletion:s];
+        _completeIndex = 0;
+    }
+    NSUInteger n = _completeCycle.count;
+    if (n == 0) {
+        return nil;
+    } else {
+        _completeIndex = (_completeIndex % n);
+    }
+    return _completeCycle[_completeIndex++];
+}
+
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wundeclared-selector"
@@ -258,18 +281,26 @@ static NSArray *testing_names = NULL;
         NSUInteger psUpperBound = selRange.location + selRange.length;
         [textView selectWord:self];
         NSUInteger newSelRangeLoc = textView.selectedRange.location;
-        NSRange replaceRange = NSMakeRange(newSelRangeLoc, psUpperBound - newSelRangeLoc);
-        NSMutableString *completionResult = [[self completeNameWithFragment:[textView.string substringWithRange:replaceRange]] mutableCopy];
+        NSRange replaceRange;
+        if (!_completeCycle)
+            replaceRange = NSMakeRange(newSelRangeLoc, psUpperBound - newSelRangeLoc);
+        else
+            replaceRange = _completeClobber;
+        NSString *completionResult = [self nextTabCompletionCandidate:[textView.string substringWithRange:replaceRange]];
         if (!completionResult) {
             NSBeep();
             textView.selectedRange = selRange;
             return YES;
         }
+        NSString *repString;
         if (replaceRange.location == 0)
-            [completionResult appendFormat:@"%@ ", [[NSUserDefaults standardUserDefaults] stringForKey:@"nameCompletionDelimiter"]];
+            repString = [NSString stringWithFormat:@"%@%@ ", completionResult,
+                         [[NSUserDefaults standardUserDefaults] stringForKey:@"nameCompletionDelimiter"]];
         else
-            [completionResult appendString:@" "];
-        textView.string = [textView.string stringByReplacingCharactersInRange:replaceRange withString:completionResult];
+            repString = [NSString stringWithFormat:@"%@ ", completionResult];
+        textView.string = [textView.string stringByReplacingCharactersInRange:replaceRange withString:repString];
+        _completeClobber = NSMakeRange(replaceRange.location, repString.length);
+        [self adjustEntryBounds];
         return YES;
     } else if ([textView respondsToSelector:commandSelector]) {
         #pragma clang diagnostic push
@@ -283,6 +314,8 @@ static NSArray *testing_names = NULL;
 
 - (void)controlTextDidChange:(NSNotification *)obj {
     [self adjustEntryBounds];
+    _completeCycle = nil;
+    _completeIndex = 0;
 }
 
 - (void)textFieldDidResize:(NSNotification *)obj {
