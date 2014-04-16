@@ -1,3 +1,5 @@
+*please make any further pull requests to the 2.0 branch. thanks*
+
 ![](https://kirara.ca/g/icon_512x512.png)
 
 ## Poison
