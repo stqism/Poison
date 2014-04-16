@@ -8,7 +8,8 @@
 @implementation SCTextFieldCell
 
 - (void)drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    [[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, cellFrame.size.width - 2, cellFrame.size.height - 2) xRadius:3.2 yRadius:3.2] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:CGRectInset(cellFrame, 0.6, 0.6)
+                                     xRadius:4.0 yRadius:4.0] fill];
 }
 
 @end
@@ -19,6 +20,7 @@
     NSColor *_unfocusedCachedColour;
     NSGradient *_cachedGradient;
     NSShadow *_innerShadow;
+    NSShadow *_outerShadow;
 }
 
 + (Class)cellClass {
@@ -37,6 +39,26 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(focusChanged:) name:NSWindowDidResignKeyNotification object:newWindow];
 }
 
+- (void)focusChanged:(NSNotification *)notification {
+    self.needsDisplay = YES;
+}
+
+#pragma mark - selection
+
+- (void)clearSelection {
+    _selectedRange = NSMakeRange(0, 0);
+}
+
+- (void)saveSelection {
+    _selectedRange = [self.window fieldEditor:YES forObject:self].selectedRange;
+}
+
+- (void)restoreSelection {
+    [self.window fieldEditor:YES forObject:self].selectedRange = _selectedRange;
+}
+
+#pragma mark - draw parameters
+
 - (NSColor *)focusedColorForTextField {
     if (!_focusedCachedColour)
         _focusedCachedColour = [NSColor colorWithCalibratedWhite:87.0 / 255.0 alpha:0.85];
@@ -51,75 +73,71 @@
 
 - (NSGradient *)gradientOfTextField {
     if (!_cachedGradient)
-        _cachedGradient = [[NSGradient alloc] initWithColorsAndLocations:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0], 0.0, [NSColor whiteColor], 1.0, nil];
+        _cachedGradient = [[NSGradient alloc] initWithColorsAndLocations:
+                           [NSColor colorWithCalibratedWhite:0.9 alpha:1.0],
+                           0.0, [NSColor whiteColor], 1.0, nil];
     return _cachedGradient;
 }
 
 - (NSShadow *)innerShadowOfTextField {
     if (!_innerShadow) {
         _innerShadow = [[NSShadow alloc] init];
-        [_innerShadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0 alpha:1.0]];
-        [_innerShadow setShadowBlurRadius:3.0];
-        [_innerShadow setShadowOffset:(NSSize){0, -1.0}];
+        _innerShadow.shadowColor = [NSColor colorWithCalibratedWhite:0.0
+                                                               alpha:1.0];
+        _innerShadow.shadowBlurRadius = 2.0;
+        _innerShadow.shadowOffset = (NSSize){0, -1.0};
     }
     return _innerShadow;
+}
+
+- (NSShadow *)outerShadowOfTextField {
+    if (!_outerShadow) {
+        _outerShadow = [[NSShadow alloc] init];
+        _outerShadow.shadowBlurRadius = 1.0;
+        _outerShadow.shadowOffset = (CGSize){0, -0.7};
+        _outerShadow.shadowColor = [NSColor colorWithCalibratedWhite:1.0
+                                                               alpha:0.56];
+    }
+    return _outerShadow;
 }
 
 - (CGRect)actualBounds {
     return CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 1);
 }
 
-- (void)focusChanged:(NSNotification *)notification {
-    self.needsDisplay = YES;
-}
-
-- (void)clearSelection {
-    _selectedRange = NSMakeRange(0, 0);
-}
-
-- (void)saveSelection {
-    _selectedRange = [self.window fieldEditor:YES forObject:self].selectedRange;
-}
-
-- (void)restoreSelection {
-    [self.window fieldEditor:YES forObject:self].selectedRange = _selectedRange;
-}
-
 - (void)drawRect:(NSRect)dirtyRect {
-    /*[[NSColor colorWithCalibratedWhite:1.0 alpha:0.34] set];
-    NSBezierPath *outerShadowPath = [NSBezierPath bezierPathWithRoundedRect:CGRectOffset(self.actualBounds, 0, 1) xRadius:4.0 yRadius:4.0];
-    [outerShadowPath fill];*/
+    CGRect ab = self.actualBounds;
 
-    [NSGraphicsContext saveGraphicsState];
-    NSShadow *test = [[NSShadow alloc] init];
-    test.shadowBlurRadius = 1.0;
-    test.shadowOffset = (CGSize){0, -0.7};
-    test.shadowColor = [NSColor colorWithCalibratedWhite:1.0 alpha:0.34];
-    [test set];
-
-    if (self.window.isKeyWindow) {
-        [[self focusedColorForTextField] set];
-    } else {
-        [[self unfocusedColorForTextField] set];
-    }
-    NSBezierPath *borderPath = [NSBezierPath bezierPathWithRoundedRect:self.actualBounds xRadius:4.0 yRadius:4.0];
-    [borderPath fill];
-    [NSGraphicsContext restoreGraphicsState];
-
-    NSBezierPath *innerPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(1, 1, self.actualBounds.size.width - 2, self.actualBounds.size.height - 2) xRadius:3.42 yRadius:3.42];
-    NSGradient *fill = [self gradientOfTextField];
-    [fill drawInBezierPath:innerPath angle:90.0];
+    /* fill it */
+    NSBezierPath *innerPath = [NSBezierPath bezierPathWithRoundedRect:CGRectInset(ab, 1, 1)
+                                                              xRadius:3.42
+                                                              yRadius:3.42];
+    [self.gradientOfTextField drawInBezierPath:innerPath angle:90.0];
 
     [NSGraphicsContext saveGraphicsState];
     [innerPath addClip];
-    NSBezierPath *shadowDraw = [NSBezierPath bezierPathWithRoundedRect:CGRectInset(self.actualBounds, -1, -1) xRadius:3.42 yRadius:3.42];
-    NSShadow *shadow = [self innerShadowOfTextField];
-    [shadow set];
+    /* draw the shadow's caster entirely outside the path */
+    NSBezierPath *shadowDraw = [NSBezierPath bezierPathWithRoundedRect:CGRectInset(ab, -1, -1)
+                                                               xRadius:3.42
+                                                               yRadius:3.42];
+    [self.innerShadowOfTextField set];
     [shadowDraw stroke];
-    // Restore the graphics state
     [NSGraphicsContext restoreGraphicsState];
 
-    [self.cell drawInteriorWithFrame:self.actualBounds inView:self];
+    /* outline */
+    [NSGraphicsContext saveGraphicsState];
+    [self.outerShadowOfTextField set];
+    if (self.window.isKeyWindow)
+        [self.focusedColorForTextField set];
+    else
+        [self.unfocusedColorForTextField set];
+    NSBezierPath *borderPath = [NSBezierPath bezierPathWithRoundedRect:CGRectInset(ab, 0.6, 0.6)
+                                                               xRadius:4.0
+                                                               yRadius:4.0];
+    [borderPath stroke];
+    [NSGraphicsContext restoreGraphicsState];
+
+    [self.cell drawInteriorWithFrame:ab inView:self];
 }
 
 - (void)dealloc {

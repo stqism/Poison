@@ -80,10 +80,16 @@ static NSArray *testing_names = NULL;
     self.webView.drawsBackground = NO;
     self.webView.frameLoadDelegate = self;
     [self reloadTheme];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutSubviews_) name:NSViewFrameDidChangeNotification object:self.chatEntryView];
-
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(layoutSubviews_)
+               name:NSViewFrameDidChangeNotification
+             object:self.chatEntryView];
+    [nc addObserver:self
+           selector:@selector(textFieldDidResize:)
+               name:NSViewFrameDidChangeNotification
+             object:self.textField];
     self.textField.delegate = self;
-    [self.textField.cell setBackgroundStyle:NSBackgroundStyleRaised];
     [self.splitView setFrameOrigin:(CGPoint){0, self.chatEntryView.frame.size.height}];
     [self.chatEntryView setFrameOrigin:(CGPoint){0, 0}];
     self.chatEntryView.dragsWindow = YES;
@@ -138,7 +144,11 @@ static NSArray *testing_names = NULL;
 }
 
 - (void)layoutSubviews_ {
-    [self.chatEntryView.window setContentBorderThickness:self.chatEntryView.frame.size.height forEdge:NSMinYEdge];
+    CGFloat os = self.chatEntryView.frame.size.height;
+    [self.chatEntryView.window setContentBorderThickness:os forEdge:NSMinYEdge];
+    self.splitView.frame = (CGRect){{0, os},
+                                    {self.splitView.frame.size.width,
+                                     self.view.frame.size.height - os}};
 }
 
 #pragma mark - management of auxilary panes
@@ -226,7 +236,8 @@ static NSArray *testing_names = NULL;
 }
 
 - (void)injectThemeLib {
-    NSString *base = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"themelib" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *base = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"themelib" ofType:@"js"]
+                                               encoding:NSUTF8StringEncoding error:nil];
     if (base)
         [self.webView.mainFrame.windowObject evaluateWebScript:base];
 }
@@ -274,7 +285,7 @@ static NSArray *testing_names = NULL;
     [self adjustEntryBounds];
 }
 
-- (void)containingWindowDidResize:(NSNotification *)obj {
+- (void)textFieldDidResize:(NSNotification *)obj {
     [self adjustEntryBounds];
 }
 
@@ -286,16 +297,24 @@ static NSArray *testing_names = NULL;
     }
     static CGFloat fourLines = 0.0;
     if (!fourLines) {
-        fourLines = [@"\n\n\n" sizeWithAttributes:@{NSFontAttributeName: self.textField.font, NSParagraphStyleAttributeName: cached}].height;
+        fourLines = [@"\n\n\n" sizeWithAttributes:
+                     @{NSFontAttributeName: self.textField.font,
+                       NSParagraphStyleAttributeName: cached}].height;
     }
-    CGRect requiredSize = [self.textField.stringValue boundingRectWithSize:(CGSize){self.textField.frame.size.width - 5, 9001} options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution attributes:@{NSFontAttributeName: self.textField.font}];
+    NSStringDrawingOptions scOpts = (NSStringDrawingUsesLineFragmentOrigin
+                                     | NSStringDrawingDisableScreenFontSubstitution);
+    CGRect requiredSize = [self.textField.stringValue boundingRectWithSize:
+                           (CGSize){self.textField.frame.size.width - 8, 9001}
+                           options:scOpts
+                        attributes:@{NSFontAttributeName: self.textField.font}];
     CGFloat actualHeight = fmin(requiredSize.size.height, fourLines);
     CGFloat baseHeight = self.chatEntryView.frame.size.height - self.textField.frame.size.height;
     /*        h without text field + size of text + textfield padding */
     CGFloat newHeight = baseHeight + actualHeight + 6;
-    [self.chatEntryView setFrameSize:(CGSize){self.chatEntryView.frame.size.width, newHeight}];
-    [self.splitView setFrame:(CGRect){{0, newHeight}, {self.splitView.frame.size.width, self.view.frame.size.height - newHeight}}];
-    [self.textField setFrameSize:(CGSize){self.textField.frame.size.width, actualHeight + 6}];
+    self.textField.frameSize = (CGSize){self.textField.frame.size.width,
+                                        actualHeight + 6};
+    self.chatEntryView.frameSize = (CGSize){self.chatEntryView.frame.size.width,
+        newHeight};
 }
 
 @end
