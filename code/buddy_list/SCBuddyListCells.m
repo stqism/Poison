@@ -65,7 +65,7 @@
 @end
 
 @implementation SCFriendCellView {
-    DESConversation *__weak _watchingFriend;
+    DESConversation *_watchingFriend;
 }
 
 - (void)removeKVOHandlers {
