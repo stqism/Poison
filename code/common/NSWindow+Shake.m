@@ -8,6 +8,8 @@
 - (void)shakeWindow:(void (^)(void))completionHandler {
     self.animations = @{@"frameOrigin": [self shakeAnimation:self.frame]};
     [self.animator setFrameOrigin:self.frame.origin];
+    if (!completionHandler)
+        return;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         completionHandler();

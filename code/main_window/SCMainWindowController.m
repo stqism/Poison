@@ -7,7 +7,7 @@
 #import "SCValidationHelpers.h"
 #import "SCProfileManager.h"
 
-static void *const SCAddFriendSheetContext;
+void *const SCAddFriendSheetContext = (void *)1;
 
 @interface SCMainWindowController ()
 @property (weak) DESToxConnection *tox;

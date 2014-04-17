@@ -6,6 +6,7 @@
 #import "DESUserDiscovery.h"
 #import "SCBase64.h"
 #import "SCValidationHelpers.h"
+#import "NSWindow+Shake.h"
 
 #define SCFailureUIColour ([NSColor colorWithCalibratedRed:0.6 green:0.0 blue:0.0 alpha:1.0])
 #define SCSuccessUIColour ([NSColor colorWithCalibratedRed:0.0 green:0.8 blue:0.0 alpha:1.0])
@@ -165,6 +166,7 @@
         [[NSUserDefaults standardUserDefaults] stringForKey:@"defaultRegistrationDomain"]];
     self.keyPreview.stringValue = @"";
     self.pinField.stringValue = @"";
+    [self.pinField.cell setPlaceholderString:NSLocalizedString(@"PIN", nil)];
     self.pinField.enabled = NO;
     self.pinValidationStatusField.stringValue = @"-";
     self.pinValidationStatusField.textColor = _cachedNeutralColour;
@@ -247,6 +249,7 @@
     self.keyPreview.stringValue = @"";
     self.pinField.stringValue = @"";
     self.pinField.enabled = NO;
+    [self.pinField.cell setPlaceholderString:NSLocalizedString(@"PIN", nil)];
     self.pinValidationStatusField.stringValue = @"-";
     self.pinValidationStatusField.textColor = _cachedNeutralColour;
     _dnsDiscoveryVersion = 0;
@@ -326,6 +329,10 @@
 #pragma mark - ui binding
 
 - (IBAction)startLookup:(id)sender {
+    if (!self.findButton.isEnabled) {
+        [self.window shakeWindow:NULL]
+        ;
+    }
     NSString *addr = self.mailAddressField.stringValue;
     if ([addr rangeOfString:@"@"].location == NSNotFound)
         addr = [addr stringByAppendingString:[NSString stringWithFormat:@"@%@",
@@ -357,6 +364,7 @@
         if ([result[DESUserDiscoveryVersionKey] isEqual:DESUserDiscoveryRecVersion1]) {
             self.keyPreview.stringValue = result[DESUserDiscoveryIDKey];
             self.pinField.enabled = NO;
+            [self.pinField.cell setPlaceholderString:NSLocalizedString(@"Not required", nil)];
             _dnsDiscoveryVersion = 1;
         } else if ([result[DESUserDiscoveryVersionKey] isEqual:DESUserDiscoveryRecVersion2]) {
             uint16_t check = 0;
@@ -370,8 +378,10 @@
 
             self.keyPreview.stringValue = result[DESUserDiscoveryPublicKey];
             self.pinField.enabled = YES;
+            [self.pinField.cell setPlaceholderString:NSLocalizedString(@"PIN (6 characters)", nil)];
             if (_proposedPIN && [self isPINValid_toxv2:_proposedPIN])
                 self.pinField.stringValue = _proposedPIN;
+
             _dnsDiscoveryVersion = 2;
             [self.pinField becomeFirstResponder];
         }

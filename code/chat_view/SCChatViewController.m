@@ -86,10 +86,6 @@ static NSArray *testing_names = NULL;
     [self reloadTheme];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
-           selector:@selector(layoutSubviews_)
-               name:NSViewFrameDidChangeNotification
-             object:self.chatEntryView];
-    [nc addObserver:self
            selector:@selector(textFieldDidResize:)
                name:NSViewFrameDidChangeNotification
              object:self.textField];

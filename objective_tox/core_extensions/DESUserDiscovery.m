@@ -70,9 +70,10 @@ void DESDiscoverUser(NSString *shouldBeAnEmailAddress,
         NSError *e = [NSError errorWithDomain:DESUserDiscoveryCallbackDomain
                                          code:DESUserDiscoveryErrorBadInput
                                      userInfo:nil];
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             callback(nil, e);
         });
+        return;
     }
 
     NSRange position = [shouldBeAnEmailAddress rangeOfString:@"@"];
