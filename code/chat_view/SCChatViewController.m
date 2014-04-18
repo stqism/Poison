@@ -298,6 +298,11 @@ static NSArray *testing_names = NULL;
         _completeClobber = NSMakeRange(replaceRange.location, repString.length);
         [self adjustEntryBounds];
         return YES;
+    } else if (sel_isEqual(commandSelector, @selector(insertNewline:))
+               && [NSEvent modifierFlags] & NSShiftKeyMask) {
+        /* Force a newline on shift-enter. */
+        [textView insertNewlineIgnoringFieldEditor:self];
+        return YES;
     } else if ([textView respondsToSelector:commandSelector]) {
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -310,6 +315,7 @@ static NSArray *testing_names = NULL;
 
 - (void)controlTextDidChange:(NSNotification *)obj {
     [self adjustEntryBounds];
+    [self layoutSubviews_];
     _completeCycle = nil;
     _completeIndex = 0;
 }
