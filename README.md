@@ -1,6 +1,12 @@
+
 ![](http://vexx.us/Images/poison1.png)
 ***
 Poison is a Mac client for [Tox](https://github.com/irungentoo/ProjecTox-Core), with support for file sharing, multiple profiles, group messaging, and more. Built with precision and care, Poison follows strict guidelines to maintaining the look and feel of OS X. While it's still in its infancy stage, most of Poison's features work, but support for A/V is in the works as more features are in the works.
+
+*Please make any further pull requests to the 2.0 branch.*
+
+
+
 
 ![](http://vexx.us/Examples/Poison/lady_stoneheart.png)
 
