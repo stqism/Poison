@@ -7,7 +7,7 @@ Poison is a Mac client for [Tox](https://github.com/irungentoo/ProjecTox-Core), 
 
 Poison is built to support Notification Center, so you never miss a message, and with an extensive array of options, you can customize Poison to be your own.
 
-<img src="http://vexx.us/Images/notification-group.png"><img src="http://vexx.us/Images/notification-fr.png">
+<img src="http://vexx.us/Images/notification-group.png"><img src="http://vexx.us/Images/notification-online.png">
 
 
 
