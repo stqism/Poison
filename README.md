@@ -33,6 +33,6 @@ Starting with 1.1.3, Poison has the ability to automagically download find the b
 ## Licensing
 
 * All assets used in Poison, with the exception of icons, PXListView, and scrypt, are licensed under GPLv3.  
-PXListView is licensed under New BSD, see the readme in its directory for more details.  
+* PXListView is licensed under New BSD, see the readme in its directory for more details.  
 * scrypt is licensed under the 2-clause BSD license, see the readme in its directory and header files for more details.  
 * If you want to use the icon for something that isn't an application, ask me on the Tox IRC. I'll probably let you use it if the use case isn't stupid. (except for the Shiina icon, I'm fairly sure that it is copyrighted and not even I am allowed to use it)
